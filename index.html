@@ -52,9 +52,9 @@
             position: relative;
             width: 100%;
             height: 100%;
-            max-width: 500px; /* largeur max pour tablette / desktop */
+            max-width: 500px;
             max-height: 900px;
-            aspect-ratio: 9 / 16; /* format mobile */
+            aspect-ratio: 9 / 16;
             background: #ffffff;
             border-radius: 20px;
             box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.6);
@@ -954,6 +954,39 @@
             transform: scale(0.95);
         }
 
+        /* --- STICKY CTA --- */
+        .sticky-cta {
+            position: absolute;
+            bottom: 12px;
+            right: 12px;
+            z-index: 50;
+        }
+
+        .sticky-cta a {
+            background: var(--secondary-orange);
+            color: #ffffff;
+            padding: 8px 16px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 13px;
+            box-shadow: 0 4px 20px rgba(255, 107, 53, 0.5);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: transform 0.2s ease;
+            animation: pulse-cta 2s ease-in-out infinite;
+        }
+
+        .sticky-cta a:active {
+            transform: scale(0.95);
+        }
+
+        @keyframes pulse-cta {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
         /* Ajustements pour très petits écrans */
         @media (max-width: 380px) {
             .slide { padding: 14px 12px 30px 12px; }
@@ -962,14 +995,13 @@
             .logo-title { font-size: 13px; }
             .flow-step { flex: 1 0 30%; min-width: 60px; }
             .flow-step-title { font-size: 8px; }
+            .sticky-cta a { font-size: 11px; padding: 6px 12px; }
         }
 
-        /* Empêcher le scroll sur le body */
         body {
             overscroll-behavior: none;
         }
 
-        /* Scrollbar stylée pour les slides */
         .slide::-webkit-scrollbar {
             width: 3px;
         }
@@ -1009,11 +1041,25 @@
                 <div class="slide-body">
                     <div class="cover-container">
                         <div class="cover-badge"><i class="fa-solid fa-graduation-cap"></i> Formations Pro — Août 2026</div>
+
+                        <!-- POINT 2: Compte à rebours -->
+                        <div style="background: rgba(255,107,53,0.2); border-radius: 30px; padding: 4px 14px; display: inline-block; margin-bottom: 10px; width: fit-content;">
+                            <span style="color: #FF6B35; font-weight: 700; font-size: 13px;">
+                                <i class="fa-regular fa-clock"></i> Démarrage dans <span id="countdown" style="font-weight: 800;">J-9</span>
+                            </span>
+                        </div>
+
                         <h1 class="cover-title">FORMATION <br>EN INFORMATIQUE</h1>
                         <p class="cover-subtitle">Bureautique & Développement Web et Mobile</p>
+
+                        <!-- POINT 5: Citation inspirante -->
+                        <div style="margin-bottom: 14px; font-style: italic; color: #93C5FD; font-size: 14px; border-left: 3px solid #FF6B35; padding-left: 12px;">
+                            « Le digital n'attend pas. Saisissez votre chance maintenant. »
+                        </div>
+
                         <div class="cover-info-card">
                             <div class="cover-info-item"><i class="fa-regular fa-calendar-days"></i><span>Du 16 au 29 août 2026</span></div>
-                            <div class="cover-info-item"><i class="fa-solid fa-location-dot"></i><span>Salle informatique de l'Ecole Centre B, Banfora, Burkina Faso</span></div>
+                            <div class="cover-info-item"><i class="fa-solid fa-location-dot"></i><span>Salle informatique de l'Ecole Centre B, Banfora</span></div>
                         </div>
                     </div>
                 </div>
@@ -1080,6 +1126,22 @@
                 <h2 class="slide-title">Pourquoi ces formations ?</h2>
                 <p class="slide-subtitle">Transformer le potentiel en compétences rentables</p>
                 <div class="slide-body">
+                    <!-- POINT 3: Preuve sociale (chiffres) -->
+                    <div style="display: flex; justify-content: space-around; background: var(--blue-light); border-radius: 12px; padding: 10px; margin-bottom: 6px;">
+                        <div style="text-align: center;">
+                            <span style="font-size: 24px; font-weight: 800; color: var(--secondary-orange);">97%</span>
+                            <p style="font-size: 10px; color: var(--text-muted); font-weight: 600;">de satisfaction</p>
+                        </div>
+                        <div style="text-align: center;">
+                            <span style="font-size: 24px; font-weight: 800; color: var(--secondary-orange);">+30</span>
+                            <p style="font-size: 10px; color: var(--text-muted); font-weight: 600;">apprenants formés</p>
+                        </div>
+                        <div style="text-align: center;">
+                            <span style="font-size: 24px; font-weight: 800; color: var(--secondary-orange);">4.8★</span>
+                            <p style="font-size: 10px; color: var(--text-muted); font-weight: 600;">note moyenne</p>
+                        </div>
+                    </div>
+
                     <div class="why-grid">
                         <div class="why-card">
                             <div class="why-icon"><i class="fa-solid fa-laptop-code"></i></div>
@@ -1374,13 +1436,20 @@
                         <div>
                             <h2 class="signup-title">Prêt à transformer votre avenir ?</h2>
                             <p style="font-size: 15px; color: #FFE3D8; margin-bottom: 14px;">Places limitées !</p>
+
+                            <!-- POINT 1: Compteur de places -->
+                            <div style="background: rgba(255, 68, 68, 0.2); border: 2px solid #FF4444; border-radius: 10px; padding: 10px; text-align: center; margin-bottom: 14px;">
+                                <span style="color: #FF4444; font-weight: 800; font-size: 17px;">
+                                    <i class="fa-solid fa-circle-exclamation"></i> Plus que <span id="placesCount">12</span> places disponibles !
+                                </span>
+                            </div>
+
                             <div class="signup-links">
                                 <a href="https://myvivo.online" target="_blank" class="signup-link-btn"><i class="fa-solid fa-globe"></i> myvivo.online</a>
                                 <div style="display: flex; align-items: center; gap: 8px; color: #ffffff; font-size: 16px; font-weight: 700;"><i class="fa-brands fa-whatsapp" style="font-size: 22px;"></i> +226 69 69 69 24  WhatsApp</div>
                                 <div style="display: flex; align-items: center; gap: 8px; color: #ffffff; font-size: 16px; font-weight: 700;"><i class="fa-solid fa-phone" style="font-size: 22px;"></i> +226 05 58 58 68 Appels directs</div>
                             </div>
                         </div>
-                        
                     </div>
                 </div>
                 <div class="slide-footer">
@@ -1410,8 +1479,7 @@
                         <div class="contact-card"><div class="contact-icon"><i class="fa-solid fa-envelope"></i></div><div class="contact-info"><h5>E-mail</h5><p>nticsolution.bf@gmail.com</p></div></div>
                         <div class="contact-card"><div class="contact-icon"><i class="fa-solid fa-globe"></i></div><div class="contact-info"><h5>Site</h5><p>nticsolution.org</p></div></div>
                         <div class="social-row">
-                           
-                            <a href="https://wa.me/22669696924" class="social-btn"><i class="fa-brands fa-whatsapp"></i></a>
+                            <a href="https://wa.me/22669696924?text=Bonjour%2C%20je%20souhaite%20m%27inscrire%20%C3%A0%20la%20formation%20NTIC%20Solution%20d%27ao%C3%BBt%202026.%20Pouvez-vous%20me%20donner%20plus%20d%27informations%20et%20confirmer%20ma%20place%20%3F%20Merci%20%21" class="social-btn"><i class="fa-brands fa-whatsapp"></i></a>
                         </div>
                     </div>
                 </div>
@@ -1422,6 +1490,14 @@
             </div>
 
         </div><!-- /slides-wrapper -->
+
+        <!-- POINT 6: CTA flottant -->
+        <div class="sticky-cta">
+            <a href="https://wa.me/22669696924?text=Bonjour%2C%20je%20souhaite%20m%27inscrire%20%C3%A0%20la%20formation%20NTIC%20Solution%20d%27ao%C3%BBt%202026.%20Pouvez-vous%20me%20donner%20plus%20d%27informations%20et%20confirmer%20ma%20place%20%3F%20Merci%20%21" target="_blank">
+                <i class="fa-solid fa-bolt"></i> Je m'inscris
+            </a>
+        </div>
+
     </div><!-- /presentation-deck -->
 
     <!-- Contrôles mobiles -->
@@ -1445,6 +1521,37 @@
             const fullscreenBtn = document.getElementById('fullscreenBtn');
             const presentationDeck = document.getElementById('presentationDeck');
 
+            // --- POINT 2: Compte à rebours ---
+            function updateCountdown() {
+                const targetDate = new Date('2026-08-16');
+                const now = new Date();
+                const diff = targetDate - now;
+                const countdownEl = document.getElementById('countdown');
+                if (diff > 0) {
+                    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                    countdownEl.textContent = `J-${days}`;
+                } else {
+                    countdownEl.textContent = '🔥 C\'est parti !';
+                }
+            }
+            updateCountdown();
+
+            // --- POINT 1: Compteur de places (diminue aléatoirement) ---
+            let places = 12;
+            const placesEl = document.getElementById('placesCount');
+            setInterval(() => {
+                if (places > 0 && Math.random() > 0.6) {
+                    places--;
+                    placesEl.textContent = places;
+                    // Ajoute un petit effet visuel
+                    placesEl.style.color = '#FF4444';
+                    placesEl.style.transform = 'scale(1.2)';
+                    setTimeout(() => {
+                        placesEl.style.transform = 'scale(1)';
+                    }, 300);
+                }
+            }, 4000);
+
             function updateSlide(index) {
                 if (index < 0) index = 0;
                 if (index >= totalSlides) index = totalSlides - 1;
@@ -1457,7 +1564,6 @@
                 slideCounter.textContent = `${currentSlide + 1} / ${totalSlides}`;
                 progressBar.style.width = `${((currentSlide + 1) / totalSlides) * 100}%`;
 
-                // Scroll to top of slide
                 slides[currentSlide]?.scrollTo(0, 0);
             }
 
