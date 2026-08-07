@@ -1,0 +1,1510 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>NTIC Solution — Formations Août 2026</title>
+
+    <!-- Google Fonts & Font Awesome Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        :root {
+            --primary-blue: #0B3FA5;
+            --primary-dark: #041842;
+            --secondary-orange: #FF6B35;
+            --orange-light: #FFF2ED;
+            --blue-light: #EFF4FF;
+            --text-main: #1E293B;
+            --text-muted: #64748B;
+            --text-light: #F8FAFC;
+            --bg-light: #F1F5F9;
+            --border-color: #E2E8F0;
+            --card-shadow: 0 4px 12px rgba(11, 63, 165, 0.08);
+            --transition-speed: 0.3s;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+            background-color: #020916;
+            color: var(--text-main);
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 8px;
+        }
+
+        /* --- Mobile First Presentation Deck --- */
+        .presentation-deck {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            max-width: 500px; /* largeur max pour tablette / desktop */
+            max-height: 900px;
+            aspect-ratio: 9 / 16; /* format mobile */
+            background: #ffffff;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.6);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Progress Bar Top */
+        .progress-bar-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: rgba(226, 232, 240, 0.5);
+            z-index: 100;
+            border-radius: 2px 2px 0 0;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            width: 8.33%;
+            background: linear-gradient(90deg, var(--primary-blue), var(--secondary-orange));
+            transition: width 0.4s ease;
+            border-radius: 2px;
+        }
+
+        /* Slides Wrapper */
+        .slides-wrapper {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            padding: 20px 18px 40px 18px;
+            display: flex;
+            flex-direction: column;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateX(20px);
+            transition: opacity var(--transition-speed) ease, transform var(--transition-speed) ease, visibility var(--transition-speed);
+            background-color: #ffffff;
+            z-index: 1;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .slide.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(0);
+            z-index: 2;
+        }
+
+        /* Thèmes */
+        .slide.theme-dark {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-blue) 100%);
+            color: #ffffff;
+        }
+
+        .slide.theme-orange {
+            background: linear-gradient(135deg, #FF6B35 0%, #D94E1B 100%);
+            color: #ffffff;
+        }
+
+        /* Header */
+        .slide-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            margin-bottom: 10px;
+            flex-shrink: 0;
+        }
+
+        .logo-brand {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background: var(--primary-blue);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            font-weight: 800;
+            font-size: 16px;
+            box-shadow: 0 4px 8px rgba(11, 63, 165, 0.2);
+        }
+
+        .theme-dark .logo-icon,
+        .theme-orange .logo-icon {
+            background: #ffffff;
+            color: var(--primary-blue);
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.1;
+        }
+
+        .logo-title {
+            font-size: 15px;
+            font-weight: 800;
+            color: var(--primary-blue);
+            letter-spacing: -0.3px;
+        }
+
+        .theme-dark .logo-title,
+        .theme-orange .logo-title {
+            color: #ffffff;
+        }
+
+        .logo-subtitle {
+            font-size: 8px;
+            font-weight: 600;
+            color: var(--secondary-orange);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .theme-orange .logo-subtitle {
+            color: #FFE3D8;
+        }
+
+        .slide-number-badge {
+            font-size: 11px;
+            font-weight: 700;
+            padding: 3px 10px;
+            border-radius: 20px;
+            background: var(--blue-light);
+            color: var(--primary-blue);
+            flex-shrink: 0;
+        }
+
+        .theme-dark .slide-number-badge {
+            background: rgba(255, 255, 255, 0.15);
+            color: #ffffff;
+        }
+
+        .theme-orange .slide-number-badge {
+            background: rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+        }
+
+        /* Titres */
+        .slide-title {
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--primary-blue);
+            letter-spacing: -0.3px;
+            margin-bottom: 4px;
+            line-height: 1.2;
+        }
+
+        .theme-dark .slide-title,
+        .theme-orange .slide-title {
+            color: #ffffff;
+        }
+
+        .slide-subtitle {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+            font-weight: 500;
+            line-height: 1.3;
+        }
+
+        .theme-dark .slide-subtitle {
+            color: #CBD5E1;
+        }
+
+        .theme-orange .slide-subtitle {
+            color: #FFE3D8;
+        }
+
+        /* Body */
+        .slide-body {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            gap: 10px;
+            overflow-y: auto;
+            padding-bottom: 8px;
+        }
+
+        .slide-footer {
+            flex-shrink: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid var(--border-color);
+            padding-top: 8px;
+            margin-top: 6px;
+            font-size: 9px;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .theme-dark .slide-footer {
+            border-top-color: rgba(255, 255, 255, 0.15);
+            color: #94A3B8;
+        }
+
+        .theme-orange .slide-footer {
+            border-top-color: rgba(255, 255, 255, 0.25);
+            color: #FFE3D8;
+        }
+
+        /* --- Contrôles --- */
+        .deck-controls {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 8px;
+            color: #ffffff;
+            flex-shrink: 0;
+        }
+
+        .control-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 14px;
+            backdrop-filter: blur(4px);
+        }
+
+        .control-btn:hover {
+            background: var(--secondary-orange);
+            border-color: var(--secondary-orange);
+            transform: translateY(-2px);
+        }
+
+        .control-btn:active {
+            transform: scale(0.95);
+        }
+
+        .slide-counter {
+            font-size: 13px;
+            font-weight: 600;
+            color: #94A3B8;
+            min-width: 60px;
+            text-align: center;
+        }
+
+        /* ===== STYLES SPÉCIFIQUES MOBILE ===== */
+
+        /* Cover */
+        .cover-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: 100%;
+            padding: 6px 0;
+        }
+
+        .cover-badge {
+            background: rgba(255, 107, 53, 0.2);
+            border: 1px solid var(--secondary-orange);
+            color: #FF9E7B;
+            padding: 6px 14px;
+            border-radius: 30px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            width: fit-content;
+        }
+
+        .cover-title {
+            font-size: 32px;
+            font-weight: 800;
+            line-height: 1.1;
+            color: #ffffff;
+            margin-bottom: 10px;
+        }
+
+        .cover-subtitle {
+            font-size: 18px;
+            font-weight: 500;
+            color: #93C5FD;
+            margin-bottom: 20px;
+        }
+
+        .cover-info-card {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 12px 16px;
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+        }
+
+        .cover-info-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #ffffff;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .cover-info-item i {
+            color: var(--secondary-orange);
+            font-size: 16px;
+        }
+
+        /* Grids adaptées */
+        .about-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .about-card {
+            background: #ffffff;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 16px;
+            box-shadow: var(--card-shadow);
+        }
+
+        .about-card.primary {
+            background: var(--blue-light);
+            border-color: #BFDBFE;
+        }
+
+        .about-card h3 {
+            color: var(--primary-blue);
+            font-size: 16px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 6px;
+        }
+
+        .about-card p {
+            font-size: 13px;
+            line-height: 1.5;
+            color: var(--text-main);
+        }
+
+        .founder-box {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: #ffffff;
+            padding: 12px;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            margin-top: 4px;
+        }
+
+        .founder-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--primary-blue);
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        /* Why */
+        .why-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .why-card {
+            background: #ffffff;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 14px;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            box-shadow: var(--card-shadow);
+        }
+
+        .why-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            background: var(--orange-light);
+            color: var(--secondary-orange);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+
+        .why-text h4 {
+            font-size: 15px;
+            color: var(--primary-blue);
+            margin-bottom: 2px;
+            font-weight: 700;
+        }
+
+        .why-text p {
+            font-size: 13px;
+            color: var(--text-main);
+            line-height: 1.4;
+        }
+
+        /* Courses */
+        .courses-cols {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .course-box {
+            border-radius: 14px;
+            padding: 18px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .course-box.blue {
+            background: var(--blue-light);
+            border: 2px solid #93C5FD;
+        }
+
+        .course-box.orange {
+            background: var(--orange-light);
+            border: 2px solid #FFBDAD;
+        }
+
+        .course-header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .course-icon-bg {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+
+        .blue .course-icon-bg {
+            background: var(--primary-blue);
+            color: #ffffff;
+        }
+
+        .orange .course-icon-bg {
+            background: var(--secondary-orange);
+            color: #ffffff;
+        }
+
+        .course-price {
+            font-size: 18px;
+            font-weight: 800;
+            padding: 4px 14px;
+            border-radius: 20px;
+            background: #ffffff;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .blue .course-price { color: var(--primary-blue); }
+        .orange .course-price { color: var(--secondary-orange); }
+
+        .course-box h3 {
+            font-size: 18px;
+            font-weight: 800;
+            margin-bottom: 4px;
+        }
+
+        .blue h3 { color: var(--primary-blue); }
+        .orange h3 { color: #C2410C; }
+
+        .course-box p {
+            font-size: 13px;
+            color: var(--text-main);
+            line-height: 1.4;
+        }
+
+        .pack-banner {
+            background: linear-gradient(90deg, var(--primary-blue), #1E40AF);
+            color: #ffffff;
+            border-radius: 10px;
+            padding: 12px 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            box-shadow: 0 6px 14px rgba(11, 63, 165, 0.2);
+            text-align: center;
+        }
+
+        .pack-title {
+            font-size: 15px;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .pack-price {
+            font-size: 18px;
+            font-weight: 800;
+            color: var(--secondary-orange);
+            background: #ffffff;
+            padding: 4px 16px;
+            border-radius: 30px;
+        }
+
+        /* Included */
+        .included-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .included-item {
+            background: #ffffff;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-main);
+            box-shadow: var(--card-shadow);
+        }
+
+        .included-item i {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--orange-light);
+            color: var(--secondary-orange);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+
+        .included-item[style*="grid-column"] {
+            grid-column: unset !important;
+        }
+
+        /* Days grid */
+        .days-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+
+        .day-card {
+            background: #ffffff;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 10px 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            box-shadow: var(--card-shadow);
+        }
+
+        .day-card.span-2 {
+            grid-column: span 2;
+        }
+
+        .day-badge {
+            font-size: 9px;
+            font-weight: 800;
+            text-transform: uppercase;
+            color: var(--secondary-orange);
+            background: var(--orange-light);
+            padding: 2px 8px;
+            border-radius: 4px;
+            display: inline-block;
+            width: fit-content;
+        }
+
+        .day-card h5 {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--primary-blue);
+        }
+
+        .day-card p {
+            font-size: 11px;
+            color: var(--text-muted);
+            line-height: 1.3;
+        }
+
+        /* Flowcharts */
+        .flowchart-container {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            margin-top: 4px;
+        }
+
+        .flow-step {
+            background: #ffffff;
+            border: 2px solid var(--primary-blue);
+            border-radius: 12px;
+            padding: 10px 8px;
+            flex: 1 0 40%;
+            min-width: 70px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            box-shadow: var(--card-shadow);
+        }
+
+        .flow-step-num {
+            width: 22px;
+            height: 22px;
+            background: var(--primary-blue);
+            color: #ffffff;
+            border-radius: 50%;
+            font-size: 10px;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .flow-step-icon {
+            font-size: 20px;
+            color: var(--secondary-orange);
+        }
+
+        .flow-step-title {
+            font-size: 10px;
+            font-weight: 700;
+            color: var(--primary-blue);
+            line-height: 1.2;
+        }
+
+        .flow-arrow {
+            color: var(--secondary-orange);
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+
+        .flow-step[style*="border-color"] {
+            border-color: var(--secondary-orange) !important;
+            background: var(--orange-light) !important;
+        }
+
+        /* Cases / Témoignages */
+        .cases-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .quote-box {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 14px;
+            padding: 18px;
+        }
+
+        .quote-box i.fa-quote-left {
+            font-size: 24px;
+            color: var(--secondary-orange);
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .quote-text {
+            font-size: 14px;
+            font-style: italic;
+            line-height: 1.5;
+            color: #ffffff;
+            margin-bottom: 10px;
+        }
+
+        .quote-author {
+            font-weight: 700;
+            font-size: 13px;
+            color: #93C5FD;
+        }
+
+        .projects-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .project-card-item {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 10px;
+            padding: 10px 14px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .project-card-item i {
+            font-size: 18px;
+            color: var(--secondary-orange);
+        }
+
+        .project-card-item h4 {
+            font-size: 14px;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        .project-card-item p {
+            font-size: 11px;
+            color: #CBD5E1;
+        }
+
+        /* Inscription */
+        .signup-container {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .signup-title {
+            font-size: 26px;
+            font-weight: 800;
+            margin-bottom: 8px;
+            color: #ffffff;
+            line-height: 1.15;
+        }
+
+        .signup-links {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .signup-link-btn {
+            background: #ffffff;
+            color: #C2410C;
+            padding: 10px 16px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+        }
+
+        .qr-code-box {
+            background: #ffffff;
+            padding: 12px;
+            border-radius: 14px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            text-align: center;
+        }
+
+        .qr-code-box svg {
+            width: 100px;
+            height: 100px;
+            margin-bottom: 6px;
+        }
+
+        .qr-code-box span {
+            color: var(--primary-blue);
+            font-size: 10px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        /* Contact */
+        .contact-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .contact-card {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 12px;
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .contact-icon {
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            background: var(--secondary-orange);
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+
+        .contact-info h5 {
+            font-size: 10px;
+            color: #93C5FD;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            margin-bottom: 2px;
+        }
+
+        .contact-info p {
+            font-size: 14px;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        .social-row {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 4px;
+        }
+
+        .social-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .social-btn:active {
+            background: var(--secondary-orange);
+            transform: scale(0.95);
+        }
+
+        /* Ajustements pour très petits écrans */
+        @media (max-width: 380px) {
+            .slide { padding: 14px 12px 30px 12px; }
+            .cover-title { font-size: 26px; }
+            .slide-title { font-size: 19px; }
+            .logo-title { font-size: 13px; }
+            .flow-step { flex: 1 0 30%; min-width: 60px; }
+            .flow-step-title { font-size: 8px; }
+        }
+
+        /* Empêcher le scroll sur le body */
+        body {
+            overscroll-behavior: none;
+        }
+
+        /* Scrollbar stylée pour les slides */
+        .slide::-webkit-scrollbar {
+            width: 3px;
+        }
+        .slide::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .slide::-webkit-scrollbar-thumb {
+            background: rgba(11, 63, 165, 0.3);
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="presentation-deck" id="presentationDeck">
+
+        <!-- Progress Bar -->
+        <div class="progress-bar-container">
+            <div class="progress-bar-fill" id="progressBar"></div>
+        </div>
+
+        <!-- Slides Wrapper -->
+        <div class="slides-wrapper">
+
+            <!-- SLIDE 1: Cover -->
+            <div class="slide theme-dark active" id="slide-1">
+                <div class="slide-header">
+                    <div class="logo-brand">
+                        <div class="logo-icon">N</div>
+                        <div class="logo-text">
+                            <span class="logo-title">NTIC SOLUTION</span>
+                            <span class="logo-subtitle">L'univers du digital</span>
+                        </div>
+                    </div>
+                    <span class="slide-number-badge">01 / 12</span>
+                </div>
+                <div class="slide-body">
+                    <div class="cover-container">
+                        <div class="cover-badge"><i class="fa-solid fa-graduation-cap"></i> Formations Pro — Août 2026</div>
+                        <h1 class="cover-title">FORMATION <br>EN INFORMATIQUE</h1>
+                        <p class="cover-subtitle">Bureautique & Développement Web et Mobile</p>
+                        <div class="cover-info-card">
+                            <div class="cover-info-item"><i class="fa-regular fa-calendar-days"></i><span>Du 16 au 29 août 2026</span></div>
+                            <div class="cover-info-item"><i class="fa-solid fa-location-dot"></i><span>Salle informatique de l'Ecole Centre B, Banfora, Burkina Faso</span></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="slide-footer">
+                    <span>NTIC Solution</span>
+                    <span>Ecole Centre B, Banfora, Burkina Faso</span>
+                </div>
+            </div>
+
+            <!-- SLIDE 2: Qui sommes-nous -->
+            <div class="slide" id="slide-2">
+                <div class="slide-header">
+                    <div class="logo-brand">
+                        <div class="logo-icon">N</div>
+                        <div class="logo-text">
+                            <span class="logo-title">NTIC SOLUTION</span>
+                            <span class="logo-subtitle">L'univers du digital</span>
+                        </div>
+                    </div>
+                    <span class="slide-number-badge">02 / 12</span>
+                </div>
+                <h2 class="slide-title">Qui sommes-nous ?</h2>
+                <p class="slide-subtitle">Agence digitale high-tech</p>
+                <div class="slide-body">
+                    <div class="about-grid">
+                        <div class="about-card primary">
+                            <h3><i class="fa-solid fa-microchip"></i> Expertise High-Tech</h3>
+                            <p><strong>NTIC Solution</strong> est spécialisée en <strong>Développement Web, Applications, IA, Marketing digital et conception graphique</strong>.</p>
+                        </div>
+                        <div class="about-card">
+                            <h3><i class="fa-solid fa-user-tie"></i> Fondateur</h3>
+                            <div class="founder-box">
+                                <div class="founder-avatar">KS</div>
+                                <div>
+                                    <strong style="color: var(--primary-blue); font-size: 15px;">Kévin Kiessé Sanou</strong>
+                                    <p style="font-size: 12px; color: var(--text-muted);">Dev Full-Stack & Expert Tech (+6 ans)</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="about-card">
+                            <h3><i class="fa-solid fa-map-location-dot"></i> Notre Ancrage</h3>
+                            <p><strong>Secteur 15, Quartier Tatana, Banfora</strong>. Nous accompagnons vers l'autonomie numérique.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="slide-footer">
+                    <span>NTIC Solution</span>
+                    <span>Salle informatique de l'Ecole Centre B, Banfora, Burkina Faso</span>
+                </div>
+            </div>
+
+            <!-- SLIDE 3: Pourquoi -->
+            <div class="slide" id="slide-3">
+                <div class="slide-header">
+                    <div class="logo-brand">
+                        <div class="logo-icon">N</div>
+                        <div class="logo-text">
+                            <span class="logo-title">NTIC SOLUTION</span>
+                            <span class="logo-subtitle">L'univers du digital</span>
+                        </div>
+                    </div>
+                    <span class="slide-number-badge">03 / 12</span>
+                </div>
+                <h2 class="slide-title">Pourquoi ces formations ?</h2>
+                <p class="slide-subtitle">Transformer le potentiel en compétences rentables</p>
+                <div class="slide-body">
+                    <div class="why-grid">
+                        <div class="why-card">
+                            <div class="why-icon"><i class="fa-solid fa-laptop-code"></i></div>
+                            <div class="why-text">
+                                <h4>Un Constat Réel</h4>
+                                <p>Beaucoup ont un ordinateur mais ne savent pas l'exploiter pleinement.</p>
+                            </div>
+                        </div>
+                        <div class="why-card">
+                            <div class="why-icon"><i class="fa-solid fa-briefcase"></i></div>
+                            <div class="why-text">
+                                <h4>Un Besoin Urgent</h4>
+                                <p>Boostez votre carrière, trouvez un emploi ou lancez votre entreprise.</p>
+                            </div>
+                        </div>
+                        <div class="why-card">
+                            <div class="why-icon"><i class="fa-solid fa-gears"></i></div>
+                            <div class="why-text">
+                                <h4>Méthode Pratique</h4>
+                                <p>100% pratique : du concret pour des résultats immédiats.</p>
+                            </div>
+                        </div>
+                        <div class="why-card">
+                            <div class="why-icon"><i class="fa-solid fa-rocket"></i></div>
+                            <div class="why-text">
+                                <h4>Notre Promesse</h4>
+                                <p>Repartez avec des nouvelles compétences informatiques !</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="slide-footer">
+                    <span>NTIC Solution</span>
+                    <span>Salle informatique de l'Ecole Centre B, Banfora, Burkina Faso</span>
+                </div>
+            </div>
+
+            <!-- SLIDE 4: Les formations -->
+            <div class="slide" id="slide-4">
+                <div class="slide-header">
+                    <div class="logo-brand">
+                        <div class="logo-icon">N</div>
+                        <div class="logo-text">
+                            <span class="logo-title">NTIC SOLUTION</span>
+                            <span class="logo-subtitle">L'univers du digital</span>
+                        </div>
+                    </div>
+                    <span class="slide-number-badge">04 / 12</span>
+                </div>
+                <h2 class="slide-title">Nos 2 Formations</h2>
+                <p class="slide-subtitle">Choisissez votre module</p>
+                <div class="slide-body">
+                    <div class="courses-cols">
+                        <div class="course-box blue">
+                            <div class="course-header-row">
+                                <div class="course-icon-bg"><i class="fa-solid fa-desktop"></i></div>
+                                <span class="course-price">10 000 FCFA</span>
+                            </div>
+                            <h3>Bureautique</h3>
+                            <p>Windows & Office 365 (Word, Excel, PowerPoint).</p>
+                        </div>
+                        <div class="course-box orange">
+                            <div class="course-header-row">
+                                <div class="course-icon-bg"><i class="fa-solid fa-code"></i></div>
+                                <span class="course-price">20 000 FCFA</span>
+                            </div>
+                            <h3>Web & Mobile</h3>
+                            <p>Site web avec IA DeepSeek & VS Code, et app Android sans coder.</p>
+                        </div>
+                    </div>
+                    <div class="pack-banner">
+                        <div class="pack-title"><i class="fa-solid fa-fire" style="color: var(--secondary-orange);"></i> PACK COMPLET</div>
+                        <div class="pack-price">25 000 FCFA <span style="font-size: 12px; text-decoration: line-through; color: #94A3B8; margin-left: 4px;">30 000</span></div>
+                    </div>
+                </div>
+                <div class="slide-footer">
+                    <span>NTIC Solution</span>
+                    <span>Salle informatique de l'Ecole Centre B, Banfora, Burkina Faso</span>
+                </div>
+            </div>
+
+            <!-- SLIDE 5: Inclus -->
+            <div class="slide" id="slide-5">
+                <div class="slide-header">
+                    <div class="logo-brand">
+                        <div class="logo-icon">N</div>
+                        <div class="logo-text">
+                            <span class="logo-title">NTIC SOLUTION</span>
+                            <span class="logo-subtitle">L'univers du digital</span>
+                        </div>
+                    </div>
+                    <span class="slide-number-badge">05 / 12</span>
+                </div>
+                <h2 class="slide-title">Ce qui est inclus</h2>
+                <p class="slide-subtitle">Un environnement d'apprentissage haut de gamme</p>
+                <div class="slide-body">
+                    <div class="included-list">
+                        <div class="included-item"><i class="fa-solid fa-user-graduate"></i><span>Suivi individuel par expert</span></div>
+                        <div class="included-item"><i class="fa-solid fa-award"></i><span>Attestation officielle</span></div>
+                        <div class="included-item"><i class="fa-solid fa-users"></i><span>Places limitées pour la qualité</span></div>
+                        <div class="included-item" style="background: var(--blue-light); border-color: #BFDBFE;">
+                            <i class="fa-solid fa-ticket" style="background: var(--primary-blue); color: #ffffff;"></i>
+                            <span>Inscriptions sur <strong style="color: var(--primary-blue);">myvivo.online ou au +22605585868</strong></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="slide-footer">
+                    <span>NTIC Solution</span>
+                    <span>Banfora, BF</span>
+                </div>
+            </div>
+
+            <!-- SLIDE 6: Bureautique détail -->
+            <div class="slide" id="slide-6">
+                <div class="slide-header">
+                    <div class="logo-brand">
+                        <div class="logo-icon">N</div>
+                        <div class="logo-text">
+                            <span class="logo-title">NTIC SOLUTION</span>
+                            <span class="logo-subtitle">L'univers du digital</span>
+                        </div>
+                    </div>
+                    <span class="slide-number-badge">06 / 12</span>
+                </div>
+                <h2 class="slide-title"><i class="fa-solid fa-desktop" style="color: var(--primary-blue);"></i> Bureautique</h2>
+                <p class="slide-subtitle">7 jours — 14h | 10 000 FCFA</p>
+                <div class="slide-body">
+                    <div class="days-grid">
+                        <div class="day-card"><span class="day-badge">J1</span><h5>PC & Windows</h5><p>Prise en main, fichiers, sécurité.</p></div>
+                        <div class="day-card"><span class="day-badge">J2</span><h5>Word — Bases</h5><p>Saisie, mise en page, styles.</p></div>
+                        <div class="day-card"><span class="day-badge">J3</span><h5>Word — Avancé</h5><p>Tableaux, images, sommaire.</p></div>
+                        <div class="day-card"><span class="day-badge">J4</span><h5>Excel — Bases</h5><p>Tableaux, formules SOMME, MOYENNE.</p></div>
+                        <div class="day-card"><span class="day-badge">J5</span><h5>Excel — Analyse</h5><p>Formules SI, graphiques.</p></div>
+                        <div class="day-card"><span class="day-badge">J6</span><h5>PowerPoint</h5><p>Présentations, animations.</p></div>
+                        <div class="day-card span-2" style="background: var(--blue-light);"><span class="day-badge">J7</span><h5>Projet</h5><p>Evaluation finale.</p></div>
+                    </div>
+                </div>
+                <div class="slide-footer">
+                    <span>NTIC Solution</span>
+                    <span>Salle informatique de l'Ecole Centre B, Banfora, Burkina Faso</span>
+                </div>
+            </div>
+
+            <!-- SLIDE 7: Dev Web & Mobile détail -->
+            <div class="slide" id="slide-7">
+                <div class="slide-header">
+                    <div class="logo-brand">
+                        <div class="logo-icon">N</div>
+                        <div class="logo-text">
+                            <span class="logo-title">NTIC SOLUTION</span>
+                            <span class="logo-subtitle">L'univers du digital</span>
+                        </div>
+                    </div>
+                    <span class="slide-number-badge">07 / 12</span>
+                </div>
+                <h2 class="slide-title"><i class="fa-solid fa-code" style="color: var(--secondary-orange);"></i> Web & Mobile</h2>
+                <p class="slide-subtitle">7 jours — 14h | 20 000 FCFA</p>
+                <div class="slide-body">
+                    <div class="days-grid">
+                        <div class="day-card"><span class="day-badge">J1</span><h5>Outils & DeepSeek</h5><p>VS Code, Live Server, IA.</p></div>
+                        <div class="day-card"><span class="day-badge">J2</span><h5>HTML</h5><p>Balises, liens, images.</p></div>
+                        <div class="day-card"><span class="day-badge">J3</span><h5>CSS & Multi-pages</h5><p>Design responsive, 3 pages.</p></div>
+                        <div class="day-card"><span class="day-badge">J4</span><h5>GitHub & Cloud</h5><p>Git, hébergement Pages.</p></div>
+                        <div class="day-card"><span class="day-badge">J5</span><h5>Domaine Pro</h5><p>Namecheap, SSL, WhatsApp.</p></div>
+                        <div class="day-card"><span class="day-badge">J6</span><h5>App Mobile</h5><p>AppCreator24, No-Code.</p></div>
+                        <div class="day-card span-2" style="background: var(--orange-light);"><span class="day-badge">J7</span><h5>APK & Publication</h5><p>Génération APK, installation, validation.</p></div>
+                    </div>
+                </div>
+                <div class="slide-footer">
+                    <span>NTIC Solution</span>
+                    <span>Salle informatique de l'Ecole Centre B, Banfora, Burkina Faso</span>
+                </div>
+            </div>
+
+            <!-- SLIDE 8: Méthode Web -->
+            <div class="slide" id="slide-8">
+                <div class="slide-header">
+                    <div class="logo-brand">
+                        <div class="logo-icon">N</div>
+                        <div class="logo-text">
+                            <span class="logo-title">NTIC SOLUTION</span>
+                            <span class="logo-subtitle">L'univers du digital</span>
+                        </div>
+                    </div>
+                    <span class="slide-number-badge">08 / 12</span>
+                </div>
+                <h2 class="slide-title">Méthode Web</h2>
+                <p class="slide-subtitle">Processus assisté par IA en 6 étapes</p>
+                <div class="slide-body">
+                    <div class="flowchart-container">
+                        <div class="flow-step"><div class="flow-step-num">1</div><div class="flow-step-icon"><i class="fa-regular fa-lightbulb"></i></div><div class="flow-step-title">Idée</div></div>
+                        <i class="fa-solid fa-arrow-right flow-arrow"></i>
+                        <div class="flow-step"><div class="flow-step-num">2</div><div class="flow-step-icon"><i class="fa-solid fa-robot"></i></div><div class="flow-step-title">DeepSeek</div></div>
+                        <i class="fa-solid fa-arrow-right flow-arrow"></i>
+                        <div class="flow-step"><div class="flow-step-num">3</div><div class="flow-step-icon"><i class="fa-solid fa-laptop-code"></i></div><div class="flow-step-title">VS Code</div></div>
+                        <i class="fa-solid fa-arrow-right flow-arrow"></i>
+                        <div class="flow-step"><div class="flow-step-num">4</div><div class="flow-step-icon"><i class="fa-brands fa-github"></i></div><div class="flow-step-title">GitHub</div></div>
+                        <i class="fa-solid fa-arrow-right flow-arrow"></i>
+                        <div class="flow-step"><div class="flow-step-num">5</div><div class="flow-step-icon"><i class="fa-solid fa-cloud-arrow-up"></i></div><div class="flow-step-title">Pages</div></div>
+                        <i class="fa-solid fa-arrow-right flow-arrow"></i>
+                        <div class="flow-step" style="border-color: var(--secondary-orange); background: var(--orange-light);"><div class="flow-step-num" style="background: var(--secondary-orange);">6</div><div class="flow-step-icon"><i class="fa-solid fa-globe"></i></div><div class="flow-step-title">En Ligne !</div></div>
+                    </div>
+                </div>
+                <div class="slide-footer">
+                    <span>NTIC Solution</span>
+                    <span>Salle informatique de l'Ecole Centre B, Banfora, Burkina Faso</span>
+                </div>
+            </div>
+
+            <!-- SLIDE 9: Méthode App -->
+            <div class="slide" id="slide-9">
+                <div class="slide-header">
+                    <div class="logo-brand">
+                        <div class="logo-icon">N</div>
+                        <div class="logo-text">
+                            <span class="logo-title">NTIC SOLUTION</span>
+                            <span class="logo-subtitle">L'univers du digital</span>
+                        </div>
+                    </div>
+                    <span class="slide-number-badge">09 / 12</span>
+                </div>
+                <h2 class="slide-title">Méthode App No-Code</h2>
+                <p class="slide-subtitle">Créez votre app Android sans coder</p>
+                <div class="slide-body">
+                    <div class="flowchart-container">
+                        <div class="flow-step"><div class="flow-step-num">1</div><div class="flow-step-icon"><i class="fa-solid fa-cubes"></i></div><div class="flow-step-title">AppCreator24</div></div>
+                        <i class="fa-solid fa-arrow-right flow-arrow"></i>
+                        <div class="flow-step"><div class="flow-step-num">2</div><div class="flow-step-icon"><i class="fa-solid fa-mobile-screen"></i></div><div class="flow-step-title">Écrans</div></div>
+                        <i class="fa-solid fa-arrow-right flow-arrow"></i>
+                        <div class="flow-step"><div class="flow-step-num">3</div><div class="flow-step-icon"><i class="fa-solid fa-puzzle-piece"></i></div><div class="flow-step-title">UI</div></div>
+                        <i class="fa-solid fa-arrow-right flow-arrow"></i>
+                        <div class="flow-step"><div class="flow-step-num">4</div><div class="flow-step-icon"><i class="fa-solid fa-gear"></i></div><div class="flow-step-title">APK</div></div>
+                        <i class="fa-solid fa-arrow-right flow-arrow"></i>
+                        <div class="flow-step" style="border-color: var(--secondary-orange); background: var(--orange-light);"><div class="flow-step-num" style="background: var(--secondary-orange);">5</div><div class="flow-step-icon"><i class="fa-solid fa-circle-check"></i></div><div class="flow-step-title">Installation</div></div>
+                    </div>
+                </div>
+                <div class="slide-footer">
+                    <span>NTIC Solution</span>
+                    <span>Salle informatique de l'Ecole Centre B, Banfora, Burkina Faso</span>
+                </div>
+            </div>
+
+            <!-- SLIDE 10: Témoignages -->
+            <div class="slide theme-dark" id="slide-10">
+                <div class="slide-header">
+                    <div class="logo-brand">
+                        <div class="logo-icon">N</div>
+                        <div class="logo-text">
+                            <span class="logo-title">NTIC SOLUTION</span>
+                            <span class="logo-subtitle">L'univers du digital</span>
+                        </div>
+                    </div>
+                    <span class="slide-number-badge">10 / 12</span>
+                </div>
+                <h2 class="slide-title">Projets & Témoignages</h2>
+                <p class="slide-subtitle">La méthode qui fonctionne</p>
+                <div class="slide-body">
+                    <div class="cases-wrapper">
+                        <div class="quote-box">
+                            <i class="fa-solid fa-quote-left"></i>
+                            <p class="quote-text">« Cette approche IA m'a permis de concevoir le site de NTIC SOLUTION en 2 jours. »</p>
+                            <div class="quote-author">— Kévin Kiessé Sanou, Lead Formateur</div>
+                        </div>
+                        <div class="projects-list">
+                            <h4 style="color: #ffffff; font-size: 14px;">Projets conçus :</h4>
+                            <div class="project-card-item"><i class="fa-solid fa-building"></i><div><h4>CAVOR</h4><p>Plateforme web d'entreprise</p></div></div>
+                            <div class="project-card-item"><i class="fa-solid fa-qrcode"></i><div><h4>Menu QR</h4><p>Solution pour restaurants</p></div></div>
+                            <div class="project-card-item"><i class="fa-solid fa-ticket"></i><div><h4>myvivo.online</h4><p>Billetterie en ligne</p></div></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="slide-footer">
+                    <span>NTIC Solution</span>
+                    <span>Salle informatique de l'Ecole Centre B, Banfora, Burkina Faso</span>
+                </div>
+            </div>
+
+            <!-- SLIDE 11: Inscription -->
+            <div class="slide theme-orange" id="slide-11">
+                <div class="slide-header">
+                    <div class="logo-brand">
+                        <div class="logo-icon">N</div>
+                        <div class="logo-text">
+                            <span class="logo-title">NTIC SOLUTION</span>
+                            <span class="logo-subtitle">L'univers du digital</span>
+                        </div>
+                    </div>
+                    <span class="slide-number-badge">11 / 12</span>
+                </div>
+                <div class="slide-body">
+                    <div class="signup-container">
+                        <div>
+                            <h2 class="signup-title">Prêt à transformer votre avenir ?</h2>
+                            <p style="font-size: 15px; color: #FFE3D8; margin-bottom: 14px;">Places limitées !</p>
+                            <div class="signup-links">
+                                <a href="https://myvivo.online" target="_blank" class="signup-link-btn"><i class="fa-solid fa-globe"></i> myvivo.online</a>
+                                <div style="display: flex; align-items: center; gap: 8px; color: #ffffff; font-size: 16px; font-weight: 700;"><i class="fa-brands fa-whatsapp" style="font-size: 22px;"></i> +226 69 69 69 24  WhatsApp</div>
+                                <div style="display: flex; align-items: center; gap: 8px; color: #ffffff; font-size: 16px; font-weight: 700;"><i class="fa-solid fa-phone" style="font-size: 22px;"></i> +226 05 58 58 68 Appels directs</div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="slide-footer">
+                    <span>NTIC Solution</span>
+                    <span>Salle informatique de l'Ecole Centre B, Banfora, Burkina Faso</span>
+                </div>
+            </div>
+
+            <!-- SLIDE 12: Contact -->
+            <div class="slide theme-dark" id="slide-12">
+                <div class="slide-header">
+                    <div class="logo-brand">
+                        <div class="logo-icon">N</div>
+                        <div class="logo-text">
+                            <span class="logo-title">NTIC SOLUTION</span>
+                            <span class="logo-subtitle">L'univers du digital</span>
+                        </div>
+                    </div>
+                    <span class="slide-number-badge">12 / 12</span>
+                </div>
+                <h2 class="slide-title">Contactez-nous</h2>
+                <p class="slide-subtitle">Pour toutes vos questions</p>
+                <div class="slide-body">
+                    <div class="contact-grid">
+                        <div class="contact-card"><div class="contact-icon"><i class="fa-solid fa-location-dot"></i></div><div class="contact-info"><h5>Adresse</h5><p>Secteur 15, Tatana, Banfora</p></div></div>
+                        <div class="contact-card"><div class="contact-icon"><i class="fa-brands fa-whatsapp"></i></div><div class="contact-info"><h5>WhatsApp</h5><p>+226 69 69 69 24</p></div></div>
+                        <div class="contact-card"><div class="contact-icon"><i class="fa-solid fa-envelope"></i></div><div class="contact-info"><h5>E-mail</h5><p>nticsolution.bf@gmail.com</p></div></div>
+                        <div class="contact-card"><div class="contact-icon"><i class="fa-solid fa-globe"></i></div><div class="contact-info"><h5>Site</h5><p>nticsolution.org</p></div></div>
+                        <div class="social-row">
+                           
+                            <a href="https://wa.me/22669696924" class="social-btn"><i class="fa-brands fa-whatsapp"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="slide-footer">
+                    <span>NTIC Solution</span>
+                    <span>Salle informatique de l'Ecole Centre B, Banfora, Burkina Faso</span>
+                </div>
+            </div>
+
+        </div><!-- /slides-wrapper -->
+    </div><!-- /presentation-deck -->
+
+    <!-- Contrôles mobiles -->
+    <div class="deck-controls">
+        <button class="control-btn" id="prevBtn"><i class="fa-solid fa-chevron-left"></i></button>
+        <div class="slide-counter" id="slideCounter">1 / 12</div>
+        <button class="control-btn" id="nextBtn"><i class="fa-solid fa-chevron-right"></i></button>
+        <button class="control-btn" id="fullscreenBtn"><i class="fa-solid fa-expand"></i></button>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const slides = document.querySelectorAll('.slide');
+            const totalSlides = slides.length;
+            let currentSlide = 0;
+
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const slideCounter = document.getElementById('slideCounter');
+            const progressBar = document.getElementById('progressBar');
+            const fullscreenBtn = document.getElementById('fullscreenBtn');
+            const presentationDeck = document.getElementById('presentationDeck');
+
+            function updateSlide(index) {
+                if (index < 0) index = 0;
+                if (index >= totalSlides) index = totalSlides - 1;
+
+                slides.forEach((slide, idx) => {
+                    slide.classList.toggle('active', idx === index);
+                });
+
+                currentSlide = index;
+                slideCounter.textContent = `${currentSlide + 1} / ${totalSlides}`;
+                progressBar.style.width = `${((currentSlide + 1) / totalSlides) * 100}%`;
+
+                // Scroll to top of slide
+                slides[currentSlide]?.scrollTo(0, 0);
+            }
+
+            prevBtn.addEventListener('click', () => updateSlide(currentSlide - 1));
+            nextBtn.addEventListener('click', () => updateSlide(currentSlide + 1));
+
+            // Gestures tactiles (swipe)
+            let touchStartX = 0;
+            let touchEndX = 0;
+            presentationDeck.addEventListener('touchstart', (e) => {
+                touchStartX = e.changedTouches[0].screenX;
+            }, { passive: true });
+            presentationDeck.addEventListener('touchend', (e) => {
+                touchEndX = e.changedTouches[0].screenX;
+                const diff = touchStartX - touchEndX;
+                if (Math.abs(diff) > 50) {
+                    if (diff > 0) updateSlide(currentSlide + 1);
+                    else updateSlide(currentSlide - 1);
+                }
+            }, { passive: true });
+
+            // Clavier
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowRight' || e.key === 'Space' || e.key === 'PageDown') {
+                    e.preventDefault();
+                    updateSlide(currentSlide + 1);
+                } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+                    e.preventDefault();
+                    updateSlide(currentSlide - 1);
+                } else if (e.key === 'Home') {
+                    e.preventDefault();
+                    updateSlide(0);
+                } else if (e.key === 'End') {
+                    e.preventDefault();
+                    updateSlide(totalSlides - 1);
+                }
+            });
+
+            // Plein écran
+            fullscreenBtn.addEventListener('click', () => {
+                if (!document.fullscreenElement) {
+                    presentationDeck.requestFullscreen().catch(() => {});
+                } else {
+                    document.exitFullscreen();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
