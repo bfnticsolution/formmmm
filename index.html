@@ -1440,7 +1440,7 @@
                             <!-- POINT 1: Compteur de places -->
                             <div style="background: rgba(255, 68, 68, 0.2); border: 2px solid #FF4444; border-radius: 10px; padding: 10px; text-align: center; margin-bottom: 14px;">
                                 <span style="color: #FF4444; font-weight: 800; font-size: 17px;">
-                                    <i class="fa-solid fa-circle-exclamation"></i> Plus que <span id="placesCount">12</span> places disponibles !
+                                    <i class="fa-solid fa-circle-exclamation"></i> Plus que <span id="placesCount">25</span> places disponibles !
                                 </span>
                             </div>
 
@@ -1537,10 +1537,10 @@
             updateCountdown();
 
             // --- POINT 1: Compteur de places (diminue aléatoirement) ---
-            let places = 12;
+            let places = 25;
             const placesEl = document.getElementById('placesCount');
             setInterval(() => {
-                if (places > 0 && Math.random() > 0.6) {
+                if (places > 1 && Math.random() > 0.6) {
                     places--;
                     placesEl.textContent = places;
                     // Ajoute un petit effet visuel
