@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NTIC SOLUTION · Formation Bureautique · Jour 6</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    :root {
+      --bleu: #0B3FA5;
+      --bleu-profond: #072a6e;
+      --bleu-clair: #e8f0fe;
+      --orange: #FF6B35;
+      --orange-vif: #ff5722;
+      --orange-clair: #fff4e5;
+      --gris-fond: #f4f6fa;
+      --texte: #1e293b;
+      --texte-secondaire: #475569;
+      --blanc: #ffffff;
+      --bordure: #e2e8f0;
+      --ppt-orange: #D24726;
+      --ppt-orange-light: #fdf2f0;
+      --ombre: 0 25px 50px rgba(11, 63, 165, 0.08), 0 6px 18px rgba(0,0,0,0.05);
+      --radius: 22px;
+      --transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      background: var(--gris-fond);
+      color: var(--texte);
+      line-height: 1.7;
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* ---------- ÉCRAN DE CODE D'ACCÈS ---------- */
+    .access-overlay {
+      position: fixed; inset: 0;
+      background: linear-gradient(135deg, #D24726 0%, #7a1f0e 100%);
+      z-index: 9999;
+      display: flex; align-items: center; justify-content: center; flex-direction: column;
+      transition: opacity 0.8s ease, visibility 0.8s ease;
+    }
+    .access-overlay.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+
+    .access-card {
+      background: var(--blanc); border-radius: 2rem; padding: 3rem 2.5rem; text-align: center;
+      box-shadow: 0 30px 60px rgba(0,0,0,0.4); max-width: 440px; width: 90%;
+      animation: floatIn 0.8s ease;
+    }
+    @keyframes floatIn {
+      from { opacity: 0; transform: translateY(40px) scale(0.95); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .access-card .logo-symbol {
+      background: var(--ppt-orange); color: white; width: 64px; height: 64px;
+      border-radius: 18px; display: flex; align-items: center; justify-content: center;
+      font-weight: 800; font-size: 1.8rem; margin: 0 auto 1.2rem;
+    }
+    .access-card h2 { color: var(--ppt-orange); font-size: 1.5rem; margin-bottom: 0.5rem; border-bottom: none; padding-bottom: 0; }
+    .access-card p { color: var(--texte-secondaire); margin-bottom: 1.8rem; font-size: 0.95rem; }
+
+    .access-input {
+      width: 100%; padding: 0.9rem 1.3rem; border: 2px solid var(--bordure); border-radius: 14px;
+      font-family: inherit; font-size: 1rem; text-align: center; letter-spacing: 2px;
+      transition: var(--transition); margin-bottom: 1rem;
+    }
+    .access-input:focus { outline: none; border-color: var(--ppt-orange); box-shadow: 0 0 0 4px rgba(210,71,38,0.1); }
+
+    .access-btn {
+      width: 100%; padding: 0.9rem; background: var(--bleu); color: white; border: none;
+      border-radius: 14px; font-weight: 700; font-size: 1rem; font-family: inherit;
+      cursor: pointer; transition: var(--transition); letter-spacing: 0.5px;
+    }
+    .access-btn:hover { background: var(--bleu-profond); transform: translateY(-2px); box-shadow: 0 8px 20px rgba(11,63,165,0.35); }
+
+    .access-error { color: #dc2626; font-size: 0.85rem; margin-top: 0.5rem; display: none; font-weight: 600; }
+    .access-error.visible { display: block; animation: shake 0.5s ease; }
+    @keyframes shake {
+      0%,100% { transform: translateX(0); } 25% { transform: translateX(-8px); } 75% { transform: translateX(8px); }
+    }
+
+    /* ---------- NAVIGATION ---------- */
+    .main-nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      background: rgba(255,255,255,0.88); backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--bordure); padding: 0.7rem 2rem;
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;
+      box-shadow: 0 2px 14px rgba(0,0,0,0.05);
+    }
+    .nav-logo { display: flex; align-items: center; gap: 0.7rem; font-weight: 700; font-size: 1.1rem; color: var(--bleu); text-decoration: none; }
+    .nav-logo .logo-symbol {
+      background: var(--bleu); color: white; width: 42px; height: 42px; border-radius: 12px;
+      display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 1.3rem;
+    }
+    .nav-controls { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+    .nav-controls button {
+      background: var(--blanc); border: 1.5px solid var(--bordure); padding: 0.55rem 1.2rem;
+      border-radius: 30px; font-family: inherit; font-weight: 600; font-size: 0.85rem;
+      cursor: pointer; color: var(--texte); transition: var(--transition);
+      display: flex; align-items: center; gap: 0.4rem;
+    }
+    .nav-controls button:hover { background: var(--bleu-clair); border-color: var(--bleu); color: var(--bleu); }
+
+    .progress-bar { width: 120px; height: 6px; background: var(--bordure); border-radius: 10px; overflow: hidden; }
+    .progress-fill { height: 100%; background: var(--orange); width: 0%; transition: width 0.4s ease; border-radius: 10px; }
+
+    /* ---------- CONTAINER ---------- */
+    .app-container {
+      max-width: 1150px; margin: 0 auto; padding: 6rem 1.5rem 3rem;
+      display: flex; flex-direction: column; gap: 2.5rem;
+      opacity: 0; transition: opacity 0.6s ease;
+    }
+    .app-container.visible { opacity: 1; }
+
+    /* ---------- SLIDE ---------- */
+    .slide {
+      background: var(--blanc); border-radius: var(--radius); box-shadow: var(--ombre);
+      padding: 2.8rem 3rem; position: relative; border-left: 7px solid transparent;
+      transition: all 0.5s ease; opacity: 0; transform: translateY(35px);
+    }
+    .slide.reveal { opacity: 1; transform: translateY(0); }
+
+    .slide.cover-slide {
+      border-left-color: var(--orange);
+      background: linear-gradient(135deg, #D24726 0%, #7a1f0e 100%);
+      color: white;
+    }
+    .slide.welcome-slide { border-left-color: var(--orange); background: linear-gradient(135deg, #f8fafc 0%, #fdf2f0 100%); }
+    .slide.recap-slide { border-left-color: #f59e0b; background: #fffbeb; }
+    .slide.next-slide { border-left-color: var(--orange); background: linear-gradient(135deg, #FF6B35 0%, #e55a2b 100%); color: white; }
+    .slide.module-ppt { border-left-color: var(--ppt-orange); }
+
+    .slide-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem; }
+
+    .module-badge {
+      background: var(--ppt-orange-light); color: var(--ppt-orange);
+      font-weight: 700; font-size: 0.8rem; padding: 0.35rem 1rem; border-radius: 20px; letter-spacing: 0.4px;
+    }
+    .cover-slide .module-badge, .next-slide .module-badge { background: rgba(255,255,255,0.2); color: white; }
+
+    .duration-badge {
+      background: var(--orange-clair); color: var(--orange);
+      font-weight: 700; font-size: 0.8rem; padding: 0.35rem 1rem; border-radius: 20px;
+    }
+
+    .day-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; margin: 1rem 0; }
+    .day-tags span {
+      background: rgba(255,255,255,0.15); color: white;
+      padding: 0.35rem 0.9rem; border-radius: 20px; font-size: 0.8rem; font-weight: 600;
+    }
+
+    h1 { font-size: 2.6rem; font-weight: 800; letter-spacing: -0.5px; margin: 1rem 0 0.5rem; }
+
+    h2 {
+      font-size: 1.7rem; font-weight: 700; color: var(--ppt-orange);
+      margin: 1.5rem 0 1rem; padding-bottom: 0.5rem;
+      border-bottom: 3px solid var(--bleu); display: inline-block;
+    }
+    .cover-slide h2, .next-slide h2 { color: white; border-bottom-color: rgba(255,255,255,0.5); }
+    .recap-slide h2 { color: #92400e; border-bottom-color: #f59e0b; }
+
+    h3 { font-size: 1.25rem; font-weight: 700; margin: 1.5rem 0 0.6rem; }
+    h4 { font-size: 1.05rem; font-weight: 700; margin: 1rem 0 0.4rem; }
+
+    /* ---------- TABLEAUX ---------- */
+    .table-wrapper { overflow-x: auto; margin: 1.5rem 0; border-radius: 14px; box-shadow: 0 2px 10px rgba(0,0,0,0.04); }
+    table { width: 100%; border-collapse: collapse; font-size: 0.95rem; background: white; }
+    th {
+      background: var(--ppt-orange); color: white; font-weight: 700;
+      padding: 0.9rem 1.2rem; text-align: left; white-space: nowrap;
+    }
+    td { padding: 0.8rem 1.2rem; border-bottom: 1px solid var(--bordure); }
+    tr:last-child td { border-bottom: none; }
+    tbody tr:hover td { background: #fdf2f0; }
+
+    /* ---------- BOXES ---------- */
+    .box {
+      border-radius: 14px; padding: 1.2rem 1.5rem; margin: 1.5rem 0;
+      display: flex; align-items: flex-start; gap: 0.9rem; font-weight: 500; border-left: 6px solid;
+    }
+    .box i { font-size: 1.4rem; margin-top: 0.15rem; flex-shrink: 0; }
+    .box-tip { background: #e8f0fe; border-color: var(--bleu); color: #0a2c5c; }
+    .box-warning { background: #fff4e5; border-color: var(--orange); color: #6b3a1f; }
+    .box-remember { background: #ecfdf5; border-color: #059669; color: #064e3b; }
+    .box-info { background: #f3e8ff; border-color: #7c3aed; color: #3b0764; }
+
+    /* ---------- GRILLE ---------- */
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin: 1.5rem 0; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin: 1.5rem 0; }
+    @media (max-width: 900px) { .grid-3 { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 768px) {
+      .grid-2, .grid-3 { grid-template-columns: 1fr; }
+      .slide { padding: 1.8rem; }
+      h1 { font-size: 1.8rem; }
+      .main-nav { padding: 0.7rem 1rem; }
+    }
+
+    /* ---------- CARDS ---------- */
+    .card {
+      background: #f8fafc; border-radius: 18px; padding: 1.5rem;
+      border: 1px solid var(--bordure); text-align: center; transition: var(--transition);
+    }
+    .card:hover { box-shadow: 0 12px 28px rgba(0,0,0,0.07); transform: translateY(-4px); }
+    .card i { font-size: 2.2rem; color: var(--ppt-orange); margin-bottom: 0.8rem; }
+
+    /* ---------- PIED ---------- */
+    .slide-footer {
+      margin-top: 2.2rem; display: flex; justify-content: space-between; align-items: center;
+      border-top: 1px solid var(--bordure); padding-top: 1.1rem;
+      font-size: 0.8rem; color: var(--texte-secondaire); font-weight: 500;
+    }
+    .page-indicator {
+      background: var(--ppt-orange); color: white;
+      width: 30px; height: 30px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.8rem;
+    }
+    .highlight { background: #fef3c7; padding: 0.15rem 0.5rem; border-radius: 5px; font-weight: 700; }
+
+    /* ---------- PLEIN ÉCRAN ---------- */
+    .fullscreen-mode .main-nav { display: none; }
+    .fullscreen-mode .app-container { padding-top: 2rem; }
+
+    /* ---------- ANIMATION OUVERTURE ---------- */
+    .hero-animation {
+      position: fixed; inset: 0; background: #7a1f0e; z-index: 9998;
+      display: flex; align-items: center; justify-content: center; flex-direction: column;
+      transition: opacity 0.7s ease, visibility 0.7s ease;
+    }
+    .hero-animation.fade-out { opacity: 0; visibility: hidden; pointer-events: none; }
+    .hero-logo { font-size: 4rem; font-weight: 800; color: white; animation: pulseLogo 1.2s ease infinite alternate; }
+    @keyframes pulseLogo {
+      from { transform: scale(1); opacity: 0.9; } to { transform: scale(1.08); opacity: 1; }
+    }
+    .hero-text { color: rgba(255,255,255,0.85); font-size: 1.2rem; margin-top: 1rem; letter-spacing: 1px; }
+    .hero-loader { width: 60px; height: 3px; background: rgba(255,255,255,0.2); border-radius: 5px; margin-top: 1.5rem; overflow: hidden; }
+    .hero-loader-fill { height: 100%; background: var(--orange); width: 0%; animation: loadFill 1.8s ease forwards; }
+    @keyframes loadFill { to { width: 100%; } }
+
+    /* ---------- PRINT ---------- */
+    @media print {
+      .main-nav, .access-overlay, .hero-animation { display: none !important; }
+      body { background: white; }
+      .slide { box-shadow: none; border: 1px solid #ddd; break-inside: avoid; page-break-after: always; opacity: 1; transform: none; }
+    }
+
+    /* ---------- WELCOME ---------- */
+    .welcome-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: center; }
+    .welcome-visual {
+      background: linear-gradient(135deg, #D24726 0%, #7a1f0e 100%);
+      border-radius: 24px; padding: 3rem 2rem; text-align: center; color: white;
+    }
+    .welcome-visual i { font-size: 5rem; margin-bottom: 1rem; opacity: 0.9; }
+    .welcome-visual h2 { color: white; border-bottom: none; margin-top: 0; }
+    @media (max-width: 768px) { .welcome-grid { grid-template-columns: 1fr; } }
+
+    /* ---------- PPT THUMBNAILS ---------- */
+    .ppt-thumbnails {
+      display: flex; gap: 1rem; overflow-x: auto; padding: 1rem 0;
+    }
+    .ppt-thumb {
+      min-width: 120px; height: 90px; border-radius: 8px; border: 2px solid var(--bordure);
+      display: flex; align-items: center; justify-content: center; font-size: 0.8rem;
+      font-weight: 600; background: white; flex-shrink: 0;
+    }
+    .ppt-thumb.active { border-color: var(--ppt-orange); box-shadow: 0 0 0 3px rgba(210,71,38,0.2); }
+
+    /* ---------- DESIGN PRINCIPLES ---------- */
+    .design-card {
+      background: white; border: 2px solid var(--bordure); border-radius: 14px;
+      padding: 1.2rem; text-align: center; transition: var(--transition);
+    }
+    .design-card:hover { border-color: var(--ppt-orange); }
+    .design-card i { font-size: 2rem; margin-bottom: 0.5rem; }
+    .design-card.good i { color: #059669; }
+    .design-card.bad i { color: #dc2626; }
+
+    /* ---------- PRESENTER MODE ---------- */
+    .presenter-mode-visual {
+      display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin: 1rem 0;
+    }
+    .presenter-screen {
+      background: #1e293b; color: white; border-radius: 12px; padding: 1.5rem;
+      text-align: center; min-width: 200px;
+    }
+    .presenter-screen.main { background: #0B3FA5; }
+    .presenter-screen.notes { background: #334155; }
+  </style>
+</head>
+<body>
+
+<!-- ANIMATION D'OUVERTURE -->
+<div class="hero-animation" id="heroAnimation">
+  <div class="hero-logo">NT</div>
+  <div class="hero-text">NTIC SOLUTION · Jour 6</div>
+  <div class="hero-loader"><div class="hero-loader-fill"></div></div>
+</div>
+
+<!-- CODE D'ACCÈS -->
+<div class="access-overlay" id="accessOverlay">
+  <div class="access-card">
+    <div class="logo-symbol">NT</div>
+    <h2>Accès formation — Jour 6</h2>
+    <p>Veuillez saisir le code d'accès pour accéder au support PowerPoint.</p>
+    <input type="password" class="access-input" id="accessInput" placeholder="Code d'accès" autocomplete="off">
+    <button class="access-btn" onclick="checkAccess()"><i class="fas fa-lock-open"></i> Accéder au cours</button>
+    <div class="access-error" id="accessError">Code incorrect. Veuillez réessayer.</div>
+  </div>
+</div>
+
+<!-- NAVIGATION -->
+<nav class="main-nav" id="mainNav">
+  <a href="#" class="nav-logo">
+    <div class="logo-symbol">NT</div>
+    <span>NTIC SOLUTION <small style="font-weight:400;font-size:0.7rem;display:block;">Formation Bureautique</small></span>
+  </a>
+  <div class="nav-controls">
+    <span style="font-weight:600;font-size:0.85rem;">Jour 6 / 7</span>
+    <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+    <button onclick="toggleFullscreen()" title="Mode présentation"><i class="fas fa-expand"></i> Plein écran</button>
+    <button onclick="window.print()" title="Imprimer"><i class="fas fa-print"></i> Imprimer</button>
+    <button onclick="scrollToTop()" title="Début"><i class="fas fa-arrow-up"></i></button>
+  </div>
+</nav>
+
+<!-- CONTENU PRINCIPAL -->
+<main class="app-container" id="appContainer">
+
+  <!-- ====== COVER ====== -->
+  <section class="slide cover-slide" id="slide-cover">
+    <div class="slide-header">
+      <span class="module-badge"><i class="fas fa-file-powerpoint"></i> Formation Bureautique</span>
+      <span class="duration-badge">2 heures</span>
+    </div>
+    <div style="text-align:center; padding: 2rem 0;">
+      <h1 style="font-size:3rem;">Jour 6</h1>
+      <p style="font-size:1.5rem; font-weight:500; margin:0.5rem 0;">Microsoft PowerPoint</p>
+      <p style="font-size:1.2rem; opacity:0.9;">Présentations professionnelles</p>
+      <div class="day-tags" style="justify-content:center;">
+        <span><i class="fas fa-paint-brush"></i> Design</span>
+        <span><i class="fas fa-film"></i> Transitions</span>
+        <span><i class="fas fa-star"></i> Animations</span>
+        <span><i class="fas fa-tv"></i> Présentateur</span>
+      </div>
+      <div style="margin-top:2rem; background:rgba(255,255,255,0.1); border-radius:20px; padding:1.8rem; display:inline-block; text-align:left;">
+        <p><i class="fas fa-user-tie" style="width:24px;"></i> <strong>Formateur :</strong> Kévin Kiessé Sanou</p>
+        <p><i class="far fa-calendar-alt" style="width:24px;"></i> <strong>Date :</strong> Août 2026</p>
+        <p><i class="fas fa-map-marker-alt" style="width:24px;"></i> <strong>Lieu :</strong> Siège NTIC Solution, Secteur 15, Quartier Tatana, Banfora</p>
+        <p><i class="fas fa-tag" style="width:24px;"></i> <strong>Investissement :</strong> 10 000 FCFA (formation complète)</p>
+      </div>
+    </div>
+    <div class="slide-footer"><span>NTIC SOLUTION — Banfora, Burkina Faso</span><span class="page-indicator">1</span></div>
+  </section>
+
+  <!-- ====== BIENVENUE ====== -->
+  <section class="slide welcome-slide" id="slide-welcome">
+    <div class="slide-header">
+      <span class="module-badge" style="background:#fdf2f0;color:#D24726;"><i class="fas fa-hand-sparkles"></i> Bienvenue</span>
+    </div>
+    <div class="welcome-grid">
+      <div class="welcome-visual">
+        <i class="fas fa-file-powerpoint"></i>
+        <h2>Jour 6 : PowerPoint</h2>
+        <p style="font-size:1.1rem;">L'art de présenter vos idées avec impact.</p>
+      </div>
+      <div>
+        <p style="font-size:1.15rem;">Après Word et Excel, vous maîtrisez déjà le texte et les données. Aujourd'hui, nous ajoutons la <strong>troisième compétence clé</strong> : créer des présentations qui captivent votre auditoire. PowerPoint est l'outil de référence mondiale.</p>
+        <div class="box box-remember" style="margin-top:1.5rem;">
+          <i class="fas fa-bullseye"></i>
+          <div><strong>4 objectifs pour aujourd'hui :</strong><br>
+            1. Maîtriser l'interface et créer des diapositives<br>
+            2. Appliquer un design professionnel<br>
+            3. Utiliser transitions et animations<br>
+            4. Présenter avec le mode présentateur</div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer"><span>NTIC SOLUTION — Formation Bureautique — Jour 6 : PowerPoint</span><span class="page-indicator">2</span></div>
+  </section>
+
+  <!-- ==================================================================================== -->
+  <!-- ================  MODULE 1 : INTERFACE POWERPOINT  ================================= -->
+  <!-- ==================================================================================== -->
+
+  <section class="slide module-ppt" id="slide-m1a">
+    <div class="slide-header">
+      <span class="module-badge"><i class="fas fa-file-powerpoint"></i> Module 1</span>
+      <span class="duration-badge">20 minutes</span>
+    </div>
+    <h2>1.1 Qu'est-ce que PowerPoint ?</h2>
+    <p><strong>Microsoft PowerPoint</strong> est un logiciel de <strong>présentation</strong>. Il permet de créer des <strong>diaporamas</strong> composés de diapositives (slides) projetées sur un écran. Il fait partie de la suite Microsoft Office, avec Word et Excel.</p>
+
+    <div class="grid-2" style="margin-top:1.5rem;">
+      <div>
+        <h3 style="margin-top:0;"><i class="fas fa-check-circle" style="color:#059669;"></i> À quoi sert PowerPoint ?</h3>
+        <ul style="padding-left:1.2rem;">
+          <li style="margin-bottom:0.5rem;"><strong>Soutenir un discours</strong> lors d'une réunion.</li>
+          <li style="margin-bottom:0.5rem;"><strong>Présenter un projet</strong> à des clients ou des partenaires.</li>
+          <li style="margin-bottom:0.5rem;"><strong>Former</strong> des collaborateurs (comme ce cours !).</li>
+          <li style="margin-bottom:0.5rem;"><strong>Pitcher</strong> une idée, un produit, une entreprise.</li>
+          <li style="margin-bottom:0.5rem;"><strong>Animer</strong> un événement (mariage, conférence).</li>
+        </ul>
+      </div>
+      <div>
+        <h3 style="margin-top:0;"><i class="fas fa-lightbulb"></i> Principe fondamental</h3>
+        <div class="box box-remember" style="margin-top:0.5rem;">
+          <i class="fas fa-star"></i>
+          <div><strong>PowerPoint est un support, pas un document.</strong> Les diapositives ne sont pas faites pour être lues, mais pour <strong>illustrer votre discours</strong>. Peu de texte, beaucoup de visuels. Vous êtes le message principal, pas les slides.</div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer"><span>NTIC SOLUTION — Formation Bureautique — Jour 6 : PowerPoint</span><span class="page-indicator">3</span></div>
+  </section>
+
+  <section class="slide module-ppt" id="slide-m1b">
+    <div class="slide-header">
+      <span class="module-badge"><i class="fas fa-file-powerpoint"></i> Module 1</span>
+      <span class="duration-badge">Détail</span>
+    </div>
+    <h2>1.2 L'interface de PowerPoint</h2>
+    <p>L'écran de PowerPoint est organisé en <strong>zones distinctes</strong>. Comprendre cette organisation est la première étape pour créer rapidement des présentations efficaces.</p>
+
+    <div class="table-wrapper" style="margin-top:1.5rem;">
+      <table>
+        <thead><tr><th style="width:5%;">N°</th><th style="width:24%;">Zone</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td><strong>Barre d'outils d'accès rapide</strong></td><td>En haut à gauche. Enregistrer <i class="fas fa-save"></i>, Annuler <i class="fas fa-undo"></i>, Répéter. Comme dans Word et Excel.</td></tr>
+          <tr><td>2</td><td><strong>Barre de titre</strong></td><td>Affiche le nom du fichier. Un fichier PowerPoint s'appelle une <strong>présentation</strong> (extension .pptx).</td></tr>
+          <tr><td>3</td><td><strong>Le Ruban</strong></td><td>Organisé en onglets : Accueil, Insertion, Création, Transitions, Animations, Diaporama, Révision, Affichage.</td></tr>
+          <tr><td>4</td><td><strong>Volet des miniatures (gauche)</strong></td><td>Affiche la liste de toutes vos diapositives en petit. Vous pouvez les <strong>réorganiser</strong> par glisser-déposer.</td></tr>
+          <tr><td>5</td><td><strong>Zone de travail (centre)</strong></td><td>La diapositive en cours d'édition. C'est ici que vous ajoutez texte, images, formes.</td></tr>
+          <tr><td>6</td><td><strong>Volet Notes (bas)</strong></td><td>Zone pour saisir des <strong>notes personnelles</strong>. Elles ne s'affichent pas sur l'écran du public, seulement sur votre écran en mode Présentateur.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="ppt-thumbnails" style="margin-top:1rem;">
+      <div class="ppt-thumb active"><i class="fas fa-home"></i><br>Diapo 1</div>
+      <div class="ppt-thumb"><i class="fas fa-image"></i><br>Diapo 2</div>
+      <div class="ppt-thumb"><i class="fas fa-chart-bar"></i><br>Diapo 3</div>
+      <div class="ppt-thumb"><i class="fas fa-cog"></i><br>Diapo 4</div>
+    </div>
+    <p style="text-align:center; font-size:0.85rem;">Le volet des miniatures : glissez-déposez pour réorganiser vos diapositives.</p>
+    <div class="slide-footer"><span>NTIC SOLUTION — Formation Bureautique — Jour 6 : PowerPoint</span><span class="page-indicator">4</span></div>
+  </section>
+
+  <!-- ==================================================================================== -->
+  <!-- ================  MODULE 2 : DESIGN PROFESSIONNEL  ================================= -->
+  <!-- ==================================================================================== -->
+
+  <section class="slide module-ppt" id="slide-m2a">
+    <div class="slide-header">
+      <span class="module-badge"><i class="fas fa-paint-brush"></i> Module 2</span>
+      <span class="duration-badge">30 minutes</span>
+    </div>
+    <h2>2.1 Créer des diapositives</h2>
+    <p>Une présentation PowerPoint est constituée de <strong>diapositives</strong> (slides). Chaque diapositive peut contenir du texte, des images, des tableaux, des graphiques, des vidéos.</p>
+
+    <div class="grid-2" style="margin-top:1.5rem;">
+      <div>
+        <h3 style="margin-top:0;"><i class="fas fa-plus-circle"></i> Ajouter et gérer des diapositives</h3>
+        <table style="font-size:0.9rem;">
+          <tbody>
+            <tr><td style="padding:0.4rem;"><strong>Nouvelle diapo</strong></td><td style="padding:0.4rem;">Accueil → <strong>Nouvelle diapositive</strong> (<code>Ctrl+M</code>).</td></tr>
+            <tr><td style="padding:0.4rem;"><strong>Supprimer</strong></td><td style="padding:0.4rem;">Clic droit sur la miniature → Supprimer la diapositive.</td></tr>
+            <tr><td style="padding:0.4rem;"><strong>Dupliquer</strong></td><td style="padding:0.4rem;">Clic droit → Dupliquer la diapositive. Très utile pour garder la même mise en page.</td></tr>
+            <tr><td style="padding:0.4rem;"><strong>Réorganiser</strong></td><td style="padding:0.4rem;">Glissez-déposez les miniatures dans le volet de gauche.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <h3 style="margin-top:0;"><i class="fas fa-th-large"></i> Les dispositions (layouts)</h3>
+        <p>Chaque diapositive a une <strong>disposition</strong> prédéfinie qui détermine l'emplacement des zones de texte et de contenu.</p>
+        <ul style="padding-left:1.2rem; margin-top:0.5rem;">
+          <li><strong>Diapositive de titre :</strong> pour la page d'accueil.</li>
+          <li><strong>Titre et contenu :</strong> la plus utilisée.</li>
+          <li><strong>Deux contenus :</strong> pour comparer.</li>
+          <li><strong>Image avec légende :</strong> pour les visuels.</li>
+          <li><strong>Vide :</strong> pour une liberté totale.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="box box-tip" style="margin-top:1.5rem;">
+      <i class="fas fa-lightbulb"></i>
+      <div><strong>Astuce :</strong> Tapez directement dans les <strong>zones de texte</strong> existantes (« Cliquez pour ajouter un titre »). Ne créez pas de nouvelles zones de texte manuellement sauf nécessité absolue. Les dispositions assurent la cohérence.</div>
+    </div>
+    <div class="slide-footer"><span>NTIC SOLUTION — Formation Bureautique — Jour 6 : PowerPoint</span><span class="page-indicator">5</span></div>
+  </section>
+
+  <section class="slide module-ppt" id="slide-m2b">
+    <div class="slide-header">
+      <span class="module-badge"><i class="fas fa-paint-brush"></i> Module 2</span>
+    </div>
+    <h2>2.2 Appliquer un design professionnel</h2>
+    <p>Le <strong>design</strong> d'une présentation est crucial. Une présentation bien conçue renforce votre crédibilité. PowerPoint propose des <strong>thèmes</strong> prêts à l'emploi, entièrement personnalisables.</p>
+
+    <div class="grid-2" style="margin-top:1.5rem;">
+      <div>
+        <h3 style="margin-top:0;"><i class="fas fa-palette"></i> Les thèmes (onglet Création)</h3>
+        <ol style="padding-left:1.2rem;">
+          <li style="margin-bottom:0.5rem;">Onglet <strong>Création</strong>.</li>
+          <li style="margin-bottom:0.5rem;">Parcourez la galerie de <strong>thèmes</strong>.</li>
+          <li style="margin-bottom:0.5rem;">Cliquez sur un thème pour l'appliquer <strong>à toute la présentation</strong>.</li>
+        </ol>
+        <p style="margin-top:0.8rem;">Un thème définit : les polices, les couleurs, l'arrière-plan, la position des éléments. Tout est <strong>cohérent</strong> automatiquement.</p>
+      </div>
+      <div>
+        <h3 style="margin-top:0;"><i class="fas fa-sliders-h"></i> Personnaliser un thème</h3>
+        <p>Vous pouvez modifier un thème après l'avoir appliqué :</p>
+        <ul style="padding-left:1.2rem;">
+          <li style="margin-bottom:0.4rem;"><strong>Variantes :</strong> à droite de la galerie, changez les couleurs.</li>
+          <li style="margin-bottom:0.4rem;"><strong>Polices :</strong> Création → Polices → Personnaliser.</li>
+          <li style="margin-bottom:0.4rem;"><strong>Arrière-plan :</strong> Création → Arrière-plan → Style d'arrière-plan.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="box box-remember" style="margin-top:1.5rem;">
+      <i class="fas fa-star"></i>
+      <div><strong>Les 5 règles d'or du design PowerPoint :</strong><br>
+        1. <strong>Moins c'est plus :</strong> maximum 6 lignes par diapo, 6 mots par ligne.<br>
+        2. <strong>Contraste :</strong> texte foncé sur fond clair, ou clair sur fond foncé.<br>
+        3. <strong>Cohérence :</strong> mêmes polices, mêmes couleurs sur toutes les diapos.<br>
+        4. <strong>Visuels :</strong> une image vaut mille mots. Remplacez le texte par des images.<br>
+        5. <strong>Police lisible :</strong> minimum 24 pt pour le corps, 36 pt pour les titres.</div>
+    </div>
+    <div class="slide-footer"><span>NTIC SOLUTION — Formation Bureautique — Jour 6 : PowerPoint</span><span class="page-indicator">6</span></div>
+  </section>
+
+  <section class="slide module-ppt" id="slide-m2c">
+    <div class="slide-header">
+      <span class="module-badge"><i class="fas fa-paint-brush"></i> Module 2</span>
+    </div>
+    <h2>2.3 Insérer des éléments visuels</h2>
+    <p>Une présentation percutante repose sur des <strong>visuels forts</strong>. PowerPoint permet d'insérer facilement des images, des formes, des icônes et des vidéos.</p>
+
+    <div class="grid-3" style="margin-top:1.5rem;">
+      <div class="card">
+        <i class="fas fa-image"></i>
+        <h3>Images</h3>
+        <p>Insertion → Images → Cet appareil. Ou faites glisser une image depuis l'Explorateur directement sur la diapositive.</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-shapes"></i>
+        <h3>Formes</h3>
+        <p>Insertion → Formes. Rectangles, cercles, flèches, bulles... Idéal pour créer des schémas et des diagrammes.</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-icons"></i>
+        <h3>Icônes</h3>
+        <p>Insertion → Icônes. Des milliers d'icônes gratuites et libres de droits pour illustrer vos propos.</p>
+      </div>
+    </div>
+
+    <div class="box box-tip" style="margin-top:1.5rem;">
+      <i class="fas fa-lightbulb"></i>
+      <div><strong>Conseil :</strong> Utilisez la fonction <strong>Insertion → SmartArt</strong> pour créer des diagrammes professionnels (organigrammes, processus, cycles) en quelques clics, sans rien dessiner.</div>
+    </div>
+    <div class="slide-footer"><span>NTIC SOLUTION — Formation Bureautique — Jour 6 : PowerPoint</span><span class="page-indicator">7</span></div>
+  </section>
+
+  <!-- ==================================================================================== -->
+  <!-- ================  MODULE 3 : TRANSITIONS ET ANIMATIONS  ============================ -->
+  <!-- ==================================================================================== -->
+
+  <section class="slide module-ppt" id="slide-m3a">
+    <div class="slide-header">
+      <span class="module-badge"><i class="fas fa-film"></i> Module 3</span>
+      <span class="duration-badge">25 minutes</span>
+    </div>
+    <h2>3.1 Les transitions entre diapositives</h2>
+    <p>Une <strong>transition</strong> est l'effet visuel qui se produit lorsqu'on passe d'une diapositive à la suivante. Elle donne du <strong>rythme</strong> à votre présentation. Tous les réglages sont dans l'onglet <strong>Transitions</strong>.</p>
+
+    <div class="grid-2" style="margin-top:1.5rem;">
+      <div>
+        <h3 style="margin-top:0;"><i class="fas fa-magic"></i> Appliquer une transition</h3>
+        <ol style="padding-left:1.2rem;">
+          <li style="margin-bottom:0.5rem;">Sélectionnez une diapositive (ou plusieurs avec Ctrl+clic).</li>
+          <li style="margin-bottom:0.5rem;">Onglet <strong>Transitions</strong>.</li>
+          <li style="margin-bottom:0.5rem;">Choisissez un effet dans la galerie.</li>
+        </ol>
+        <p style="margin-top:0.8rem;">La transition s'applique à <strong>l'arrivée</strong> de la diapositive sélectionnée. La première diapositive n'a pas de transition (sauf si vous le souhaitez).</p>
+      </div>
+      <div>
+        <h3 style="margin-top:0;"><i class="fas fa-sliders-h"></i> Paramétrer une transition</h3>
+        <table style="font-size:0.9rem;">
+          <tbody>
+            <tr><td style="padding:0.4rem;"><strong>Options d'effet</strong></td><td style="padding:0.4rem;">Changer la direction (gauche, droite, haut...).</td></tr>
+            <tr><td style="padding:0.4rem;"><strong>Durée</strong></td><td style="padding:0.4rem;">Temps de l'effet (1 à 2 secondes maximum).</td></tr>
+            <tr><td style="padding:0.4rem;"><strong>Son</strong></td><td style="padding:0.4rem;">Ajouter un son à la transition (à utiliser avec parcimonie).</td></tr>
+            <tr><td style="padding:0.4rem;"><strong>Passer à la diapositive suivante</strong></td><td style="padding:0.4rem;">Manuellement (clic) ou automatiquement après X secondes.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="box box-warning" style="margin-top:1.5rem;">
+      <i class="fas fa-exclamation-triangle"></i>
+      <div><strong>Attention :</strong> Choisissez <strong>une ou deux transitions</strong> pour toute la présentation et appliquez-les partout. Varier les effets à chaque diapositive donne un résultat <strong>amateur</strong>. La simplicité est la clé du professionnalisme.</div>
+    </div>
+    <div class="slide-footer"><span>NTIC SOLUTION — Formation Bureautique — Jour 6 : PowerPoint</span><span class="page-indicator">8</span></div>
+  </section>
+
+  <section class="slide module-ppt" id="slide-m3b">
+    <div class="slide-header">
+      <span class="module-badge"><i class="fas fa-star"></i> Module 3</span>
+    </div>
+    <h2>3.2 Les animations d'objets</h2>
+    <p>Une <strong>animation</strong> contrôle l'apparition, le déplacement ou la disparition d'un <strong>élément à l'intérieur</strong> d'une diapositive (texte, image, forme). Les animations sont gérées dans l'onglet <strong>Animations</strong>.</p>
+
+    <div class="grid-2" style="margin-top:1.5rem;">
+      <div>
+        <h3 style="margin-top:0;"><i class="fas fa-play-circle"></i> Types d'animations</h3>
+        <table style="font-size:0.9rem;">
+          <tbody>
+            <tr><td style="padding:0.4rem;"><i class="fas fa-arrow-right" style="color:#059669;"></i> <strong>Ouverture</strong></td><td style="padding:0.4rem;">L'élément <strong>apparaît</strong> (entrée).</td></tr>
+            <tr><td style="padding:0.4rem;"><i class="fas fa-sync-alt" style="color:#f59e0b;"></i> <strong>Emphase</strong></td><td style="padding:0.4rem;">L'élément <strong>attire l'attention</strong> (tourne, grandit...).</td></tr>
+            <tr><td style="padding:0.4rem;"><i class="fas fa-arrow-left" style="color:#dc2626;"></i> <strong>Fermeture</strong></td><td style="padding:0.4rem;">L'élément <strong>disparaît</strong> (sortie).</td></tr>
+            <tr><td style="padding:0.4rem;"><i class="fas fa-route" style="color:#7c3aed;"></i> <strong>Trajectoires</strong></td><td style="padding:0.4rem;">L'élément suit un <strong>chemin</strong> dessiné.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <h3 style="margin-top:0;"><i class="fas fa-list-ol"></i> Le volet Animation</h3>
+        <p>Pour un contrôle précis, ouvrez le <strong>volet Animation</strong> (bouton dans l'onglet Animations).</p>
+        <ul style="padding-left:1.2rem;">
+          <li style="margin-bottom:0.4rem;">Il liste <strong>toutes les animations</strong> de la diapositive.</li>
+          <li style="margin-bottom:0.4rem;">Vous pouvez les <strong>réorganiser</strong> par glisser-déposer.</li>
+          <li style="margin-bottom:0.4rem;">Choisir le <strong>déclencheur</strong> : au clic, avec la précédente, après la précédente.</li>
+          <li>Régler la <strong>durée</strong> et le <strong>délai</strong> de chaque animation.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="box box-remember" style="margin-top:1.5rem;">
+      <i class="fas fa-star"></i>
+      <div><strong>Règle d'or des animations :</strong> Utilisez les animations pour <strong>faire apparaître les points un par un</strong> (pour que le public lise ce que vous dites, pas ce qui va suivre). Évitez les animations « fantaisistes » (tournoyer, rebondir, machine à écrire) en contexte professionnel.</div>
+    </div>
+    <div class="slide-footer"><span>NTIC SOLUTION — Formation Bureautique — Jour 6 : PowerPoint</span><span class="page-indicator">9</span></div>
+  </section>
+
+  <!-- ==================================================================================== -->
+  <!-- ================  MODULE 4 : MODE PRÉSENTATEUR  ==================================== -->
+  <!-- ==================================================================================== -->
+
+  <section class="slide module-ppt" id="slide-m4a">
+    <div class="slide-header">
+      <span class="module-badge"><i class="fas fa-tv"></i> Module 4</span>
+      <span class="duration-badge">20 minutes</span>
+    </div>
+    <h2>4.1 Le mode Diaporama</h2>
+    <p>Le <strong>mode Diaporama</strong> est le mode de projection. Il affiche vos diapositives <strong>en plein écran</strong>, sans le Ruban ni les outils d'édition. C'est ce que voit votre public.</p>
+
+    <div class="grid-2" style="margin-top:1.5rem;">
+      <div>
+        <h3 style="margin-top:0;"><i class="fas fa-play"></i> Lancer le diaporama</h3>
+        <table style="font-size:0.9rem;">
+          <tbody>
+            <tr><td style="padding:0.4rem;"><strong>Depuis le début</strong></td><td style="padding:0.4rem;"><code>F5</code>. Lance à partir de la première diapositive.</td></tr>
+            <tr><td style="padding:0.4rem;"><strong>Depuis la diapo actuelle</strong></td><td style="padding:0.4rem;"><code>Shift+F5</code>. Lance à partir de la diapositive sélectionnée.</td></tr>
+            <tr><td style="padding:0.4rem;"><strong>Bouton Diaporama</strong></td><td style="padding:0.4rem;">En bas à droite de la fenêtre PowerPoint.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <h3 style="margin-top:0;"><i class="fas fa-keyboard"></i> Naviguer pendant la présentation</h3>
+        <table style="font-size:0.9rem;">
+          <tbody>
+            <tr><td style="padding:0.4rem;"><code>Espace, Entrée, →, ↓</code></td><td style="padding:0.4rem;">Diapositive suivante.</td></tr>
+            <tr><td style="padding:0.4rem;"><code>←, ↑</code></td><td style="padding:0.4rem;">Diapositive précédente.</td></tr>
+            <tr><td style="padding:0.4rem;"><code>N° + Entrée</code></td><td style="padding:0.4rem;">Aller directement à la diapo N°.</td></tr>
+            <tr><td style="padding:0.4rem;"><code>B</code> ou <code>.</code></td><td style="padding:0.4rem;">Écran noir (ou blanc).</td></tr>
+            <tr><td style="padding:0.4rem;"><code>Échap</code></td><td style="padding:0.4rem;">Quitter le diaporama.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="slide-footer"><span>NTIC SOLUTION — Formation Bureautique — Jour 6 : PowerPoint</span><span class="page-indicator">10</span></div>
+  </section>
+
+  <section class="slide module-ppt" id="slide-m4b">
+    <div class="slide-header">
+      <span class="module-badge"><i class="fas fa-tv"></i> Module 4</span>
+    </div>
+    <h2>4.2 Le mode Présentateur</h2>
+    <p>Le <strong>mode Présentateur</strong> est une fonction avancée qui affiche des <strong>informations différentes</strong> sur votre écran et sur celui du public. Il nécessite deux écrans (votre PC + un projecteur ou un second écran).</p>
+
+    <div class="presenter-mode-visual" style="margin-top:1.5rem;">
+      <div class="presenter-screen main">
+        <i class="fas fa-users fa-2x" style="margin-bottom:0.5rem;"></i>
+        <p><strong>Écran du public</strong></p>
+        <p style="font-size:0.8rem;">Diapositive en plein écran</p>
+      </div>
+      <div class="presenter-screen notes">
+        <i class="fas fa-user-tie fa-2x" style="margin-bottom:0.5rem;"></i>
+        <p><strong>Votre écran</strong></p>
+        <p style="font-size:0.8rem;">Diapositive en cours<br>+ Diapositive suivante<br>+ Vos notes<br>+ Chronomètre<br>+ Outils (laser, zoom)</p>
+      </div>
+    </div>
+
+    <div class="grid-2" style="margin-top:1rem;">
+      <div>
+        <h3 style="margin-top:0;"><i class="fas fa-cog"></i> Activer le mode Présentateur</h3>
+        <ol style="padding-left:1.2rem;">
+          <li style="margin-bottom:0.4rem;">Branchez le second écran/projecteur.</li>
+          <li style="margin-bottom:0.4rem;">Onglet <strong>Diaporama</strong>.</li>
+          <li style="margin-bottom:0.4rem;">Cochez <strong>Mode Présentateur</strong>.</li>
+          <li>Lancez le diaporama (F5).</li>
+        </ol>
+      </div>
+      <div>
+        <h3 style="margin-top:0;"><i class="fas fa-star"></i> Avantages du mode Présentateur</h3>
+        <ul style="padding-left:1.2rem;">
+          <li>Voir vos <strong>notes</strong> sans que le public les voie.</li>
+          <li>Voir la <strong>diapositive suivante</strong> pour anticiper.</li>
+          <li>Voir le <strong>temps écoulé</strong> pour gérer votre timing.</li>
+          <li>Utiliser le <strong>pointeur laser</strong> ou le <strong>zoom</strong> sur un détail.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="box box-remember" style="margin-top:1.5rem;">
+      <i class="fas fa-tasks"></i>
+      <div><strong>Exercice :</strong> Créez une présentation de 5 diapositives. Ajoutez des notes dans le volet Notes pour chaque diapositive. Lancez le mode Présentateur (même sans second écran, vous verrez l'aperçu).</div>
+    </div>
+    <div class="slide-footer"><span>NTIC SOLUTION — Formation Bureautique — Jour 6 : PowerPoint</span><span class="page-indicator">11</span></div>
+  </section>
+
+  <!-- ====== RÉCAPITULATIF ====== -->
+  <section class="slide recap-slide" id="slide-recap">
+    <div class="slide-header">
+      <span class="module-badge" style="background:#fef3c7;color:#92400e;"><i class="fas fa-list-check"></i> Récapitulatif du Jour 6</span>
+    </div>
+    <h2>Les 10 points clés à retenir</h2>
+
+    <div class="grid-2" style="margin-top:1.5rem;">
+      <div>
+        <ol style="padding-left:1.2rem; line-height:2.4;">
+          <li><strong>PowerPoint</strong> est un outil de présentation, pas un traitement de texte.</li>
+          <li>Une diapositive est un <strong>support visuel</strong>, pas un document à lire.</li>
+          <li>Utilisez les <strong>dispositions</strong> existantes pour garantir la cohérence.</li>
+          <li>Appliquez un <strong>thème</strong> (onglet Création) pour un design professionnel instantané.</li>
+          <li><strong>Règle du 6×6 :</strong> maximum 6 lignes par diapo, 6 mots par ligne.</li>
+        </ol>
+      </div>
+      <div>
+        <ol start="6" style="padding-left:1.2rem; line-height:2.4;">
+          <li>Une <strong>transition</strong> = passage entre deux diapos. Restez sobre.</li>
+          <li>Une <strong>animation</strong> = mouvement d'un élément dans la diapositive.</li>
+          <li>Utilisez les animations pour faire apparaître les <strong>points un par un</strong>.</li>
+          <li><strong>F5</strong> = lancer le diaporama. <strong>Shift+F5</strong> = depuis la diapo actuelle.</li>
+          <li>Le <strong>mode Présentateur</strong> affiche vos notes et la diapo suivante.</li>
+        </ol>
+      </div>
+    </div>
+
+    <div style="text-align:center; margin-top:2rem;">
+      <p style="font-size:1.3rem; font-weight:700; color:var(--ppt-orange);">Félicitations pour cette sixième journée !</p>
+      <p>Vous savez créer des présentations professionnelles avec PowerPoint.</p>
+    </div>
+    <div class="slide-footer"><span>NTIC SOLUTION — Formation Bureautique — Jour 6 : PowerPoint</span><span class="page-indicator">12</span></div>
+  </section>
+
+  <!-- ====== EXERCICE FINAL ====== -->
+  <section class="slide" id="slide-exercise">
+    <div class="slide-header">
+      <span class="module-badge"><i class="fas fa-pencil-alt"></i> Exercice final</span>
+    </div>
+    <h2>Exercice de révision : Créez une présentation complète</h2>
+
+    <div style="background:#f8fafc; border-radius:16px; padding:1.5rem; margin-top:1.5rem;">
+      <p><strong>Consignes :</strong> Créez une présentation de <strong>6 diapositives</strong> sur le thème « NTIC SOLUTION — Services numériques » :</p>
+      <ol style="padding-left:1.5rem; line-height:2.2;">
+        <li><strong>Diapo 1 :</strong> Page de titre (Titre + Sous-titre + Logo).</li>
+        <li><strong>Diapo 2 :</strong> Sommaire (liste des points abordés).</li>
+        <li><strong>Diapo 3 :</strong> Création de sites web (titre + 3 points + image).</li>
+        <li><strong>Diapo 4 :</strong> Formations (titre + tableau des formations).</li>
+        <li><strong>Diapo 5 :</strong> Contact (titre + coordonnées).</li>
+        <li><strong>Diapo 6 :</strong> Merci (titre + message de remerciement).</li>
+      </ol>
+      <p style="margin-top:1rem;">Appliquez un <strong>thème</strong> cohérent, une <strong>transition</strong> unique sur toutes les diapositives, et des <strong>animations</strong> pour faire apparaître les listes point par point.</p>
+    </div>
+
+    <div class="box box-remember" style="margin-top:1.5rem;">
+      <i class="fas fa-trophy"></i>
+      <div><strong>Bravo !</strong> Vous avez créé une présentation professionnelle complète. Vous maîtrisez PowerPoint.</div>
+    </div>
+    <div class="slide-footer"><span>NTIC SOLUTION — Formation Bureautique — Jour 6 : PowerPoint</span><span class="page-indicator">13</span></div>
+  </section>
+
+  <!-- ====== ANNONCE JOUR 7 ====== -->
+  <section class="slide next-slide" id="slide-next">
+    <div class="slide-header">
+      <span class="module-badge"><i class="fas fa-calendar-check"></i> Suite du programme</span>
+    </div>
+    <h2>Rendez-vous pour le Jour 7</h2>
+    <p style="font-size:1.3rem;"><strong>Thème : Internet, email et projet final</strong></p>
+    <p>Vous apprendrez à naviguer sur Internet, gérer vos emails et réaliser un projet complet.</p>
+    <p><i class="fas fa-check-circle"></i> Dernier jour ! Apportez toute votre motivation.</p>
+    <p style="margin-top:2rem;"><strong>NTIC SOLUTION</strong><br>
+    Secteur 15, Quartier Tatana, Banfora, Burkina Faso<br>
+    <i class="fas fa-phone"></i> +226 05 58 58 68 &nbsp;|&nbsp; <i class="fab fa-whatsapp"></i> +226 69 69 69 24<br>
+    <i class="fas fa-envelope"></i> nticsolution.bf@gmail.com</p>
+    <div class="slide-footer"><span>NTIC SOLUTION — Formation Bureautique — Jour 6 : PowerPoint</span><span class="page-indicator">14</span></div>
+  </section>
+
+</main>
+
+<script>
+  const CORRECT_CODE = 'NTICBANFORA';
+
+  function checkAccess() {
+    const input = document.getElementById('accessInput');
+    const error = document.getElementById('accessError');
+    if (input.value.trim() === CORRECT_CODE) {
+      document.getElementById('accessOverlay').classList.add('hidden');
+      document.getElementById('appContainer').classList.add('visible');
+      setTimeout(() => {
+        document.querySelectorAll('.slide').forEach(s => s.classList.add('reveal'));
+      }, 150);
+    } else {
+      error.classList.add('visible');
+      input.value = '';
+      input.focus();
+      setTimeout(() => error.classList.remove('visible'), 2500);
+    }
+  }
+
+  document.getElementById('accessInput').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') checkAccess();
+  });
+
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      document.getElementById('heroAnimation').classList.add('fade-out');
+    }, 2000);
+  });
+
+  function toggleFullscreen() {
+    document.body.classList.toggle('fullscreen-mode');
+    const btn = document.querySelector('.nav-controls button');
+    if (document.body.classList.contains('fullscreen-mode')) {
+      btn.innerHTML = '<i class="fas fa-compress"></i> Quitter';
+    } else {
+      btn.innerHTML = '<i class="fas fa-expand"></i> Plein écran';
+    }
+  }
+
+  function scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  const revealSlides = () => {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('reveal');
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.slide').forEach(s => observer.observe(s));
+  };
+
+  window.addEventListener('scroll', () => {
+    const pct = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+    document.getElementById('progressFill').style.width = Math.min(pct, 100) + '%';
+  });
+
+  document.addEventListener('DOMContentLoaded', () => {
+    revealSlides();
+  });
+</script>
+
+</body>
+</html>
