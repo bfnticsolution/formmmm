@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="fr-BF">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>Formation Création & Gestion de Publicité — NTIC Solution | Banfora</title>
+    <meta name="description" content="Formation Publicité Digitale NTIC Solution à Banfora. 7 jours, 14h. Maîtrisez Facebook Ads et Google Ads. 15 000 FCFA. Inscrivez-vous.">
+    <meta name="theme-color" content="#0B3FA5">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root{--b:#0B3FA5;--bd:#072a6e;--bl:#EFF4FF;--o:#FF6B35;--od:#D94E1B;--ol:#FFF2ED;--w:#fff;--d:#0F172A;--g:#64748B;--gl:#F1F5F9;--br:#E2E8F0;--r:14px;--t:0.35s cubic-bezier(0.4,0,0.2,1)}
+        *{margin:0;padding:0;box-sizing:border-box}
+        html{scroll-behavior:smooth}
+        body{font-family:'Plus Jakarta Sans',sans-serif;line-height:1.6;color:var(--d);background:var(--w);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+        .container{width:90%;max-width:1100px;margin:0 auto;padding:0 16px}
+        header{position:fixed;top:0;left:0;width:100%;z-index:1000;background:rgba(255,255,255,.92);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);padding:10px 0;transition:var(--t);border-bottom:1px solid rgba(11,63,165,.08)}
+        header.scrolled{padding:6px 0;box-shadow:0 4px 30px rgba(0,0,0,.06)}
+        .header-container{display:flex;justify-content:space-between;align-items:center}
+        .header-logo{display:flex;align-items:center;gap:8px;text-decoration:none}
+        .header-logo-text{font-size:1rem;font-weight:700;color:var(--b)}
+        .header-logo-slogan{font-size:.6rem;color:var(--o);font-weight:600;letter-spacing:2px;text-transform:uppercase}
+        .header-actions{display:flex;align-items:center;gap:8px}
+        .btn{display:inline-flex;align-items:center;gap:6px;padding:10px 20px;background:var(--o);color:var(--w);border:none;border-radius:50px;font-weight:600;text-decoration:none;cursor:pointer;transition:var(--t);font-size:.8rem;white-space:nowrap;box-shadow:0 4px 15px rgba(255,107,53,.2)}
+        .btn:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(255,107,53,.3)}
+        .btn-outline{background:transparent;border:2px solid var(--o);color:var(--o);box-shadow:none}
+        .btn-outline:hover{background:var(--o);color:var(--w)}
+        .btn-white{background:var(--w);color:var(--b);box-shadow:0 4px 15px rgba(0,0,0,.1)}
+        .btn-sm{padding:6px 14px;font-size:.72rem}
+        .btn-lg{padding:14px 28px;font-size:.9rem}
+        .hero{background:linear-gradient(135deg,#DC2626,#991B1B);color:var(--w);padding:100px 0 60px;text-align:center;position:relative;overflow:hidden}
+        .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 30% 50%,rgba(255,107,53,.15),transparent 60%)}
+        .hero-content{position:relative;z-index:1}
+        .hero-icon{width:72px;height:72px;border-radius:18px;background:var(--w);display:flex;align-items:center;justify-content:center;font-size:1.8rem;color:#DC2626;margin:0 auto 16px;box-shadow:0 8px 30px rgba(0,0,0,.2)}
+        .hero h1{font-size:clamp(1.8rem,4vw,2.8rem);font-weight:800;margin-bottom:8px}
+        .hero .subtitle{font-size:clamp(.9rem,2vw,1.1rem);color:rgba(255,255,255,.8);margin-bottom:8px}
+        .hero .infos{display:flex;justify-content:center;gap:20px;flex-wrap:wrap;margin-bottom:20px;font-size:.85rem;color:rgba(255,255,255,.7)}
+        .hero .infos span{display:flex;align-items:center;gap:6px}
+        .hero .badge{display:inline-block;background:rgba(255,255,255,.15);padding:5px 14px;border-radius:20px;font-size:.72rem;font-weight:600;margin-bottom:16px}
+        .hero-btns{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}
+        section{padding:60px 0}
+        h2{font-size:clamp(1.4rem,3vw,1.9rem);text-align:center;margin-bottom:30px;color:var(--b)}
+        h2 span{background:linear-gradient(135deg,var(--o),#F59E0B);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+        .program-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+        .day-card{background:var(--w);border:1px solid var(--br);border-radius:var(--r);padding:20px;transition:var(--t);display:flex;flex-direction:column;text-decoration:none;color:inherit}
+        .day-card:hover{transform:translateY(-4px);box-shadow:0 12px 30px rgba(0,0,0,.08);border-color:#DC2626}
+        .day-card.featured{border:2px solid #DC2626;background:#FEF2F2}
+        .day-number{font-size:.65rem;font-weight:800;text-transform:uppercase;color:#DC2626;background:#FEF2F2;padding:3px 10px;border-radius:6px;display:inline-block;width:fit-content;margin-bottom:10px}
+        .day-card h3{font-size:1rem;font-weight:700;color:var(--b);margin-bottom:6px}
+        .day-card p{font-size:.8rem;color:var(--g);margin-bottom:12px;line-height:1.5;flex:1}
+        .day-tags{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:14px}
+        .day-tags span{background:#FEF2F2;color:#DC2626;padding:3px 8px;border-radius:10px;font-size:.62rem;font-weight:600}
+        .day-card .btn{width:100%;justify-content:center}
+        .skills-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;max-width:700px;margin:0 auto}
+        .skill-item{display:flex;align-items:center;gap:8px;font-size:.85rem;color:var(--d);padding:8px 12px;background:var(--gl);border-radius:10px}
+        .skill-item i{color:var(--o)}
+        .method-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px}
+        .method-card{background:var(--gl);border-radius:var(--r);padding:20px;text-align:center;transition:var(--t)}
+        .method-card:hover{transform:translateY(-4px)}
+        .method-icon{width:48px;height:48px;border-radius:12px;background:#DC2626;color:var(--w);display:flex;align-items:center;justify-content:center;font-size:1.2rem;margin:0 auto 10px}
+        .method-card h3{font-size:.9rem;margin-bottom:4px}
+        .method-card p{font-size:.75rem;color:var(--g)}
+        .cta{background:linear-gradient(135deg,#DC2626,#991B1B);color:var(--w);text-align:center;padding:50px 20px;position:relative;overflow:hidden}
+        .cta h2{color:var(--w);position:relative;z-index:1}
+        .cta h2 span{color:#FCD34D;-webkit-text-fill-color:#FCD34D}
+        .cta p{color:rgba(255,255,255,.75);margin-bottom:24px;position:relative;z-index:1}
+        .cta-btns{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;position:relative;z-index:1}
+        footer{background:var(--d);color:var(--w);padding:40px 0 20px;text-align:center;font-size:.75rem;color:rgba(255,255,255,.4)}
+        footer a{color:var(--o);text-decoration:none}
+        @media(max-width:600px){.program-grid{grid-template-columns:1fr}.hero{padding:80px 0 40px}}
+    </style>
+</head>
+<body>
+
+<header id="header">
+    <div class="container header-container">
+        <a href="https://nticsolution.org/formations" class="header-logo">
+            <div><div class="header-logo-text">NTIC Solution</div><div class="header-logo-slogan">L'UNIVERS DU DIGITAL</div></div>
+        </a>
+        <div class="header-actions">
+            <a href="https://nticsolution.org/formations" class="btn btn-outline btn-sm">← Toutes les formations</a>
+            <a href="https://wa.me/22669696924" class="btn btn-sm"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+        </div>
+    </div>
+</header>
+
+<section class="hero">
+    <div class="container hero-content">
+        <div class="hero-icon"><i class="fas fa-bullhorn"></i></div>
+        <div class="badge">Tous niveaux</div>
+        <h1>Création & Gestion de Publicité</h1>
+        <p class="subtitle">Maîtrisez Facebook Ads et Google Ads pour booster votre business</p>
+        <div class="infos">
+            <span><i class="far fa-clock"></i> 7 jours • 14 heures</span>
+            <span><i class="fas fa-map-marker-alt"></i> Salle informatique École Centre B, Banfora</span>
+        </div>
+        <div style="font-size:2rem;font-weight:800;color:var(--w);margin-bottom:20px">15 000 FCFA</div>
+        <div class="hero-btns">
+            <a href="#programme" class="btn btn-white btn-lg"><i class="fas fa-list"></i> Programme détaillé</a>
+            <a href="https://wa.me/22669696924?text=Bonjour%2C%20je%20suis%20int%C3%A9ress%C3%A9%20par%20la%20formation%20Publicit%C3%A9%20Digitale%20%C3%A0%2015%20000%20FCFA.%20Pouvez-vous%20m'inscrire%20%3F" class="btn btn-outline btn-lg" style="border-color:white;color:white"><i class="fab fa-whatsapp"></i> S'inscrire</a>
+        </div>
+    </div>
+</section>
+
+<section id="programme">
+    <div class="container">
+        <h2>Programme de la <span>Formation</span></h2>
+        <div class="program-grid">
+            <a href="cours-publicite/jour1.html" class="day-card">
+                <span class="day-number">Jour 1</span><h3>Introduction à la publicité digitale</h3>
+                <p>Les types de publicité en ligne (display, search, social ads). Vocabulaire, KPI, objectifs.</p>
+                <div class="day-tags"><span>Display</span><span>Search</span><span>Social Ads</span><span>KPI</span></div>
+                <span class="btn btn-sm">Accéder au cours →</span>
+            </a>
+            <a href="cours-publicite/jour2.html" class="day-card">
+                <span class="day-number">Jour 2</span><h3>Facebook Ads Manager</h3>
+                <p>Créer sa première campagne Facebook. Définir un objectif, choisir un format publicitaire.</p>
+                <div class="day-tags"><span>Facebook Ads</span><span>Campagne</span><span>Objectif</span><span>Format</span></div>
+                <span class="btn btn-sm">Accéder au cours →</span>
+            </a>
+            <a href="cours-publicite/jour3.html" class="day-card">
+                <span class="day-number">Jour 3</span><h3>Ciblage et audiences</h3>
+                <p>Audiences personnalisées, audiences similaires, retargeting, installation du pixel Facebook.</p>
+                <div class="day-tags"><span>Ciblage</span><span>Audiences</span><span>Retargeting</span><span>Pixel</span></div>
+                <span class="btn btn-sm">Accéder au cours →</span>
+            </a>
+            <a href="cours-publicite/jour4.html" class="day-card">
+                <span class="day-number">Jour 4</span><h3>Google Ads — Search et Display</h3>
+                <p>Créer une campagne Google Search. Annonces textuelles. Display Network.</p>
+                <div class="day-tags"><span>Google Ads</span><span>Search</span><span>Display</span><span>Annonces</span></div>
+                <span class="btn btn-sm">Accéder au cours →</span>
+            </a>
+            <a href="cours-publicite/jour5.html" class="day-card">
+                <span class="day-number">Jour 5</span><h3>Budget, enchères et optimisation</h3>
+                <p>Définir un budget. Stratégies d'enchères. Optimiser les performances. A/B testing.</p>
+                <div class="day-tags"><span>Budget</span><span>Enchères</span><span>Optimisation</span><span>A/B Testing</span></div>
+                <span class="btn btn-sm">Accéder au cours →</span>
+            </a>
+            <a href="cours-publicite/jour6.html" class="day-card">
+                <span class="day-number">Jour 6</span><h3>Analyse et rapports</h3>
+                <p>Lire les statistiques. Analyser le ROI. Créer des rapports clients. Ajuster les campagnes.</p>
+                <div class="day-tags"><span>Analyse</span><span>ROI</span><span>Rapports</span><span>Ajustements</span></div>
+                <span class="btn btn-sm">Accéder au cours →</span>
+            </a>
+            <a href="cours-publicite/jour7.html" class="day-card featured">
+                <span class="day-number" style="background:#DC2626;color:var(--w)">Jour 7 — Projet Final</span>
+                <h3>Campagne complète</h3>
+                <p>Créer une campagne publicitaire complète de A à Z pour une entreprise réelle.</p>
+                <div class="day-tags"><span>Campagne</span><span>Stratégie</span><span>Exécution</span><span>Résultats</span></div>
+                <span class="btn btn-sm" style="background:#DC2626">Accéder au cours →</span>
+            </a>
+        </div>
+    </div>
+</section>
+
+<section style="background:var(--gl)">
+    <div class="container">
+        <h2>Ce que vous allez <span>apprendre</span></h2>
+        <div class="skills-list">
+            <div class="skill-item"><i class="fas fa-check-circle"></i> Comprendre les différents types de publicité en ligne</div>
+            <div class="skill-item"><i class="fas fa-check-circle"></i> Créer des campagnes sur Facebook Ads Manager</div>
+            <div class="skill-item"><i class="fas fa-check-circle"></i> Configurer le ciblage et le retargeting</div>
+            <div class="skill-item"><i class="fas fa-check-circle"></i> Lancer des annonces sur Google Ads</div>
+            <div class="skill-item"><i class="fas fa-check-circle"></i> Gérer un budget publicitaire efficacement</div>
+            <div class="skill-item"><i class="fas fa-check-circle"></i> Analyser les performances et le ROI</div>
+            <div class="skill-item"><i class="fas fa-check-circle"></i> Créer des rapports clients professionnels</div>
+            <div class="skill-item"><i class="fas fa-check-circle"></i> Optimiser les campagnes en continu</div>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="container">
+        <h2>Méthode <span>pédagogique</span></h2>
+        <div class="method-grid">
+            <div class="method-card"><div class="method-icon"><i class="fas fa-rocket"></i></div><h3>Cas réels</h3><p>Vous travaillez sur des campagnes pour de vraies entreprises locales.</p></div>
+            <div class="method-card"><div class="method-icon"><i class="fas fa-chart-bar"></i></div><h3>Budgets simulés</h3><p>Apprenez à gérer un budget sans risque avec des comptes de test.</p></div>
+            <div class="method-card"><div class="method-icon"><i class="fas fa-file-invoice"></i></div><h3>Rapports pro</h3><p>Vous savez présenter vos résultats à un client ou un employeur.</p></div>
+            <div class="method-card"><div class="method-icon"><i class="fas fa-award"></i></div><h3>Attestation</h3><p>Attestation officielle délivrée en fin de formation.</p></div>
+        </div>
+    </div>
+</section>
+
+<section class="cta">
+    <div class="container">
+        <h2>Prêt à <span>lancer</span> vos campagnes ?</h2>
+        <p>Places limitées. Inscrivez-vous dès maintenant.</p>
+        <div class="cta-btns">
+            <a href="https://wa.me/22669696924?text=Bonjour%2C%20je%20souhaite%20m'inscrire%20%C3%A0%20la%20formation%20Publicit%C3%A9%20Digitale.%20Pouvez-vous%20confirmer%20ma%20place%20%3F" class="btn btn-white btn-lg"><i class="fab fa-whatsapp"></i> S'inscrire via WhatsApp</a>
+            <a href="tel:+22605585868" class="btn btn-outline btn-lg" style="border-color:white;color:white"><i class="fas fa-phone"></i> Appeler</a>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="container">
+        <p>NTIC Solution — Secteur 15, Quartier Tatana, Banfora, Burkina Faso</p>
+        <p><a href="https://wa.me/22669696924">WhatsApp : +226 69 69 69 24</a> | <a href="mailto:nticsolution.bf@gmail.com">nticsolution.bf@gmail.com</a></p>
+        <p>&copy; 2026 NTIC Solution. Tous droits réservés.</p>
+    </div>
+</footer>
+
+<script>
+window.addEventListener('scroll',()=>document.getElementById('header').classList.toggle('scrolled',window.scrollY>80));
+</script>
+</body>
+</html>
