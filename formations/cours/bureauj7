@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NTIC SOLUTION · Formation Bureautique · Jour 7</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    :root {
+      --bleu: #0B3FA5;
+      --bleu-profond: #072a6e;
+      --bleu-clair: #e8f0fe;
+      --orange: #FF6B35;
+      --orange-vif: #ff5722;
+      --orange-clair: #fff4e5;
+      --gris-fond: #f4f6fa;
+      --texte: #1e293b;
+      --texte-secondaire: #475569;
+      --blanc: #ffffff;
+      --bordure: #e2e8f0;
+      --cloud-blue: #0078D4;
+      --cloud-light: #e6f3fc;
+      --teams-purple: #6264A7;
+      --teams-light: #f0f0fa;
+      --ombre: 0 25px 50px rgba(11, 63, 165, 0.08), 0 6px 18px rgba(0,0,0,0.05);
+      --radius: 22px;
+      --transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      background: var(--gris-fond);
+      color: var(--texte);
+      line-height: 1.7;
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* ---------- ÉCRAN DE CODE D'ACCÈS ---------- */
+    .access-overlay {
+      position: fixed; inset: 0;
+      background: linear-gradient(135deg, var(--bleu-profond) 0%, #0d1b3e 100%);
+      z-index: 9999;
+      display: flex; align-items: center; justify-content: center; flex-direction: column;
+      transition: opacity 0.8s ease, visibility 0.8s ease;
+    }
+    .access-overlay.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+
+    .access-card {
+      background: var(--blanc); border-radius: 2rem; padding: 3rem 2.5rem; text-align: center;
+      box-shadow: 0 30px 60px rgba(0,0,0,0.4); max-width: 440px; width: 90%;
+      animation: floatIn 0.8s ease;
+    }
+    @keyframes floatIn {
+      from { opacity: 0; transform: translateY(40px) scale(0.95); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .access-card .logo-symbol {
+      background: var(--bleu); color: white; width: 64px; height: 64px;
+      border-radius: 18px; display: flex; align-items: center; justify-content: center;
+      font-weight: 800; font-size: 1.8rem; margin: 0 auto 1.2rem;
+    }
+    .access-card h2 { color: var(--bleu); font-size: 1.5rem; margin-bottom: 0.5rem; border-bottom: none; padding-bottom: 0; }
+    .access-card p { color: var(--texte-secondaire); margin-bottom: 1.8rem; font-size: 0.95rem; }
+
+    .access-input {
+      width: 100%; padding: 0.9rem 1.3rem; border: 2px solid var(--bordure); border-radius: 14px;
+      font-family: inherit; font-size: 1rem; text-align: center; letter-spacing: 2px;
+      transition: var(--transition); margin-bottom: 1rem;
+    }
+    .access-input:focus { outline: none; border-color: var(--bleu); box-shadow: 0 0 0 4px rgba(11,63,165,0.1); }
+
+    .access-btn {
+      width: 100%; padding: 0.9rem; background: var(--orange); color: white; border: none;
+      border-radius: 14px; font-weight: 700; font-size: 1rem; font-family: inherit;
+      cursor: pointer; transition: var(--transition); letter-spacing: 0.5px;
+    }
+    .access-btn:hover { background: var(--orange-vif); transform: translateY(-2px); box-shadow: 0 8px 20px rgba(255,107,53,0.35); }
+
+    .access-error { color: #dc2626; font-size: 0.85rem; margin-top: 0.5rem; display: none; font-weight: 600; }
+    .access-error.visible { display: block; animation: shake 0.5s ease; }
+    @keyframes shake {
+      0%,100% { transform: translateX(0); } 25% { transform: translateX(-8px); } 75% { transform: translateX(8px); }
+    }
+
+    /* ---------- NAVIGATION ---------- */
+    .main-nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      background: rgba(255,255,255,0.88); backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--bordure); padding: 0.7rem 2rem;
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;
+      box-shadow: 0 2px 14px rgba(0,0,0,0.05);
+    }
+    .nav-logo { display: flex; align-items: center; gap: 0.7rem; font-weight: 700; font-size: 1.1rem; color: var(--bleu); text-decoration: none; }
+    .nav-logo .logo-symbol {
+      background: var(--bleu); color: white; width: 42px; height: 42px; border-radius: 12px;
+      display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 1.3rem;
+    }
+    .nav-controls { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+    .nav-controls button {
+      background: var(--blanc); border: 1.5px solid var(--bordure); padding: 0.55rem 1.2rem;
+      border-radius: 30px; font-family: inherit; font-weight: 600; font-size: 0.85rem;
+      cursor: pointer; color: var(--texte); transition: var(--transition);
+      display: flex; align-items: center; gap: 0.4rem;
+    }
+    .nav-controls button:hover { background: var(--bleu-clair); border-color: var(--bleu); color: var(--bleu); }
+
+    .progress-bar { width: 120px; height: 6px; background: var(--bordure); border-radius: 10px; overflow: hidden; }
+    .progress-fill { height: 100%; background: var(--orange); width: 0%; transition: width 0.4s ease; border-radius: 10px; }
+
+    /* ---------- CONTAINER ---------- */
+    .app-container {
+      max-width: 1150px; margin: 0 auto; padding: 6rem 1.5rem 3rem;
+      display: flex; flex-direction: column; gap: 2.5rem;
+      opacity: 0; transition: opacity 0.6s ease;
+    }
+    .app-container.visible { opacity: 1; }
+
+    /* ---------- SLIDE ---------- */
+    .slide {
+      background: var(--blanc); border-radius: var(--radius); box-shadow: var(--ombre);
+      padding: 2.8rem 3rem; position: relative; border-left: 7px solid transparent;
+      transition: all 0.5s ease; opacity: 0; transform: translateY(35px);
+    }
+    .slide.reveal { opacity: 1; transform: translateY(0); }
+
+    .slide.cover-slide {
+      border-left-color: var(--orange);
+      background: linear-gradient(135deg, #0B3FA5 0%, #072a6e 100%);
+      color: white;
+    }
+    .slide.welcome-slide { border-left-color: var(--orange); background: linear-gradient(135deg, #f8fafc 0%, #e8f0fe 100%); }
+    .slide.recap-slide { border-left-color: #f59e0b; background: #fffbeb; }
+    .slide.certif-slide {
+      border-left-color: #f59e0b;
+      background: linear-gradient(135deg, #fffdf0 0%, #fffbeb 100%);
+      border: 2px solid #f59e0b;
+    }
+    .slide.next-slide { border-left-color: var(--orange); background: linear-gradient(135deg, #059669 0%, #047857 100%); color: white; }
+    .slide.module-project { border-left-color: var(--bleu); }
+    .slide.module-cloud { border-left-color: var(--cloud-blue); }
+
+    .slide-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem; }
+
+    .module-badge {
+      background: var(--bleu-clair); color: var(--bleu);
+      font-weight: 700; font-size: 0.8rem; padding: 0.35rem 1rem; border-radius: 20px; letter-spacing: 0.4px;
+    }
+    .cover-slide .module-badge, .next-slide .module-badge { background: rgba(255,255,255,0.2); color: white; }
+
+    .duration-badge {
+      background: var(--orange-clair); color: var(--orange);
+      font-weight: 700; font-size: 0.8rem; padding: 0.35rem 1rem; border-radius: 20px;
+    }
+
+    .day-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; margin: 1rem 0; }
+    .day-tags span {
+      background: rgba(255,255,255,0.15); color: white;
+      padding: 0.35rem 0.9rem; border-radius: 20px; font-size: 0.8rem; font-weight: 600;
+    }
+
+    h1 { font-size: 2.6rem; font-weight: 800; letter-spacing: -0.5px; margin: 1rem 0 0.5rem; }
+
+    h2 {
+      font-size: 1.7rem; font-weight: 700; color: var(--bleu);
+      margin: 1.5rem 0 1rem; padding-bottom: 0.5rem;
+      border-bottom: 3px solid var(--orange); display: inline-block;
+    }
+    .cover-slide h2, .next-slide h2 { color: white; border-bottom-color: rgba(255,255,255,0.5); }
+    .recap-slide h2 { color: #92400e; border-bottom-color: #f59e0b; }
+    .certif-slide h2 { color: #92400e; border-bottom-color: #f59e0b; }
+
+    h3 { font-size: 1.25rem; font-weight: 700; margin: 1.5rem 0 0.6rem; }
+    h4 { font-size: 1.05rem; font-weight: 700; margin: 1rem 0 0.4rem; }
+
+    /* ---------- TABLEAUX ---------- */
+    .table-wrapper { overflow-x: auto; margin: 1.5rem 0; border-radius: 14px; box-shadow: 0 2px 10px rgba(0,0,0,0.04); }
+    table { width: 100%; border-collapse: collapse; font-size: 0.95rem; background: white; }
+    th {
+      background: var(--bleu); color: white; font-weight: 700;
+      padding: 0.9rem 1.2rem; text-align: left; white-space: nowrap;
+    }
+    td { padding: 0.8rem 1.2rem; border-bottom: 1px solid var(--bordure); }
+    tr:last-child td { border-bottom: none; }
+    tbody tr:hover td { background: #f8fafc; }
+
+    /* ---------- BOXES ---------- */
+    .box {
+      border-radius: 14px; padding: 1.2rem 1.5rem; margin: 1.5rem 0;
+      display: flex; align-items: flex-start; gap: 0.9rem; font-weight: 500; border-left: 6px solid;
+    }
+    .box i { font-size: 1.4rem; margin-top: 0.15rem; flex-shrink: 0; }
+    .box-tip { background: #e8f0fe; border-color: var(--bleu); color: #0a2c5c; }
+    .box-warning { background: #fff4e5; border-color: var(--orange); color: #6b3a1f; }
+    .box-remember { background: #ecfdf5; border-color: #059669; color: #064e3b; }
+    .box-info { background: #f3e8ff; border-color: #7c3aed; color: #3b0764; }
+
+    /* ---------- GRILLE ---------- */
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin: 1.5rem 0; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin: 1.5rem 0; }
+    @media (max-width: 900px) { .grid-3 { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 768px) {
+      .grid-2, .grid-3 { grid-template-columns: 1fr; }
+      .slide { padding: 1.8rem; }
+      h1 { font-size: 1.8rem; }
+      .main-nav { padding: 0.7rem 1rem; }
+    }
+
+    /* ---------- CARDS ---------- */
+    .card {
+      background: #f8fafc; border-radius: 18px; padding: 1.5rem;
+      border: 1px solid var(--bordure); text-align: center; transition: var(--transition);
+    }
+    .card:hover { box-shadow: 0 12px 28px rgba(0,0,0,0.07); transform: translateY(-4px); }
+    .card i { font-size: 2.2rem; color: var(--bleu); margin-bottom: 0.8rem; }
+
+    /* ---------- PIED ---------- */
+    .slide-footer {
+      margin-top: 2.2rem; display: flex; justify-content: space-between; align-items: center;
+      border-top: 1px solid var(--bordure); padding-top: 1.1rem;
+      font-size: 0.8rem; color: var(--texte-secondaire); font-weight: 500;
+    }
+    .page-indicator {
+      background: var(--bleu); color: white;
+      width: 30px; height: 30px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.8rem;
+    }
+    .highlight { background: #fef3c7; padding: 0.15rem 0.5rem; border-radius: 5px; font-weight: 700; }
+
+    /* ---------- PLEIN ÉCRAN ---------- */
+    .fullscreen-mode .main-nav { display: none; }
+    .fullscreen-mode .app-container { padding-top: 2rem; }
+
+    /* ---------- ANIMATION OUVERTURE ---------- */
+    .hero-animation {
+      position: fixed; inset: 0; background: #072a6e; z-index: 9998;
+      display: flex; align-items: center; justify-content: center; flex-direction: column;
+      transition: opacity 0.7s ease, visibility 0.7s ease;
+    }
+    .hero-animation.fade-out { opacity: 0; visibility: hidden; pointer-events: none; }
+    .hero-logo { font-size: 4rem; font-weight: 800; color: white; animation: pulseLogo 1.2s ease infinite alternate; }
+    @keyframes pulseLogo {
+      from { transform: scale(1); opacity: 0.9; } to { transform: scale(1.08); opacity: 1; }
+    }
+    .hero-text { color: rgba(255,255,255,0.85); font-size: 1.2rem; margin-top: 1rem; letter-spacing: 1px; }
+    .hero-loader { width: 60px; height: 3px; background: rgba(255,255,255,0.2); border-radius: 5px; margin-top: 1.5rem; overflow: hidden; }
+    .hero-loader-fill { height: 100%; background: var(--orange); width: 0%; animation: loadFill 1.8s ease forwards; }
+    @keyframes loadFill { to { width: 100%; } }
+
+    /* ---------- PRINT ---------- */
+    @media print {
+      .main-nav, .access-overlay, .hero-animation { display: none !important; }
+      body { background: white; }
+      .slide { box-shadow: none; border: 1px solid #ddd; break-inside: avoid; page-break-after: always; opacity: 1; transform: none; }
+    }
+
+    /* ---------- WELCOME ---------- */
+    .welcome-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: center; }
+    .welcome-visual {
+      background: linear-gradient(135deg, #0B3FA5 0%, #072a6e 100%);
+      border-radius: 24px; padding: 3rem 2rem; text-align: center; color: white;
+    }
+    .welcome-visual i { font-size: 5rem; margin-bottom: 1rem; opacity: 0.9; }
+    .welcome-visual h2 { color: white; border-bottom: none; margin-top: 0; }
+    @media (max-width: 768px) { .welcome-grid { grid-template-columns: 1fr; } }
+
+    /* ---------- PROJECT FLOW ---------- */
+    .project-flow {
+      display: flex; align-items: center; justify-content: center; gap: 1.5rem; flex-wrap: wrap;
+      margin: 1.5rem 0;
+    }
+    .project-step {
+      background: white; border: 2px solid var(--bordure); border-radius: 16px;
+      padding: 1.2rem 1.5rem; text-align: center; min-width: 130px;
+    }
+    .project-step i { font-size: 2rem; margin-bottom: 0.5rem; }
+    .project-step.word i { color: #2b579a; }
+    .project-step.excel i { color: #217346; }
+    .project-step.ppt i { color: #D24726; }
+    .project-step.cloud i { color: var(--cloud-blue); }
+    .project-arrow { font-size: 1.5rem; color: var(--orange); font-weight: 700; }
+
+    /* ---------- CERTIFICATE ---------- */
+    .certificate-preview {
+      background: linear-gradient(135deg, #fffdf0 0%, #fffbeb 100%);
+      border: 3px solid #f59e0b;
+      border-radius: 20px;
+      padding: 2.5rem;
+      text-align: center;
+      position: relative;
+    }
+    .certificate-preview .seal {
+      position: absolute;
+      top: -30px; right: -30px;
+      background: var(--orange);
+      color: white;
+      width: 70px; height: 70px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 800; font-size: 0.7rem;
+      transform: rotate(15deg);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+    /* ---------- ONEDRIVE VISUAL ---------- */
+    .onedrive-flow {
+      display: flex; align-items: center; justify-content: center; gap: 1.5rem; flex-wrap: wrap;
+      margin: 1.5rem 0;
+    }
+    .onedrive-device {
+      background: #f8fafc; border: 2px solid var(--bordure); border-radius: 14px;
+      padding: 1rem 1.5rem; text-align: center;
+    }
+    .onedrive-device i { font-size: 2rem; color: var(--cloud-blue); }
+  </style>
+</head>
+<body>
+
+<!-- ANIMATION D'OUVERTURE -->
+<div class="hero-animation" id="heroAnimation">
+  <div class="hero-logo">NT</div>
+  <div class="hero-text">NTIC SOLUTION · Jour 7</div>
+  <div class="hero-loader"><div class="hero-loader-fill"></div></div>
+</div>
+
+<!-- CODE D'ACCÈS -->
+<div class="access-overlay" id="accessOverlay">
+  <div class="access-card">
+    <div class="logo-symbol">NT</div>
+    <h2>Accès formation — Jour 7</h2>
+    <p>Dernier jour ! Veuillez saisir le code d'accès.</p>
+    <input type="password" class="access-input" id="accessInput" placeholder="Code d'accès" autocomplete="off">
+    <button class="access-btn" onclick="checkAccess()"><i class="fas fa-lock-open"></i> Accéder au cours</button>
+    <div class="access-error" id="accessError">Code incorrect. Veuillez réessayer.</div>
+  </div>
+</div>
+
+<!-- NAVIGATION -->
+<nav class="main-nav" id="mainNav">
+  <a href="#" class="nav-logo">
+    <div class="logo-symbol">NT</div>
+    <span>NTIC SOLUTION <small style="font-weight:400;font-size:0.7rem;display:block;">Formation Bureautique</small></span>
+  </a>
+  <div class="nav-controls">
+    <span style="font-weight:600;font-size:0.85rem;">Jour 7 / 7</span>
+    <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+    <button onclick="toggleFullscreen()" title="Mode présentation"><i class="fas fa-expand"></i> Plein écran</button>
+    <button onclick="window.print()" title="Imprimer"><i class="fas fa-print"></i> Imprimer</button>
+    <button onclick="scrollToTop()" title="Début"><i class="fas fa-arrow-up"></i></button>
+  </div>
+</nav>
+
+<!-- CONTENU PRINCIPAL -->
+<main class="app-container" id="appContainer">
+
+  <!-- ====== COVER ====== -->
+  <section class="slide cover-slide" id="slide-cover">
+    <div class="slide-header">
+      <span class="module-badge"><i class="fas fa-trophy"></i> Formation Bureautique</span>
+      <span class="duration-badge">2 heures</span>
+    </div>
+    <div style="text-align:center; padding: 2rem 0;">
+      <h1 style="font-size:3rem;">Jour 7</h1>
+      <p style="font-size:1.5rem; font-weight:500; margin:0.5rem 0;">Projet intégré & OneDrive</p>
+      <p style="font-size:1.2rem; opacity:0.9;">Collaboration Cloud · Évaluation finale</p>
+      <div class="day-tags" style="justify-content:center;">
+        <span><i class="fas fa-tasks"></i> Projet final</span>
+        <span><i class="fas fa-cloud"></i> OneDrive</span>
+        <span><i class="fas fa-users"></i> Teams</span>
+        <span><i class="fas fa-certificate"></i> Attestation</span>
+      </div>
+      <div style="margin-top:2rem; background:rgba(255,255,255,0.1); border-radius:20px; padding:1.8rem; display:inline-block; text-align:left;">
+        <p><i class="fas fa-user-tie" style="width:24px;"></i> <strong>Formateur :</strong> Kévin Kiessé Sanou</p>
+        <p><i class="far fa-calendar-alt" style="width:24px;"></i> <strong>Date :</strong> Août 2026</p>
+        <p><i class="fas fa-map-marker-alt" style="width:24px;"></i> <strong>Lieu :</strong> Siège NTIC Solution, Secteur 15, Quartier Tatana, Banfora</p>
+        <p><i class="fas fa-tag" style="width:24px;"></i> <strong>Investissement :</strong> 10 000 FCFA (formation complète)</p>
+      </div>
+    </div>
+    <div class="slide-footer"><span>NTIC SOLUTION — Banfora, Burkina Faso</span><span class="page-indicator">1</span></div>
+  </section>
+
+  <!-- ====== BIENVENUE ====== -->
+  <section class="slide welcome-slide" id="slide-welcome">
+    <div class="slide-header">
+      <span class="module-badge"><i class="fas fa-hand-sparkles"></i> Bienvenue</span>
+    </div>
+    <div class="welcome-grid">
+      <div class="welcome-visual">
+        <i class="fas fa-flag-checkered"></i>
+        <h2>Jour 7 : Dernier jour !</h2>
+        <p style="font-size:1.1rem;">Vous y êtes presque. C'est le jour de la consécration.</p>
+      </div>
+      <div>
+        <p style="font-size:1.15rem;">Pendant 6 jours, vous avez acquis des compétences précieuses. Aujourd'hui, nous allons <strong>tout mettre ensemble</strong> dans un projet complet, découvrir la <strong>collaboration dans le Cloud</strong>, et valider vos acquis avec <strong>l'évaluation finale</strong>.</p>
+        <div class="box box-remember" style="margin-top:1.5rem;">
+          <i class="fas fa-bullseye"></i>
+          <div><strong>4 objectifs pour aujourd'hui :</strong><br>
+            1. Réaliser un projet intégré Word + Excel + PowerPoint<br>
+            2. Découvrir OneDrive et le stockage Cloud<br>
+            3. Collaborer avec Microsoft Teams<br>
+            4. Passer l'évaluation finale et recevoir votre attestation</div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer"><span>NTIC SOLUTION — Formation Bureautique — Jour 7 : Projet intégré & OneDrive</span><span class="page-indicator">2</span></div>
+  </section>
+
+  <!-- ==================================================================================== -->
+  <!-- ====================  MODULE 1 : PROJET INTÉGRÉ  =================================== -->
+  <!-- ==================================================================================== -->
+
+  <section class="slide module-project" id="slide-m1a">
+    <div class="slide-header">
+      <span class="module-badge"><i class="fas fa-tasks"></i> Module 1</span>
+      <span class="duration-badge">45 minutes</span>
+    </div>
+    <h2>1.1 Votre projet final : Présentation de NTIC SOLUTION</h2>
+    <p>Vous allez réaliser un <strong>projet complet</strong> qui mobilise toutes les compétences acquises pendant la formation. Ce projet simule une <strong>situation professionnelle réelle</strong> : présenter une entreprise à un client potentiel.</p>
+
+    <div class="project-flow" style="margin-top:1.5rem;">
+      <div class="project-step word">
+        <i class="fas fa-file-word"></i>
+        <h4>Word</h4>
+        <p style="font-size:0.8rem;">Rapport écrit</p>
+      </div>
+      <div class="project-arrow"><i class="fas fa-arrow-right"></i></div>
+      <div class="project-step excel">
+        <i class="fas fa-file-excel"></i>
+        <h4>Excel</h4>
+        <p style="font-size:0.8rem;">Budget & Analyse</p>
+      </div>
+      <div class="project-arrow"><i class="fas fa-arrow-right"></i></div>
+      <div class="project-step ppt">
+        <i class="fas fa-file-powerpoint"></i>
+        <h4>PowerPoint</h4>
+        <p style="font-size:0.8rem;">Présentation</p>
+      </div>
+      <div class="project-arrow"><i class="fas fa-arrow-right"></i></div>
+      <div class="project-step cloud">
+        <i class="fas fa-cloud-upload-alt"></i>
+        <h4>OneDrive</h4>
+        <p style="font-size:0.8rem;">Sauvegarde Cloud</p>
+      </div>
+    </div>
+
+    <div class="box box-remember" style="margin-top:1.5rem;">
+      <i class="fas fa-info-circle"></i>
+      <div><strong>Contexte :</strong> Vous êtes chargé de préparer un dossier de présentation pour NTIC SOLUTION à destination d'un investisseur potentiel. Vous devez produire trois documents complémentaires.</div>
+    </div>
+    <div class="slide-footer"><span>NTIC SOLUTION — Formation Bureautique — Jour 7 : Projet intégré & OneDrive</span><span class="page-indicator">3</span></div>
+  </section>
+
+  <section class="slide module-project" id="slide-m1b">
+    <div class="slide-header">
+      <span class="module-badge"><i class="fas fa-tasks"></i> Module 1</span>
+    </div>
+    <h2>1.2 Partie 1 : Document Word — Le rapport</h2>
+    <p>Créez un <strong>rapport professionnel</strong> de 3 pages présentant NTIC SOLUTION. Ce document doit démontrer votre maîtrise de Word.</p>
+
+    <div style="background:#f8fafc; border-radius:16px; padding:1.5rem; margin-top:1.5rem;">
+      <h3 style="margin-top:0;"><i class="fas fa-check-circle" style="color:#059669;"></i> Éléments exigés</h3>
+      <table style="font-size:0.9rem;">
+        <tbody>
+          <tr><td style="padding:0.5rem;"><i class="fas fa-font"></i> <strong>Styles</strong></td><td style="padding:0.5rem;">Appliquer les styles Titre 1, Titre 2 et Normal.</td></tr>
+          <tr><td style="padding:0.5rem;"><i class="fas fa-list-alt"></i> <strong>Table des matières</strong></td><td style="padding:0.5rem;">Générer un sommaire automatique en première page.</td></tr>
+          <tr><td style="padding:0.5rem;"><i class="fas fa-image"></i> <strong>Image</strong></td><td style="padding:0.5rem;">Insérer le logo de NTIC SOLUTION en en-tête.</td></tr>
+          <tr><td style="padding:0.5rem;"><i class="fas fa-table"></i> <strong>Tableau</strong></td><td style="padding:0.5rem;">Créer un tableau des services proposés (au moins 4 services).</td></tr>
+          <tr><td style="padding:0.5rem;"><i class="fas fa-list-ul"></i> <strong>Liste</strong></td><td style="padding:0.5rem;">Lister les avantages concurrentiels de NTIC SOLUTION.</td></tr>
+          <tr><td style="padding:0.5rem;"><i class="fas fa-ruler-combined"></i> <strong>Mise en page</strong></td><td style="padding:0.5rem;">Marges 2,5 cm, justifié, interligne 1,5.</td></tr>
+          <tr><td style="padding:0.5rem;"><i class="fas fa-file-pdf"></i> <strong>Export</strong></td><td style="padding:0.5rem;">Exporter le document en PDF.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="slide-footer"><span>NTIC SOLUTION — Formation Bureautique — Jour 7 : Projet intégré & OneDrive</span><span class="page-indicator">4</span></div>
+  </section>
+
+  <section class="slide module-project" id="slide-m1c">
+    <div class="slide-header">
+      <span class="module-badge"><i class="fas fa-tasks"></i> Module 1</span>
+    </div>
+    <h2>1.3 Partie 2 : Document Excel — Budget prévisionnel</h2>
+    <p>Créez un <strong>tableau de bord financier</strong> pour le premier trimestre d'activité de NTIC SOLUTION. Ce document doit démontrer votre maîtrise d'Excel.</p>
+
+    <div style="background:#f8fafc; border-radius:16px; padding:1.5rem; margin-top:1.5rem;">
+      <h3 style="margin-top:0;"><i class="fas fa-check-circle" style="color:#059669;"></i> Éléments exigés</h3>
+      <table style="font-size:0.9rem;">
+        <tbody>
+          <tr><td style="padding:0.5rem;"><i class="fas fa-calculator"></i> <strong>Formules</strong></td><td style="padding:0.5rem;">Colonnes : Service, Janvier, Février, Mars, Total. Total = SOMME().</td></tr>
+          <tr><td style="padding:0.5rem;"><i class="fas fa-chart-bar"></i> <strong>Graphique</strong></td><td style="padding:0.5rem;">Créer un histogramme des revenus par mois.</td></tr>
+          <tr><td style="padding:0.5rem;"><i class="fas fa-code-branch"></i> <strong>Fonction SI()</strong></td><td style="padding:0.5rem;">Colonne « Statut » : si Total > 200 000 FCFA → « Rentable », sinon « À surveiller ».</td></tr>
+          <tr><td style="padding:0.5rem;"><i class="fas fa-percent"></i> <strong>Format</strong></td><td style="padding:0.5rem;">Formater les montants en FCFA. Appliquer une mise en forme de tableau.</td></tr>
+          <tr><td style="padding:0.5rem;"><i class="fas fa-table"></i> <strong>TCD</strong></td><td style="padding:0.5rem;">Créer un tableau croisé dynamique : Total par Service.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="slide-footer"><span>NTIC SOLUTION — Formation Bureautique — Jour 7 : Projet intégré & OneDrive</span><span class="page-indicator">5</span></div>
+  </section>
+
+  <section class="slide module-project" id="slide-m1d">
+    <div class="slide-header">
+      <span class="module-badge"><i class="fas fa-tasks"></i> Module 1</span>
+    </div>
+    <h2>1.4 Partie 3 : Document PowerPoint — Présentation</h2>
+    <p>Créez une <strong>présentation de 6 diapositives</strong> destinée à être projetée devant l'investisseur. Elle doit être percutante et professionnelle.</p>
+
+    <div style="background:#f8fafc; border-radius:16px; padding:1.5rem; margin-top:1.5rem;">
+      <h3 style="margin-top:0;"><i class="fas fa-check-circle" style="color:#059669;"></i> Éléments exigés</h3>
+      <table style="font-size:0.9rem;">
+        <tbody>
+          <tr><td style="padding:0.5rem;"><i class="fas fa-paint-brush"></i> <strong>Thème</strong></td><td style="padding:0.5rem;">Appliquer un thème professionnel cohérent.</td></tr>
+          <tr><td style="padding:0.5rem;"><i class="fas fa-home"></i> <strong>Diapo 1</strong></td><td style="padding:0.5rem;">Page de titre : NTIC SOLUTION + slogan.</td></tr>
+          <tr><td style="padding:0.5rem;"><i class="fas fa-list"></i> <strong>Diapo 2</strong></td><td style="padding:0.5rem;">Sommaire de la présentation.</td></tr>
+          <tr><td style="padding:0.5rem;"><i class="fas fa-chart-pie"></i> <strong>Diapo 3</strong></td><td style="padding:0.5rem;">Services proposés (avec icônes).</td></tr>
+          <tr><td style="padding:0.5rem;"><i class="fas fa-chart-line"></i> <strong>Diapo 4</strong></td><td style="padding:0.5rem;">Graphique copié depuis Excel.</td></tr>
+          <tr><td style="padding:0.5rem;"><i class="fas fa-film"></i> <strong>Transitions</strong></td><td style="padding:0.5rem;">Appliquer une transition sobre et uniforme.</td></tr>
+          <tr><td style="padding:0.5rem;"><i class="fas fa-star"></i> <strong>Animations</strong></td><td style="padding:0.5rem;">Faire apparaître les listes point par point.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="slide-footer"><span>NTIC SOLUTION — Formation Bureautique — Jour 7 : Projet intégré & OneDrive</span><span class="page-indicator">6</span></div>
+  </section>
+
+  <!-- ==================================================================================== -->
+  <!-- ====================  MODULE 2 : ONEDRIVE ET CLOUD  ================================ -->
+  <!-- ==================================================================================== -->
+
+  <section class="slide module-cloud" id="slide-m2a">
+    <div class="slide-header">
+      <span class="module-badge" style="background:#e6f3fc;color:#0078D4;"><i class="fas fa-cloud"></i> Module 2</span>
+      <span class="duration-badge">25 minutes</span>
+    </div>
+    <h2 style="color:#0078D4; border-bottom-color:#0078D4;">2.1 Qu'est-ce que le Cloud et OneDrive ?</h2>
+    <p>Le <strong>Cloud</strong> (nuage) désigne des serveurs distants accessibles via Internet. <strong>OneDrive</strong> est le service de stockage Cloud de Microsoft, intégré à Windows et à Office. Il vous permet de sauvegarder, synchroniser et partager vos fichiers.</p>
+
+    <div class="grid-2" style="margin-top:1.5rem;">
+      <div>
+        <h3 style="margin-top:0;"><i class="fas fa-check-circle" style="color:#059669;"></i> Avantages de OneDrive</h3>
+        <ul style="padding-left:1.2rem;">
+          <li style="margin-bottom:0.5rem;"><strong>Sauvegarde automatique :</strong> vos fichiers sont en sécurité même en cas de panne.</li>
+          <li style="margin-bottom:0.5rem;"><strong>Accès partout :</strong> PC, téléphone, tablette, navigateur web.</li>
+          <li style="margin-bottom:0.5rem;"><strong>Partage facile :</strong> envoyez un lien au lieu d'une pièce jointe.</li>
+          <li style="margin-bottom:0.5rem;"><strong>Collaboration :</strong> plusieurs personnes modifient le même document.</li>
+          <li><strong>5 Go gratuits</strong> avec un compte Microsoft (1 To avec Microsoft 365).</li>
+        </ul>
+      </div>
+      <div>
+        <h3 style="margin-top:0;"><i class="fas fa-sync-alt"></i> Comment ça fonctionne</h3>
+        <div class="onedrive-flow">
+          <div class="onedrive-device"><i class="fas fa-desktop fa-2x"></i><p style="font-size:0.85rem;">Votre PC</p></div>
+          <i class="fas fa-sync-alt" style="color:var(--cloud-blue); font-size:1.5rem;"></i>
+          <div class="onedrive-device" style="border-color:var(--cloud-blue); background:#e6f3fc;">
+            <i class="fas fa-cloud fa-2x"></i><p style="font-size:0.85rem;">OneDrive</p>
+          </div>
+          <i class="fas fa-sync-alt" style="color:var(--cloud-blue); font-size:1.5rem;"></i>
+          <div class="onedrive-device"><i class="fas fa-mobile-alt fa-2x"></i><p style="font-size:0.85rem;">Téléphone</p></div>
+        </div>
+        <p>Vous travaillez sur votre PC. OneDrive <strong>synchronise automatiquement</strong> les fichiers dans le Cloud. Vous les retrouvez sur tous vos appareils.</p>
+      </div>
+    </div>
+    <div class="slide-footer"><span>NTIC SOLUTION — Formation Bureautique — Jour 7 : Projet intégré & OneDrive</span><span class="page-indicator">7</span></div>
+  </section>
+
+  <section class="slide module-cloud" id="slide-m2b">
+    <div class="slide-header">
+      <span class="module-badge" style="background:#e6f3fc;color:#0078D4;"><i class="fas fa-cloud"></i> Module 2</span>
+    </div>
+    <h2 style="color:#0078D4; border-bottom-color:#0078D4;">2.2 Utiliser OneDrive</h2>
+    <p>OneDrive est directement <strong>intégré à Windows 11</strong> et à l'Explorateur de fichiers. Vous l'utilisez sans même vous en rendre compte.</p>
+
+    <div class="grid-2" style="margin-top:1.5rem;">
+      <div>
+        <h3 style="margin-top:0;"><i class="fas fa-folder-open"></i> Dans l'Explorateur</h3>
+        <ol style="padding-left:1.2rem;">
+          <li style="margin-bottom:0.5rem;">Ouvrez l'Explorateur (<code>Win+E</code>).</li>
+          <li style="margin-bottom:0.5rem;">Dans le volet gauche, cliquez sur <strong>OneDrive</strong>.</li>
+          <li style="margin-bottom:0.5rem;">Vous voyez vos fichiers Cloud comme des fichiers normaux.</li>
+          <li>Une <strong>coche verte</strong> = synchronisé. Une <strong>flèche bleue</strong> = en cours de synchro.</li>
+        </ol>
+      </div>
+      <div>
+        <h3 style="margin-top:0;"><i class="fas fa-share-alt"></i> Partager un fichier</h3>
+        <ol style="padding-left:1.2rem;">
+          <li style="margin-bottom:0.5rem;">Clic droit sur le fichier dans OneDrive.</li>
+          <li style="margin-bottom:0.5rem;">Choisissez <strong>Partager</strong>.</li>
+          <li style="margin-bottom:0.5rem;">Entrez l'adresse email du destinataire.</li>
+          <li style="margin-bottom:0.5rem;">Définissez les droits : <strong>Modifier</strong> ou <strong>Lecture seule</strong>.</li>
+          <li>Cliquez sur <strong>Envoyer</strong> (ou copiez le lien).</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="box box-remember" style="margin-top:1.5rem;">
+      <i class="fas fa-tasks"></i>
+      <div><strong>Exercice :</strong> Enregistrez votre projet Word, Excel et PowerPoint dans votre dossier OneDrive. Vérifiez qu'ils apparaissent avec la coche verte. Partagez le dossier avec le formateur (nticsolution.bf@gmail.com).</div>
+    </div>
+    <div class="slide-footer"><span>NTIC SOLUTION — Formation Bureautique — Jour 7 : Projet intégré & OneDrive</span><span class="page-indicator">8</span></div>
+  </section>
+
+  <!-- ==================================================================================== -->
+  <!-- ====================  MODULE 3 : MICROSOFT TEAMS  ================================== -->
+  <!-- ==================================================================================== -->
+
+  <section class="slide" id="slide-m3" style="border-left-color: #6264A7;">
+    <div class="slide-header">
+      <span class="module-badge" style="background:#f0f0fa;color:#6264A7;"><i class="fas fa-users"></i> Module 3</span>
+      <span class="duration-badge">20 minutes</span>
+    </div>
+    <h2 style="color:#6264A7; border-bottom-color:#6264A7;">3. Collaborer avec Microsoft Teams</h2>
+    <p><strong>Microsoft Teams</strong> est la plateforme de <strong>collaboration</strong> de Microsoft. Elle combine messagerie instantanée, appels vidéo, partage de fichiers et travail d'équipe. C'est l'outil de référence en entreprise.</p>
+
+    <div class="grid-2" style="margin-top:1.5rem;">
+      <div>
+        <h3 style="margin-top:0;"><i class="fas fa-check-circle" style="color:#6264A7;"></i> Fonctionnalités clés</h3>
+        <ul style="padding-left:1.2rem;">
+          <li style="margin-bottom:0.5rem;"><strong>Réunions vidéo :</strong> avec partage d'écran intégré.</li>
+          <li style="margin-bottom:0.5rem;"><strong>Canaux :</strong> organiser les discussions par thème.</li>
+          <li style="margin-bottom:0.5rem;"><strong>Fichiers partagés :</strong> tous les documents de l'équipe au même endroit.</li>
+          <li style="margin-bottom:0.5rem;"><strong>Collaboration en temps réel :</strong> modifier un document à plusieurs.</li>
+          <li><strong>Intégration Office :</strong> Word, Excel, PowerPoint directement dans Teams.</li>
+        </ul>
+      </div>
+      <div>
+        <h3 style="margin-top:0;"><i class="fas fa-edit"></i> Collaborer sur un document</h3>
+        <ol style="padding-left:1.2rem;">
+          <li style="margin-bottom:0.5rem;">Dans Teams, allez dans l'onglet <strong>Fichiers</strong> du canal.</li>
+          <li style="margin-bottom:0.5rem;">Cliquez sur un document Word, Excel ou PowerPoint.</li>
+          <li style="margin-bottom:0.5rem;">Il s'ouvre <strong>directement dans Teams</strong> (ou dans l'application Office).</li>
+          <li style="margin-bottom:0.5rem;">Vous voyez en temps réel les modifications des autres.</li>
+          <li>Le fichier est automatiquement <strong>sauvegardé sur OneDrive</strong>.</li>
+        </ol>
+        <p style="margin-top:0.5rem;">C'est la même chose que Google Docs, mais avec la puissance d'Office.</p>
+      </div>
+    </div>
+
+    <div class="box box-info" style="margin-top:1.5rem;">
+      <i class="fas fa-info-circle"></i>
+      <div><strong>NTIC SOLUTION utilise Teams :</strong> Pour toute collaboration future, nous vous inviterons dans une équipe Teams dédiée. Vous pourrez y retrouver vos supports de formation, poser des questions et échanger avec les autres participants.</div>
+    </div>
+    <div class="slide-footer"><span>NTIC SOLUTION — Formation Bureautique — Jour 7 : Projet intégré & OneDrive</span><span class="page-indicator">9</span></div>
+  </section>
+
+  <!-- ==================================================================================== -->
+  <!-- ====================  MODULE 4 : ÉVALUATION FINALE  ================================ -->
+  <!-- ==================================================================================== -->
+
+  <section class="slide" id="slide-m4a" style="border-left-color: #059669;">
+    <div class="slide-header">
+      <span class="module-badge" style="background:#ecfdf5;color:#059669;"><i class="fas fa-clipboard-check"></i> Module 4</span>
+      <span class="duration-badge">30 minutes</span>
+    </div>
+    <h2 style="color:#059669; border-bottom-color:#059669;">4.1 Évaluation finale</h2>
+    <p>L'<strong>évaluation finale</strong> valide l'ensemble des compétences acquises durant la formation. Elle comporte <strong>deux parties</strong> : un QCM théorique et le rendu du projet pratique.</p>
+
+    <div class="grid-2" style="margin-top:1.5rem;">
+      <div>
+        <h3 style="margin-top:0;"><i class="fas fa-question-circle"></i> Partie 1 : QCM (15 questions)</h3>
+        <p>Questions à choix multiples couvrant l'ensemble de la formation :</p>
+        <ul style="padding-left:1.2rem;">
+          <li style="margin-bottom:0.3rem;">Windows et manipulation des fichiers</li>
+          <li style="margin-bottom:0.3rem;">Word : mise en forme, styles, publipostage</li>
+          <li style="margin-bottom:0.3rem;">Excel : formules, SI(), RECHERCHEV(), TCD</li>
+          <li style="margin-bottom:0.3rem;">PowerPoint : design, transitions, mode présentateur</li>
+          <li style="margin-bottom:0.3rem;">OneDrive et Teams</li>
+        </ul>
+        <p style="margin-top:0.5rem;"><strong>Durée :</strong> 15 minutes. <strong>Réussite :</strong> 10/15 minimum.</p>
+      </div>
+      <div>
+        <h3 style="margin-top:0;"><i class="fas fa-folder-open"></i> Partie 2 : Projet pratique</h3>
+        <p>Remise des trois fichiers du projet :</p>
+        <ol style="padding-left:1.2rem;">
+          <li style="margin-bottom:0.5rem;"><strong>Rapport Word</strong> (.docx + PDF)</li>
+          <li style="margin-bottom:0.5rem;"><strong>Budget Excel</strong> (.xlsx)</li>
+          <li><strong>Présentation PowerPoint</strong> (.pptx)</li>
+        </ol>
+        <p style="margin-top:0.8rem;">Les fichiers doivent être <strong>déposés dans le dossier OneDrive partagé</strong>.</p>
+        <p><strong>Critères :</strong> qualité, respect des consignes, utilisation des fonctionnalités vues en cours.</p>
+      </div>
+    </div>
+    <div class="slide-footer"><span>NTIC SOLUTION — Formation Bureautique — Jour 7 : Projet intégré & OneDrive</span><span class="page-indicator">10</span></div>
+  </section>
+
+  <!-- ====== ATTESTATION ====== -->
+  <section class="slide certif-slide" id="slide-certif">
+    <div class="slide-header">
+      <span class="module-badge" style="background:#fef3c7;color:#92400e;"><i class="fas fa-certificate"></i> Attestation</span>
+    </div>
+    <h2>Votre attestation de formation</h2>
+    <p>À l'issue de la formation et après validation de l'évaluation, vous recevrez une <strong>attestation officielle</strong> délivrée par NTIC SOLUTION.</p>
+
+    <div class="certificate-preview" style="margin-top:1.5rem;">
+      <div class="seal">NTIC<br>SOLUTION</div>
+      <h3 style="color:#92400e; margin-top:0;">ATTESTATION DE FORMATION</h3>
+      <p style="font-size:0.9rem; color:var(--texte-secondaire);">NTIC SOLUTION, agence digitale basée à Banfora, Burkina Faso,</p>
+      <p style="font-size:0.9rem; color:var(--texte-secondaire);">atteste que</p>
+      <p style="font-size:1.4rem; font-weight:700; margin:0.8rem 0; color:var(--bleu);">[Nom du participant]</p>
+      <p style="font-size:0.9rem; color:var(--texte-secondaire);">a suivi avec succès la formation</p>
+      <p style="font-size:1.2rem; font-weight:700; margin:0.5rem 0; color:var(--orange);">Bureautique & Outils Numériques</p>
+      <p style="font-size:0.9rem; color:var(--texte-secondaire);">du 16 au 29 août 2026 — 14 heures de formation</p>
+      <div class="grid-2" style="margin-top:1.5rem; gap:0.5rem;">
+        <div><p style="font-size:0.8rem;">Fait à Banfora, le 29 août 2026</p></div>
+        <div><p style="font-size:0.8rem;"><strong>Kévin Kiessé Sanou</strong><br>Fondateur & Formateur</p></div>
+      </div>
+    </div>
+
+    <div class="box box-remember" style="margin-top:1.5rem;">
+      <i class="fas fa-star"></i>
+      <div><strong>Cette attestation valorise votre CV.</strong> Elle démontre votre maîtrise des outils bureautiques essentiels : Windows, Word, Excel, PowerPoint, OneDrive et Teams.</div>
+    </div>
+    <div class="slide-footer"><span>NTIC SOLUTION — Formation Bureautique — Jour 7 : Projet intégré & OneDrive</span><span class="page-indicator">11</span></div>
+  </section>
+
+  <!-- ====== RÉCAPITULATIF ====== -->
+  <section class="slide recap-slide" id="slide-recap">
+    <div class="slide-header">
+      <span class="module-badge" style="background:#fef3c7;color:#92400e;"><i class="fas fa-list-check"></i> Récapitulatif du Jour 7</span>
+    </div>
+    <h2>Les 10 points clés à retenir</h2>
+
+    <div class="grid-2" style="margin-top:1.5rem;">
+      <div>
+        <ol style="padding-left:1.2rem; line-height:2.4;">
+          <li>Le <strong>projet intégré</strong> mobilise Word, Excel et PowerPoint ensemble.</li>
+          <li>Un projet professionnel contient un <strong>rapport, un budget et une présentation</strong>.</li>
+          <li><strong>OneDrive</strong> sauvegarde vos fichiers dans le Cloud automatiquement.</li>
+          <li>OneDrive permet de <strong>partager</strong> des fichiers par simple lien.</li>
+          <li><strong>Microsoft Teams</strong> est la plateforme de collaboration en entreprise.</li>
+        </ol>
+      </div>
+      <div>
+        <ol start="6" style="padding-left:1.2rem; line-height:2.4;">
+          <li>Teams permet de <strong>modifier un document à plusieurs</strong> en temps réel.</li>
+          <li>L'<strong>évaluation finale</strong> valide toutes les compétences de la formation.</li>
+          <li>Le <strong>QCM</strong> teste vos connaissances théoriques (15 questions).</li>
+          <li>Le <strong>projet pratique</strong> démontre votre savoir-faire.</li>
+          <li>L'<strong>attestation</strong> valorise votre CV et vos compétences professionnelles.</li>
+        </ol>
+      </div>
+    </div>
+
+    <div style="text-align:center; margin-top:2rem;">
+      <p style="font-size:1.3rem; font-weight:700; color:var(--bleu);">Félicitations pour cette dernière journée !</p>
+      <p>Vous avez terminé la formation Bureautique de NTIC SOLUTION.</p>
+    </div>
+    <div class="slide-footer"><span>NTIC SOLUTION — Formation Bureautique — Jour 7 : Projet intégré & OneDrive</span><span class="page-indicator">12</span></div>
+  </section>
+
+  <!-- ====== REMERCIEMENTS ====== -->
+  <section class="slide next-slide" id="slide-thanks">
+    <div class="slide-header">
+      <span class="module-badge"><i class="fas fa-heart"></i> Merci</span>
+    </div>
+    <div style="text-align:center; padding: 2rem 0;">
+      <i class="fas fa-trophy" style="font-size:5rem; margin-bottom:1.5rem; opacity:0.9;"></i>
+      <h2 style="border-bottom:none;">Félicitations !</h2>
+      <p style="font-size:1.3rem; margin:1rem 0;">Vous avez terminé la formation Bureautique avec succès.</p>
+      <p style="font-size:1.1rem; opacity:0.9;">Windows · Word · Excel · PowerPoint · OneDrive · Teams</p>
+      <div style="margin-top:2rem; background:rgba(255,255,255,0.15); border-radius:20px; padding:1.8rem; display:inline-block; text-align:left;">
+        <p><strong>Continuez à pratiquer !</strong></p>
+        <p style="font-size:0.95rem;">La maîtrise vient avec la pratique régulière. N'hésitez pas à nous contacter pour toute question.</p>
+        <p style="margin-top:1rem;"><i class="fas fa-phone"></i> +226 05 58 58 68 &nbsp;|&nbsp; <i class="fab fa-whatsapp"></i> +226 69 69 69 24</p>
+        <p><i class="fas fa-envelope"></i> nticsolution.bf@gmail.com</p>
+        <p><i class="fas fa-globe"></i> nticsolution.org</p>
+      </div>
+    </div>
+    <div class="slide-footer"><span>NTIC SOLUTION — Banfora, Burkina Faso</span><span class="page-indicator">13</span></div>
+  </section>
+
+</main>
+
+<script>
+  const CORRECT_CODE = 'NTICBANFORA';
+
+  function checkAccess() {
+    const input = document.getElementById('accessInput');
+    const error = document.getElementById('accessError');
+    if (input.value.trim() === CORRECT_CODE) {
+      document.getElementById('accessOverlay').classList.add('hidden');
+      document.getElementById('appContainer').classList.add('visible');
+      setTimeout(() => {
+        document.querySelectorAll('.slide').forEach(s => s.classList.add('reveal'));
+      }, 150);
+    } else {
+      error.classList.add('visible');
+      input.value = '';
+      input.focus();
+      setTimeout(() => error.classList.remove('visible'), 2500);
+    }
+  }
+
+  document.getElementById('accessInput').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') checkAccess();
+  });
+
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      document.getElementById('heroAnimation').classList.add('fade-out');
+    }, 2000);
+  });
+
+  function toggleFullscreen() {
+    document.body.classList.toggle('fullscreen-mode');
+    const btn = document.querySelector('.nav-controls button');
+    if (document.body.classList.contains('fullscreen-mode')) {
+      btn.innerHTML = '<i class="fas fa-compress"></i> Quitter';
+    } else {
+      btn.innerHTML = '<i class="fas fa-expand"></i> Plein écran';
+    }
+  }
+
+  function scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  const revealSlides = () => {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('reveal');
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.slide').forEach(s => observer.observe(s));
+  };
+
+  window.addEventListener('scroll', () => {
+    const pct = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+    document.getElementById('progressFill').style.width = Math.min(pct, 100) + '%';
+  });
+
+  document.addEventListener('DOMContentLoaded', () => {
+    revealSlides();
+  });
+</script>
+
+</body>
+</html>
