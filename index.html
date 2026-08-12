@@ -1,1616 +1,680 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr-BF">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>NTIC Solution — Formations Août 2026</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="NTIC Solution">
+    <meta name="theme-color" content="#0B3FA5">
+    <meta name="format-detection" content="telephone=yes">
+    <meta http-equiv="content-language" content="fr-BF">
 
-    <!-- Google Fonts & Font Awesome Icons -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>Centre de Formations NTIC Solution | Bureautique, Développement Web, Marketing Digital, Graphisme, Publicité — Banfora</title>
+    <meta name="description" content="Centre de formations professionnelles NTIC Solution à Banfora. Bureautique, Développement Web & Mobile, Marketing Digital, Création Publicitaire, Conception Graphique. Formations en présentiel, attestation officielle. Inscrivez-vous dès maintenant.">
+    <meta name="keywords" content="formation informatique Banfora, formation bureautique Burkina Faso, formation développement web Banfora, formation marketing digital Burkina, formation conception graphique Banfora, formation publicité digitale, NTIC Solution, Kévin Kiessé Sanou">
+
+    <meta property="og:locale" content="fr_BF">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Centre de Formations NTIC Solution | Banfora, Burkina Faso">
+    <meta property="og:description" content="Bureautique, Développement Web, Marketing Digital, Publicité, Graphisme. Formations professionnelles en présentiel à Banfora. Attestation officielle.">
+    <meta property="og:url" content="https://nticsolution.org/formations">
+    <meta property="og:site_name" content="NTIC Solution">
+    <meta property="og:image" content="https://nticsolution.org/logo-og.png">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Centre de Formations NTIC Solution">
+    <meta name="twitter:description" content="Formations professionnelles en informatique à Banfora, Burkina Faso.">
+
+    <link rel="canonical" href="https://nticsolution.org/formations">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
         :root {
-            --primary-blue: #0B3FA5;
-            --primary-dark: #041842;
-            --secondary-orange: #FF6B35;
-            --orange-light: #FFF2ED;
-            --blue-light: #EFF4FF;
-            --text-main: #1E293B;
-            --text-muted: #64748B;
-            --text-light: #F8FAFC;
-            --bg-light: #F1F5F9;
-            --border-color: #E2E8F0;
-            --card-shadow: 0 4px 12px rgba(11, 63, 165, 0.08);
-            --transition-speed: 0.3s;
+            --b: #0B3FA5;
+            --bd: #072a6e;
+            --bl: #EFF4FF;
+            --o: #FF6B35;
+            --od: #D94E1B;
+            --ol: #FFF2ED;
+            --w: #fff;
+            --d: #0F172A;
+            --g: #64748B;
+            --gl: #F1F5F9;
+            --br: #E2E8F0;
+            --s: 0 1px 3px rgba(0,0,0,.04);
+            --sl: 0 20px 50px rgba(0,0,0,.08);
+            --r: 14px;
+            --rl: 20px;
+            --t: 0.35s cubic-bezier(0.4,0,0.2,1);
         }
+        *{margin:0;padding:0;box-sizing:border-box}
+        html{scroll-behavior:smooth;font-size:16px}
+        body{
+            font-family:'Plus Jakarta Sans',sans-serif;line-height:1.6;color:var(--d);background:var(--w);
+            overflow-x:hidden;-webkit-font-smoothing:antialiased;
+        }
+        .container{width:90%;max-width:1200px;margin:0 auto;padding:0 16px}
+        section{padding:80px 0;position:relative}
+        @media(max-width:768px){section{padding:50px 0}}
+        h1,h2,h3{font-weight:700;line-height:1.2}
+        h1{font-size:clamp(2rem,5vw,3.5rem);letter-spacing:-1px}
+        h2{font-size:clamp(1.6rem,3.5vw,2.3rem);text-align:center;margin-bottom:40px;color:var(--b)}
+        h2 span{background:linear-gradient(135deg,var(--o),#F59E0B);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+        h3{font-size:clamp(1.05rem,2vw,1.2rem);color:var(--b)}
+        p{color:var(--g);margin-bottom:12px;font-size:clamp(.88rem,1.5vw,.95rem)}
+        .btn{
+            display:inline-flex;align-items:center;gap:8px;padding:14px 30px;background:var(--o);
+            color:var(--w);border:none;border-radius:50px;font-weight:600;text-decoration:none;
+            cursor:pointer;transition:var(--t);font-size:.9rem;white-space:nowrap;
+            box-shadow:0 6px 20px rgba(255,107,53,.25);
+        }
+        .btn:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(255,107,53,.35)}
+        .btn-outline{background:transparent;border:2px solid var(--o);color:var(--o);box-shadow:none}
+        .btn-outline:hover{background:var(--o);color:var(--w)}
+        .btn-white{background:var(--w);color:var(--b);box-shadow:0 6px 20px rgba(0,0,0,.1)}
+        .btn-blue{background:var(--b);color:var(--w);box-shadow:0 6px 20px rgba(11,63,165,.25)}
+        .btn-blue:hover{box-shadow:0 12px 30px rgba(11,63,165,.35)}
+        .btn-sm{padding:8px 18px;font-size:.8rem;border-radius:30px}
+        .btn-lg{padding:18px 36px;font-size:1rem}
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
-            background-color: #020916;
-            color: var(--text-main);
-            height: 100vh;
-            width: 100vw;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 8px;
-        }
-
-        /* --- Mobile First Presentation Deck --- */
-        .presentation-deck {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            max-width: 500px;
-            max-height: 900px;
-            aspect-ratio: 9 / 16;
-            background: #ffffff;
-            border-radius: 20px;
-            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.6);
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-        }
-
-        /* Progress Bar Top */
-        .progress-bar-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: rgba(226, 232, 240, 0.5);
-            z-index: 100;
-            border-radius: 2px 2px 0 0;
-        }
-
-        .progress-bar-fill {
-            height: 100%;
-            width: 8.33%;
-            background: linear-gradient(90deg, var(--primary-blue), var(--secondary-orange));
-            transition: width 0.4s ease;
-            border-radius: 2px;
-        }
-
-        /* Slides Wrapper */
-        .slides-wrapper {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-        }
-
-        .slide {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            padding: 20px 18px 40px 18px;
-            display: flex;
-            flex-direction: column;
-            opacity: 0;
-            visibility: hidden;
-            transform: translateX(20px);
-            transition: opacity var(--transition-speed) ease, transform var(--transition-speed) ease, visibility var(--transition-speed);
-            background-color: #ffffff;
-            z-index: 1;
-            overflow-y: auto;
-            -webkit-overflow-scrolling: touch;
-        }
-
-        .slide.active {
-            opacity: 1;
-            visibility: visible;
-            transform: translateX(0);
-            z-index: 2;
-        }
-
-        /* Thèmes */
-        .slide.theme-dark {
-            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-blue) 100%);
-            color: #ffffff;
-        }
-
-        .slide.theme-orange {
-            background: linear-gradient(135deg, #FF6B35 0%, #D94E1B 100%);
-            color: #ffffff;
-        }
+        /* Animations */
+        .reveal{opacity:0;transition:all .8s cubic-bezier(.17,.85,.44,1)}
+        .reveal.visible{opacity:1}
+        .reveal-up{transform:translateY(60px)}.reveal-up.visible{transform:translateY(0)}
+        .reveal-left{transform:translateX(-50px)}.reveal-left.visible{transform:translateX(0)}
+        .reveal-right{transform:translateX(50px)}.reveal-right.visible{transform:translateX(0)}
+        .reveal-scale{transform:scale(.85)}.reveal-scale.visible{transform:scale(1)}
+        @keyframes fadeInUp{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}
+        @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-18px)}}
+        @keyframes gradientFlow{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+        @keyframes borderGlow{0%,100%{border-color:rgba(255,107,53,.2)}50%{border-color:rgba(255,107,53,.8)}}
+        @keyframes bgPulse{0%,100%{transform:scale(1);opacity:.05}50%{transform:scale(1.1);opacity:.12}}
 
         /* Header */
-        .slide-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 100%;
-            margin-bottom: 10px;
-            flex-shrink: 0;
-        }
-
-        .logo-brand {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            text-decoration: none;
-        }
-
-        .logo-icon {
-            width: 32px;
-            height: 32px;
-            background: var(--primary-blue);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #ffffff;
-            font-weight: 800;
-            font-size: 16px;
-            box-shadow: 0 4px 8px rgba(11, 63, 165, 0.2);
-        }
-
-        .theme-dark .logo-icon,
-        .theme-orange .logo-icon {
-            background: #ffffff;
-            color: var(--primary-blue);
-        }
-
-        .logo-text {
-            display: flex;
-            flex-direction: column;
-            line-height: 1.1;
-        }
-
-        .logo-title {
-            font-size: 15px;
-            font-weight: 800;
-            color: var(--primary-blue);
-            letter-spacing: -0.3px;
-        }
-
-        .theme-dark .logo-title,
-        .theme-orange .logo-title {
-            color: #ffffff;
-        }
-
-        .logo-subtitle {
-            font-size: 8px;
-            font-weight: 600;
-            color: var(--secondary-orange);
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
-
-        .theme-orange .logo-subtitle {
-            color: #FFE3D8;
-        }
-
-        .slide-number-badge {
-            font-size: 11px;
-            font-weight: 700;
-            padding: 3px 10px;
-            border-radius: 20px;
-            background: var(--blue-light);
-            color: var(--primary-blue);
-            flex-shrink: 0;
-        }
-
-        .theme-dark .slide-number-badge {
-            background: rgba(255, 255, 255, 0.15);
-            color: #ffffff;
-        }
-
-        .theme-orange .slide-number-badge {
-            background: rgba(255, 255, 255, 0.2);
-            color: #ffffff;
-        }
-
-        /* Titres */
-        .slide-title {
-            font-size: 22px;
-            font-weight: 800;
-            color: var(--primary-blue);
-            letter-spacing: -0.3px;
-            margin-bottom: 4px;
-            line-height: 1.2;
-        }
-
-        .theme-dark .slide-title,
-        .theme-orange .slide-title {
-            color: #ffffff;
-        }
-
-        .slide-subtitle {
-            font-size: 13px;
-            color: var(--text-muted);
-            margin-bottom: 12px;
-            font-weight: 500;
-            line-height: 1.3;
-        }
-
-        .theme-dark .slide-subtitle {
-            color: #CBD5E1;
-        }
-
-        .theme-orange .slide-subtitle {
-            color: #FFE3D8;
-        }
-
-        /* Body */
-        .slide-body {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-            gap: 10px;
-            overflow-y: auto;
-            padding-bottom: 8px;
-        }
-
-        .slide-footer {
-            flex-shrink: 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-top: 1px solid var(--border-color);
-            padding-top: 8px;
-            margin-top: 6px;
-            font-size: 9px;
-            color: var(--text-muted);
-            font-weight: 500;
-        }
-
-        .theme-dark .slide-footer {
-            border-top-color: rgba(255, 255, 255, 0.15);
-            color: #94A3B8;
-        }
-
-        .theme-orange .slide-footer {
-            border-top-color: rgba(255, 255, 255, 0.25);
-            color: #FFE3D8;
-        }
-
-        /* --- Contrôles --- */
-        .deck-controls {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            margin-top: 8px;
-            color: #ffffff;
-            flex-shrink: 0;
-        }
-
-        .control-btn {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: #ffffff;
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            font-size: 14px;
-            backdrop-filter: blur(4px);
-        }
-
-        .control-btn:hover {
-            background: var(--secondary-orange);
-            border-color: var(--secondary-orange);
-            transform: translateY(-2px);
-        }
-
-        .control-btn:active {
-            transform: scale(0.95);
-        }
-
-        .slide-counter {
-            font-size: 13px;
-            font-weight: 600;
-            color: #94A3B8;
-            min-width: 60px;
-            text-align: center;
-        }
-
-        /* ===== STYLES SPÉCIFIQUES MOBILE ===== */
-
-        /* Cover */
-        .cover-container {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            height: 100%;
-            padding: 6px 0;
-        }
-
-        .cover-badge {
-            background: rgba(255, 107, 53, 0.2);
-            border: 1px solid var(--secondary-orange);
-            color: #FF9E7B;
-            padding: 6px 14px;
-            border-radius: 30px;
-            font-size: 11px;
-            font-weight: 700;
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
-            margin-bottom: 16px;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            width: fit-content;
-        }
-
-        .cover-title {
-            font-size: 32px;
-            font-weight: 800;
-            line-height: 1.1;
-            color: #ffffff;
-            margin-bottom: 10px;
-        }
-
-        .cover-subtitle {
-            font-size: 18px;
-            font-weight: 500;
-            color: #93C5FD;
-            margin-bottom: 20px;
-        }
-
-        .cover-info-card {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            padding: 12px 16px;
-            border-radius: 12px;
-            backdrop-filter: blur(10px);
-        }
-
-        .cover-info-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            color: #ffffff;
-            font-size: 13px;
-            font-weight: 600;
-        }
-
-        .cover-info-item i {
-            color: var(--secondary-orange);
-            font-size: 16px;
-        }
-
-        /* Grids adaptées */
-        .about-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .about-card {
-            background: #ffffff;
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 16px;
-            box-shadow: var(--card-shadow);
-        }
-
-        .about-card.primary {
-            background: var(--blue-light);
-            border-color: #BFDBFE;
-        }
-
-        .about-card h3 {
-            color: var(--primary-blue);
-            font-size: 16px;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: 6px;
-        }
-
-        .about-card p {
-            font-size: 13px;
-            line-height: 1.5;
-            color: var(--text-main);
-        }
-
-        .founder-box {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            background: #ffffff;
-            padding: 12px;
-            border-radius: 10px;
-            border: 1px solid var(--border-color);
-            margin-top: 4px;
-        }
-
-        .founder-avatar {
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            background: var(--primary-blue);
-            color: #ffffff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 18px;
-            font-weight: 700;
-            flex-shrink: 0;
-        }
-
-        /* Why */
-        .why-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .why-card {
-            background: #ffffff;
-            border: 1px solid var(--border-color);
-            border-radius: 10px;
-            padding: 14px;
-            display: flex;
-            align-items: flex-start;
-            gap: 12px;
-            box-shadow: var(--card-shadow);
-        }
-
-        .why-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 8px;
-            background: var(--orange-light);
-            color: var(--secondary-orange);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 18px;
-            flex-shrink: 0;
-        }
-
-        .why-text h4 {
-            font-size: 15px;
-            color: var(--primary-blue);
-            margin-bottom: 2px;
-            font-weight: 700;
-        }
-
-        .why-text p {
-            font-size: 13px;
-            color: var(--text-main);
-            line-height: 1.4;
-        }
-
-        /* Courses */
-        .courses-cols {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .course-box {
-            border-radius: 14px;
-            padding: 18px;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .course-box.blue {
-            background: var(--blue-light);
-            border: 2px solid #93C5FD;
-        }
-
-        .course-box.orange {
-            background: var(--orange-light);
-            border: 2px solid #FFBDAD;
-        }
-
-        .course-header-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 8px;
-        }
-
-        .course-icon-bg {
-            width: 40px;
-            height: 40px;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 18px;
-        }
-
-        .blue .course-icon-bg {
-            background: var(--primary-blue);
-            color: #ffffff;
-        }
-
-        .orange .course-icon-bg {
-            background: var(--secondary-orange);
-            color: #ffffff;
-        }
-
-        .course-price {
-            font-size: 18px;
-            font-weight: 800;
-            padding: 4px 14px;
-            border-radius: 20px;
-            background: #ffffff;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-        }
-
-        .blue .course-price { color: var(--primary-blue); }
-        .orange .course-price { color: var(--secondary-orange); }
-
-        .course-box h3 {
-            font-size: 18px;
-            font-weight: 800;
-            margin-bottom: 4px;
-        }
-
-        .blue h3 { color: var(--primary-blue); }
-        .orange h3 { color: #C2410C; }
-
-        .course-box p {
-            font-size: 13px;
-            color: var(--text-main);
-            line-height: 1.4;
-        }
-
-        .pack-banner {
-            background: linear-gradient(90deg, var(--primary-blue), #1E40AF);
-            color: #ffffff;
-            border-radius: 10px;
-            padding: 12px 16px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 6px;
-            box-shadow: 0 6px 14px rgba(11, 63, 165, 0.2);
-            text-align: center;
-        }
-
-        .pack-title {
-            font-size: 15px;
-            font-weight: 800;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .pack-price {
-            font-size: 18px;
-            font-weight: 800;
-            color: var(--secondary-orange);
-            background: #ffffff;
-            padding: 4px 16px;
-            border-radius: 30px;
-        }
-
-        /* Included */
-        .included-list {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .included-item {
-            background: #ffffff;
-            border: 1px solid var(--border-color);
-            border-radius: 10px;
-            padding: 12px 16px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-size: 14px;
-            font-weight: 600;
-            color: var(--text-main);
-            box-shadow: var(--card-shadow);
-        }
-
-        .included-item i {
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            background: var(--orange-light);
-            color: var(--secondary-orange);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 14px;
-            flex-shrink: 0;
-        }
-
-        .included-item[style*="grid-column"] {
-            grid-column: unset !important;
-        }
-
-        /* Days grid */
-        .days-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 8px;
-        }
-
-        .day-card {
-            background: #ffffff;
-            border: 1px solid var(--border-color);
-            border-radius: 10px;
-            padding: 10px 12px;
-            display: flex;
-            flex-direction: column;
-            gap: 2px;
-            box-shadow: var(--card-shadow);
-        }
-
-        .day-card.span-2 {
-            grid-column: span 2;
-        }
-
-        .day-badge {
-            font-size: 9px;
-            font-weight: 800;
-            text-transform: uppercase;
-            color: var(--secondary-orange);
-            background: var(--orange-light);
-            padding: 2px 8px;
-            border-radius: 4px;
-            display: inline-block;
-            width: fit-content;
-        }
-
-        .day-card h5 {
-            font-size: 13px;
-            font-weight: 700;
-            color: var(--primary-blue);
-        }
-
-        .day-card p {
-            font-size: 11px;
-            color: var(--text-muted);
-            line-height: 1.3;
-        }
-
-        /* Flowcharts */
-        .flowchart-container {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-            margin-top: 4px;
-        }
-
-        .flow-step {
-            background: #ffffff;
-            border: 2px solid var(--primary-blue);
-            border-radius: 12px;
-            padding: 10px 8px;
-            flex: 1 0 40%;
-            min-width: 70px;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 4px;
-            box-shadow: var(--card-shadow);
-        }
-
-        .flow-step-num {
-            width: 22px;
-            height: 22px;
-            background: var(--primary-blue);
-            color: #ffffff;
-            border-radius: 50%;
-            font-size: 10px;
-            font-weight: 800;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .flow-step-icon {
-            font-size: 20px;
-            color: var(--secondary-orange);
-        }
-
-        .flow-step-title {
-            font-size: 10px;
-            font-weight: 700;
-            color: var(--primary-blue);
-            line-height: 1.2;
-        }
-
-        .flow-arrow {
-            color: var(--secondary-orange);
-            font-size: 14px;
-            flex-shrink: 0;
-        }
-
-        .flow-step[style*="border-color"] {
-            border-color: var(--secondary-orange) !important;
-            background: var(--orange-light) !important;
-        }
-
-        /* Cases / Témoignages */
-        .cases-wrapper {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .quote-box {
-            background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: 14px;
-            padding: 18px;
-        }
-
-        .quote-box i.fa-quote-left {
-            font-size: 24px;
-            color: var(--secondary-orange);
-            margin-bottom: 8px;
-            display: block;
-        }
-
-        .quote-text {
-            font-size: 14px;
-            font-style: italic;
-            line-height: 1.5;
-            color: #ffffff;
-            margin-bottom: 10px;
-        }
-
-        .quote-author {
-            font-weight: 700;
-            font-size: 13px;
-            color: #93C5FD;
-        }
-
-        .projects-list {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-
-        .project-card-item {
-            background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: 10px;
-            padding: 10px 14px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .project-card-item i {
-            font-size: 18px;
-            color: var(--secondary-orange);
-        }
-
-        .project-card-item h4 {
-            font-size: 14px;
-            font-weight: 700;
-            color: #ffffff;
-        }
-
-        .project-card-item p {
-            font-size: 11px;
-            color: #CBD5E1;
-        }
-
-        /* Inscription */
-        .signup-container {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 16px;
-            padding: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .signup-title {
-            font-size: 26px;
-            font-weight: 800;
-            margin-bottom: 8px;
-            color: #ffffff;
-            line-height: 1.15;
-        }
-
-        .signup-links {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .signup-link-btn {
-            background: #ffffff;
-            color: #C2410C;
-            padding: 10px 16px;
-            border-radius: 10px;
-            text-decoration: none;
-            font-weight: 800;
-            font-size: 15px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
-        }
-
-        .qr-code-box {
-            background: #ffffff;
-            padding: 12px;
-            border-radius: 14px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-            text-align: center;
-        }
-
-        .qr-code-box svg {
-            width: 100px;
-            height: 100px;
-            margin-bottom: 6px;
-        }
-
-        .qr-code-box span {
-            color: var(--primary-blue);
-            font-size: 10px;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 0.3px;
-        }
-
-        /* Contact */
-        .contact-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .contact-card {
-            background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: 12px;
-            padding: 12px 16px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .contact-icon {
-            width: 38px;
-            height: 38px;
-            border-radius: 10px;
-            background: var(--secondary-orange);
-            color: #ffffff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 16px;
-            flex-shrink: 0;
-        }
-
-        .contact-info h5 {
-            font-size: 10px;
-            color: #93C5FD;
-            text-transform: uppercase;
-            letter-spacing: 0.3px;
-            margin-bottom: 2px;
-        }
-
-        .contact-info p {
-            font-size: 14px;
-            font-weight: 700;
-            color: #ffffff;
-        }
-
-        .social-row {
-            display: flex;
-            justify-content: center;
-            gap: 12px;
-            margin-top: 4px;
-        }
-
-        .social-btn {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.12);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: #ffffff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 16px;
-            text-decoration: none;
-            transition: all 0.2s ease;
-        }
-
-        .social-btn:active {
-            background: var(--secondary-orange);
-            transform: scale(0.95);
-        }
-
-        /* --- STICKY CTA --- */
-        .sticky-cta {
-            position: absolute;
-            bottom: 12px;
-            right: 12px;
-            z-index: 50;
-        }
-
-        .sticky-cta a {
-            background: var(--secondary-orange);
-            color: #ffffff;
-            padding: 8px 16px;
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: 800;
-            font-size: 13px;
-            box-shadow: 0 4px 20px rgba(255, 107, 53, 0.5);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: transform 0.2s ease;
-            animation: pulse-cta 2s ease-in-out infinite;
-        }
-
-        .sticky-cta a:active {
-            transform: scale(0.95);
-        }
-
-        @keyframes pulse-cta {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
-
-        /* Ajustements pour très petits écrans */
-        @media (max-width: 380px) {
-            .slide { padding: 14px 12px 30px 12px; }
-            .cover-title { font-size: 26px; }
-            .slide-title { font-size: 19px; }
-            .logo-title { font-size: 13px; }
-            .flow-step { flex: 1 0 30%; min-width: 60px; }
-            .flow-step-title { font-size: 8px; }
-            .sticky-cta a { font-size: 11px; padding: 6px 12px; }
-        }
-
-        body {
-            overscroll-behavior: none;
-        }
-
-        .slide::-webkit-scrollbar {
-            width: 3px;
-        }
-        .slide::-webkit-scrollbar-track {
-            background: transparent;
-        }
-        .slide::-webkit-scrollbar-thumb {
-            background: rgba(11, 63, 165, 0.3);
-            border-radius: 10px;
+        header{
+            position:fixed;top:0;left:0;width:100%;z-index:1000;
+            background:rgba(255,255,255,.85);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+            padding:12px 0;transition:var(--t);border-bottom:1px solid rgba(11,63,165,.08);
+        }
+        header.scrolled{padding:8px 0;background:rgba(255,255,255,.95);box-shadow:0 4px 30px rgba(0,0,0,.06)}
+        .header-container{display:flex;justify-content:space-between;align-items:center}
+        .header-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+        .header-logo img{height:42px}
+        .header-logo-text{font-size:1.1rem;font-weight:700;color:var(--b);line-height:1.1}
+        .header-logo-slogan{font-size:.7rem;color:var(--o);font-weight:600;letter-spacing:2px;text-transform:uppercase}
+        nav ul{display:flex;list-style:none;gap:24px;align-items:center}
+        nav ul li a{text-decoration:none;color:var(--b);font-weight:500;font-size:.88rem;transition:color .2s}
+        nav ul li a:hover{color:var(--o)}
+        .mobile-menu-btn{display:none;background:none;border:none;font-size:1.5rem;color:var(--b);cursor:pointer;padding:8px}
+        @media(max-width:900px){
+            .mobile-menu-btn{display:block}
+            nav{position:fixed;top:60px;left:-100%;width:100%;background:rgba(255,255,255,.98);backdrop-filter:blur(20px);padding:20px;transition:left .3s;z-index:999;box-shadow:0 10px 30px rgba(0,0,0,.1)}
+            nav.active{left:0}nav ul{flex-direction:column;gap:0}
+            nav ul li a{display:block;padding:14px 0;font-size:1rem;border-bottom:1px solid var(--br)}
+        }
+
+        /* Hero */
+        .hero{
+            min-height:100vh;display:flex;align-items:center;background:var(--b);color:var(--w);
+            text-align:center;padding-top:80px;position:relative;overflow:hidden;
+        }
+        .hero-bg{
+            position:absolute;inset:0;
+            background:radial-gradient(ellipse at 30% 50%,rgba(255,107,53,.15) 0%,transparent 60%),
+                       radial-gradient(ellipse at 70% 20%,rgba(255,255,255,.05) 0%,transparent 50%);
+        }
+        .hero-glow{
+            position:absolute;width:500px;height:500px;
+            background:radial-gradient(circle,rgba(255,107,53,.25),transparent 70%);
+            border-radius:50%;top:50%;left:50%;transform:translate(-50%,-50%);
+            animation:bgPulse 4s ease-in-out infinite;pointer-events:none;
+        }
+        .hero-grid{
+            position:absolute;inset:0;
+            background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),
+                            linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);
+            background-size:60px 60px;pointer-events:none;
+        }
+        .hero-content{position:relative;z-index:2;max-width:850px;margin:0 auto;animation:fadeInUp 1s ease}
+        .hero-badge{
+            display:inline-flex;align-items:center;gap:6px;
+            background:rgba(255,255,255,.1);backdrop-filter:blur(10px);
+            border:1px solid rgba(255,255,255,.15);padding:8px 20px;border-radius:50px;
+            font-size:.8rem;margin-bottom:24px;animation:borderGlow 3s ease-in-out infinite;
+        }
+        .hero-badge .dot{width:8px;height:8px;background:var(--o);border-radius:50%;animation:borderGlow 1.5s ease-in-out infinite}
+        .hero h1{color:var(--w);margin-bottom:20px;text-shadow:0 2px 20px rgba(0,0,0,.3);line-height:1.15}
+        .hero h1 span{background:linear-gradient(135deg,var(--o),#F59E0B,#FCD34D);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+        .hero p{color:rgba(255,255,255,.85);font-size:clamp(1rem,2vw,1.25rem);margin-bottom:36px;max-width:600px;margin-left:auto;margin-right:auto}
+        .hero-btns{display:flex;justify-content:center;gap:14px;flex-wrap:wrap}
+        .hero-stats{display:flex;justify-content:center;gap:50px;margin-top:60px;flex-wrap:wrap}
+        .hero-stat{text-align:center}
+        .hero-stat .nb{font-size:2.6rem;font-weight:800;color:var(--o);line-height:1}
+        .hero-stat .lb{font-size:.75rem;opacity:.7;text-transform:uppercase;letter-spacing:2px;margin-top:4px}
+
+        /* Trust Bar */
+        .trust-bar{background:var(--gl);padding:40px 0;text-align:center}
+        .trust-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:24px}
+        .trust-item{text-align:center;padding:20px}
+        .trust-item i{font-size:2.5rem;color:var(--o);margin-bottom:12px}
+        .trust-item h3{font-size:1.1rem;margin-bottom:4px}
+        .trust-item p{font-size:.8rem;color:var(--g)}
+
+        /* Formations Grid */
+        .formations-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:24px;margin-top:40px}
+        .formation-card{
+            background:var(--w);border-radius:var(--rl);overflow:hidden;
+            box-shadow:var(--s);border:1px solid var(--br);transition:var(--t);
+            display:flex;flex-direction:column;position:relative;
+        }
+        .formation-card:hover{transform:translateY(-8px);box-shadow:var(--sl);border-color:var(--o)}
+        .formation-card::before{
+            content:'';position:absolute;top:0;left:0;width:100%;height:4px;
+            background:linear-gradient(90deg,var(--o),var(--b));transform:scaleX(0);
+            transition:transform .5s ease;transform-origin:left;z-index:2;
+        }
+        .formation-card:hover::before{transform:scaleX(1)}
+        .formation-header{
+            padding:30px 24px 20px;text-align:center;
+            background:var(--bl);position:relative;overflow:hidden;
+        }
+        .formation-header.blue{background:var(--bl)}
+        .formation-header.orange{background:var(--ol)}
+        .formation-header.green{background:#ECFDF5}
+        .formation-header.purple{background:#F5F3FF}
+        .formation-header.red{background:#FEF2F2}
+        .formation-icon{
+            width:64px;height:64px;border-radius:16px;display:flex;align-items:center;
+            justify-content:center;font-size:1.6rem;margin:0 auto 14px;transition:var(--t);
+        }
+        .formation-card:hover .formation-icon{transform:rotate(-5deg) scale(1.1)}
+        .formation-icon.blue{background:var(--b);color:var(--w)}
+        .formation-icon.orange{background:var(--o);color:var(--w)}
+        .formation-icon.green{background:#10B981;color:var(--w)}
+        .formation-icon.purple{background:#8B5CF6;color:var(--w)}
+        .formation-icon.red{background:#EF4444;color:var(--w)}
+        .formation-header h3{font-size:1.2rem;margin-bottom:4px}
+        .formation-header .duration{font-size:.75rem;color:var(--g);font-weight:500}
+        .formation-body{padding:20px 24px;flex:1;display:flex;flex-direction:column}
+        .formation-body p{font-size:.85rem;color:var(--g);margin-bottom:16px;line-height:1.5;flex:1}
+        .formation-highlights{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px}
+        .formation-highlights span{
+            background:var(--bl);color:var(--b);padding:4px 10px;border-radius:12px;
+            font-size:.67rem;font-weight:600;display:flex;align-items:center;gap:4px;
+        }
+        .formation-highlights span i{font-size:.5rem;color:var(--o)}
+        .formation-price-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+        .formation-price{font-size:1.4rem;font-weight:800;color:var(--b)}
+        .formation-price span{font-size:.7rem;color:var(--g);font-weight:500;display:block}
+        .formation-actions{display:flex;gap:8px}
+        .formation-actions .btn{flex:1;justify-content:center;font-size:.8rem;padding:12px 16px}
+
+        /* Pack Banner */
+        .pack-banner{
+            background:linear-gradient(135deg,var(--b),var(--bd));color:var(--w);
+            border-radius:var(--rl);padding:30px 28px;text-align:center;
+            margin-top:30px;position:relative;overflow:hidden;
+            box-shadow:0 20px 40px rgba(11,63,165,.2);
+        }
+        .pack-banner::before{
+            content:'';position:absolute;inset:0;
+            background:radial-gradient(circle at 30% 50%,rgba(255,107,53,.2),transparent 60%);
+        }
+        .pack-badge{
+            display:inline-flex;align-items:center;gap:6px;
+            background:var(--o);padding:6px 16px;border-radius:30px;
+            font-size:.7rem;font-weight:700;margin-bottom:14px;position:relative;z-index:1;
+        }
+        .pack-banner h3{color:var(--w);font-size:1.3rem;margin-bottom:8px;position:relative;z-index:1}
+        .pack-banner p{color:rgba(255,255,255,.7);font-size:.9rem;margin-bottom:16px;position:relative;z-index:1}
+        .pack-price-row{display:flex;justify-content:center;align-items:center;gap:12px;margin-bottom:20px;position:relative;z-index:1}
+        .pack-old-price{font-size:1.1rem;text-decoration:line-through;color:rgba(255,255,255,.5)}
+        .pack-new-price{font-size:2rem;font-weight:800;color:var(--o)}
+        .pack-save{background:var(--o);color:var(--w);padding:4px 12px;border-radius:20px;font-size:.7rem;font-weight:700}
+        .pack-actions{display:flex;justify-content:center;gap:10px;position:relative;z-index:1}
+
+        /* Pourquoi Section */
+        .pourquoi-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:20px}
+        .pourquoi-card{
+            background:var(--w);border-radius:var(--rl);padding:28px 22px;
+            text-align:center;box-shadow:var(--s);border:1px solid var(--br);
+            transition:var(--t);position:relative;overflow:hidden;
+        }
+        .pourquoi-card:hover{transform:translateY(-6px);box-shadow:var(--sl)}
+        .pourquoi-icon{
+            width:56px;height:56px;border-radius:14px;display:flex;align-items:center;
+            justify-content:center;font-size:1.4rem;margin:0 auto 14px;background:var(--ol);color:var(--o);
+            transition:var(--t);
+        }
+        .pourquoi-card:hover .pourquoi-icon{background:var(--o);color:var(--w);transform:scale(1.1)}
+        .pourquoi-card h3{font-size:1rem;margin-bottom:6px}
+
+        /* Témoignages */
+        .testimonials-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px}
+        .testimonial-card{
+            background:var(--w);border-radius:var(--rl);padding:24px;
+            box-shadow:var(--s);border:1px solid var(--br);transition:var(--t);
+            position:relative;
+        }
+        .testimonial-card:hover{transform:translateY(-4px);box-shadow:var(--sl)}
+        .testimonial-card .quote-icon{font-size:2rem;color:var(--o);opacity:.3;margin-bottom:8px}
+        .testimonial-card p{font-size:.88rem;font-style:italic;margin-bottom:16px;line-height:1.5}
+        .testimonial-author{display:flex;align-items:center;gap:10px}
+        .testimonial-avatar{
+            width:40px;height:40px;border-radius:50%;background:var(--b);color:var(--w);
+            display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.9rem;
+        }
+        .testimonial-author strong{font-size:.85rem;color:var(--b)}
+        .testimonial-author span{font-size:.7rem;color:var(--g);display:block}
+
+        /* Contact CTA */
+        .contact-cta{
+            background:linear-gradient(135deg,var(--b),var(--bd));color:var(--w);
+            text-align:center;padding:60px 20px;position:relative;overflow:hidden;
+        }
+        .contact-cta::before{
+            content:'';position:absolute;inset:0;
+            background:radial-gradient(circle at 50% 50%,rgba(255,107,53,.15),transparent 60%);
+        }
+        .contact-cta h2{color:var(--w);position:relative;z-index:1}
+        .contact-cta h2 span{background:linear-gradient(135deg,var(--o),#FCD34D);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+        .contact-cta p{color:rgba(255,255,255,.75);font-size:1rem;max-width:500px;margin:0 auto 30px;position:relative;z-index:1}
+        .contact-cta .btn-row{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;position:relative;z-index:1}
+
+        /* Footer */
+        footer{background:var(--d);color:var(--w);padding:60px 0 24px;position:relative}
+        footer::before{content:'';position:absolute;top:0;left:0;width:100%;height:1px;background:linear-gradient(90deg,transparent,var(--o),transparent)}
+        .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:40px;margin-bottom:36px}
+        @media(max-width:768px){.footer-grid{grid-template-columns:1fr}}
+        .footer-links h3{color:var(--w);font-size:.95rem;margin-bottom:16px}
+        .footer-links ul{list-style:none}
+        .footer-links ul li{margin-bottom:10px}
+        .footer-links ul li a{color:rgba(255,255,255,.6);text-decoration:none;font-size:.82rem;transition:color .2s}
+        .footer-links ul li a:hover{color:var(--o)}
+        .footer-bottom{text-align:center;padding-top:24px;border-top:1px solid rgba(255,255,255,.06);font-size:.75rem;color:rgba(255,255,255,.4)}
+
+        @media(max-width:768px){
+            .formations-grid{grid-template-columns:1fr}
+            .hero-stats{gap:20px}
+            .hero-stat .nb{font-size:1.8rem}
+            .pack-price-row{flex-direction:column;gap:4px}
         }
     </style>
 </head>
 <body>
 
-    <div class="presentation-deck" id="presentationDeck">
-
-        <!-- Progress Bar -->
-        <div class="progress-bar-container">
-            <div class="progress-bar-fill" id="progressBar"></div>
-        </div>
-
-        <!-- Slides Wrapper -->
-        <div class="slides-wrapper">
-
-            <!-- SLIDE 1: Cover -->
-            <div class="slide theme-dark active" id="slide-1">
-                <div class="slide-header">
-                    <div class="logo-brand">
-                        <div class="logo-icon">N</div>
-                        <div class="logo-text">
-                            <span class="logo-title">NTIC SOLUTION</span>
-                            <span class="logo-subtitle">L'univers du digital</span>
-                        </div>
-                    </div>
-                    <span class="slide-number-badge">01 / 12</span>
-                </div>
-                <div class="slide-body">
-                    <div class="cover-container">
-                        <div class="cover-badge"><i class="fa-solid fa-graduation-cap"></i> Formations Pro — Août 2026</div>
-
-                        <!-- POINT 2: Compte à rebours -->
-                        <div style="background: rgba(255,107,53,0.2); border-radius: 30px; padding: 4px 14px; display: inline-block; margin-bottom: 10px; width: fit-content;">
-                            <span style="color: #FF6B35; font-weight: 700; font-size: 13px;">
-                                <i class="fa-regular fa-clock"></i> Démarrage dans <span id="countdown" style="font-weight: 800;">J-9</span>
-                            </span>
-                        </div>
-
-                        <h1 class="cover-title">FORMATION <br>EN INFORMATIQUE</h1>
-                        <p class="cover-subtitle">Bureautique & Développement Web et Mobile</p>
-
-                        <!-- POINT 5: Citation inspirante -->
-                        <div style="margin-bottom: 14px; font-style: italic; color: #93C5FD; font-size: 14px; border-left: 3px solid #FF6B35; padding-left: 12px;">
-                            « Le digital n'attend pas. Saisissez votre chance maintenant. »
-                        </div>
-
-                        <div class="cover-info-card">
-                            <div class="cover-info-item"><i class="fa-regular fa-calendar-days"></i><span>Du 16 au 29 août 2026</span></div>
-                            <div class="cover-info-item"><i class="fa-solid fa-location-dot"></i><span>Salle informatique de l'Ecole Centre B, Banfora</span></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="slide-footer">
-                    <span>NTIC Solution</span>
-                    <span>Ecole Centre B, Banfora, Burkina Faso</span>
-                </div>
+<!-- ==================== HEADER ==================== -->
+<header id="header">
+    <div class="container header-container">
+        <a href="https://nticsolution.org" class="header-logo" title="NTIC Solution">
+            <img src="logo.png" alt="NTIC Solution Logo">
+            <div>
+                <div class="header-logo-text">NTIC Solution</div>
+                <div class="header-logo-slogan">L'UNIVERS DU DIGITAL</div>
             </div>
-
-            <!-- SLIDE 2: Qui sommes-nous -->
-            <div class="slide" id="slide-2">
-                <div class="slide-header">
-                    <div class="logo-brand">
-                        <div class="logo-icon">N</div>
-                        <div class="logo-text">
-                            <span class="logo-title">NTIC SOLUTION</span>
-                            <span class="logo-subtitle">L'univers du digital</span>
-                        </div>
-                    </div>
-                    <span class="slide-number-badge">02 / 12</span>
-                </div>
-                <h2 class="slide-title">Qui sommes-nous ?</h2>
-                <p class="slide-subtitle">Agence digitale high-tech</p>
-                <div class="slide-body">
-                    <div class="about-grid">
-                        <div class="about-card primary">
-                            <h3><i class="fa-solid fa-microchip"></i> Expertise High-Tech</h3>
-                            <p><strong>NTIC Solution</strong> est spécialisée en <strong>Développement Web, Applications, IA, Marketing digital et conception graphique</strong>.</p>
-                        </div>
-                        <div class="about-card">
-                            <h3><i class="fa-solid fa-user-tie"></i> Fondateur</h3>
-                            <div class="founder-box">
-                                <div class="founder-avatar">KS</div>
-                                <div>
-                                    <strong style="color: var(--primary-blue); font-size: 15px;">Kévin Kiessé Sanou</strong>
-                                    <p style="font-size: 12px; color: var(--text-muted);">Dev Full-Stack & Expert Tech (+6 ans)</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="about-card">
-                            <h3><i class="fa-solid fa-map-location-dot"></i> Notre Ancrage</h3>
-                            <p><strong>Secteur 15, Quartier Tatana, Banfora</strong>. Nous accompagnons vers l'autonomie numérique.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="slide-footer">
-                    <span>NTIC Solution</span>
-                    <span>Salle informatique de l'Ecole Centre B, Banfora, Burkina Faso</span>
-                </div>
-            </div>
-
-            <!-- SLIDE 3: Pourquoi -->
-            <div class="slide" id="slide-3">
-                <div class="slide-header">
-                    <div class="logo-brand">
-                        <div class="logo-icon">N</div>
-                        <div class="logo-text">
-                            <span class="logo-title">NTIC SOLUTION</span>
-                            <span class="logo-subtitle">L'univers du digital</span>
-                        </div>
-                    </div>
-                    <span class="slide-number-badge">03 / 12</span>
-                </div>
-                <h2 class="slide-title">Pourquoi ces formations ?</h2>
-                <p class="slide-subtitle">Transformer le potentiel en compétences rentables</p>
-                <div class="slide-body">
-                    <!-- POINT 3: Preuve sociale (chiffres) -->
-                    <div style="display: flex; justify-content: space-around; background: var(--blue-light); border-radius: 12px; padding: 10px; margin-bottom: 6px;">
-                        <div style="text-align: center;">
-                            <span style="font-size: 24px; font-weight: 800; color: var(--secondary-orange);">97%</span>
-                            <p style="font-size: 10px; color: var(--text-muted); font-weight: 600;">de satisfaction</p>
-                        </div>
-                        <div style="text-align: center;">
-                            <span style="font-size: 24px; font-weight: 800; color: var(--secondary-orange);">+30</span>
-                            <p style="font-size: 10px; color: var(--text-muted); font-weight: 600;">apprenants formés</p>
-                        </div>
-                        <div style="text-align: center;">
-                            <span style="font-size: 24px; font-weight: 800; color: var(--secondary-orange);">4.8★</span>
-                            <p style="font-size: 10px; color: var(--text-muted); font-weight: 600;">note moyenne</p>
-                        </div>
-                    </div>
-
-                    <div class="why-grid">
-                        <div class="why-card">
-                            <div class="why-icon"><i class="fa-solid fa-laptop-code"></i></div>
-                            <div class="why-text">
-                                <h4>Un Constat Réel</h4>
-                                <p>Beaucoup ont un ordinateur mais ne savent pas l'exploiter pleinement.</p>
-                            </div>
-                        </div>
-                        <div class="why-card">
-                            <div class="why-icon"><i class="fa-solid fa-briefcase"></i></div>
-                            <div class="why-text">
-                                <h4>Un Besoin Urgent</h4>
-                                <p>Boostez votre carrière, trouvez un emploi ou lancez votre entreprise.</p>
-                            </div>
-                        </div>
-                        <div class="why-card">
-                            <div class="why-icon"><i class="fa-solid fa-gears"></i></div>
-                            <div class="why-text">
-                                <h4>Méthode Pratique</h4>
-                                <p>100% pratique : du concret pour des résultats immédiats.</p>
-                            </div>
-                        </div>
-                        <div class="why-card">
-                            <div class="why-icon"><i class="fa-solid fa-rocket"></i></div>
-                            <div class="why-text">
-                                <h4>Notre Promesse</h4>
-                                <p>Repartez avec des nouvelles compétences informatiques !</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="slide-footer">
-                    <span>NTIC Solution</span>
-                    <span>Salle informatique de l'Ecole Centre B, Banfora, Burkina Faso</span>
-                </div>
-            </div>
-
-            <!-- SLIDE 4: Les formations -->
-            <div class="slide" id="slide-4">
-                <div class="slide-header">
-                    <div class="logo-brand">
-                        <div class="logo-icon">N</div>
-                        <div class="logo-text">
-                            <span class="logo-title">NTIC SOLUTION</span>
-                            <span class="logo-subtitle">L'univers du digital</span>
-                        </div>
-                    </div>
-                    <span class="slide-number-badge">04 / 12</span>
-                </div>
-                <h2 class="slide-title">Nos 2 Formations</h2>
-                <p class="slide-subtitle">Choisissez votre module</p>
-                <div class="slide-body">
-                    <div class="courses-cols">
-                        <div class="course-box blue">
-                            <div class="course-header-row">
-                                <div class="course-icon-bg"><i class="fa-solid fa-desktop"></i></div>
-                                <span class="course-price">10 000 FCFA</span>
-                            </div>
-                            <h3>Bureautique</h3>
-                            <p>Windows & Office 365 (Word, Excel, PowerPoint).</p>
-                        </div>
-                        <div class="course-box orange">
-                            <div class="course-header-row">
-                                <div class="course-icon-bg"><i class="fa-solid fa-code"></i></div>
-                                <span class="course-price">20 000 FCFA</span>
-                            </div>
-                            <h3>Web & Mobile</h3>
-                            <p>Site web avec IA DeepSeek & VS Code, et app Android sans coder.</p>
-                        </div>
-                    </div>
-                    <div class="pack-banner">
-                        <div class="pack-title"><i class="fa-solid fa-fire" style="color: var(--secondary-orange);"></i> PACK COMPLET</div>
-                        <div class="pack-price">25 000 FCFA <span style="font-size: 12px; text-decoration: line-through; color: #94A3B8; margin-left: 4px;">30 000</span></div>
-                    </div>
-                </div>
-                <div class="slide-footer">
-                    <span>NTIC Solution</span>
-                    <span>Salle informatique de l'Ecole Centre B, Banfora, Burkina Faso</span>
-                </div>
-            </div>
-
-            <!-- SLIDE 5: Inclus -->
-            <div class="slide" id="slide-5">
-                <div class="slide-header">
-                    <div class="logo-brand">
-                        <div class="logo-icon">N</div>
-                        <div class="logo-text">
-                            <span class="logo-title">NTIC SOLUTION</span>
-                            <span class="logo-subtitle">L'univers du digital</span>
-                        </div>
-                    </div>
-                    <span class="slide-number-badge">05 / 12</span>
-                </div>
-                <h2 class="slide-title">Ce qui est inclus</h2>
-                <p class="slide-subtitle">Un environnement d'apprentissage haut de gamme</p>
-                <div class="slide-body">
-                    <div class="included-list">
-                        <div class="included-item"><i class="fa-solid fa-user-graduate"></i><span>Suivi individuel par expert</span></div>
-                        <div class="included-item"><i class="fa-solid fa-award"></i><span>Attestation officielle</span></div>
-                        <div class="included-item"><i class="fa-solid fa-users"></i><span>Places limitées pour la qualité</span></div>
-                        <div class="included-item" style="background: var(--blue-light); border-color: #BFDBFE;">
-                            <i class="fa-solid fa-ticket" style="background: var(--primary-blue); color: #ffffff;"></i>
-                            <span>Inscriptions sur <strong style="color: var(--primary-blue);">myvivo.online ou au +22605585868</strong></span>
-                        </div>
-                    </div>
-                </div>
-                <div class="slide-footer">
-                    <span>NTIC Solution</span>
-                    <span>Banfora, BF</span>
-                </div>
-            </div>
-
-            <!-- SLIDE 6: Bureautique détail -->
-            <div class="slide" id="slide-6">
-                <div class="slide-header">
-                    <div class="logo-brand">
-                        <div class="logo-icon">N</div>
-                        <div class="logo-text">
-                            <span class="logo-title">NTIC SOLUTION</span>
-                            <span class="logo-subtitle">L'univers du digital</span>
-                        </div>
-                    </div>
-                    <span class="slide-number-badge">06 / 12</span>
-                </div>
-                <h2 class="slide-title"><i class="fa-solid fa-desktop" style="color: var(--primary-blue);"></i> Bureautique</h2>
-                <p class="slide-subtitle">7 jours — 14h | 10 000 FCFA</p>
-                <div class="slide-body">
-                    <div class="days-grid">
-                        <div class="day-card"><span class="day-badge">J1</span><h5>PC & Windows</h5><p>Prise en main, fichiers, sécurité.</p></div>
-                        <div class="day-card"><span class="day-badge">J2</span><h5>Word — Bases</h5><p>Saisie, mise en page, styles.</p></div>
-                        <div class="day-card"><span class="day-badge">J3</span><h5>Word — Avancé</h5><p>Tableaux, images, sommaire.</p></div>
-                        <div class="day-card"><span class="day-badge">J4</span><h5>Excel — Bases</h5><p>Tableaux, formules SOMME, MOYENNE.</p></div>
-                        <div class="day-card"><span class="day-badge">J5</span><h5>Excel — Analyse</h5><p>Formules SI, graphiques.</p></div>
-                        <div class="day-card"><span class="day-badge">J6</span><h5>PowerPoint</h5><p>Présentations, animations.</p></div>
-                        <div class="day-card span-2" style="background: var(--blue-light);"><span class="day-badge">J7</span><h5>Projet</h5><p>Evaluation finale.</p></div>
-                    </div>
-                </div>
-                <div class="slide-footer">
-                    <span>NTIC Solution</span>
-                    <span>Salle informatique de l'Ecole Centre B, Banfora, Burkina Faso</span>
-                </div>
-            </div>
-
-            <!-- SLIDE 7: Dev Web & Mobile détail -->
-            <div class="slide" id="slide-7">
-                <div class="slide-header">
-                    <div class="logo-brand">
-                        <div class="logo-icon">N</div>
-                        <div class="logo-text">
-                            <span class="logo-title">NTIC SOLUTION</span>
-                            <span class="logo-subtitle">L'univers du digital</span>
-                        </div>
-                    </div>
-                    <span class="slide-number-badge">07 / 12</span>
-                </div>
-                <h2 class="slide-title"><i class="fa-solid fa-code" style="color: var(--secondary-orange);"></i> Web & Mobile</h2>
-                <p class="slide-subtitle">7 jours — 14h | 20 000 FCFA</p>
-                <div class="slide-body">
-                    <div class="days-grid">
-                        <div class="day-card"><span class="day-badge">J1</span><h5>Outils & DeepSeek</h5><p>VS Code, Live Server, IA.</p></div>
-                        <div class="day-card"><span class="day-badge">J2</span><h5>HTML</h5><p>Balises, liens, images.</p></div>
-                        <div class="day-card"><span class="day-badge">J3</span><h5>CSS & Multi-pages</h5><p>Design responsive, 3 pages.</p></div>
-                        <div class="day-card"><span class="day-badge">J4</span><h5>GitHub & Cloud</h5><p>Git, hébergement Pages.</p></div>
-                        <div class="day-card"><span class="day-badge">J5</span><h5>Domaine Pro</h5><p>Namecheap, SSL, WhatsApp.</p></div>
-                        <div class="day-card"><span class="day-badge">J6</span><h5>App Mobile</h5><p>AppCreator24, No-Code.</p></div>
-                        <div class="day-card span-2" style="background: var(--orange-light);"><span class="day-badge">J7</span><h5>APK & Publication</h5><p>Génération APK, installation, validation.</p></div>
-                    </div>
-                </div>
-                <div class="slide-footer">
-                    <span>NTIC Solution</span>
-                    <span>Salle informatique de l'Ecole Centre B, Banfora, Burkina Faso</span>
-                </div>
-            </div>
-
-            <!-- SLIDE 8: Méthode Web -->
-            <div class="slide" id="slide-8">
-                <div class="slide-header">
-                    <div class="logo-brand">
-                        <div class="logo-icon">N</div>
-                        <div class="logo-text">
-                            <span class="logo-title">NTIC SOLUTION</span>
-                            <span class="logo-subtitle">L'univers du digital</span>
-                        </div>
-                    </div>
-                    <span class="slide-number-badge">08 / 12</span>
-                </div>
-                <h2 class="slide-title">Méthode Web</h2>
-                <p class="slide-subtitle">Processus assisté par IA en 6 étapes</p>
-                <div class="slide-body">
-                    <div class="flowchart-container">
-                        <div class="flow-step"><div class="flow-step-num">1</div><div class="flow-step-icon"><i class="fa-regular fa-lightbulb"></i></div><div class="flow-step-title">Idée</div></div>
-                        <i class="fa-solid fa-arrow-right flow-arrow"></i>
-                        <div class="flow-step"><div class="flow-step-num">2</div><div class="flow-step-icon"><i class="fa-solid fa-robot"></i></div><div class="flow-step-title">DeepSeek</div></div>
-                        <i class="fa-solid fa-arrow-right flow-arrow"></i>
-                        <div class="flow-step"><div class="flow-step-num">3</div><div class="flow-step-icon"><i class="fa-solid fa-laptop-code"></i></div><div class="flow-step-title">VS Code</div></div>
-                        <i class="fa-solid fa-arrow-right flow-arrow"></i>
-                        <div class="flow-step"><div class="flow-step-num">4</div><div class="flow-step-icon"><i class="fa-brands fa-github"></i></div><div class="flow-step-title">GitHub</div></div>
-                        <i class="fa-solid fa-arrow-right flow-arrow"></i>
-                        <div class="flow-step"><div class="flow-step-num">5</div><div class="flow-step-icon"><i class="fa-solid fa-cloud-arrow-up"></i></div><div class="flow-step-title">Pages</div></div>
-                        <i class="fa-solid fa-arrow-right flow-arrow"></i>
-                        <div class="flow-step" style="border-color: var(--secondary-orange); background: var(--orange-light);"><div class="flow-step-num" style="background: var(--secondary-orange);">6</div><div class="flow-step-icon"><i class="fa-solid fa-globe"></i></div><div class="flow-step-title">En Ligne !</div></div>
-                    </div>
-                </div>
-                <div class="slide-footer">
-                    <span>NTIC Solution</span>
-                    <span>Salle informatique de l'Ecole Centre B, Banfora, Burkina Faso</span>
-                </div>
-            </div>
-
-            <!-- SLIDE 9: Méthode App -->
-            <div class="slide" id="slide-9">
-                <div class="slide-header">
-                    <div class="logo-brand">
-                        <div class="logo-icon">N</div>
-                        <div class="logo-text">
-                            <span class="logo-title">NTIC SOLUTION</span>
-                            <span class="logo-subtitle">L'univers du digital</span>
-                        </div>
-                    </div>
-                    <span class="slide-number-badge">09 / 12</span>
-                </div>
-                <h2 class="slide-title">Méthode App No-Code</h2>
-                <p class="slide-subtitle">Créez votre app Android sans coder</p>
-                <div class="slide-body">
-                    <div class="flowchart-container">
-                        <div class="flow-step"><div class="flow-step-num">1</div><div class="flow-step-icon"><i class="fa-solid fa-cubes"></i></div><div class="flow-step-title">AppCreator24</div></div>
-                        <i class="fa-solid fa-arrow-right flow-arrow"></i>
-                        <div class="flow-step"><div class="flow-step-num">2</div><div class="flow-step-icon"><i class="fa-solid fa-mobile-screen"></i></div><div class="flow-step-title">Écrans</div></div>
-                        <i class="fa-solid fa-arrow-right flow-arrow"></i>
-                        <div class="flow-step"><div class="flow-step-num">3</div><div class="flow-step-icon"><i class="fa-solid fa-puzzle-piece"></i></div><div class="flow-step-title">UI</div></div>
-                        <i class="fa-solid fa-arrow-right flow-arrow"></i>
-                        <div class="flow-step"><div class="flow-step-num">4</div><div class="flow-step-icon"><i class="fa-solid fa-gear"></i></div><div class="flow-step-title">APK</div></div>
-                        <i class="fa-solid fa-arrow-right flow-arrow"></i>
-                        <div class="flow-step" style="border-color: var(--secondary-orange); background: var(--orange-light);"><div class="flow-step-num" style="background: var(--secondary-orange);">5</div><div class="flow-step-icon"><i class="fa-solid fa-circle-check"></i></div><div class="flow-step-title">Installation</div></div>
-                    </div>
-                </div>
-                <div class="slide-footer">
-                    <span>NTIC Solution</span>
-                    <span>Salle informatique de l'Ecole Centre B, Banfora, Burkina Faso</span>
-                </div>
-            </div>
-
-            <!-- SLIDE 10: Témoignages -->
-            <div class="slide theme-dark" id="slide-10">
-                <div class="slide-header">
-                    <div class="logo-brand">
-                        <div class="logo-icon">N</div>
-                        <div class="logo-text">
-                            <span class="logo-title">NTIC SOLUTION</span>
-                            <span class="logo-subtitle">L'univers du digital</span>
-                        </div>
-                    </div>
-                    <span class="slide-number-badge">10 / 12</span>
-                </div>
-                <h2 class="slide-title">Projets & Témoignages</h2>
-                <p class="slide-subtitle">La méthode qui fonctionne</p>
-                <div class="slide-body">
-                    <div class="cases-wrapper">
-                        <div class="quote-box">
-                            <i class="fa-solid fa-quote-left"></i>
-                            <p class="quote-text">« Cette approche IA m'a permis de concevoir le site de NTIC SOLUTION en 2 jours. »</p>
-                            <div class="quote-author">— Kévin Kiessé Sanou, Lead Formateur</div>
-                        </div>
-                        <div class="projects-list">
-                            <h4 style="color: #ffffff; font-size: 14px;">Projets conçus :</h4>
-                            <div class="project-card-item"><i class="fa-solid fa-building"></i><div><h4>CAVOR</h4><p>Plateforme web d'entreprise</p></div></div>
-                            <div class="project-card-item"><i class="fa-solid fa-qrcode"></i><div><h4>Menu QR</h4><p>Solution pour restaurants</p></div></div>
-                            <div class="project-card-item"><i class="fa-solid fa-ticket"></i><div><h4>myvivo.online</h4><p>Billetterie en ligne</p></div></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="slide-footer">
-                    <span>NTIC Solution</span>
-                    <span>Salle informatique de l'Ecole Centre B, Banfora, Burkina Faso</span>
-                </div>
-            </div>
-
-            <!-- SLIDE 11: Inscription -->
-            <div class="slide theme-orange" id="slide-11">
-                <div class="slide-header">
-                    <div class="logo-brand">
-                        <div class="logo-icon">N</div>
-                        <div class="logo-text">
-                            <span class="logo-title">NTIC SOLUTION</span>
-                            <span class="logo-subtitle">L'univers du digital</span>
-                        </div>
-                    </div>
-                    <span class="slide-number-badge">11 / 12</span>
-                </div>
-                <div class="slide-body">
-                    <div class="signup-container">
-                        <div>
-                            <h2 class="signup-title">Prêt à transformer votre avenir ?</h2>
-                            <p style="font-size: 15px; color: #FFE3D8; margin-bottom: 14px;">Places limitées !</p>
-
-                            <!-- POINT 1: Compteur de places -->
-                            <div style="background: rgba(255, 68, 68, 0.2); border: 2px solid #FF4444; border-radius: 10px; padding: 10px; text-align: center; margin-bottom: 14px;">
-                                <span style="color: #FF4444; font-weight: 800; font-size: 17px;">
-                                    <i class="fa-solid fa-circle-exclamation"></i> Plus que <span id="placesCount">25</span> places disponibles !
-                                </span>
-                            </div>
-
-                            <div class="signup-links">
-                                <a href="https://myvivo.online" target="_blank" class="signup-link-btn"><i class="fa-solid fa-globe"></i> myvivo.online</a>
-                                <div style="display: flex; align-items: center; gap: 8px; color: #ffffff; font-size: 16px; font-weight: 700;"><i class="fa-brands fa-whatsapp" style="font-size: 22px;"></i> +226 69 69 69 24  WhatsApp</div>
-                                <div style="display: flex; align-items: center; gap: 8px; color: #ffffff; font-size: 16px; font-weight: 700;"><i class="fa-solid fa-phone" style="font-size: 22px;"></i> +226 05 58 58 68 Appels directs</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="slide-footer">
-                    <span>NTIC Solution</span>
-                    <span>Salle informatique de l'Ecole Centre B, Banfora, Burkina Faso</span>
-                </div>
-            </div>
-
-            <!-- SLIDE 12: Contact -->
-            <div class="slide theme-dark" id="slide-12">
-                <div class="slide-header">
-                    <div class="logo-brand">
-                        <div class="logo-icon">N</div>
-                        <div class="logo-text">
-                            <span class="logo-title">NTIC SOLUTION</span>
-                            <span class="logo-subtitle">L'univers du digital</span>
-                        </div>
-                    </div>
-                    <span class="slide-number-badge">12 / 12</span>
-                </div>
-                <h2 class="slide-title">Contactez-nous</h2>
-                <p class="slide-subtitle">Pour toutes vos questions</p>
-                <div class="slide-body">
-                    <div class="contact-grid">
-                        <div class="contact-card"><div class="contact-icon"><i class="fa-solid fa-location-dot"></i></div><div class="contact-info"><h5>Adresse</h5><p>Secteur 15, Tatana, Banfora</p></div></div>
-                        <div class="contact-card"><div class="contact-icon"><i class="fa-brands fa-whatsapp"></i></div><div class="contact-info"><h5>WhatsApp</h5><p>+226 69 69 69 24</p></div></div>
-                        <div class="contact-card"><div class="contact-icon"><i class="fa-solid fa-envelope"></i></div><div class="contact-info"><h5>E-mail</h5><p>nticsolution.bf@gmail.com</p></div></div>
-                        <div class="contact-card"><div class="contact-icon"><i class="fa-solid fa-globe"></i></div><div class="contact-info"><h5>Site</h5><p>nticsolution.org</p></div></div>
-                        <div class="social-row">
-                            <a href="https://wa.me/22669696924?text=Bonjour%2C%20je%20souhaite%20m%27inscrire%20%C3%A0%20la%20formation%20NTIC%20Solution%20d%27ao%C3%BBt%202026.%20Pouvez-vous%20me%20donner%20plus%20d%27informations%20et%20confirmer%20ma%20place%20%3F%20Merci%20%21" class="social-btn"><i class="fa-brands fa-whatsapp"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="slide-footer">
-                    <span>NTIC Solution</span>
-                    <span>Salle informatique de l'Ecole Centre B, Banfora, Burkina Faso</span>
-                </div>
-            </div>
-
-        </div><!-- /slides-wrapper -->
-
-        <!-- POINT 6: CTA flottant -->
-        <div class="sticky-cta">
-            <a href="https://wa.me/22669696924?text=Bonjour%2C%20je%20souhaite%20m%27inscrire%20%C3%A0%20la%20formation%20NTIC%20Solution%20d%27ao%C3%BBt%202026.%20Pouvez-vous%20me%20donner%20plus%20d%27informations%20et%20confirmer%20ma%20place%20%3F%20Merci%20%21" target="_blank">
-                <i class="fa-solid fa-bolt"></i> Je m'inscris
-            </a>
-        </div>
-
-    </div><!-- /presentation-deck -->
-
-    <!-- Contrôles mobiles -->
-    <div class="deck-controls">
-        <button class="control-btn" id="prevBtn"><i class="fa-solid fa-chevron-left"></i></button>
-        <div class="slide-counter" id="slideCounter">1 / 12</div>
-        <button class="control-btn" id="nextBtn"><i class="fa-solid fa-chevron-right"></i></button>
-        <button class="control-btn" id="fullscreenBtn"><i class="fa-solid fa-expand"></i></button>
+        </a>
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Menu"><i class="fas fa-bars"></i></button>
+        <nav id="mainNav">
+            <ul>
+                <li><a href="#formations">Formations</a></li>
+                <li><a href="#pourquoi">Pourquoi nous</a></li>
+                <li><a href="#temoignages">Témoignages</a></li>
+                <li><a href="#contact" class="btn btn-sm">S'inscrire</a></li>
+            </ul>
+        </nav>
     </div>
+</header>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const slides = document.querySelectorAll('.slide');
-            const totalSlides = slides.length;
-            let currentSlide = 0;
+<!-- ==================== HERO ==================== -->
+<section class="hero" id="top">
+    <div class="hero-bg"></div>
+    <div class="hero-glow"></div>
+    <div class="hero-grid"></div>
+    <div class="container">
+        <div class="hero-content">
+            <div class="hero-badge"><span class="dot"></span> Centre de Formations Professionnelles</div>
+            <h1>Devenez un <span>Professionnel</span> du Digital</h1>
+            <p>NTIC Solution vous forme aux compétences les plus demandées : bureautique, développement web, marketing digital, publicité et conception graphique. Du 16 au 29 août 2026 à Banfora.</p>
+            <div class="hero-btns">
+                <a href="#formations" class="btn btn-white">Voir les formations</a>
+                <a href="https://wa.me/22669696924" class="btn btn-outline" style="border-color:white;color:white">WhatsApp</a>
+            </div>
+            <div class="hero-stats">
+                <div class="hero-stat"><div class="nb">5</div><div class="lb">Formations</div></div>
+                <div class="hero-stat"><div class="nb">30+</div><div class="lb">Apprenants formés</div></div>
+                <div class="hero-stat"><div class="nb">97%</div><div class="lb">Satisfaction</div></div>
+                <div class="hero-stat"><div class="nb">4.8★</div><div class="lb">Note moyenne</div></div>
+            </div>
+        </div>
+    </div>
+</section>
 
-            const prevBtn = document.getElementById('prevBtn');
-            const nextBtn = document.getElementById('nextBtn');
-            const slideCounter = document.getElementById('slideCounter');
-            const progressBar = document.getElementById('progressBar');
-            const fullscreenBtn = document.getElementById('fullscreenBtn');
-            const presentationDeck = document.getElementById('presentationDeck');
+<!-- ==================== CONFIANCE ==================== -->
+<section class="trust-bar">
+    <div class="container">
+        <div class="trust-grid">
+            <div class="trust-item reveal reveal-up">
+                <i class="fas fa-user-graduate"></i>
+                <h3>Experts Qualifiés</h3>
+                <p>Formateurs professionnels avec 6+ ans d'expérience</p>
+            </div>
+            <div class="trust-item reveal reveal-up">
+                <i class="fas fa-laptop-code"></i>
+                <h3>100% Pratique</h3>
+                <p>Apprenez en faisant, pas en écoutant</p>
+            </div>
+            <div class="trust-item reveal reveal-up">
+                <i class="fas fa-award"></i>
+                <h3>Attestation Officielle</h3>
+                <p>Valorisez vos compétences sur le marché</p>
+            </div>
+            <div class="trust-item reveal reveal-up">
+                <i class="fas fa-headset"></i>
+                <h3>Suivi Personnalisé</h3>
+                <p>Places limitées pour un accompagnement de qualité</p>
+            </div>
+        </div>
+    </div>
+</section>
 
-            // --- POINT 2: Compte à rebours ---
-            function updateCountdown() {
-                const targetDate = new Date('2026-08-16');
-                const now = new Date();
-                const diff = targetDate - now;
-                const countdownEl = document.getElementById('countdown');
-                if (diff > 0) {
-                    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-                    countdownEl.textContent = `J-${days}`;
-                } else {
-                    countdownEl.textContent = '🔥 C\'est parti !';
-                }
-            }
-            updateCountdown();
+<!-- ==================== FORMATIONS ==================== -->
+<section id="formations">
+    <div class="container">
+        <h2>Nos <span>Formations</span></h2>
+        <p style="text-align:center;max-width:600px;margin:0 auto 10px;color:var(--g)">
+            Du 16 au 29 août 2026 • Salle informatique de l'École Centre B, Banfora
+        </p>
 
-            // --- POINT 1: Compteur de places (diminue aléatoirement) ---
-            let places = 25;
-            const placesEl = document.getElementById('placesCount');
-            setInterval(() => {
-                if (places > 1 && Math.random() > 0.6) {
-                    places--;
-                    placesEl.textContent = places;
-                    // Ajoute un petit effet visuel
-                    placesEl.style.color = '#FF4444';
-                    placesEl.style.transform = 'scale(1.2)';
-                    setTimeout(() => {
-                        placesEl.style.transform = 'scale(1)';
-                    }, 300);
-                }
-            }, 4000);
+        <div class="formations-grid">
 
-            function updateSlide(index) {
-                if (index < 0) index = 0;
-                if (index >= totalSlides) index = totalSlides - 1;
+            <!-- Bureautique -->
+            <div class="formation-card reveal reveal-up">
+                <div class="formation-header blue">
+                    <div class="formation-icon blue"><i class="fas fa-desktop"></i></div>
+                    <h3>Bureautique</h3>
+                    <span class="duration"><i class="far fa-clock"></i> 7 jours • 14 heures</span>
+                </div>
+                <div class="formation-body">
+                    <p>Maîtrisez Windows et le Pack Office 365 (Word, Excel, PowerPoint). Même si vous partez de zéro, devenez autonome et productif.</p>
+                    <div class="formation-highlights">
+                        <span><i class="fas fa-circle"></i> Windows</span>
+                        <span><i class="fas fa-circle"></i> Word</span>
+                        <span><i class="fas fa-circle"></i> Excel</span>
+                        <span><i class="fas fa-circle"></i> PowerPoint</span>
+                        <span><i class="fas fa-circle"></i> Débutant</span>
+                    </div>
+                    <div class="formation-price-row">
+                        <div class="formation-price">10 000 <span>FCFA</span></div>
+                    </div>
+                    <div class="formation-actions">
+                        <a href="formations/bureautique.html" class="btn btn-blue">Programme détaillé</a>
+                        <a href="https://wa.me/22669696924?text=Bonjour%2C%20je%20suis%20int%C3%A9ress%C3%A9%20par%20la%20formation%20Bureautique%20%C3%A0%2010%20000%20FCFA.%20Pouvez-vous%20me%20donner%20plus%20d'informations%20%3F" class="btn btn-outline btn-sm">WhatsApp</a>
+                    </div>
+                </div>
+            </div>
 
-                slides.forEach((slide, idx) => {
-                    slide.classList.toggle('active', idx === index);
-                });
+            <!-- Développement Web -->
+            <div class="formation-card reveal reveal-up">
+                <div class="formation-header orange">
+                    <div class="formation-icon orange"><i class="fas fa-code"></i></div>
+                    <h3>Développement Web & Mobile</h3>
+                    <span class="duration"><i class="far fa-clock"></i> 7 jours • 14 heures</span>
+                </div>
+                <div class="formation-body">
+                    <p>Créez votre site web avec DeepSeek et VS Code, et votre application Android sans coder avec AppCreator24. Publiez en ligne.</p>
+                    <div class="formation-highlights">
+                        <span><i class="fas fa-circle"></i> DeepSeek IA</span>
+                        <span><i class="fas fa-circle"></i> VS Code</span>
+                        <span><i class="fas fa-circle"></i> GitHub</span>
+                        <span><i class="fas fa-circle"></i> App No-Code</span>
+                        <span><i class="fas fa-circle"></i> Débutant</span>
+                    </div>
+                    <div class="formation-price-row">
+                        <div class="formation-price">20 000 <span>FCFA</span></div>
+                    </div>
+                    <div class="formation-actions">
+                        <a href="formations/dev-web.html" class="btn btn-blue">Programme détaillé</a>
+                        <a href="https://wa.me/22669696924?text=Bonjour%2C%20je%20suis%20int%C3%A9ress%C3%A9%20par%20la%20formation%20D%C3%A9veloppement%20Web%20%26%20Mobile%20%C3%A0%2020%20000%20FCFA.%20Pouvez-vous%20me%20donner%20plus%20d'informations%20%3F" class="btn btn-outline btn-sm">WhatsApp</a>
+                    </div>
+                </div>
+            </div>
 
-                currentSlide = index;
-                slideCounter.textContent = `${currentSlide + 1} / ${totalSlides}`;
-                progressBar.style.width = `${((currentSlide + 1) / totalSlides) * 100}%`;
+            <!-- Publicité -->
+            <div class="formation-card reveal reveal-up">
+                <div class="formation-header red">
+                    <div class="formation-icon red"><i class="fas fa-bullhorn"></i></div>
+                    <h3>Création & Gestion de Publicité</h3>
+                    <span class="duration"><i class="far fa-clock"></i> 7 jours • 14 heures</span>
+                </div>
+                <div class="formation-body">
+                    <p>Apprenez à créer et gérer des campagnes publicitaires sur Facebook Ads et Google Ads. Ciblage, budget, optimisation, analyse.</p>
+                    <div class="formation-highlights">
+                        <span><i class="fas fa-circle"></i> Facebook Ads</span>
+                        <span><i class="fas fa-circle"></i> Google Ads</span>
+                        <span><i class="fas fa-circle"></i> Ciblage</span>
+                        <span><i class="fas fa-circle"></i> Budget</span>
+                        <span><i class="fas fa-circle"></i> ROI</span>
+                    </div>
+                    <div class="formation-price-row">
+                        <div class="formation-price">15 000 <span>FCFA</span></div>
+                    </div>
+                    <div class="formation-actions">
+                        <a href="formations/publicite.html" class="btn btn-blue">Programme détaillé</a>
+                        <a href="https://wa.me/22669696924?text=Bonjour%2C%20je%20suis%20int%C3%A9ress%C3%A9%20par%20la%20formation%20Cr%C3%A9ation%20%26%20Gestion%20de%20Publicit%C3%A9%20%C3%A0%2015%20000%20FCFA.%20Pouvez-vous%20me%20donner%20plus%20d'informations%20%3F" class="btn btn-outline btn-sm">WhatsApp</a>
+                    </div>
+                </div>
+            </div>
 
-                slides[currentSlide]?.scrollTo(0, 0);
-            }
+            <!-- Marketing Digital -->
+            <div class="formation-card reveal reveal-up">
+                <div class="formation-header green">
+                    <div class="formation-icon green"><i class="fas fa-chart-line"></i></div>
+                    <h3>Stratégie Marketing Digital</h3>
+                    <span class="duration"><i class="far fa-clock"></i> 7 jours • 14 heures</span>
+                </div>
+                <div class="formation-body">
+                    <p>Maîtrisez le référencement SEO, le content marketing, les réseaux sociaux, l'email marketing et l'analyse de données.</p>
+                    <div class="formation-highlights">
+                        <span><i class="fas fa-circle"></i> SEO</span>
+                        <span><i class="fas fa-circle"></i> Réseaux sociaux</span>
+                        <span><i class="fas fa-circle"></i> Content marketing</span>
+                        <span><i class="fas fa-circle"></i> Analytics</span>
+                        <span><i class="fas fa-circle"></i> Email</span>
+                    </div>
+                    <div class="formation-price-row">
+                        <div class="formation-price">15 000 <span>FCFA</span></div>
+                    </div>
+                    <div class="formation-actions">
+                        <a href="formations/marketing.html" class="btn btn-blue">Programme détaillé</a>
+                        <a href="https://wa.me/22669696924?text=Bonjour%2C%20je%20suis%20int%C3%A9ress%C3%A9%20par%20la%20formation%20Strat%C3%A9gie%20Marketing%20Digital%20%C3%A0%2015%20000%20FCFA.%20Pouvez-vous%20me%20donner%20plus%20d'informations%20%3F" class="btn btn-outline btn-sm">WhatsApp</a>
+                    </div>
+                </div>
+            </div>
 
-            prevBtn.addEventListener('click', () => updateSlide(currentSlide - 1));
-            nextBtn.addEventListener('click', () => updateSlide(currentSlide + 1));
+            <!-- Conception Graphique -->
+            <div class="formation-card reveal reveal-up">
+                <div class="formation-header purple">
+                    <div class="formation-icon purple"><i class="fas fa-palette"></i></div>
+                    <h3>Conception Graphique</h3>
+                    <span class="duration"><i class="far fa-clock"></i> 7 jours • 14 heures</span>
+                </div>
+                <div class="formation-body">
+                    <p>Apprenez les principes du design, maîtrisez Canva, créez des logos, affiches, bannières et kits graphiques professionnels.</p>
+                    <div class="formation-highlights">
+                        <span><i class="fas fa-circle"></i> Canva</span>
+                        <span><i class="fas fa-circle"></i> Logos</span>
+                        <span><i class="fas fa-circle"></i> Affiches</span>
+                        <span><i class="fas fa-circle"></i> Photoshop</span>
+                        <span><i class="fas fa-circle"></i> Débutant</span>
+                    </div>
+                    <div class="formation-price-row">
+                        <div class="formation-price">15 000 <span>FCFA</span></div>
+                    </div>
+                    <div class="formation-actions">
+                        <a href="formations/graphisme.html" class="btn btn-blue">Programme détaillé</a>
+                        <a href="https://wa.me/22669696924?text=Bonjour%2C%20je%20suis%20int%C3%A9ress%C3%A9%20par%20la%20formation%20Conception%20Graphique%20%C3%A0%2015%20000%20FCFA.%20Pouvez-vous%20me%20donner%20plus%20d'informations%20%3F" class="btn btn-outline btn-sm">WhatsApp</a>
+                    </div>
+                </div>
+            </div>
 
-            // Gestures tactiles (swipe)
-            let touchStartX = 0;
-            let touchEndX = 0;
-            presentationDeck.addEventListener('touchstart', (e) => {
-                touchStartX = e.changedTouches[0].screenX;
-            }, { passive: true });
-            presentationDeck.addEventListener('touchend', (e) => {
-                touchEndX = e.changedTouches[0].screenX;
-                const diff = touchStartX - touchEndX;
-                if (Math.abs(diff) > 50) {
-                    if (diff > 0) updateSlide(currentSlide + 1);
-                    else updateSlide(currentSlide - 1);
-                }
-            }, { passive: true });
+        </div>
 
-            // Clavier
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'ArrowRight' || e.key === 'Space' || e.key === 'PageDown') {
-                    e.preventDefault();
-                    updateSlide(currentSlide + 1);
-                } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
-                    e.preventDefault();
-                    updateSlide(currentSlide - 1);
-                } else if (e.key === 'Home') {
-                    e.preventDefault();
-                    updateSlide(0);
-                } else if (e.key === 'End') {
-                    e.preventDefault();
-                    updateSlide(totalSlides - 1);
-                }
-            });
+        <!-- Pack Complet -->
+        <div class="pack-banner reveal reveal-scale">
+            <div class="pack-badge"><i class="fas fa-fire"></i> LE PLUS POPULAIRE</div>
+            <h3>Pack Complet — Les 5 formations</h3>
+            <p>Bureautique + Développement Web & Mobile + Publicité + Marketing Digital + Conception Graphique</p>
+            <div class="pack-price-row">
+                <span class="pack-old-price">75 000 FCFA</span>
+                <span class="pack-new-price">50 000 FCFA</span>
+                <span class="pack-save">-25 000 F</span>
+            </div>
+            <div class="pack-actions">
+                <a href="formations/pack-complet.html" class="btn btn-white">Programme détaillé</a>
+                <a href="https://wa.me/22669696924?text=Bonjour%2C%20je%20suis%20int%C3%A9ress%C3%A9%20par%20le%20Pack%20Complet%20des%205%20formations%20%C3%A0%2050%20000%20FCFA.%20Pouvez-vous%20me%20confirmer%20les%20disponibilit%C3%A9s%20%3F" class="btn btn-outline" style="border-color:white;color:white">WhatsApp</a>
+            </div>
+        </div>
 
-            // Plein écran
-            fullscreenBtn.addEventListener('click', () => {
-                if (!document.fullscreenElement) {
-                    presentationDeck.requestFullscreen().catch(() => {});
-                } else {
-                    document.exitFullscreen();
-                }
-            });
-        });
-    </script>
+    </div>
+</section>
+
+<!-- ==================== POURQUOI NTIC SOLUTION ==================== -->
+<section id="pourquoi" style="background:var(--gl)">
+    <div class="container">
+        <h2>Pourquoi <span>NTIC Solution</span> ?</h2>
+        <div class="pourquoi-grid">
+            <div class="pourquoi-card reveal reveal-up">
+                <div class="pourquoi-icon"><i class="fas fa-microchip"></i></div>
+                <h3>Expertise High-Tech</h3>
+                <p>Agence digitale spécialisée en développement web, IA, cybersécurité. Nous pratiquons ce que nous enseignons.</p>
+            </div>
+            <div class="pourquoi-card reveal reveal-up">
+                <div class="pourquoi-icon"><i class="fas fa-user-tie"></i></div>
+                <h3>Fondateur Expérimenté</h3>
+                <p>Kévin Kiessé Sanou, développeur full-stack avec plus de 6 ans d'expérience, partage son savoir-faire.</p>
+            </div>
+            <div class="pourquoi-card reveal reveal-up">
+                <div class="pourquoi-icon"><i class="fas fa-map-marker-alt"></i></div>
+                <h3>Ancré à Banfora</h3>
+                <p>Basé au Secteur 15, Quartier Tatana. Nous formons les talents locaux pour le marché du digital.</p>
+            </div>
+            <div class="pourquoi-card reveal reveal-up">
+                <div class="pourquoi-icon"><i class="fas fa-briefcase"></i></div>
+                <h3>Projets Réels</h3>
+                <p>CAVOR, Menu QR, myvivo.online. Nos formations sont basées sur des projets concrets et éprouvés.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== TÉMOIGNAGES ==================== -->
+<section id="temoignages">
+    <div class="container">
+        <h2>Ce qu'ils <span>disent</span></h2>
+        <div class="testimonials-grid">
+            <div class="testimonial-card reveal reveal-left">
+                <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+                <p>"Cette méthode assistée par IA m'a permis de créer le site de NTIC Solution en seulement 2 jours. C'est révolutionnaire."</p>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">KS</div>
+                    <div>
+                        <strong>Kévin Kiessé Sanou</strong>
+                        <span>Lead Formateur & Fondateur</span>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card reveal reveal-right">
+                <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+                <p>"J'avais peur de l'ordinateur. Après la formation Bureautique, je crée mes propres documents Word et Excel sans stress. Merci NTIC Solution !"</p>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">MD</div>
+                    <div>
+                        <strong>Mariam D.</strong>
+                        <span>Apprenante — Bureautique</span>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card reveal reveal-left">
+                <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+                <p>"La formation Développement Web m'a ouvert les yeux. J'ai publié mon premier site web avec mon propre nom de domaine. Incroyable !"</p>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">ST</div>
+                    <div>
+                        <strong>Souleymane T.</strong>
+                        <span>Apprenant — Développement Web</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== CONTACT CTA ==================== -->
+<section class="contact-cta" id="contact">
+    <div class="container">
+        <h2>Prêt à <span>Transformer</span> Votre Avenir ?</h2>
+        <p>Les places sont limitées pour garantir un suivi de qualité. Inscrivez-vous dès maintenant et recevez votre confirmation immédiatement.</p>
+        <div class="btn-row">
+            <a href="https://myvivo.online" class="btn btn-white btn-lg"><i class="fas fa-ticket-alt"></i> Acheter mes tickets</a>
+            <a href="https://wa.me/22669696924?text=Bonjour%20NTIC%20Solution%2C%20je%20souhaite%20m'inscrire%20aux%20formations%20d'ao%C3%BBt%202026.%20Pouvez-vous%20m'aider%20%3F" class="btn btn-outline btn-lg" style="border-color:white;color:white"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== FOOTER ==================== -->
+<footer>
+    <div class="container">
+        <div class="footer-grid">
+            <div>
+                <div class="header-logo" style="margin-bottom:14px">
+                    <img src="logo.png" alt="NTIC Solution" style="height:40px">
+                    <div>
+                        <div class="header-logo-text" style="color:white">NTIC Solution</div>
+                        <div class="header-logo-slogan" style="color:var(--o)">L'UNIVERS DU DIGITAL</div>
+                    </div>
+                </div>
+                <p style="color:rgba(255,255,255,.5);font-size:.82rem;margin-top:12px">Centre de formations professionnelles. Bureautique, Développement Web, Marketing Digital, Publicité, Graphisme. Banfora, Burkina Faso.</p>
+            </div>
+            <div class="footer-links">
+                <h3>Formations</h3>
+                <ul>
+                    <li><a href="formations/bureautique.html">Bureautique</a></li>
+                    <li><a href="formations/dev-web.html">Développement Web & Mobile</a></li>
+                    <li><a href="formations/publicite.html">Publicité Digitale</a></li>
+                    <li><a href="formations/marketing.html">Marketing Digital</a></li>
+                    <li><a href="formations/graphisme.html">Conception Graphique</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h3>Contact</h3>
+                <ul>
+                    <li><a href="https://wa.me/22669696924">WhatsApp : +226 69 69 69 24</a></li>
+                    <li><a href="tel:+22605585868">Tél : +226 05 58 58 68</a></li>
+                    <li><a href="mailto:nticsolution.bf@gmail.com">nticsolution.bf@gmail.com</a></li>
+                    <li><a href="https://nticsolution.org">nticsolution.org</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2026 NTIC Solution. Tous droits réservés. Secteur 15, Quartier Tatana, Banfora, Burkina Faso. | Fondateur : Kévin Kiessé Sanou
+        </div>
+    </div>
+</footer>
+
+<script>
+(function(){
+    'use strict';
+    document.getElementById('mobileMenuBtn').addEventListener('click',()=>{const n=document.getElementById('mainNav');n.classList.toggle('active');document.getElementById('mobileMenuBtn').innerHTML=n.classList.contains('active')?'<i class="fas fa-times"></i>':'<i class="fas fa-bars"></i>'});
+    document.querySelectorAll('nav a').forEach(l=>l.addEventListener('click',()=>{document.getElementById('mainNav').classList.remove('active');document.getElementById('mobileMenuBtn').innerHTML='<i class="fas fa-bars"></i>'}));
+    window.addEventListener('scroll',()=>document.getElementById('header').classList.toggle('scrolled',window.scrollY>80));
+    function reveal(){document.querySelectorAll('.reveal').forEach(el=>{if(el.getBoundingClientRect().top<window.innerHeight-80)el.classList.add('visible')})}
+    window.addEventListener('scroll',reveal);window.addEventListener('load',reveal);setTimeout(reveal,300);
+})();
+</script>
+
 </body>
 </html>
