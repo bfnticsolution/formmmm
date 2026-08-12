@@ -1,0 +1,1173 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NTIC SOLUTION · Formation Bureautique · Jour 4</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    :root {
+      --bleu: #0B3FA5;
+      --bleu-profond: #072a6e;
+      --bleu-clair: #e8f0fe;
+      --orange: #FF6B35;
+      --orange-vif: #ff5722;
+      --orange-clair: #fff4e5;
+      --gris-fond: #f4f6fa;
+      --texte: #1e293b;
+      --texte-secondaire: #475569;
+      --blanc: #ffffff;
+      --bordure: #e2e8f0;
+      --excel-green: #217346;
+      --excel-green-light: #e8f5e9;
+      --ombre: 0 25px 50px rgba(11, 63, 165, 0.08), 0 6px 18px rgba(0,0,0,0.05);
+      --radius: 22px;
+      --transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      background: var(--gris-fond);
+      color: var(--texte);
+      line-height: 1.7;
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* ---------- ÉCRAN DE CODE D'ACCÈS ---------- */
+    .access-overlay {
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(135deg, var(--excel-green) 0%, #143020 100%);
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      transition: opacity 0.8s ease, visibility 0.8s ease;
+    }
+    .access-overlay.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+
+    .access-card {
+      background: var(--blanc);
+      border-radius: 2rem;
+      padding: 3rem 2.5rem;
+      text-align: center;
+      box-shadow: 0 30px 60px rgba(0,0,0,0.4);
+      max-width: 440px;
+      width: 90%;
+      animation: floatIn 0.8s ease;
+    }
+
+    @keyframes floatIn {
+      from { opacity: 0; transform: translateY(40px) scale(0.95); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .access-card .logo-symbol {
+      background: var(--excel-green);
+      color: white;
+      width: 64px; height: 64px;
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 1.8rem;
+      margin: 0 auto 1.2rem;
+    }
+
+    .access-card h2 { color: var(--excel-green); font-size: 1.5rem; margin-bottom: 0.5rem; border-bottom: none; padding-bottom: 0; }
+    .access-card p { color: var(--texte-secondaire); margin-bottom: 1.8rem; font-size: 0.95rem; }
+
+    .access-input {
+      width: 100%;
+      padding: 0.9rem 1.3rem;
+      border: 2px solid var(--bordure);
+      border-radius: 14px;
+      font-family: inherit;
+      font-size: 1rem;
+      text-align: center;
+      letter-spacing: 2px;
+      transition: var(--transition);
+      margin-bottom: 1rem;
+    }
+    .access-input:focus { outline: none; border-color: var(--excel-green); box-shadow: 0 0 0 4px rgba(33,115,70,0.1); }
+
+    .access-btn {
+      width: 100%;
+      padding: 0.9rem;
+      background: var(--orange);
+      color: white;
+      border: none;
+      border-radius: 14px;
+      font-weight: 700;
+      font-size: 1rem;
+      font-family: inherit;
+      cursor: pointer;
+      transition: var(--transition);
+      letter-spacing: 0.5px;
+    }
+    .access-btn:hover { background: var(--orange-vif); transform: translateY(-2px); box-shadow: 0 8px 20px rgba(255,107,53,0.35); }
+
+    .access-error { color: #dc2626; font-size: 0.85rem; margin-top: 0.5rem; display: none; font-weight: 600; }
+    .access-error.visible { display: block; animation: shake 0.5s ease; }
+
+    @keyframes shake {
+      0%,100% { transform: translateX(0); }
+      25% { transform: translateX(-8px); }
+      75% { transform: translateX(8px); }
+    }
+
+    /* ---------- NAVIGATION ---------- */
+    .main-nav {
+      position: fixed;
+      top: 0; left: 0; right: 0; z-index: 1000;
+      background: rgba(255,255,255,0.88);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--bordure);
+      padding: 0.7rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+      box-shadow: 0 2px 14px rgba(0,0,0,0.05);
+    }
+
+    .nav-logo { display: flex; align-items: center; gap: 0.7rem; font-weight: 700; font-size: 1.1rem; color: var(--bleu); text-decoration: none; }
+    .nav-logo .logo-symbol {
+      background: var(--bleu);
+      color: white;
+      width: 42px; height: 42px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 1.3rem;
+    }
+
+    .nav-controls { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+    .nav-controls button {
+      background: var(--blanc);
+      border: 1.5px solid var(--bordure);
+      padding: 0.55rem 1.2rem;
+      border-radius: 30px;
+      font-family: inherit;
+      font-weight: 600;
+      font-size: 0.85rem;
+      cursor: pointer;
+      color: var(--texte);
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .nav-controls button:hover { background: var(--bleu-clair); border-color: var(--bleu); color: var(--bleu); }
+
+    .progress-bar { width: 120px; height: 6px; background: var(--bordure); border-radius: 10px; overflow: hidden; }
+    .progress-fill { height: 100%; background: var(--orange); width: 0%; transition: width 0.4s ease; border-radius: 10px; }
+
+    /* ---------- CONTAINER ---------- */
+    .app-container {
+      max-width: 1150px;
+      margin: 0 auto;
+      padding: 6rem 1.5rem 3rem;
+      display: flex;
+      flex-direction: column;
+      gap: 2.5rem;
+      opacity: 0;
+      transition: opacity 0.6s ease;
+    }
+    .app-container.visible { opacity: 1; }
+
+    /* ---------- SLIDE ---------- */
+    .slide {
+      background: var(--blanc);
+      border-radius: var(--radius);
+      box-shadow: var(--ombre);
+      padding: 2.8rem 3rem;
+      position: relative;
+      border-left: 7px solid transparent;
+      transition: all 0.5s ease;
+      opacity: 0;
+      transform: translateY(35px);
+    }
+    .slide.reveal { opacity: 1; transform: translateY(0); }
+
+    .slide.cover-slide {
+      border-left-color: var(--orange);
+      background: linear-gradient(135deg, #217346 0%, #143020 100%);
+      color: white;
+    }
+    .slide.welcome-slide { border-left-color: var(--orange); background: linear-gradient(135deg, #f8fafc 0%, #e8f5e9 100%); }
+    .slide.recap-slide { border-left-color: #f59e0b; background: #fffbeb; }
+    .slide.next-slide { border-left-color: var(--orange); background: linear-gradient(135deg, #FF6B35 0%, #e55a2b 100%); color: white; }
+    .slide.module-excel { border-left-color: var(--excel-green); }
+
+    .slide-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem; }
+
+    .module-badge {
+      background: var(--excel-green-light);
+      color: var(--excel-green);
+      font-weight: 700;
+      font-size: 0.8rem;
+      padding: 0.35rem 1rem;
+      border-radius: 20px;
+      letter-spacing: 0.4px;
+    }
+    .cover-slide .module-badge, .next-slide .module-badge { background: rgba(255,255,255,0.2); color: white; }
+
+    .duration-badge {
+      background: var(--orange-clair);
+      color: var(--orange);
+      font-weight: 700;
+      font-size: 0.8rem;
+      padding: 0.35rem 1rem;
+      border-radius: 20px;
+    }
+
+    .day-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; margin: 1rem 0; }
+    .day-tags span {
+      background: rgba(255,255,255,0.15);
+      color: white;
+      padding: 0.35rem 0.9rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+
+    h1 { font-size: 2.6rem; font-weight: 800; letter-spacing: -0.5px; margin: 1rem 0 0.5rem; }
+
+    h2 {
+      font-size: 1.7rem;
+      font-weight: 700;
+      color: var(--excel-green);
+      margin: 1.5rem 0 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 3px solid var(--orange);
+      display: inline-block;
+    }
+    .cover-slide h2, .next-slide h2 { color: white; border-bottom-color: rgba(255,255,255,0.5); }
+    .recap-slide h2 { color: #92400e; border-bottom-color: #f59e0b; }
+
+    h3 { font-size: 1.25rem; font-weight: 700; margin: 1.5rem 0 0.6rem; }
+    h4 { font-size: 1.05rem; font-weight: 700; margin: 1rem 0 0.4rem; }
+
+    /* ---------- TABLEAUX ---------- */
+    .table-wrapper { overflow-x: auto; margin: 1.5rem 0; border-radius: 14px; box-shadow: 0 2px 10px rgba(0,0,0,0.04); }
+    table { width: 100%; border-collapse: collapse; font-size: 0.95rem; background: white; }
+    th {
+      background: var(--excel-green);
+      color: white;
+      font-weight: 700;
+      padding: 0.9rem 1.2rem;
+      text-align: left;
+      white-space: nowrap;
+    }
+    td { padding: 0.8rem 1.2rem; border-bottom: 1px solid var(--bordure); }
+    tr:last-child td { border-bottom: none; }
+    tbody tr:hover td { background: #f8fafc; }
+
+    /* ---------- BOXES ---------- */
+    .box {
+      border-radius: 14px;
+      padding: 1.2rem 1.5rem;
+      margin: 1.5rem 0;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.9rem;
+      font-weight: 500;
+      border-left: 6px solid;
+    }
+    .box i { font-size: 1.4rem; margin-top: 0.15rem; flex-shrink: 0; }
+    .box-tip { background: #e8f0fe; border-color: var(--bleu); color: #0a2c5c; }
+    .box-warning { background: #fff4e5; border-color: var(--orange); color: #6b3a1f; }
+    .box-remember { background: #ecfdf5; border-color: #059669; color: #064e3b; }
+    .box-info { background: #f3e8ff; border-color: #7c3aed; color: #3b0764; }
+
+    /* ---------- GRILLE ---------- */
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin: 1.5rem 0; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin: 1.5rem 0; }
+    @media (max-width: 900px) { .grid-3 { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 768px) {
+      .grid-2, .grid-3 { grid-template-columns: 1fr; }
+      .slide { padding: 1.8rem; }
+      h1 { font-size: 1.8rem; }
+      .main-nav { padding: 0.7rem 1rem; }
+    }
+
+    /* ---------- CARDS ---------- */
+    .card {
+      background: #f8fafc;
+      border-radius: 18px;
+      padding: 1.5rem;
+      border: 1px solid var(--bordure);
+      text-align: center;
+      transition: var(--transition);
+    }
+    .card:hover { box-shadow: 0 12px 28px rgba(0,0,0,0.07); transform: translateY(-4px); }
+    .card i { font-size: 2.2rem; color: var(--excel-green); margin-bottom: 0.8rem; }
+
+    /* ---------- PIED ---------- */
+    .slide-footer {
+      margin-top: 2.2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid var(--bordure);
+      padding-top: 1.1rem;
+      font-size: 0.8rem;
+      color: var(--texte-secondaire);
+      font-weight: 500;
+    }
+    .page-indicator {
+      background: var(--excel-green);
+      color: white;
+      width: 30px; height: 30px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.8rem;
+    }
+    .highlight { background: #fef3c7; padding: 0.15rem 0.5rem; border-radius: 5px; font-weight: 700; }
+
+    /* ---------- PLEIN ÉCRAN ---------- */
+    .fullscreen-mode .main-nav { display: none; }
+    .fullscreen-mode .app-container { padding-top: 2rem; }
+
+    /* ---------- ANIMATION OUVERTURE ---------- */
+    .hero-animation {
+      position: fixed;
+      inset: 0;
+      background: #143020;
+      z-index: 9998;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      transition: opacity 0.7s ease, visibility 0.7s ease;
+    }
+    .hero-animation.fade-out { opacity: 0; visibility: hidden; pointer-events: none; }
+    .hero-logo { font-size: 4rem; font-weight: 800; color: white; animation: pulseLogo 1.2s ease infinite alternate; }
+    @keyframes pulseLogo {
+      from { transform: scale(1); opacity: 0.9; }
+      to { transform: scale(1.08); opacity: 1; }
+    }
+    .hero-text { color: rgba(255,255,255,0.85); font-size: 1.2rem; margin-top: 1rem; letter-spacing: 1px; }
+    .hero-loader { width: 60px; height: 3px; background: rgba(255,255,255,0.2); border-radius: 5px; margin-top: 1.5rem; overflow: hidden; }
+    .hero-loader-fill { height: 100%; background: var(--orange); width: 0%; animation: loadFill 1.8s ease forwards; }
+    @keyframes loadFill { to { width: 100%; } }
+
+    /* ---------- PRINT ---------- */
+    @media print {
+      .main-nav, .access-overlay, .hero-animation { display: none !important; }
+      body { background: white; }
+      .slide { box-shadow: none; border: 1px solid #ddd; break-inside: avoid; page-break-after: always; opacity: 1; transform: none; }
+    }
+
+    /* ---------- WELCOME ---------- */
+    .welcome-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: center; }
+    .welcome-visual {
+      background: linear-gradient(135deg, #217346 0%, #143020 100%);
+      border-radius: 24px;
+      padding: 3rem 2rem;
+      text-align: center;
+      color: white;
+    }
+    .welcome-visual i { font-size: 5rem; margin-bottom: 1rem; opacity: 0.9; }
+    .welcome-visual h2 { color: white; border-bottom: none; margin-top: 0; }
+    @media (max-width: 768px) { .welcome-grid { grid-template-columns: 1fr; } }
+
+    /* ---------- GRILLE EXCEL VISUELLE ---------- */
+    .excel-grid-demo {
+      display: grid;
+      grid-template-columns: 40px repeat(5, 1fr);
+      gap: 0;
+      border: 2px solid #cbd5e1;
+      border-radius: 8px;
+      overflow: hidden;
+      font-size: 0.85rem;
+    }
+    .excel-cell {
+      background: white;
+      border: 1px solid #e2e8f0;
+      padding: 0.5rem;
+      text-align: center;
+      min-height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .excel-header { background: #e8f5e9; font-weight: 700; color: var(--excel-green); }
+    .excel-row-header { background: #e8f5e9; font-weight: 700; color: var(--excel-green); }
+    .excel-selected { background: #dbeafe; border: 2px solid var(--bleu); }
+
+    /* ---------- FORMULA VISUAL ---------- */
+    .formula-box {
+      background: #1e293b;
+      color: #4ade80;
+      padding: 1rem 1.5rem;
+      border-radius: 12px;
+      font-family: 'Courier New', monospace;
+      font-size: 1.1rem;
+      font-weight: 600;
+      text-align: center;
+      margin: 1rem 0;
+      letter-spacing: 1px;
+    }
+    .formula-box .func { color: #facc15; }
+    .formula-box .paren { color: #f472b6; }
+    .formula-box .ref { color: #60a5fa; }
+    .formula-box .operator { color: #f87171; }
+    .formula-box .number { color: #fb923c; }
+  </style>
+</head>
+<body>
+
+<!-- ANIMATION D'OUVERTURE -->
+<div class="hero-animation" id="heroAnimation">
+  <div class="hero-logo">NT</div>
+  <div class="hero-text">NTIC SOLUTION · Jour 4</div>
+  <div class="hero-loader"><div class="hero-loader-fill"></div></div>
+</div>
+
+<!-- CODE D'ACCÈS -->
+<div class="access-overlay" id="accessOverlay">
+  <div class="access-card">
+    <div class="logo-symbol">NT</div>
+    <h2>Accès formation — Jour 4</h2>
+    <p>Veuillez saisir le code d'accès pour accéder au support Excel.</p>
+    <input type="password" class="access-input" id="accessInput" placeholder="Code d'accès" autocomplete="off">
+    <button class="access-btn" onclick="checkAccess()"><i class="fas fa-lock-open"></i> Accéder au cours</button>
+    <div class="access-error" id="accessError">Code incorrect. Veuillez réessayer.</div>
+  </div>
+</div>
+
+<!-- NAVIGATION -->
+<nav class="main-nav" id="mainNav">
+  <a href="#" class="nav-logo">
+    <div class="logo-symbol">NT</div>
+    <span>NTIC SOLUTION <small style="font-weight:400;font-size:0.7rem;display:block;">Formation Bureautique</small></span>
+  </a>
+  <div class="nav-controls">
+    <span style="font-weight:600;font-size:0.85rem;">Jour 4 / 7</span>
+    <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+    <button onclick="toggleFullscreen()" title="Mode présentation"><i class="fas fa-expand"></i> Plein écran</button>
+    <button onclick="window.print()" title="Imprimer"><i class="fas fa-print"></i> Imprimer</button>
+    <button onclick="scrollToTop()" title="Début"><i class="fas fa-arrow-up"></i></button>
+  </div>
+</nav>
+
+<!-- CONTENU PRINCIPAL -->
+<main class="app-container" id="appContainer">
+
+  <!-- ====== COVER ====== -->
+  <section class="slide cover-slide" id="slide-cover">
+    <div class="slide-header">
+      <span class="module-badge"><i class="fas fa-file-excel"></i> Formation Bureautique</span>
+      <span class="duration-badge">2 heures</span>
+    </div>
+    <div style="text-align:center; padding: 2rem 0;">
+      <h1 style="font-size:3rem;">Jour 4</h1>
+      <p style="font-size:1.5rem; font-weight:500; margin:0.5rem 0;">Microsoft Excel</p>
+      <p style="font-size:1.2rem; opacity:0.9;">Les bases essentielles</p>
+      <div class="day-tags" style="justify-content:center;">
+        <span><i class="fas fa-desktop"></i> Interface</span>
+        <span><i class="fas fa-keyboard"></i> Saisie</span>
+        <span><i class="fas fa-calculator"></i> Formules</span>
+        <span><i class="fas fa-code-branch"></i> SI()</span>
+        <span><i class="fas fa-paint-brush"></i> Formats</span>
+      </div>
+      <div style="margin-top:2rem; background:rgba(255,255,255,0.1); border-radius:20px; padding:1.8rem; display:inline-block; text-align:left;">
+        <p><i class="fas fa-user-tie" style="width:24px;"></i> <strong>Formateur :</strong> Kévin Kiessé Sanou</p>
+        <p><i class="far fa-calendar-alt" style="width:24px;"></i> <strong>Date :</strong> Août 2026</p>
+        <p><i class="fas fa-map-marker-alt" style="width:24px;"></i> <strong>Lieu :</strong> Siège NTIC Solution, Secteur 15, Quartier Tatana, Banfora</p>
+        <p><i class="fas fa-tag" style="width:24px;"></i> <strong>Investissement :</strong> 10 000 FCFA (formation complète)</p>
+      </div>
+    </div>
+    <div class="slide-footer"><span>NTIC SOLUTION — Banfora, Burkina Faso</span><span class="page-indicator">1</span></div>
+  </section>
+
+  <!-- ====== BIENVENUE ====== -->
+  <section class="slide welcome-slide" id="slide-welcome">
+    <div class="slide-header">
+      <span class="module-badge" style="background:#e8f5e9;color:#217346;"><i class="fas fa-hand-sparkles"></i> Bienvenue</span>
+    </div>
+    <div class="welcome-grid">
+      <div class="welcome-visual">
+        <i class="fas fa-file-excel"></i>
+        <h2>Jour 4 : Excel</h2>
+        <p style="font-size:1.1rem;">Le tableur le plus puissant au monde.</p>
+      </div>
+      <div>
+        <p style="font-size:1.15rem;">Après Word, nous attaquons <strong>Excel</strong>, l'outil de calcul et d'analyse de données. Vous allez apprendre à créer des tableaux, à utiliser des formules et à automatiser vos calculs. <strong>C'est un jour charnière.</strong></p>
+        <div class="box box-remember" style="margin-top:1.5rem;">
+          <i class="fas fa-bullseye"></i>
+          <div><strong>5 objectifs pour aujourd'hui :</strong><br>
+            1. Découvrir l'interface d'Excel<br>
+            2. Saisir et organiser des données<br>
+            3. Utiliser les formules de base (SOMME, MOYENNE, MIN, MAX)<br>
+            4. Maîtriser la fonction SI()<br>
+            5. Appliquer des formats professionnels</div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer"><span>NTIC SOLUTION — Formation Bureautique — Jour 4 : Excel — Les bases</span><span class="page-indicator">2</span></div>
+  </section>
+
+  <!-- ==================================================================================== -->
+  <!-- ====================  MODULE 1 : INTERFACE EXCEL  ================================== -->
+  <!-- ==================================================================================== -->
+
+  <section class="slide module-excel" id="slide-m1a">
+    <div class="slide-header">
+      <span class="module-badge"><i class="fas fa-file-excel"></i> Module 1</span>
+      <span class="duration-badge">20 minutes</span>
+    </div>
+    <h2>1.1 Qu'est-ce que Microsoft Excel ?</h2>
+    <p><strong>Microsoft Excel</strong> est un <strong>tableur</strong>. Contrairement à Word qui gère du texte, Excel est conçu pour <strong>calculer, analyser et visualiser des données</strong> organisées en lignes et colonnes. Il fait partie de la suite <strong>Microsoft Office</strong>.</p>
+
+    <div class="grid-2" style="margin-top:1.5rem;">
+      <div>
+        <h3 style="margin-top:0;"><i class="fas fa-check-circle" style="color:#059669;"></i> Ce que Excel permet de faire</h3>
+        <ul style="padding-left:1.2rem;">
+          <li style="margin-bottom:0.5rem;">Créer des <strong>factures</strong> avec calculs automatiques</li>
+          <li style="margin-bottom:0.5rem;">Gérer des <strong>budgets</strong> et des comptes</li>
+          <li style="margin-bottom:0.5rem;">Suivre des <strong>stocks</strong> et des inventaires</li>
+          <li style="margin-bottom:0.5rem;">Analyser des <strong>données chiffrées</strong></li>
+          <li style="margin-bottom:0.5rem;">Créer des <strong>graphiques</strong></li>
+          <li>Automatiser des calculs avec des <strong>formules</strong></li>
+        </ul>
+      </div>
+      <div>
+        <h3 style="margin-top:0;"><i class="fas fa-balance-scale"></i> Word vs Excel</h3>
+        <div class="table-wrapper">
+          <table>
+            <thead><tr><th>Word</th><th>Excel</th></tr></thead>
+            <tbody>
+              <tr><td>Traitement de <strong>texte</strong></td><td>Traitement de <strong>données</strong></td></tr>
+              <tr><td>Pages et paragraphes</td><td>Lignes et colonnes</td></tr>
+              <tr><td>Calculs manuels</td><td>Calculs automatiques</td></tr>
+              <tr><td>Extension .docx</td><td>Extension .xlsx</td></tr>
+              <tr><td>Pour lire et écrire</td><td>Pour calculer et analyser</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer"><span>NTIC SOLUTION — Formation Bureautique — Jour 4 : Excel — Les bases</span><span class="page-indicator">3</span></div>
+  </section>
+
+  <section class="slide module-excel" id="slide-m1b">
+    <div class="slide-header">
+      <span class="module-badge"><i class="fas fa-file-excel"></i> Module 1</span>
+      <span class="duration-badge">Détail</span>
+    </div>
+    <h2>1.2 L'interface d'Excel en détail</h2>
+    <p>L'écran d'Excel est organisé en <strong>zones distinctes</strong>. Comprendre cette organisation est la clé pour travailler efficacement.</p>
+
+    <div class="table-wrapper" style="margin-top:1.5rem;">
+      <table>
+        <thead><tr><th style="width:5%;">N°</th><th style="width:22%;">Zone</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td><strong>Barre d'outils d'accès rapide</strong></td><td>En haut à gauche. Contient Enregistrer <i class="fas fa-save"></i>, Annuler <i class="fas fa-undo"></i>, Répéter <i class="fas fa-redo"></i>. Personnalisable.</td></tr>
+          <tr><td>2</td><td><strong>Barre de titre</strong></td><td>Affiche le nom du classeur. Un fichier Excel s'appelle un <strong>classeur</strong>. Il contient des <strong>feuilles</strong> (onglets en bas).</td></tr>
+          <tr><td>3</td><td><strong>Le Ruban</strong></td><td>Barre d'outils organisée en onglets (Accueil, Insertion, Formules, Données...).</td></tr>
+          <tr><td>4</td><td><strong>Zone de nom</strong></td><td>Située sous le Ruban, à gauche. Affiche l'adresse de la <strong>cellule active</strong> (ex: A1, B5, C12).</td></tr>
+          <tr><td>5</td><td><strong>Barre de formule</strong></td><td>À droite de la zone de nom. Affiche le contenu réel de la cellule sélectionnée. C'est ici qu'on saisit les formules.</td></tr>
+          <tr><td>6</td><td><strong>La grille de cellules</strong></td><td>La zone principale. Des <strong>colonnes</strong> (A, B, C...) et des <strong>lignes</strong> (1, 2, 3...). L'intersection d'une colonne et d'une ligne est une <strong>cellule</strong>.</td></tr>
+          <tr><td>7</td><td><strong>Onglets de feuilles</strong></td><td>En bas. Un classeur peut contenir plusieurs feuilles (Feuil1, Feuil2...). Cliquez sur + pour en ajouter.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Représentation visuelle de la grille -->
+    <div class="excel-grid-demo" style="margin-top:1.5rem;">
+      <div class="excel-cell excel-header"></div>
+      <div class="excel-cell excel-header">A</div>
+      <div class="excel-cell excel-header">B</div>
+      <div class="excel-cell excel-header">C</div>
+      <div class="excel-cell excel-header">D</div>
+      <div class="excel-cell excel-header">E</div>
+      <div class="excel-cell excel-row-header">1</div>
+      <div class="excel-cell excel-selected">A1</div>
+      <div class="excel-cell">B1</div>
+      <div class="excel-cell">C1</div>
+      <div class="excel-cell">D1</div>
+      <div class="excel-cell">E1</div>
+      <div class="excel-cell excel-row-header">2</div>
+      <div class="excel-cell">A2</div>
+      <div class="excel-cell">B2</div>
+      <div class="excel-cell">C2</div>
+      <div class="excel-cell">D2</div>
+      <div class="excel-cell">E2</div>
+      <div class="excel-cell excel-row-header">3</div>
+      <div class="excel-cell">A3</div>
+      <div class="excel-cell">B3</div>
+      <div class="excel-cell">C3</div>
+      <div class="excel-cell">D3</div>
+      <div class="excel-cell">E3</div>
+    </div>
+    <p style="text-align:center; font-size:0.85rem; margin-top:0.5rem;">Colonnes = lettres (A, B, C...) | Lignes = chiffres (1, 2, 3...) | Cellule = intersection (ex: B2)</p>
+    <div class="slide-footer"><span>NTIC SOLUTION — Formation Bureautique — Jour 4 : Excel — Les bases</span><span class="page-indicator">4</span></div>
+  </section>
+
+  <!-- ==================================================================================== -->
+  <!-- ====================  MODULE 2 : SAISIE DE DONNÉES  ================================ -->
+  <!-- ==================================================================================== -->
+
+  <section class="slide module-excel" id="slide-m2a">
+    <div class="slide-header">
+      <span class="module-badge"><i class="fas fa-keyboard"></i> Module 2</span>
+      <span class="duration-badge">20 minutes</span>
+    </div>
+    <h2>2.1 Saisir des données dans Excel</h2>
+    <p>Dans Excel, chaque information est saisie dans une <strong>cellule</strong>. Une cellule peut contenir du <strong>texte</strong>, un <strong>nombre</strong>, une <strong>date</strong> ou une <strong>formule</strong>.</p>
+
+    <div class="grid-2" style="margin-top:1.5rem;">
+      <div>
+        <h3 style="margin-top:0;"><i class="fas fa-i-cursor"></i> Règles de saisie essentielles</h3>
+        <table style="font-size:0.9rem;">
+          <tbody>
+            <tr><td style="padding:0.5rem;"><strong>Sélectionner une cellule</strong></td><td style="padding:0.5rem;">Cliquez dessus. Un <strong>contour épais</strong> apparaît.</td></tr>
+            <tr><td style="padding:0.5rem;"><strong>Saisir une valeur</strong></td><td style="padding:0.5rem;">Tapez directement, puis <strong>Entrée</strong> pour valider.</td></tr>
+            <tr><td style="padding:0.5rem;"><strong>Modifier une cellule</strong></td><td style="padding:0.5rem;">Double-cliquez sur la cellule, ou sélectionnez-la et tapez dans la <strong>barre de formule</strong>.</td></tr>
+            <tr><td style="padding:0.5rem;"><strong>Effacer une cellule</strong></td><td style="padding:0.5rem;">Sélectionnez, puis <strong>Suppr</strong>.</td></tr>
+            <tr><td style="padding:0.5rem;"><strong>Annuler</strong></td><td style="padding:0.5rem;"><code>Ctrl+Z</code> annule la dernière action.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <h3 style="margin-top:0;"><i class="fas fa-arrow-right"></i> Se déplacer dans la grille</h3>
+        <table style="font-size:0.9rem;">
+          <tbody>
+            <tr><td style="padding:0.5rem;"><code>Entrée</code></td><td style="padding:0.5rem;">Valide et descend d'une cellule.</td></tr>
+            <tr><td style="padding:0.5rem;"><code>Tab</code></td><td style="padding:0.5rem;">Valide et va à droite.</td></tr>
+            <tr><td style="padding:0.5rem;"><code>Flèches</code></td><td style="padding:0.5rem;">Se déplacer dans la grille.</td></tr>
+            <tr><td style="padding:0.5rem;"><code>Ctrl+Flèche</code></td><td style="padding:0.5rem;">Aller à la dernière cellule remplie.</td></tr>
+            <tr><td style="padding:0.5rem;"><code>Ctrl+Fin</code></td><td style="padding:0.5rem;">Aller à la dernière cellule utilisée.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="box box-remember" style="margin-top:1.5rem;">
+      <i class="fas fa-hand-pointer"></i>
+      <div><strong>Exercice pratique :</strong> Créez le tableau suivant à partir de la cellule A1 :<br><br>
+      <strong>A1 :</strong> Produit | <strong>B1 :</strong> Prix unitaire | <strong>C1 :</strong> Quantité | <strong>D1 :</strong> Total<br>
+      <strong>A2 :</strong> Riz | <strong>B2 :</strong> 500 | <strong>C2 :</strong> 10<br>
+      <strong>A3 :</strong> Sucre | <strong>B3 :</strong> 300 | <strong>C3 :</strong> 5<br>
+      <strong>A4 :</strong> Huile | <strong>B4 :</strong> 1000 | <strong>C4 :</strong> 3</div>
+    </div>
+    <div class="slide-footer"><span>NTIC SOLUTION — Formation Bureautique — Jour 4 : Excel — Les bases</span><span class="page-indicator">5</span></div>
+  </section>
+
+  <section class="slide module-excel" id="slide-m2b">
+    <div class="slide-header">
+      <span class="module-badge"><i class="fas fa-keyboard"></i> Module 2</span>
+    </div>
+    <h2>2.2 Sélectionner, copier et recopier</h2>
+    <p>Comme dans Word, vous pouvez <strong>sélectionner</strong>, <strong>copier</strong> et <strong>coller</strong> dans Excel. Mais Excel offre aussi la <strong>poignée de recopie</strong>, un outil puissant pour remplir automatiquement des cellules.</p>
+
+    <div class="grid-2" style="margin-top:1.5rem;">
+      <div>
+        <h3 style="margin-top:0;"><i class="fas fa-mouse-pointer"></i> Sélectionner des cellules</h3>
+        <ul style="padding-left:1.2rem;">
+          <li style="margin-bottom:0.5rem;"><strong>Une cellule :</strong> cliquez dessus.</li>
+          <li style="margin-bottom:0.5rem;"><strong>Une plage :</strong> cliquez sur la première, maintenez, glissez jusqu'à la dernière.</li>
+          <li style="margin-bottom:0.5rem;"><strong>Toute une colonne :</strong> cliquez sur la lettre (A, B, C...).</li>
+          <li style="margin-bottom:0.5rem;"><strong>Toute une ligne :</strong> cliquez sur le numéro (1, 2, 3...).</li>
+          <li><strong>Tout le tableau :</strong> <code>Ctrl+A</code> ou cliquez sur le coin en haut à gauche (entre A et 1).</li>
+        </ul>
+      </div>
+      <div>
+        <h3 style="margin-top:0;"><i class="fas fa-magic"></i> La poignée de recopie</h3>
+        <p>Chaque cellule sélectionnée a un <strong>petit carré noir</strong> dans son coin inférieur droit. C'est la <strong>poignée de recopie</strong>.</p>
+        <ol style="padding-left:1.2rem;">
+          <li>Sélectionnez une cellule contenant une valeur.</li>
+          <li>Placez le curseur sur le coin inférieur droit (il devient une croix noire).</li>
+          <li>Maintenez le clic et faites glisser vers le bas ou la droite.</li>
+        </ol>
+        <p style="margin-top:0.5rem;">Excel <strong>prolonge la série</strong> : jours, mois, nombres pairs, ou recopie la formule.</p>
+      </div>
+    </div>
+    <div class="slide-footer"><span>NTIC SOLUTION — Formation Bureautique — Jour 4 : Excel — Les bases</span><span class="page-indicator">6</span></div>
+  </section>
+
+  <!-- ==================================================================================== -->
+  <!-- ====================  MODULE 3 : FORMULES DE BASE  ================================= -->
+  <!-- ==================================================================================== -->
+
+  <section class="slide module-excel" id="slide-m3a">
+    <div class="slide-header">
+      <span class="module-badge"><i class="fas fa-calculator"></i> Module 3</span>
+      <span class="duration-badge">30 minutes</span>
+    </div>
+    <h2>3.1 Les formules : le cœur d'Excel</h2>
+    <p>Une <strong>formule</strong> est un calcul qu'Excel exécute automatiquement. <strong>Toute formule commence par le signe égal <code>=</code>.</strong> Sans le signe =, Excel traite votre saisie comme du simple texte.</p>
+
+    <div class="grid-2" style="margin-top:1.5rem;">
+      <div>
+        <h3 style="margin-top:0;"><i class="fas fa-plus-minus"></i> Opérateurs de base</h3>
+        <table style="font-size:0.9rem;">
+          <thead><tr><th>Opérateur</th><th>Signification</th><th>Exemple</th></tr></thead>
+          <tbody>
+            <tr><td><code>+</code></td><td>Addition</td><td><code>=A1+A2</code></td></tr>
+            <tr><td><code>-</code></td><td>Soustraction</td><td><code>=B1-B2</code></td></tr>
+            <tr><td><code>*</code></td><td>Multiplication</td><td><code>=C1*C2</code></td></tr>
+            <tr><td><code>/</code></td><td>Division</td><td><code>=D1/D2</code></td></tr>
+          </tbody>
+        </table>
+        <p style="margin-top:0.8rem;"><strong>Ordre des opérations :</strong> Excel respecte les règles mathématiques. Utilisez des <strong>parenthèses</strong> pour clarifier : <code>=(A1+A2)/2</code>.</p>
+      </div>
+      <div>
+        <h3 style="margin-top:0;"><i class="fas fa-lightbulb"></i> Référencer des cellules</h3>
+        <p>Au lieu d'écrire <code>=500+300</code>, écrivez <code>=A1+A2</code>. Pourquoi ?</p>
+        <ul style="padding-left:1.2rem;">
+          <li style="margin-bottom:0.5rem;">Si vous changez la valeur en A1, le résultat se <strong>met à jour automatiquement</strong>.</li>
+          <li style="margin-bottom:0.5rem;">C'est le principe fondamental d'Excel : <strong>le calcul dynamique</strong>.</li>
+          <li>Une formule fait <strong>toujours référence à des cellules</strong>, pas à des valeurs fixes.</li>
+        </ul>
+        <div class="formula-box" style="margin-top:0.8rem;">
+          <span class="operator">=</span><span class="ref">A1</span><span class="operator">+</span><span class="ref">A2</span>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer"><span>NTIC SOLUTION — Formation Bureautique — Jour 4 : Excel — Les bases</span><span class="page-indicator">7</span></div>
+  </section>
+
+  <section class="slide module-excel" id="slide-m3b">
+    <div class="slide-header">
+      <span class="module-badge"><i class="fas fa-calculator"></i> Module 3</span>
+    </div>
+    <h2>3.2 Les 4 fonctions de base indispensables</h2>
+    <p>Une <strong>fonction</strong> est une formule pré-écrite par Excel. Au lieu d'additionner 50 cellules une par une, utilisez <code>=SOMME()</code>. Voici les 4 fonctions à connaître <strong>absolument</strong>.</p>
+
+    <div class="grid-2" style="margin-top:1.5rem;">
+      <div>
+        <div class="card" style="text-align:left; margin-bottom:1rem;">
+          <h3 style="margin-top:0;"><i class="fas fa-plus-circle" style="color:#059669;"></i> SOMME</h3>
+          <p>Additionne toutes les valeurs d'une plage.</p>
+          <div class="formula-box" style="font-size:0.95rem;"><span class="operator">=</span><span class="func">SOMME</span><span class="paren">(</span><span class="ref">B2:B10</span><span class="paren">)</span></div>
+          <p style="font-size:0.85rem;">Additionne toutes les cellules de B2 à B10.</p>
+        </div>
+        <div class="card" style="text-align:left; margin-bottom:1rem;">
+          <h3 style="margin-top:0;"><i class="fas fa-divide" style="color:#2563eb;"></i> MOYENNE</h3>
+          <p>Calcule la moyenne arithmétique d'une plage.</p>
+          <div class="formula-box" style="font-size:0.95rem;"><span class="operator">=</span><span class="func">MOYENNE</span><span class="paren">(</span><span class="ref">B2:B10</span><span class="paren">)</span></div>
+          <p style="font-size:0.85rem;">Calcule la moyenne de toutes les cellules de B2 à B10.</p>
+        </div>
+      </div>
+      <div>
+        <div class="card" style="text-align:left; margin-bottom:1rem;">
+          <h3 style="margin-top:0;"><i class="fas fa-arrow-down" style="color:#dc2626;"></i> MIN</h3>
+          <p>Renvoie la plus petite valeur d'une plage.</p>
+          <div class="formula-box" style="font-size:0.95rem;"><span class="operator">=</span><span class="func">MIN</span><span class="paren">(</span><span class="ref">B2:B10</span><span class="paren">)</span></div>
+          <p style="font-size:0.85rem;">Trouve le minimum parmi les cellules de B2 à B10.</p>
+        </div>
+        <div class="card" style="text-align:left; margin-bottom:1rem;">
+          <h3 style="margin-top:0;"><i class="fas fa-arrow-up" style="color:#f59e0b;"></i> MAX</h3>
+          <p>Renvoie la plus grande valeur d'une plage.</p>
+          <div class="formula-box" style="font-size:0.95rem;"><span class="operator">=</span><span class="func">MAX</span><span class="paren">(</span><span class="ref">B2:B10</span><span class="paren">)</span></div>
+          <p style="font-size:0.85rem;">Trouve le maximum parmi les cellules de B2 à B10.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="box box-remember" style="margin-top:1.5rem;">
+      <i class="fas fa-tasks"></i>
+      <div><strong>Exercice :</strong> Reprenez le tableau créé précédemment. En D2, saisissez <code>=B2*C2</code> pour calculer le total (Prix × Quantité). Recopiez la formule vers le bas avec la poignée de recopie. Puis, sous la colonne Total, ajoutez <code>=SOMME(D2:D4)</code> pour obtenir le total général.</div>
+    </div>
+    <div class="slide-footer"><span>NTIC SOLUTION — Formation Bureautique — Jour 4 : Excel — Les bases</span><span class="page-indicator">8</span></div>
+  </section>
+
+  <section class="slide module-excel" id="slide-m3c">
+    <div class="slide-header">
+      <span class="module-badge"><i class="fas fa-calculator"></i> Module 3</span>
+    </div>
+    <h2>3.3 Comprendre les plages de cellules</h2>
+    <p>Une <strong>plage</strong> (ou <em>range</em>) est un ensemble de cellules contiguës. On la note avec les <strong>deux points <code>:</code></strong> entre la première et la dernière cellule.</p>
+
+    <div class="grid-2" style="margin-top:1.5rem;">
+      <div>
+        <h3 style="margin-top:0;"><i class="fas fa-th"></i> Notation des plages</h3>
+        <table style="font-size:0.9rem;">
+          <tbody>
+            <tr><td style="padding:0.5rem;"><code>A1:A10</code></td><td style="padding:0.5rem;">La colonne A, de la ligne 1 à 10.</td></tr>
+            <tr><td style="padding:0.5rem;"><code>A1:D1</code></td><td style="padding:0.5rem;">La ligne 1, de la colonne A à D.</td></tr>
+            <tr><td style="padding:0.5rem;"><code>A1:D10</code></td><td style="padding:0.5rem;">Le rectangle de A1 à D10 (toutes les cellules à l'intérieur).</td></tr>
+            <tr><td style="padding:0.5rem;"><code>A:A</code></td><td style="padding:0.5rem;">Toute la colonne A.</td></tr>
+            <tr><td style="padding:0.5rem;"><code>1:1</code></td><td style="padding:0.5rem;">Toute la ligne 1.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <h3 style="margin-top:0;"><i class="fas fa-mouse-pointer"></i> Sélectionner une plage pour une fonction</h3>
+        <p>Quand vous tapez <code>=SOMME(</code>, vous pouvez :</p>
+        <ol style="padding-left:1.2rem;">
+          <li style="margin-bottom:0.5rem;"><strong>Taper</strong> la plage au clavier : <code>B2:B10</code></li>
+          <li style="margin-bottom:0.5rem;"><strong>Sélectionner</strong> les cellules avec la souris : Excel remplit automatiquement la référence.</li>
+          <li>Fermer la parenthèse <code>)</code> et valider.</li>
+        </ol>
+        <p style="margin-top:0.8rem;">La sélection à la souris est la méthode <strong>la plus sûre</strong> pour éviter les erreurs.</p>
+      </div>
+    </div>
+    <div class="slide-footer"><span>NTIC SOLUTION — Formation Bureautique — Jour 4 : Excel — Les bases</span><span class="page-indicator">9</span></div>
+  </section>
+
+  <!-- ==================================================================================== -->
+  <!-- ====================  MODULE 4 : LA FONCTION SI()  ================================= -->
+  <!-- ==================================================================================== -->
+
+  <section class="slide module-excel" id="slide-m4a">
+    <div class="slide-header">
+      <span class="module-badge"><i class="fas fa-code-branch"></i> Module 4</span>
+      <span class="duration-badge">25 minutes</span>
+    </div>
+    <h2>4.1 La fonction SI() : prendre des décisions</h2>
+    <p>La fonction <strong>SI()</strong> est l'une des plus puissantes d'Excel. Elle permet d'afficher un résultat <strong>différent selon qu'une condition est vraie ou fausse</strong>. C'est la base de l'automatisation.</p>
+
+    <div class="grid-2" style="margin-top:1.5rem;">
+      <div>
+        <h3 style="margin-top:0;"><i class="fas fa-question-circle"></i> Logique de la fonction SI</h3>
+        <p>La fonction SI fonctionne comme une question :</p>
+        <p style="font-size:1.1rem; text-align:center; margin:1rem 0;"><strong>SI</strong> <em>cette condition est vraie</em> <strong>ALORS</strong> <em>affiche ceci</em> <strong>SINON</strong> <em>affiche cela</em></p>
+        <p>Exemple concret :</p>
+        <p style="font-size:1.1rem; text-align:center; margin:1rem 0;"><strong>SI</strong> le montant est supérieur à 100 000 FCFA <strong>ALORS</strong> « Frais offerts » <strong>SINON</strong> « Frais : 2 000 FCFA »</p>
+      </div>
+      <div>
+        <h3 style="margin-top:0;"><i class="fas fa-code"></i> Syntaxe de la fonction SI()</h3>
+        <div class="formula-box" style="font-size:0.9rem; text-align:left;">
+          <span class="operator">=</span><span class="func">SI</span><span class="paren">(</span><br>
+          &nbsp;&nbsp;<span class="ref">Condition</span><span class="operator">;</span><br>
+          &nbsp;&nbsp;<span class="ref">Valeur_si_vrai</span><span class="operator">;</span><br>
+          &nbsp;&nbsp;<span class="ref">Valeur_si_faux</span><br>
+          <span class="paren">)</span>
+        </div>
+        <p style="margin-top:0.8rem;"><strong>Attention :</strong> dans Excel, les arguments sont séparés par des <strong>points-virgules</strong> <code>;</code> (pas des virgules).</p>
+        <p><strong>Condition :</strong> utilisez les opérateurs de comparaison :</p>
+        <table style="font-size:0.85rem;">
+          <tbody>
+            <tr><td><code>=</code></td><td>Égal à</td><td><code>&gt;</code></td><td>Supérieur à</td></tr>
+            <tr><td><code>&lt;</code></td><td>Inférieur à</td><td><code>&gt;=</code></td><td>Supérieur ou égal</td></tr>
+            <tr><td><code>&lt;=</code></td><td>Inférieur ou égal</td><td><code>&lt;&gt;</code></td><td>Différent de</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="slide-footer"><span>NTIC SOLUTION — Formation Bureautique — Jour 4 : Excel — Les bases</span><span class="page-indicator">10</span></div>
+  </section>
+
+  <section class="slide module-excel" id="slide-m4b">
+    <div class="slide-header">
+      <span class="module-badge"><i class="fas fa-code-branch"></i> Module 4</span>
+    </div>
+    <h2>4.2 Exemples pratiques de la fonction SI()</h2>
+    <p>La meilleure façon de comprendre la fonction SI, c'est de la pratiquer avec des <strong>cas concrets</strong>.</p>
+
+    <div class="grid-2" style="margin-top:1.5rem;">
+      <div>
+        <h3 style="margin-top:0;"><i class="fas fa-check-circle"></i> Exemple 1 : Mention</h3>
+        <p>Un étudiant a une note en <strong>B2</strong>. Si sa note est ≥ 10, il est « Admis », sinon « Refusé ».</p>
+        <div class="formula-box" style="font-size:0.9rem;">
+          <span class="operator">=</span><span class="func">SI</span><span class="paren">(</span><span class="ref">B2</span><span class="operator">&gt;=</span><span class="number">10</span><span class="operator">;</span><span class="ref">"Admis"</span><span class="operator">;</span><span class="ref">"Refusé"</span><span class="paren">)</span>
+        </div>
+        <table style="font-size:0.85rem; margin-top:0.8rem;">
+          <tr><th>Note en B2</th><th>Résultat</th></tr>
+          <tr><td>12</td><td style="color:#059669;">Admis</td></tr>
+          <tr><td>8</td><td style="color:#dc2626;">Refusé</td></tr>
+        </table>
+      </div>
+      <div>
+        <h3 style="margin-top:0;"><i class="fas fa-check-circle"></i> Exemple 2 : Remise</h3>
+        <p>Un client a un total en <strong>C2</strong>. Si le total dépasse 50 000 FCFA, il a droit à 10% de remise, sinon 0.</p>
+        <div class="formula-box" style="font-size:0.9rem;">
+          <span class="operator">=</span><span class="func">SI</span><span class="paren">(</span><span class="ref">C2</span><span class="operator">&gt;</span><span class="number">50000</span><span class="operator">;</span><span class="ref">C2</span><span class="operator">*</span><span class="number">10%</span><span class="operator">;</span><span class="number">0</span><span class="paren">)</span>
+        </div>
+        <table style="font-size:0.85rem; margin-top:0.8rem;">
+          <tr><th>Total en C2</th><th>Remise</th></tr>
+          <tr><td>75 000</td><td style="color:#059669;">7 500</td></tr>
+          <tr><td>30 000</td><td>0</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="box box-remember" style="margin-top:1.5rem;">
+      <i class="fas fa-tasks"></i>
+      <div><strong>Exercice :</strong> Dans votre tableau, ajoutez une colonne E intitulée « Statut ». En E2, saisissez une formule SI qui affiche « À commander » si la Quantité (C2) est inférieure à 5, et « Stock OK » sinon. Recopiez la formule vers le bas.</div>
+    </div>
+    <div class="slide-footer"><span>NTIC SOLUTION — Formation Bureautique — Jour 4 : Excel — Les bases</span><span class="page-indicator">11</span></div>
+  </section>
+
+  <section class="slide module-excel" id="slide-m4c">
+    <div class="slide-header">
+      <span class="module-badge"><i class="fas fa-code-branch"></i> Module 4</span>
+    </div>
+    <h2>4.3 SI() imbriqués : plusieurs conditions</h2>
+    <p>Vous pouvez <strong>imbriquer</strong> plusieurs fonctions SI pour gérer plus de deux cas. Attention à ne pas dépasser 3 ou 4 niveaux pour rester lisible.</p>
+
+    <div class="grid-2" style="margin-top:1.5rem;">
+      <div>
+        <h3 style="margin-top:0;"><i class="fas fa-sitemap"></i> Exemple : Mentions</h3>
+        <p>Note en <strong>A1</strong>. On veut afficher « Très Bien » (≥ 16), « Bien » (≥ 14), « Assez Bien » (≥ 12), « Passable » (≥ 10), « Insuffisant » (&lt; 10).</p>
+        <div class="formula-box" style="font-size:0.8rem; text-align:left; line-height:1.6;">
+          <span class="operator">=</span><span class="func">SI</span><span class="paren">(</span><span class="ref">A1</span><span class="operator">&gt;=</span><span class="number">16</span><span class="operator">;</span><span class="ref">"Très Bien"</span><span class="operator">;</span><br>
+          &nbsp;<span class="func">SI</span><span class="paren">(</span><span class="ref">A1</span><span class="operator">&gt;=</span><span class="number">14</span><span class="operator">;</span><span class="ref">"Bien"</span><span class="operator">;</span><br>
+          &nbsp;<span class="func">SI</span><span class="paren">(</span><span class="ref">A1</span><span class="operator">&gt;=</span><span class="number">12</span><span class="operator">;</span><span class="ref">"Assez Bien"</span><span class="operator">;</span><br>
+          &nbsp;<span class="func">SI</span><span class="paren">(</span><span class="ref">A1</span><span class="operator">&gt;=</span><span class="number">10</span><span class="operator">;</span><span class="ref">"Passable"</span><span class="operator">;</span><span class="ref">"Insuffisant"</span><span class="paren">))))</span>
+        </div>
+      </div>
+      <div>
+        <h3 style="margin-top:0;"><i class="fas fa-lightbulb"></i> Règles pour les SI imbriqués</h3>
+        <ul style="padding-left:1.2rem;">
+          <li style="margin-bottom:0.8rem;">Commencez par la condition la <strong>plus restrictive</strong> (la plus grande valeur).</li>
+          <li style="margin-bottom:0.8rem;">Chaque SI ouvre une parenthèse. Comptez-les bien.</li>
+          <li style="margin-bottom:0.8rem;">À la fin, fermez <strong>autant de parenthèses</strong> que de SI ouverts.</li>
+          <li style="margin-bottom:0.8rem;">Si la formule devient trop complexe, utilisez la fonction <strong>RECHERCHEV()</strong> (vue plus tard).</li>
+        </ul>
+        <div class="box box-warning">
+          <i class="fas fa-exclamation-triangle"></i>
+          <div>Les textes dans une formule doivent être entre <strong>guillemets doubles</strong> " ". Les nombres s'écrivent sans guillemets.</div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer"><span>NTIC SOLUTION — Formation Bureautique — Jour 4 : Excel — Les bases</span><span class="page-indicator">12</span></div>
+  </section>
+
+  <!-- ==================================================================================== -->
+  <!-- ====================  MODULE 5 : FORMATS  ========================================== -->
+  <!-- ==================================================================================== -->
+
+  <section class="slide module-excel" id="slide-m5a">
+    <div class="slide-header">
+      <span class="module-badge"><i class="fas fa-paint-brush"></i> Module 5</span>
+      <span class="duration-badge">15 minutes</span>
+    </div>
+    <h2>5.1 Mettre en forme un tableau Excel</h2>
+    <p>Un tableau bien formaté est <strong>plus lisible</strong> et <strong>plus professionnel</strong>. Les outils de mise en forme sont dans l'onglet <strong>Accueil</strong>, comme dans Word, mais adaptés aux cellules.</p>
+
+    <div class="grid-2" style="margin-top:1.5rem;">
+      <div>
+        <h3 style="margin-top:0;"><i class="fas fa-font"></i> Mise en forme des cellules</h3>
+        <table style="font-size:0.9rem;">
+          <tbody>
+            <tr><td style="padding:0.5rem;"><i class="fas fa-bold"></i> <strong>Gras, Italique, Souligné</strong></td><td style="padding:0.5rem;">Identiques à Word. <code>Ctrl+G</code>, <code>Ctrl+I</code>, <code>Ctrl+U</code>.</td></tr>
+            <tr><td style="padding:0.5rem;"><i class="fas fa-font"></i> <strong>Police et taille</strong></td><td style="padding:0.5rem;">Changez la police et la taille des caractères.</td></tr>
+            <tr><td style="padding:0.5rem;"><i class="fas fa-fill-drip"></i> <strong>Couleur de fond</strong></td><td style="padding:0.5rem;">Pot de peinture. Idéal pour les en-têtes de tableau.</td></tr>
+            <tr><td style="padding:0.5rem;"><i class="fas fa-palette"></i> <strong>Couleur de texte</strong></td><td style="padding:0.5rem;">Changez la couleur de la police.</td></tr>
+            <tr><td style="padding:0.5rem;"><i class="fas fa-border-all"></i> <strong>Bordures</strong></td><td style="padding:0.5rem;">Ajoutez des bordures autour des cellules pour délimiter le tableau.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <h3 style="margin-top:0;"><i class="fas fa-align-left"></i> Alignement dans les cellules</h3>
+        <table style="font-size:0.9rem;">
+          <tbody>
+            <tr><td style="padding:0.5rem;"><i class="fas fa-align-left"></i> Gauche</td><td style="padding:0.5rem;">Standard pour le texte.</td></tr>
+            <tr><td style="padding:0.5rem;"><i class="fas fa-align-center"></i> Centré</td><td style="padding:0.5rem;">Pour les en-têtes, les titres.</td></tr>
+            <tr><td style="padding:0.5rem;"><i class="fas fa-align-right"></i> Droite</td><td style="padding:0.5rem;">Standard pour les nombres.</td></tr>
+            <tr><td style="padding:0.5rem;"><i class="fas fa-arrows-alt-v"></i> Alignement vertical</td><td style="padding:0.5rem;">Haut, Milieu, Bas de la cellule.</td></tr>
+            <tr><td style="padding:0.5rem;"><i class="fas fa-text-width"></i> Renvoyer à la ligne</td><td style="padding:0.5rem;">Le texte s'adapte à la largeur de la colonne.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="box box-tip" style="margin-top:1.5rem;">
+      <i class="fas fa-magic"></i>
+      <div><strong>Mise en forme automatique :</strong> Sélectionnez votre tableau, puis Accueil → <strong>Mettre sous forme de tableau</strong>. Choisissez un style. Excel applique automatiquement bordures, couleurs alternées et filtres.</div>
+    </div>
+    <div class="slide-footer"><span>NTIC SOLUTION — Formation Bureautique — Jour 4 : Excel — Les bases</span><span class="page-indicator">13</span></div>
+  </section>
+
+  <section class="slide module-excel" id="slide-m5b">
+    <div class="slide-header">
+      <span class="module-badge"><i class="fas fa-paint-brush"></i> Module 5</span>
+    </div>
+    <h2>5.2 Les formats de nombres</h2>
+    <p>Excel peut afficher les nombres de différentes manières : <strong>monnaie, pourcentage, date, heure</strong>. Le format ne change <strong>pas la valeur</strong> de la cellule, seulement son <strong>affichage</strong>.</p>
+
+    <div class="grid-3" style="margin-top:1.5rem;">
+      <div class="card">
+        <i class="fas fa-money-bill-wave"></i>
+        <h3>Monétaire</h3>
+        <p>Affiche le symbole monétaire. Exemple : <strong>1 500 FCFA</strong></p>
+        <p style="font-size:0.85rem;">Accueil → Groupe Nombre → <i class="fas fa-dollar-sign"></i> ou menu déroulant « Comptabilité ».</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-percent"></i>
+        <h3>Pourcentage</h3>
+        <p>Multiplie par 100 et ajoute %. Exemple : <strong>0,15 → 15%</strong></p>
+        <p style="font-size:0.85rem;">Accueil → Groupe Nombre → <i class="fas fa-percent"></i>.</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-calendar-alt"></i>
+        <h3>Date</h3>
+        <p>Formate un nombre en date. Exemple : <strong>01/01/2026</strong></p>
+        <p style="font-size:0.85rem;">Sélectionnez « Date courte » ou « Date longue » dans le menu déroulant.</p>
+      </div>
+    </div>
+
+    <div class="box box-remember" style="margin-top:1.5rem;">
+      <i class="fas fa-star"></i>
+      <div><strong>Exercice final :</strong> Reprenez votre tableau complet. Appliquez-lui une <strong>mise en forme de tableau</strong> (Accueil → Mettre sous forme de tableau). Formatez la colonne Prix en <strong>monétaire FCFA</strong>. Formatez la colonne Total en <strong>monétaire FCFA</strong>. Ajoutez des <strong>bordures</strong> et une <strong>couleur de fond</strong> à la ligne d'en-tête.</div>
+    </div>
+    <div class="slide-footer"><span>NTIC SOLUTION — Formation Bureautique — Jour 4 : Excel — Les bases</span><span class="page-indicator">14</span></div>
+  </section>
+
+  <!-- ====== RÉCAPITULATIF ====== -->
+  <section class="slide recap-slide" id="slide-recap">
+    <div class="slide-header">
+      <span class="module-badge" style="background:#fef3c7;color:#92400e;"><i class="fas fa-list-check"></i> Récapitulatif du Jour 4</span>
+    </div>
+    <h2>Les 10 points clés à retenir</h2>
+
+    <div class="grid-2" style="margin-top:1.5rem;">
+      <div>
+        <ol style="padding-left:1.2rem; line-height:2.4;">
+          <li><strong>Excel</strong> est un tableur. Il gère des données en <strong>lignes et colonnes</strong>.</li>
+          <li>Une <strong>cellule</strong> est l'intersection d'une colonne (A, B, C...) et d'une ligne (1, 2, 3...).</li>
+          <li><strong>Toute formule commence par <code>=</code>.</strong> Sans le =, c'est du texte.</li>
+          <li>Une formule fait référence à des <strong>cellules</strong>, pas à des valeurs fixes.</li>
+          <li><strong>=SOMME(plage)</strong> additionne toutes les cellules de la plage.</li>
+        </ol>
+      </div>
+      <div>
+        <ol start="6" style="padding-left:1.2rem; line-height:2.4;">
+          <li><strong>=MOYENNE(plage)</strong>, <strong>=MIN(plage)</strong>, <strong>=MAX(plage)</strong> pour les calculs statistiques.</li>
+          <li><strong>=SI(condition;vrai;faux)</strong> permet de prendre des décisions automatiques.</li>
+          <li>Les <strong>SI imbriqués</strong> gèrent plusieurs conditions (commencez par la plus restrictive).</li>
+          <li>La <strong>poignée de recopie</strong> (carré noir) étend une formule ou une série.</li>
+          <li>Les <strong>formats</strong> (monétaire, %, date) changent l'affichage sans changer la valeur.</li>
+        </ol>
+      </div>
+    </div>
+
+    <div style="text-align:center; margin-top:2rem;">
+      <p style="font-size:1.3rem; font-weight:700; color:var(--excel-green);">Félicitations pour cette quatrième journée !</p>
+      <p>Vous maîtrisez les bases d'Excel : saisie, formules, SI() et formats.</p>
+    </div>
+    <div class="slide-footer"><span>NTIC SOLUTION — Formation Bureautique — Jour 4 : Excel — Les bases</span><span class="page-indicator">15</span></div>
+  </section>
+
+  <!-- ====== EXERCICE FINAL ====== -->
+  <section class="slide" id="slide-exercise">
+    <div class="slide-header">
+      <span class="module-badge"><i class="fas fa-pencil-alt"></i> Exercice final</span>
+    </div>
+    <h2>Exercice de révision : Créez une facture</h2>
+
+    <div style="background:#f8fafc; border-radius:16px; padding:1.5rem; margin-top:1.5rem;">
+      <p><strong>Consignes :</strong> Créez une facture simple pour NTIC SOLUTION :</p>
+      <ol style="padding-left:1.5rem; line-height:2.2;">
+        <li>En-tête : « NTIC SOLUTION — Facture » (fusionnez les cellules A1 à D1).</li>
+        <li>Colonnes : <strong>Désignation</strong>, <strong>Prix unitaire</strong>, <strong>Quantité</strong>, <strong>Total</strong>.</li>
+        <li>Remplissez <strong>5 produits</strong>.</li>
+        <li>En colonne D, utilisez <strong>=Prix*Quantité</strong> pour chaque ligne.</li>
+        <li>Sous le tableau, calculez le <strong>Total général</strong> avec <strong>=SOMME()</strong>.</li>
+        <li>Ajoutez une colonne <strong>Remise</strong> avec <strong>=SI(Total>20000;Total*5%;0)</strong>.</li>
+        <li>Formatez les prix en <strong>monétaire FCFA</strong>.</li>
+        <li>Appliquez une <strong>mise en forme de tableau</strong>.</li>
+      </ol>
+    </div>
+
+    <div class="box box-remember" style="margin-top:1.5rem;">
+      <i class="fas fa-trophy"></i>
+      <div><strong>Bravo !</strong> Vous avez créé une facture professionnelle avec calculs automatiques. Vous maîtrisez les bases d'Excel.</div>
+    </div>
+    <div class="slide-footer"><span>NTIC SOLUTION — Formation Bureautique — Jour 4 : Excel — Les bases</span><span class="page-indicator">16</span></div>
+  </section>
+
+  <!-- ====== ANNONCE JOUR 5 ====== -->
+  <section class="slide next-slide" id="slide-next">
+    <div class="slide-header">
+      <span class="module-badge"><i class="fas fa-calendar-check"></i> Suite du programme</span>
+    </div>
+    <h2>Rendez-vous pour le Jour 5</h2>
+    <p style="font-size:1.3rem;"><strong>Thème : Excel — Graphiques et analyse</strong></p>
+    <p>Vous apprendrez à créer des graphiques et à analyser vos données.</p>
+    <p><i class="fas fa-check-circle"></i> Apportez votre support de formation et votre motivation.</p>
+    <p style="margin-top:2rem;"><strong>NTIC SOLUTION</strong><br>
+    Secteur 15, Quartier Tatana, Banfora, Burkina Faso<br>
+    <i class="fas fa-phone"></i> +226 05 58 58 68 &nbsp;|&nbsp; <i class="fab fa-whatsapp"></i> +226 69 69 69 24<br>
+    <i class="fas fa-envelope"></i> nticsolution.bf@gmail.com</p>
+    <div class="slide-footer"><span>NTIC SOLUTION — Formation Bureautique — Jour 4 : Excel — Les bases</span><span class="page-indicator">17</span></div>
+  </section>
+
+</main>
+
+<script>
+  const CORRECT_CODE = 'NTICBANFORA';
+
+  function checkAccess() {
+    const input = document.getElementById('accessInput');
+    const error = document.getElementById('accessError');
+    if (input.value.trim() === CORRECT_CODE) {
+      document.getElementById('accessOverlay').classList.add('hidden');
+      document.getElementById('appContainer').classList.add('visible');
+      setTimeout(() => {
+        document.querySelectorAll('.slide').forEach(s => s.classList.add('reveal'));
+      }, 150);
+    } else {
+      error.classList.add('visible');
+      input.value = '';
+      input.focus();
+      setTimeout(() => error.classList.remove('visible'), 2500);
+    }
+  }
+
+  document.getElementById('accessInput').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') checkAccess();
+  });
+
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      document.getElementById('heroAnimation').classList.add('fade-out');
+    }, 2000);
+  });
+
+  function toggleFullscreen() {
+    document.body.classList.toggle('fullscreen-mode');
+    const btn = document.querySelector('.nav-controls button');
+    if (document.body.classList.contains('fullscreen-mode')) {
+      btn.innerHTML = '<i class="fas fa-compress"></i> Quitter';
+    } else {
+      btn.innerHTML = '<i class="fas fa-expand"></i> Plein écran';
+    }
+  }
+
+  function scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  const revealSlides = () => {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('reveal');
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.slide').forEach(s => observer.observe(s));
+  };
+
+  window.addEventListener('scroll', () => {
+    const pct = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+    document.getElementById('progressFill').style.width = Math.min(pct, 100) + '%';
+  });
+
+  document.addEventListener('DOMContentLoaded', () => {
+    revealSlides();
+  });
+</script>
+
+</body>
+</html>
