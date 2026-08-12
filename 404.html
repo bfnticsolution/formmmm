@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="fr-BF">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="theme-color" content="#0B3FA5">
+    <title>Page introuvable — 404 | NTIC Solution</title>
+    <meta name="description" content="La page que vous recherchez n'existe pas ou a été déplacée. Retournez à l'accueil de NTIC Solution, agence digitale à Banfora.">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --b: #0B3FA5;
+            --bd: #072a6e;
+            --o: #FF6B35;
+            --w: #fff;
+            --d: #0F172A;
+            --g: #64748B;
+            --gl: #F1F5F9;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: linear-gradient(135deg, var(--b) 0%, var(--bd) 100%);
+            color: var(--w);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+            -webkit-font-smoothing: antialiased;
+            position: relative;
+            overflow: hidden;
+        }
+        body::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 30% 50%, rgba(255, 107, 53, 0.12), transparent 60%),
+                        radial-gradient(circle at 70% 30%, rgba(255, 255, 255, 0.03), transparent 50%);
+            pointer-events: none;
+        }
+        .grid-bg {
+            position: absolute;
+            inset: 0;
+            background-image: linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+            background-size: 50px 50px;
+            pointer-events: none;
+        }
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 520px;
+            width: 100%;
+            animation: fadeInUp 0.6s ease;
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .error-code {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: clamp(5rem, 12vw, 10rem);
+            font-weight: 800;
+            color: var(--o);
+            line-height: 1;
+            margin-bottom: 8px;
+            text-shadow: 0 4px 30px rgba(255, 107, 53, 0.3);
+            animation: pulse 2s ease-in-out infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.03); }
+        }
+        .error-icon {
+            font-size: 3rem;
+            color: var(--o);
+            margin-bottom: 16px;
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-12px); }
+        }
+        h1 {
+            font-size: clamp(1.3rem, 3vw, 1.8rem);
+            font-weight: 800;
+            margin-bottom: 10px;
+            color: var(--w);
+        }
+        p {
+            font-size: clamp(0.85rem, 1.5vw, 0.95rem);
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 28px;
+            line-height: 1.6;
+        }
+        .btn-row {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: inherit;
+            white-space: nowrap;
+        }
+        .btn-primary {
+            background: var(--o);
+            color: var(--w);
+            box-shadow: 0 6px 20px rgba(255, 107, 53, 0.3);
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.45);
+        }
+        .btn-outline {
+            background: transparent;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: var(--w);
+        }
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.6);
+        }
+        .btn-whatsapp {
+            background: #25D366;
+            color: var(--w);
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.25);
+        }
+        .btn-whatsapp:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4);
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 30px;
+            text-decoration: none;
+        }
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--o);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            color: var(--w);
+            font-weight: 800;
+            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+        }
+        .logo-text {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--w);
+        }
+        .logo-sub {
+            font-size: 0.6rem;
+            color: var(--o);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+        }
+        .suggestions {
+            margin-top: 30px;
+            font-size: 0.72rem;
+            color: rgba(255, 255, 255, 0.45);
+        }
+        .suggestions a {
+            color: var(--o);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+        .suggestions a:hover {
+            color: #FCD34D;
+        }
+    </style>
+</head>
+<body>
+    <div class="grid-bg"></div>
+    <div class="container">
+        <a href="https://nticsolution.org" class="logo">
+            <div class="logo-icon">N</div>
+            <div>
+                <div class="logo-text">NTIC Solution</div>
+                <div class="logo-sub">L'univers du digital</div>
+            </div>
+        </a>
+
+        <div class="error-code">404</div>
+        <div class="error-icon"><i class="fas fa-map-signs"></i></div>
+        <h1>Page introuvable</h1>
+        <p>
+            La page que vous recherchez n'existe pas, a été déplacée ou l'adresse saisie est incorrecte.<br>
+            Pas d'inquiétude, vous pouvez retrouver votre chemin.
+        </p>
+        <div class="btn-row">
+            <a href="https://formation.nticsolution.org" class="btn btn-primary"><i class="fas fa-home"></i> Retour à l'accueil</a>
+            <a href="https://wa.me/22669696924?text=Bonjour%20NTIC%20Solution%2C%20je%20suis%20sur%20une%20page%20introuvable%20et%20j'ai%20besoin%20d'aide." class="btn btn-whatsapp"><i class="fab fa-whatsapp"></i> Demander de l'aide</a>
+        </div>
+        <div class="suggestions">
+            Essayez l'une de ces pages : 
+            <a href="https://nticsolution.org">Accueil</a> · 
+            <a href="https://formation.nticsolution.org/">Formations</a> · 
+            <a href="https://nticsolution.org/#contact">Contact</a> · 
+            <a href="https://cav-or.com">CAVOR</a> · 
+            <a href="https://myvivo.online">myvivo.online</a>
+        </div>
+    </div>
+</body>
+</html>
