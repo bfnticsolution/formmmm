@@ -21,6 +21,8 @@
       --texte-secondaire: #475569;
       --blanc: #ffffff;
       --bordure: #e2e8f0;
+      --word-blue: #2b579a;
+      --word-blue-light: #e8f0fe;
       --ombre: 0 25px 50px rgba(11, 63, 165, 0.08), 0 6px 18px rgba(0,0,0,0.05);
       --radius: 22px;
       --transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
@@ -42,7 +44,7 @@
     .access-overlay {
       position: fixed;
       inset: 0;
-      background: linear-gradient(135deg, var(--bleu-profond) 0%, #0d1b3e 100%);
+      background: linear-gradient(135deg, var(--word-blue) 0%, #14305a 100%);
       z-index: 9999;
       display: flex;
       align-items: center;
@@ -51,11 +53,7 @@
       transition: opacity 0.8s ease, visibility 0.8s ease;
     }
 
-    .access-overlay.hidden {
-      opacity: 0;
-      visibility: hidden;
-      pointer-events: none;
-    }
+    .access-overlay.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
 
     .access-card {
       background: var(--blanc);
@@ -74,7 +72,7 @@
     }
 
     .access-card .logo-symbol {
-      background: var(--bleu);
+      background: var(--word-blue);
       color: white;
       width: 64px; height: 64px;
       border-radius: 18px;
@@ -87,18 +85,14 @@
     }
 
     .access-card h2 {
-      color: var(--bleu);
+      color: var(--word-blue);
       font-size: 1.5rem;
       margin-bottom: 0.5rem;
       border-bottom: none;
       padding-bottom: 0;
     }
 
-    .access-card p {
-      color: var(--texte-secondaire);
-      margin-bottom: 1.8rem;
-      font-size: 0.95rem;
-    }
+    .access-card p { color: var(--texte-secondaire); margin-bottom: 1.8rem; font-size: 0.95rem; }
 
     .access-input {
       width: 100%;
@@ -113,11 +107,7 @@
       margin-bottom: 1rem;
     }
 
-    .access-input:focus {
-      outline: none;
-      border-color: var(--bleu);
-      box-shadow: 0 0 0 4px rgba(11,63,165,0.1);
-    }
+    .access-input:focus { outline: none; border-color: var(--word-blue); box-shadow: 0 0 0 4px rgba(43,87,154,0.1); }
 
     .access-btn {
       width: 100%;
@@ -134,11 +124,7 @@
       letter-spacing: 0.5px;
     }
 
-    .access-btn:hover {
-      background: var(--orange-vif);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(255,107,53,0.35);
-    }
+    .access-btn:hover { background: var(--orange-vif); transform: translateY(-2px); box-shadow: 0 8px 20px rgba(255,107,53,0.35); }
 
     .access-error {
       color: #dc2626;
@@ -194,12 +180,7 @@
       font-size: 1.3rem;
     }
 
-    .nav-controls {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
+    .nav-controls { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
 
     .nav-controls button {
       background: var(--blanc);
@@ -217,26 +198,11 @@
       gap: 0.4rem;
     }
 
-    .nav-controls button:hover {
-      background: var(--bleu-clair);
-      border-color: var(--bleu);
-      color: var(--bleu);
-    }
+    .nav-controls button:hover { background: var(--bleu-clair); border-color: var(--bleu); color: var(--bleu); }
 
-    .progress-bar {
-      width: 120px; height: 6px;
-      background: var(--bordure);
-      border-radius: 10px;
-      overflow: hidden;
-    }
+    .progress-bar { width: 120px; height: 6px; background: var(--bordure); border-radius: 10px; overflow: hidden; }
 
-    .progress-fill {
-      height: 100%;
-      background: var(--orange);
-      width: 0%;
-      transition: width 0.4s ease;
-      border-radius: 10px;
-    }
+    .progress-fill { height: 100%; background: var(--orange); width: 0%; transition: width 0.4s ease; border-radius: 10px; }
 
     /* ---------- CONTAINER ---------- */
     .app-container {
@@ -265,27 +231,17 @@
       transform: translateY(35px);
     }
 
-    .slide.reveal {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    .slide.reveal { opacity: 1; transform: translateY(0); }
 
-    .slide.module-word { border-left-color: #2b579a; }
     .slide.cover-slide {
       border-left-color: var(--orange);
-      background: linear-gradient(135deg, #2b579a 0%, #1a3a6e 100%);
+      background: linear-gradient(135deg, #2b579a 0%, #14305a 100%);
       color: white;
     }
-    .slide.welcome-slide {
-      border-left-color: var(--orange);
-      background: linear-gradient(135deg, #f8fafc 0%, #e8f0fe 100%);
-    }
+    .slide.welcome-slide { border-left-color: var(--orange); background: linear-gradient(135deg, #f8fafc 0%, #e8f0fe 100%); }
     .slide.recap-slide { border-left-color: #f59e0b; background: #fffbeb; }
-    .slide.next-slide {
-      border-left-color: var(--orange);
-      background: linear-gradient(135deg, #FF6B35 0%, #e55a2b 100%);
-      color: white;
-    }
+    .slide.next-slide { border-left-color: var(--orange); background: linear-gradient(135deg, #FF6B35 0%, #e55a2b 100%); color: white; }
+    .slide.module-word { border-left-color: var(--word-blue); }
 
     .slide-header {
       display: flex;
@@ -297,8 +253,8 @@
     }
 
     .module-badge {
-      background: var(--bleu-clair);
-      color: var(--bleu);
+      background: var(--word-blue-light);
+      color: var(--word-blue);
       font-weight: 700;
       font-size: 0.8rem;
       padding: 0.35rem 1rem;
@@ -318,17 +274,23 @@
       border-radius: 20px;
     }
 
-    h1 {
-      font-size: 2.6rem;
-      font-weight: 800;
-      letter-spacing: -0.5px;
-      margin: 1rem 0 0.5rem;
+    .day-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; margin: 1rem 0; }
+
+    .day-tags span {
+      background: rgba(255,255,255,0.15);
+      color: white;
+      padding: 0.35rem 0.9rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
     }
+
+    h1 { font-size: 2.6rem; font-weight: 800; letter-spacing: -0.5px; margin: 1rem 0 0.5rem; }
 
     h2 {
       font-size: 1.7rem;
       font-weight: 700;
-      color: var(--bleu);
+      color: var(--word-blue);
       margin: 1.5rem 0 1rem;
       padding-bottom: 0.5rem;
       border-bottom: 3px solid var(--orange);
@@ -339,35 +301,17 @@
     .next-slide h2 { color: white; border-bottom-color: rgba(255,255,255,0.5); }
     .recap-slide h2 { color: #92400e; border-bottom-color: #f59e0b; }
 
-    h3 {
-      font-size: 1.25rem;
-      font-weight: 700;
-      margin: 1.5rem 0 0.6rem;
-    }
+    h3 { font-size: 1.25rem; font-weight: 700; margin: 1.5rem 0 0.6rem; }
 
-    h4 {
-      font-size: 1.05rem;
-      font-weight: 700;
-      margin: 1rem 0 0.4rem;
-    }
+    h4 { font-size: 1.05rem; font-weight: 700; margin: 1rem 0 0.4rem; }
 
     /* ---------- TABLEAUX ---------- */
-    .table-wrapper {
-      overflow-x: auto;
-      margin: 1.5rem 0;
-      border-radius: 14px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.04);
-    }
+    .table-wrapper { overflow-x: auto; margin: 1.5rem 0; border-radius: 14px; box-shadow: 0 2px 10px rgba(0,0,0,0.04); }
 
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 0.95rem;
-      background: white;
-    }
+    table { width: 100%; border-collapse: collapse; font-size: 0.95rem; background: white; }
 
     th {
-      background: #2b579a;
+      background: var(--word-blue);
       color: white;
       font-weight: 700;
       padding: 0.9rem 1.2rem;
@@ -375,10 +319,7 @@
       white-space: nowrap;
     }
 
-    td {
-      padding: 0.8rem 1.2rem;
-      border-bottom: 1px solid var(--bordure);
-    }
+    td { padding: 0.8rem 1.2rem; border-bottom: 1px solid var(--bordure); }
 
     tr:last-child td { border-bottom: none; }
     tbody tr:hover td { background: #f8fafc; }
@@ -402,19 +343,9 @@
     .box-info { background: #f3e8ff; border-color: #7c3aed; color: #3b0764; }
 
     /* ---------- GRILLE ---------- */
-    .grid-2 {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2rem;
-      margin: 1.5rem 0;
-    }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin: 1.5rem 0; }
 
-    .grid-3 {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem;
-      margin: 1.5rem 0;
-    }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin: 1.5rem 0; }
 
     @media (max-width: 900px) { .grid-3 { grid-template-columns: repeat(2, 1fr); } }
 
@@ -435,12 +366,8 @@
       transition: var(--transition);
     }
 
-    .card:hover {
-      box-shadow: 0 12px 28px rgba(0,0,0,0.07);
-      transform: translateY(-4px);
-    }
-
-    .card i { font-size: 2.2rem; color: #2b579a; margin-bottom: 0.8rem; }
+    .card:hover { box-shadow: 0 12px 28px rgba(0,0,0,0.07); transform: translateY(-4px); }
+    .card i { font-size: 2.2rem; color: var(--word-blue); margin-bottom: 0.8rem; }
 
     /* ---------- TABS ---------- */
     .tabs-container { margin: 1.5rem 0; }
@@ -467,15 +394,9 @@
       transition: var(--transition);
     }
 
-    .tab-btn.active {
-      color: #2b579a;
-      border-bottom-color: var(--orange);
-    }
+    .tab-btn.active { color: var(--word-blue); border-bottom-color: var(--orange); }
 
-    .tab-panel {
-      display: none;
-      animation: fadeSlide 0.35s ease;
-    }
+    .tab-panel { display: none; animation: fadeSlide 0.35s ease; }
 
     .tab-panel.active { display: block; }
 
@@ -498,7 +419,7 @@
     }
 
     .page-indicator {
-      background: #2b579a;
+      background: var(--word-blue);
       color: white;
       width: 30px; height: 30px;
       border-radius: 50%;
@@ -509,12 +430,7 @@
       font-size: 0.8rem;
     }
 
-    .highlight {
-      background: #fef3c7;
-      padding: 0.15rem 0.5rem;
-      border-radius: 5px;
-      font-weight: 700;
-    }
+    .highlight { background: #fef3c7; padding: 0.15rem 0.5rem; border-radius: 5px; font-weight: 700; }
 
     /* ---------- PLEIN ÉCRAN ---------- */
     .fullscreen-mode .main-nav { display: none; }
@@ -524,7 +440,7 @@
     .hero-animation {
       position: fixed;
       inset: 0;
-      background: #1a3a6e;
+      background: #14305a;
       z-index: 9998;
       display: flex;
       align-items: center;
@@ -533,46 +449,20 @@
       transition: opacity 0.7s ease, visibility 0.7s ease;
     }
 
-    .hero-animation.fade-out {
-      opacity: 0;
-      visibility: hidden;
-      pointer-events: none;
-    }
+    .hero-animation.fade-out { opacity: 0; visibility: hidden; pointer-events: none; }
 
-    .hero-logo {
-      font-size: 4rem;
-      font-weight: 800;
-      color: white;
-      animation: pulseLogo 1.2s ease infinite alternate;
-    }
+    .hero-logo { font-size: 4rem; font-weight: 800; color: white; animation: pulseLogo 1.2s ease infinite alternate; }
 
     @keyframes pulseLogo {
       from { transform: scale(1); opacity: 0.9; }
       to { transform: scale(1.08); opacity: 1; }
     }
 
-    .hero-text {
-      color: rgba(255,255,255,0.85);
-      font-size: 1.2rem;
-      margin-top: 1rem;
-      letter-spacing: 1px;
-    }
+    .hero-text { color: rgba(255,255,255,0.85); font-size: 1.2rem; margin-top: 1rem; letter-spacing: 1px; }
 
-    .hero-loader {
-      width: 60px;
-      height: 3px;
-      background: rgba(255,255,255,0.2);
-      border-radius: 5px;
-      margin-top: 1.5rem;
-      overflow: hidden;
-    }
+    .hero-loader { width: 60px; height: 3px; background: rgba(255,255,255,0.2); border-radius: 5px; margin-top: 1.5rem; overflow: hidden; }
 
-    .hero-loader-fill {
-      height: 100%;
-      background: var(--orange);
-      width: 0%;
-      animation: loadFill 1.8s ease forwards;
-    }
+    .hero-loader-fill { height: 100%; background: var(--orange); width: 0%; animation: loadFill 1.8s ease forwards; }
 
     @keyframes loadFill { to { width: 100%; } }
 
@@ -584,15 +474,10 @@
     }
 
     /* ---------- WELCOME ---------- */
-    .welcome-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2rem;
-      align-items: center;
-    }
+    .welcome-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: center; }
 
     .welcome-visual {
-      background: linear-gradient(135deg, #2b579a 0%, #1a3a6e 100%);
+      background: linear-gradient(135deg, #2b579a 0%, #14305a 100%);
       border-radius: 24px;
       padding: 3rem 2rem;
       text-align: center;
@@ -602,18 +487,10 @@
     .welcome-visual i { font-size: 5rem; margin-bottom: 1rem; opacity: 0.9; }
     .welcome-visual h2 { color: white; border-bottom: none; margin-top: 0; }
 
-    @media (max-width: 768px) {
-      .welcome-grid { grid-template-columns: 1fr; }
-    }
+    @media (max-width: 768px) { .welcome-grid { grid-template-columns: 1fr; } }
 
     /* ---------- RUBAN WORD VISUEL ---------- */
-    .ribbon-visual {
-      background: #f0f4fc;
-      border-radius: 16px;
-      padding: 1.5rem;
-      text-align: center;
-      margin: 1.5rem 0;
-    }
+    .ribbon-visual { background: #f0f4fc; border-radius: 16px; padding: 1.5rem; text-align: center; margin: 1.5rem 0; }
 
     .ribbon-tab {
       display: inline-block;
@@ -628,15 +505,11 @@
       color: var(--texte);
     }
 
-    .ribbon-tab.active-tab {
-      background: #2b579a;
-      color: white;
-      border-color: #2b579a;
-    }
+    .ribbon-tab.active-tab { background: var(--word-blue); color: white; border-color: var(--word-blue); }
 
     .ribbon-content {
       background: white;
-      border: 2px solid #2b579a;
+      border: 2px solid var(--word-blue);
       border-radius: 0 12px 12px 12px;
       padding: 1.5rem;
       display: flex;
@@ -645,23 +518,22 @@
       justify-content: center;
     }
 
-    .ribbon-group {
+    .ribbon-group { text-align: center; min-width: 70px; }
+    .ribbon-group i { font-size: 1.8rem; color: var(--word-blue); display: block; margin-bottom: 0.3rem; }
+    .ribbon-group span { font-size: 0.7rem; font-weight: 600; color: var(--texte-secondaire); }
+
+    /* ---------- VISUEL MISE EN PAGE ---------- */
+    .layout-demo {
+      background: #f8fafc;
+      border: 2px dashed var(--word-blue);
+      border-radius: 16px;
+      padding: 1.5rem;
+      margin: 1rem 0;
       text-align: center;
-      min-width: 70px;
     }
 
-    .ribbon-group i {
-      font-size: 1.8rem;
-      color: #2b579a;
-      display: block;
-      margin-bottom: 0.3rem;
-    }
-
-    .ribbon-group span {
-      font-size: 0.7rem;
-      font-weight: 600;
-      color: var(--texte-secondaire);
-    }
+    .layout-demo .margin-zone { background: #e8f0fe; padding: 1rem; border-radius: 8px; }
+    .layout-demo .content-zone { background: white; padding: 2rem; border-radius: 8px; border: 1px solid var(--bordure); margin: 0.5rem 0; }
   </style>
 </head>
 <body>
@@ -712,8 +584,16 @@
     <div style="text-align:center; padding: 2rem 0;">
       <h1 style="font-size:3rem;">Jour 2</h1>
       <p style="font-size:1.5rem; font-weight:500; margin:0.5rem 0;">Microsoft Word</p>
-      <p style="font-size:1.2rem; opacity:0.9;">Traitement de texte professionnel</p>
-      <div style="margin-top:2.5rem; background:rgba(255,255,255,0.1); border-radius:20px; padding:1.8rem; display:inline-block; text-align:left;">
+      <p style="font-size:1.2rem; opacity:0.9;">Les bases essentielles</p>
+      <div class="day-tags" style="justify-content:center;">
+        <span><i class="fas fa-desktop"></i> Interface Word</span>
+        <span><i class="fas fa-keyboard"></i> Saisie</span>
+        <span><i class="fas fa-font"></i> Mise en forme</span>
+        <span><i class="fas fa-ruler-combined"></i> Mise en page</span>
+        <span><i class="fas fa-image"></i> Images</span>
+        <span><i class="fas fa-table"></i> Tableaux</span>
+      </div>
+      <div style="margin-top:2rem; background:rgba(255,255,255,0.1); border-radius:20px; padding:1.8rem; display:inline-block; text-align:left;">
         <p><i class="fas fa-user-tie" style="width:24px;"></i> <strong>Formateur :</strong> Kévin Kiessé Sanou</p>
         <p><i class="far fa-calendar-alt" style="width:24px;"></i> <strong>Date :</strong> Août 2026</p>
         <p><i class="fas fa-map-marker-alt" style="width:24px;"></i> <strong>Lieu :</strong> Siège NTIC Solution, Secteur 15, Quartier Tatana, Banfora</p>
@@ -741,9 +621,9 @@
           <div><strong>5 objectifs pour aujourd'hui :</strong><br>
             1. Découvrir l'interface de Word<br>
             2. Saisir et modifier du texte<br>
-            3. Mettre en forme un document<br>
-            4. Insérer des images et des tableaux<br>
-            5. Enregistrer et imprimer</div>
+            3. Mettre en forme le texte<br>
+            4. Maîtriser la mise en page<br>
+            5. Insérer des images et des tableaux simples</div>
         </div>
       </div>
     </div>
@@ -764,13 +644,15 @@
           <li><i class="fas fa-check-circle" style="color:#059669;"></i> Allumer et éteindre correctement le PC</li>
           <li><i class="fas fa-check-circle" style="color:#059669;"></i> Utiliser la souris (clic, double-clic, clic droit)</li>
           <li><i class="fas fa-check-circle" style="color:#059669;"></i> Ouvrir une application via le menu Démarrer</li>
+          <li><i class="fas fa-check-circle" style="color:#059669;"></i> Créer un dossier et le retrouver</li>
         </ul>
       </div>
       <div>
         <ul style="padding-left:1.2rem; line-height:2.2;">
-          <li><i class="fas fa-check-circle" style="color:#059669;"></i> Créer un dossier et le retrouver</li>
           <li><i class="fas fa-check-circle" style="color:#059669;"></i> Utiliser Ctrl+C, Ctrl+V, Ctrl+S</li>
           <li><i class="fas fa-check-circle" style="color:#059669;"></i> Verrouiller la session (Win+L)</li>
+          <li><i class="fas fa-check-circle" style="color:#059669;"></i> Naviguer dans l'Explorateur (Win+E)</li>
+          <li><i class="fas fa-check-circle" style="color:#059669;"></i> Gérer la Corbeille</li>
         </ul>
       </div>
     </div>
@@ -781,7 +663,10 @@
     <div class="slide-footer"><span>NTIC SOLUTION — Formation Bureautique — Jour 2 : Microsoft Word</span><span class="page-indicator">3</span></div>
   </section>
 
-  <!-- ====== MODULE 1 : DÉCOUVRIR WORD ====== -->
+  <!-- ==================================================================================== -->
+  <!-- ====================  MODULE 1 : INTERFACE WORD  =================================== -->
+  <!-- ==================================================================================== -->
+
   <!-- 1.1 Qu'est-ce que Word ? -->
   <section class="slide module-word" id="slide-m1a">
     <div class="slide-header">
@@ -789,28 +674,28 @@
       <span class="duration-badge">20 minutes</span>
     </div>
     <h2>1.1 Qu'est-ce que Microsoft Word ?</h2>
-    <p><strong>Microsoft Word</strong> est un logiciel de <strong>traitement de texte</strong>. Il permet de créer, modifier, mettre en forme et imprimer des documents texte. Il fait partie de la suite <strong>Microsoft Office</strong>, avec Excel (tableur) et PowerPoint (présentations).</p>
+    <p><strong>Microsoft Word</strong> est un logiciel de <strong>traitement de texte</strong>. Il permet de créer, modifier, mettre en forme et imprimer des documents. Il fait partie de la suite <strong>Microsoft Office</strong>, avec Excel et PowerPoint.</p>
 
     <div class="grid-2" style="margin-top:1.5rem;">
       <div>
         <h3 style="margin-top:0;"><i class="fas fa-check-circle" style="color:#059669;"></i> Ce que Word permet de faire</h3>
         <ul style="padding-left:1.2rem;">
           <li style="margin-bottom:0.5rem;">Rédiger des <strong>courriers administratifs</strong></li>
-          <li style="margin-bottom:0.5rem;">Créer des <strong>rapports</strong> et des <strong>mémoires</strong></li>
-          <li style="margin-bottom:0.5rem;">Concevoir des <strong>CV professionnels</strong></li>
-          <li style="margin-bottom:0.5rem;">Rédiger des <strong>factures</strong> et des <strong>devis</strong></li>
-          <li style="margin-bottom:0.5rem;">Créer des <strong>affiches</strong> et des <strong>flyers</strong></li>
+          <li style="margin-bottom:0.5rem;">Créer des <strong>rapports</strong> et <strong>mémoires</strong></li>
+          <li style="margin-bottom:0.5rem;">Concevoir des <strong>CV</strong> professionnels</li>
+          <li style="margin-bottom:0.5rem;">Rédiger des <strong>factures</strong> et <strong>devis</strong></li>
+          <li style="margin-bottom:0.5rem;">Créer des <strong>affiches</strong> et <strong>flyers</strong></li>
           <li>Rédiger des <strong>lettres de motivation</strong></li>
         </ul>
       </div>
       <div>
-        <h3 style="margin-top:0;"><i class="fas fa-file-alt"></i> Document Word vs Bloc-notes</h3>
+        <h3 style="margin-top:0;"><i class="fas fa-file-alt"></i> Word vs Bloc-notes</h3>
         <div class="table-wrapper">
           <table>
             <thead><tr><th>Bloc-notes</th><th>Word</th></tr></thead>
             <tbody>
-              <tr><td>Texte brut</td><td>Texte mis en forme</td></tr>
-              <tr><td>Pas d'images</td><td>Images, tableaux, graphiques</td></tr>
+              <tr><td>Texte brut uniquement</td><td>Texte mis en forme</td></tr>
+              <tr><td>Pas d'images</td><td>Images, tableaux</td></tr>
               <tr><td>Pas de couleurs</td><td>Couleurs, polices variées</td></tr>
               <tr><td>Extension .txt</td><td>Extension .docx</td></tr>
               <tr><td>Une seule police</td><td>Des centaines de polices</td></tr>
@@ -818,6 +703,11 @@
           </table>
         </div>
       </div>
+    </div>
+
+    <div class="box box-remember" style="margin-top:1.5rem;">
+      <i class="fas fa-star"></i>
+      <div><strong>À retenir :</strong> Word est l'outil de rédaction professionnelle par excellence. Tout document écrit destiné à être lu par d'autres personnes devrait passer par Word plutôt que par le Bloc-notes.</div>
     </div>
     <div class="slide-footer"><span>NTIC SOLUTION — Formation Bureautique — Jour 2 : Microsoft Word</span><span class="page-indicator">4</span></div>
   </section>
@@ -835,25 +725,25 @@
         <i class="fas fa-search"></i>
         <h3>Méthode 1</h3>
         <p><strong>Barre de recherche</strong></p>
-        <p style="font-size:0.9rem;">Cliquez sur le menu Démarrer, tapez « Word », puis cliquez sur l'icône Word qui apparaît.</p>
+        <p style="font-size:0.9rem;">Menu Démarrer, tapez « Word », cliquez sur l'icône.</p>
       </div>
       <div class="card">
         <i class="fas fa-thumbtack"></i>
         <h3>Méthode 2</h3>
         <p><strong>Barre des tâches</strong></p>
-        <p style="font-size:0.9rem;">Si Word est épinglé dans votre barre des tâches, un simple clic suffit.</p>
+        <p style="font-size:0.9rem;">Si Word est épinglé, un simple clic suffit.</p>
       </div>
       <div class="card">
         <i class="fas fa-desktop"></i>
         <h3>Méthode 3</h3>
         <p><strong>Raccourci Bureau</strong></p>
-        <p style="font-size:0.9rem;">Si un raccourci Word est présent sur le Bureau, double-cliquez dessus.</p>
+        <p style="font-size:0.9rem;">Double-cliquez sur l'icône Word.</p>
       </div>
     </div>
 
     <div class="box box-remember" style="margin-top:1.5rem;">
       <i class="fas fa-star"></i>
-      <div><strong>Page d'accueil de Word :</strong> Au lancement, Word affiche une page d'accueil. Vous pouvez y choisir « <strong>Document vierge</strong> » pour commencer un nouveau document, ou ouvrir un document existant dans la liste récente.</div>
+      <div><strong>Page d'accueil :</strong> Au lancement, Word propose « <strong>Document vierge</strong> » pour commencer, ou la liste des documents récents pour reprendre un travail.</div>
     </div>
     <div class="slide-footer"><span>NTIC SOLUTION — Formation Bureautique — Jour 2 : Microsoft Word</span><span class="page-indicator">5</span></div>
   </section>
@@ -867,23 +757,24 @@
     <h2>1.3 L'interface de Word en détail</h2>
     <p>L'écran de Word est organisé en <strong>zones distinctes</strong>. Apprendre à les reconnaître est essentiel pour travailler efficacement.</p>
 
-    <div style="background:#f8fafc; border-radius:16px; padding:1.5rem; margin-top:1.5rem; border:1px solid var(--bordure);">
+    <div class="table-wrapper" style="margin-top:1.5rem;">
       <table>
         <thead><tr><th style="width:5%;">N°</th><th style="width:22%;">Zone</th><th>Description</th></tr></thead>
         <tbody>
-          <tr><td>1</td><td><strong>Barre d'outils d'accès rapide</strong></td><td>Située tout en haut à gauche. Contient les boutons Enregistrer, Annuler, Répéter. Personnalisable.</td></tr>
-          <tr><td>2</td><td><strong>Barre de titre</strong></td><td>Affiche le nom du document. Si vous n'avez pas encore enregistré, il indique « Document1 ».</td></tr>
-          <tr><td>3</td><td><strong>Le Ruban</strong></td><td>C'est la barre d'outils principale, organisée en onglets (Accueil, Insertion, Création...). Cœur de Word.</td></tr>
-          <tr><td>4</td><td><strong>La règle</strong></td><td>Située en haut et à gauche de la page. Permet de visualiser et d'ajuster les marges.</td></tr>
-          <tr><td>5</td><td><strong>La zone de texte (page blanche)</strong></td><td>C'est ici que vous tapez votre texte. Le curseur clignotant indique où le texte apparaîtra.</td></tr>
-          <tr><td>6</td><td><strong>Barre d'état</strong></td><td>Tout en bas. Affiche le numéro de page, le nombre de mots, la langue, et le zoom.</td></tr>
+          <tr><td>1</td><td><strong>Barre d'outils d'accès rapide</strong></td><td>Située tout en haut à gauche. Contient Enregistrer <i class="fas fa-save"></i>, Annuler <i class="fas fa-undo"></i>, Répéter <i class="fas fa-redo"></i>. Entièrement personnalisable.</td></tr>
+          <tr><td>2</td><td><strong>Barre de titre</strong></td><td>Affiche le nom du document en cours. Si vous n'avez pas encore enregistré : « Document1 — Word ».</td></tr>
+          <tr><td>3</td><td><strong>Le Ruban</strong></td><td>La barre d'outils principale, organisée en <strong>onglets</strong> (Accueil, Insertion, Création...). C'est le cœur de Word. Chaque onglet affiche des groupes de commandes.</td></tr>
+          <tr><td>4</td><td><strong>La règle horizontale</strong></td><td>Située sous le Ruban. Permet de visualiser et d'ajuster les marges, les retraits et les taquets de tabulation.</td></tr>
+          <tr><td>5</td><td><strong>La zone de texte</strong></td><td>La page blanche au centre. C'est ici que vous tapez votre texte. Le <strong>curseur clignotant</strong> (barre verticale) indique où le texte apparaîtra.</td></tr>
+          <tr><td>6</td><td><strong>Barre d'état</strong></td><td>Tout en bas. Affiche : numéro de page, nombre de mots, langue du document, boutons de mode d'affichage, curseur de zoom.</td></tr>
+          <tr><td>7</td><td><strong>Ascenseurs</strong></td><td>Barres verticale (à droite) et horizontale (en bas) pour faire défiler le document.</td></tr>
         </tbody>
       </table>
     </div>
 
     <div class="box box-tip" style="margin-top:1.5rem;">
       <i class="fas fa-search-plus"></i>
-      <div><strong>Le zoom :</strong> En bas à droite, un curseur permet de zoomer ou dézoomer sur votre document. Cela ne change pas la taille d'impression, seulement l'affichage à l'écran.</div>
+      <div><strong>Le zoom :</strong> En bas à droite, le curseur de zoom agrandit ou réduit l'affichage. Cela ne modifie <strong>pas</strong> la taille d'impression, seulement le confort de lecture à l'écran.</div>
     </div>
     <div class="slide-footer"><span>NTIC SOLUTION — Formation Bureautique — Jour 2 : Microsoft Word</span><span class="page-indicator">6</span></div>
   </section>
@@ -895,12 +786,12 @@
       <span class="duration-badge">Essentiel</span>
     </div>
     <h2>1.4 Le Ruban : le cœur de Word</h2>
-    <p>Le <strong>Ruban</strong> est la barre d'outils principale de Word. Il est organisé en <strong>onglets</strong>. Chaque onglet regroupe des commandes par thème. Voici les onglets que vous utiliserez le plus.</p>
+    <p>Le <strong>Ruban</strong> est la barre d'outils principale. Il est organisé en <strong>onglets</strong> thématiques. Chaque onglet contient des <strong>groupes</strong> de commandes. Voici les onglets que vous utiliserez le plus.</p>
 
     <div class="ribbon-visual" style="margin-top:1.5rem;">
       <div>
-        <span class="ribbon-tab active-tab">Fichier</span>
-        <span class="ribbon-tab">Accueil</span>
+        <span class="ribbon-tab">Fichier</span>
+        <span class="ribbon-tab active-tab">Accueil</span>
         <span class="ribbon-tab">Insertion</span>
         <span class="ribbon-tab">Création</span>
         <span class="ribbon-tab">Disposition</span>
@@ -912,56 +803,61 @@
         <div class="ribbon-group"><i class="fas fa-font"></i><span>Police</span></div>
         <div class="ribbon-group"><i class="fas fa-paragraph"></i><span>Paragraphe</span></div>
         <div class="ribbon-group"><i class="fas fa-paint-brush"></i><span>Style</span></div>
+        <div class="ribbon-group"><i class="fas fa-edit"></i><span>Modification</span></div>
       </div>
     </div>
 
     <div class="table-wrapper" style="margin-top:1.5rem;">
       <table>
-        <thead><tr><th>Onglet</th><th>À quoi il sert</th><th>Exemples d'outils</th></tr></thead>
+        <thead><tr><th style="width:18%;">Onglet</th><th>Rôle principal</th><th style="width:35%;">Commandes essentielles</th></tr></thead>
         <tbody>
-          <tr><td><i class="far fa-file"></i> <strong>Fichier</strong></td><td>Gérer le document dans son ensemble</td><td>Nouveau, Ouvrir, Enregistrer, Imprimer, Exporter en PDF</td></tr>
-          <tr><td><i class="fas fa-home"></i> <strong>Accueil</strong></td><td>Toute la mise en forme du texte</td><td>Police, taille, gras, italique, couleur, alignement, listes</td></tr>
-          <tr><td><i class="fas fa-plus-square"></i> <strong>Insertion</strong></td><td>Ajouter des éléments dans le document</td><td>Images, tableaux, formes, en-tête, pied de page, numéro de page</td></tr>
-          <tr><td><i class="fas fa-paint-brush"></i> <strong>Création</strong></td><td>Appliquer un style global au document</td><td>Thèmes, couleurs, polices, bordures de page</td></tr>
-          <tr><td><i class="fas fa-ruler-combined"></i> <strong>Disposition</strong></td><td>Configurer la page</td><td>Marges, orientation (portrait/paysage), taille du papier, colonnes</td></tr>
-          <tr><td><i class="fas fa-check-double"></i> <strong>Révision</strong></td><td>Corriger et vérifier le document</td><td>Orthographe et grammaire, dictionnaire des synonymes, commentaires</td></tr>
+          <tr><td><i class="far fa-file"></i> <strong>Fichier</strong></td><td>Gérer le document</td><td>Nouveau, Ouvrir, Enregistrer, Enregistrer sous, Imprimer, Exporter en PDF, Fermer</td></tr>
+          <tr><td><i class="fas fa-home"></i> <strong>Accueil</strong></td><td>Mise en forme du texte</td><td>Police, taille, gras, italique, souligné, couleur, alignement, listes, interligne</td></tr>
+          <tr><td><i class="fas fa-plus-square"></i> <strong>Insertion</strong></td><td>Ajouter des éléments</td><td>Images, tableaux, formes, en-tête, pied de page, numéro de page, lien hypertexte</td></tr>
+          <tr><td><i class="fas fa-paint-brush"></i> <strong>Création</strong></td><td>Apparence globale</td><td>Thèmes, jeux de couleurs, polices, bordures de page, filigrane</td></tr>
+          <tr><td><i class="fas fa-ruler-combined"></i> <strong>Disposition</strong></td><td>Mise en page</td><td>Marges, orientation (Portrait/Paysage), taille du papier, colonnes, retraits</td></tr>
+          <tr><td><i class="fas fa-check-double"></i> <strong>Révision</strong></td><td>Correction</td><td>Orthographe et grammaire, dictionnaire des synonymes, compter les mots</td></tr>
+          <tr><td><i class="fas fa-eye"></i> <strong>Affichage</strong></td><td>Mode de visualisation</td><td>Mode Lecture, Page web, Plan, règle, quadrillage, zoom</td></tr>
         </tbody>
       </table>
     </div>
     <div class="slide-footer"><span>NTIC SOLUTION — Formation Bureautique — Jour 2 : Microsoft Word</span><span class="page-indicator">7</span></div>
   </section>
 
-  <!-- ====== MODULE 2 : SAISIR ET MODIFIER DU TEXTE ====== -->
+  <!-- ==================================================================================== -->
+  <!-- ====================  MODULE 2 : SAISIE ET MODIFICATION  =========================== -->
+  <!-- ==================================================================================== -->
+
   <!-- 2.1 Saisie de texte -->
   <section class="slide module-word" id="slide-m2a">
     <div class="slide-header">
       <span class="module-badge"><i class="fas fa-keyboard"></i> Module 2</span>
-      <span class="duration-badge">25 minutes</span>
+      <span class="duration-badge">20 minutes</span>
     </div>
     <h2>2.1 Saisir du texte dans Word</h2>
-    <p>La <strong>saisie de texte</strong> est l'action la plus fondamentale dans Word. Le texte s'écrit là où clignote le <strong>curseur</strong> (la barre verticale).</p>
+    <p>La <strong>saisie</strong> est l'action de taper du texte. Le texte s'écrit à l'endroit où clignote le <strong>curseur</strong> (la barre verticale). Voici les règles fondamentales.</p>
 
     <div class="grid-2" style="margin-top:1.5rem;">
       <div>
-        <h3 style="margin-top:0;"><i class="fas fa-i-cursor"></i> Règles de saisie essentielles</h3>
+        <h3 style="margin-top:0;"><i class="fas fa-i-cursor"></i> Règles de saisie</h3>
         <table style="font-size:0.9rem;">
           <tbody>
-            <tr><td style="padding:0.5rem;"><strong>Curseur</strong></td><td style="padding:0.5rem;">Barre verticale clignotante. Indique où le texte va apparaître.</td></tr>
-            <tr><td style="padding:0.5rem;"><strong>Saut de ligne</strong></td><td style="padding:0.5rem;">Touche <code>Entrée</code>. Passe à la ligne suivante, crée un nouveau paragraphe.</td></tr>
-            <tr><td style="padding:0.5rem;"><strong>Espace</strong></td><td style="padding:0.5rem;">Un seul espace entre chaque mot. Ne doublez jamais les espaces.</td></tr>
-            <tr><td style="padding:0.5rem;"><strong>Majuscule</strong></td><td style="padding:0.5rem;"><code>Maj + lettre</code> pour une majuscule en début de phrase.</td></tr>
-            <tr><td style="padding:0.5rem;"><strong>Accents</strong></td><td style="padding:0.5rem;">Tapez l'accent (^, ¨, ´, `) puis la lettre. Ou utilisez la touche directement.</td></tr>
+            <tr><td style="padding:0.5rem;"><strong>Curseur</strong></td><td style="padding:0.5rem;">Barre verticale clignotante. Indique où le texte apparaîtra. Déplacez-le en cliquant ailleurs dans le texte.</td></tr>
+            <tr><td style="padding:0.5rem;"><strong>Saut de ligne</strong></td><td style="padding:0.5rem;">Touche <code>Entrée</code>. Passe à la ligne suivante et crée un <strong>nouveau paragraphe</strong>.</td></tr>
+            <tr><td style="padding:0.5rem;"><strong>Espace</strong></td><td style="padding:0.5rem;"><strong>Un seul espace</strong> entre chaque mot. Ne doublez jamais les espaces.</td></tr>
+            <tr><td style="padding:0.5rem;"><strong>Majuscule accentuée</strong></td><td style="padding:0.5rem;">Maintenez <code>Maj</code> + tapez l'accent, puis la lettre. Exemple : <code>Maj+´</code> puis <code>E</code> = É.</td></tr>
+            <tr><td style="padding:0.5rem;"><strong>Retour automatique</strong></td><td style="padding:0.5rem;">Quand vous atteignez la fin d'une ligne, Word passe automatiquement à la ligne suivante. N'appuyez pas sur Entrée.</td></tr>
           </tbody>
         </table>
       </div>
       <div>
-        <h3 style="margin-top:0;"><i class="fas fa-arrow-left"></i> Corriger ses erreurs</h3>
+        <h3 style="margin-top:0;"><i class="fas fa-backspace"></i> Corriger ses erreurs</h3>
         <table style="font-size:0.9rem;">
           <tbody>
-            <tr><td style="padding:0.5rem;"><code>Retour arrière</code></td><td style="padding:0.5rem;">Efface le caractère <strong>à gauche</strong> du curseur.</td></tr>
+            <tr><td style="padding:0.5rem;"><code>Retour arrière ←</code></td><td style="padding:0.5rem;">Efface le caractère <strong>à gauche</strong> du curseur.</td></tr>
             <tr><td style="padding:0.5rem;"><code>Suppr</code></td><td style="padding:0.5rem;">Efface le caractère <strong>à droite</strong> du curseur.</td></tr>
-            <tr><td style="padding:0.5rem;"><code>Ctrl+Z</code></td><td style="padding:0.5rem;">Annule la dernière action. Mémorisez ce raccourci !</td></tr>
-            <tr><td style="padding:0.5rem;"><code>Ctrl+Y</code></td><td style="padding:0.5rem;">Rétablit l'action annulée (le « contraire » de Ctrl+Z).</td></tr>
+            <tr><td style="padding:0.5rem;"><code>Ctrl+Z</code></td><td style="padding:0.5rem;"><strong>Annule</strong> la dernière action. Le raccourci le plus utile après Ctrl+S.</td></tr>
+            <tr><td style="padding:0.5rem;"><code>Ctrl+Y</code></td><td style="padding:0.5rem;"><strong>Rétablit</strong> l'action annulée (le « contraire » de Ctrl+Z).</td></tr>
           </tbody>
         </table>
       </div>
@@ -971,7 +867,7 @@
       <i class="fas fa-hand-pointer"></i>
       <div><strong>Exercice pratique :</strong> Ouvrez un document vierge. Tapez le paragraphe suivant :<br><br>
       « NTIC SOLUTION est une entreprise burkinabè basée à Banfora, dans le Secteur 15, Quartier Tatana. Elle propose des services numériques innovants : création de sites web, développement d'applications, formations en bureautique et en programmation. »<br><br>
-      <em>Ne vous préoccupez pas des fautes de frappe. Utilisez Retour arrière pour corriger, et Ctrl+Z si vous faites une erreur importante.</em></div>
+      <em>Ne vous préoccupez pas des fautes. Utilisez Retour arrière pour corriger et Ctrl+Z si nécessaire.</em></div>
     </div>
     <div class="slide-footer"><span>NTIC SOLUTION — Formation Bureautique — Jour 2 : Microsoft Word</span><span class="page-indicator">8</span></div>
   </section>
@@ -982,7 +878,7 @@
       <span class="module-badge"><i class="fas fa-keyboard"></i> Module 2</span>
     </div>
     <h2>2.2 Sélectionner du texte</h2>
-    <p>Avant de modifier du texte, il faut le <strong>sélectionner</strong>. Le texte sélectionné apparaît <strong>surligné en gris</strong>. Voici toutes les méthodes.</p>
+    <p>Avant de modifier du texte (le supprimer, le mettre en forme, le déplacer), il faut d'abord le <strong>sélectionner</strong>. Le texte sélectionné apparaît <strong>surligné en gris</strong>.</p>
 
     <div class="grid-2" style="margin-top:1.5rem;">
       <div>
@@ -990,10 +886,11 @@
         <table style="font-size:0.9rem;">
           <tbody>
             <tr><td style="padding:0.5rem;"><strong>Un mot</strong></td><td style="padding:0.5rem;">Double-clic sur le mot.</td></tr>
-            <tr><td style="padding:0.5rem;"><strong>Une ligne</strong></td><td style="padding:0.5rem;">Cliquez dans la marge gauche, en face de la ligne.</td></tr>
+            <tr><td style="padding:0.5rem;"><strong>Une phrase</strong></td><td style="padding:0.5rem;">Maintenez <code>Ctrl</code> + cliquez n'importe où dans la phrase.</td></tr>
+            <tr><td style="padding:0.5rem;"><strong>Une ligne</strong></td><td style="padding:0.5rem;">Cliquez dans la marge gauche, en face de la ligne (le curseur devient une flèche blanche).</td></tr>
             <tr><td style="padding:0.5rem;"><strong>Un paragraphe</strong></td><td style="padding:0.5rem;">Triple-clic n'importe où dans le paragraphe.</td></tr>
-            <tr><td style="padding:0.5rem;"><strong>Une zone libre</strong></td><td style="padding:0.5rem;">Cliquez au début, maintenez, faites glisser jusqu'à la fin.</td></tr>
-            <tr><td style="padding:0.5rem;"><strong>Tout le document</strong></td><td style="padding:0.5rem;"><code>Ctrl+A</code> (ou triple-clic dans la marge gauche).</td></tr>
+            <tr><td style="padding:0.5rem;"><strong>Une zone libre</strong></td><td style="padding:0.5rem;">Cliquez au début de la zone, maintenez le clic, faites glisser jusqu'à la fin.</td></tr>
+            <tr><td style="padding:0.5rem;"><strong>Tout le document</strong></td><td style="padding:0.5rem;"><code>Ctrl+A</code>.</td></tr>
           </tbody>
         </table>
       </div>
@@ -1001,10 +898,11 @@
         <h3 style="margin-top:0;"><i class="fas fa-keyboard"></i> Avec le clavier</h3>
         <table style="font-size:0.9rem;">
           <tbody>
-            <tr><td style="padding:0.5rem;"><code>Shift + flèche droite</code></td><td style="padding:0.5rem;">Sélectionne caractère par caractère.</td></tr>
-            <tr><td style="padding:0.5rem;"><code>Shift + flèche bas</code></td><td style="padding:0.5rem;">Sélectionne ligne par ligne.</td></tr>
-            <tr><td style="padding:0.5rem;"><code>Ctrl+Shift+flèche</code></td><td style="padding:0.5rem;">Sélectionne mot par mot.</td></tr>
-            <tr><td style="padding:0.5rem;"><code>Ctrl+A</code></td><td style="padding:0.5rem;">Sélectionne tout le document.</td></tr>
+            <tr><td style="padding:0.5rem;"><code>Shift + →</code></td><td style="padding:0.5rem;">Sélectionne caractère par caractère vers la droite.</td></tr>
+            <tr><td style="padding:0.5rem;"><code>Shift + ↓</code></td><td style="padding:0.5rem;">Sélectionne ligne par ligne vers le bas.</td></tr>
+            <tr><td style="padding:0.5rem;"><code>Ctrl+Shift+→</code></td><td style="padding:0.5rem;">Sélectionne mot par mot.</td></tr>
+            <tr><td style="padding:0.5rem;"><code>Shift+Fin</code></td><td style="padding:0.5rem;">Sélectionne jusqu'à la fin de la ligne.</td></tr>
+            <tr><td style="padding:0.5rem;"><code>Ctrl+Shift+Fin</code></td><td style="padding:0.5rem;">Sélectionne jusqu'à la fin du document.</td></tr>
           </tbody>
         </table>
       </div>
@@ -1012,95 +910,103 @@
 
     <div class="box box-tip" style="margin-top:1.5rem;">
       <i class="fas fa-lightbulb"></i>
-      <div><strong>Une fois le texte sélectionné,</strong> vous pouvez le <strong>supprimer</strong> (touche Suppr), le <strong>remplacer</strong> (tapez directement le nouveau texte), le <strong>copier</strong> (Ctrl+C), le <strong>couper</strong> (Ctrl+X) ou le <strong>coller</strong> (Ctrl+V).</div>
+      <div><strong>Une fois le texte sélectionné</strong>, vous pouvez le <strong>supprimer</strong> (touche Suppr), le <strong>remplacer</strong> (tapez directement), le <strong>copier</strong> (Ctrl+C), le <strong>couper</strong> (Ctrl+X) ou le <strong>coller</strong> (Ctrl+V) ailleurs.</div>
     </div>
     <div class="slide-footer"><span>NTIC SOLUTION — Formation Bureautique — Jour 2 : Microsoft Word</span><span class="page-indicator">9</span></div>
   </section>
 
-  <!-- 2.3 Déplacer et copier du texte -->
+  <!-- 2.3 Déplacer et copier -->
   <section class="slide module-word" id="slide-m2c">
     <div class="slide-header">
       <span class="module-badge"><i class="fas fa-keyboard"></i> Module 2</span>
     </div>
     <h2>2.3 Déplacer, copier et coller du texte</h2>
-    <p>Ces trois opérations sont <strong>fondamentales</strong>. Elles vous évitent de retaper du texte déjà écrit. Vous les avez vues hier avec les fichiers : le principe est le même pour le texte.</p>
+    <p>Ces trois opérations sont <strong>fondamentales</strong>. Elles vous évitent de retaper du texte déjà écrit. Le principe est exactement le même que pour les fichiers dans l'Explorateur Windows.</p>
 
     <div class="grid-3" style="margin-top:1.5rem;">
       <div class="card">
-        <i class="fas fa-copy fa-2x" style="color:#2b579a;"></i>
+        <i class="fas fa-copy fa-2x" style="color:var(--word-blue);"></i>
         <h3>Copier</h3>
-        <p><code>Ctrl+C</code></p>
-        <p style="font-size:0.9rem;">Le texte sélectionné est dupliqué dans la mémoire de l'ordinateur. L'original reste en place.</p>
+        <p><code><strong>Ctrl+C</strong></code></p>
+        <p style="font-size:0.9rem;">Le texte sélectionné est dupliqué dans la mémoire. L'original <strong>reste en place</strong>.</p>
       </div>
       <div class="card">
         <i class="fas fa-cut fa-2x" style="color:var(--orange);"></i>
         <h3>Couper</h3>
-        <p><code>Ctrl+X</code></p>
-        <p style="font-size:0.9rem;">Le texte sélectionné est retiré et placé en mémoire. Il disparaît de son emplacement d'origine.</p>
+        <p><code><strong>Ctrl+X</strong></code></p>
+        <p style="font-size:0.9rem;">Le texte sélectionné est retiré et placé en mémoire. Il <strong>disparaît</strong> de son emplacement.</p>
       </div>
       <div class="card">
         <i class="fas fa-paste fa-2x" style="color:#059669;"></i>
         <h3>Coller</h3>
-        <p><code>Ctrl+V</code></p>
-        <p style="font-size:0.9rem;">Le texte en mémoire est déposé à l'endroit où se trouve le curseur.</p>
+        <p><code><strong>Ctrl+V</strong></code></p>
+        <p style="font-size:0.9rem;">Le texte en mémoire est <strong>déposé</strong> à l'endroit où se trouve le curseur.</p>
       </div>
     </div>
 
     <div class="box box-warning" style="margin-top:1.5rem;">
       <i class="fas fa-exclamation-triangle"></i>
-      <div><strong>Attention :</strong> Le Copier-Coller est très pratique, mais ne l'utilisez pas pour dupliquer du texte plagié. Pour vos propres documents, c'est un outil de productivité formidable.</div>
+      <div><strong>Attention :</strong> Le contenu copié ou coupé reste en mémoire <strong>jusqu'à ce que vous copiiez autre chose</strong> ou que vous éteigniez l'ordinateur. Vous pouvez coller (Ctrl+V) <strong>autant de fois que vous voulez</strong>.</div>
     </div>
     <div class="slide-footer"><span>NTIC SOLUTION — Formation Bureautique — Jour 2 : Microsoft Word</span><span class="page-indicator">10</span></div>
   </section>
 
-  <!-- ====== MODULE 3 : METTRE EN FORME ====== -->
+  <!-- ==================================================================================== -->
+  <!-- ====================  MODULE 3 : MISE EN FORME DU TEXTE  =========================== -->
+  <!-- ==================================================================================== -->
+
   <!-- 3.1 Police de caractères -->
   <section class="slide module-word" id="slide-m3a">
     <div class="slide-header">
       <span class="module-badge"><i class="fas fa-font"></i> Module 3</span>
-      <span class="duration-badge">30 minutes</span>
+      <span class="duration-badge">25 minutes</span>
     </div>
     <h2>3.1 La mise en forme des caractères (Police)</h2>
-    <p>La <strong>mise en forme</strong> consiste à modifier l'apparence du texte pour le rendre plus lisible, plus attractif ou plus professionnel. Tous les outils se trouvent dans l'onglet <strong>Accueil</strong>, groupe <strong>Police</strong>.</p>
+    <p>La <strong>mise en forme</strong> des caractères modifie l'apparence du texte. Tous les outils se trouvent dans l'onglet <strong>Accueil</strong>, groupe <strong>Police</strong>. Voici les commandes essentielles.</p>
 
     <div class="table-wrapper" style="margin-top:1.5rem;">
       <table>
-        <thead><tr><th style="width:5%;">N°</th><th style="width:18%;">Outil</th><th style="width:12%;">Icône</th><th>Effet</th><th>Exemple</th></tr></thead>
+        <thead><tr><th style="width:5%;">N°</th><th style="width:20%;">Outil</th><th style="width:10%;">Icône / Raccourci</th><th>Description</th><th>Exemple visuel</th></tr></thead>
         <tbody>
           <tr>
             <td>1</td><td><strong>Police</strong></td><td><i class="fas fa-font"></i></td>
-            <td>Change le style d'écriture. Il existe des centaines de polices.</td>
-            <td><span style="font-family:'Times New Roman';">Times New Roman</span>, <span style="font-family:Arial;">Arial</span>, <span style="font-family:'Courier New';">Courier New</span></td>
+            <td>Change le style des caractères. Word propose des centaines de polices.</td>
+            <td><span style="font-family:'Times New Roman';">Times New Roman</span> — <span style="font-family:Arial;">Arial</span> — <span style="font-family:'Courier New';">Courier New</span></td>
           </tr>
           <tr>
             <td>2</td><td><strong>Taille</strong></td><td><i class="fas fa-text-height"></i></td>
-            <td>Agrandit ou réduit les caractères. Se mesure en points (pt).</td>
-            <td><span style="font-size:0.8rem;">8 pt</span> — <span style="font-size:1rem;">12 pt</span> — <span style="font-size:1.4rem;">18 pt</span></td>
+            <td>Agrandit ou réduit le texte. Se mesure en <strong>points (pt)</strong>. Le standard professionnel est 12 pt.</td>
+            <td><span style="font-size:0.8rem;">8 pt</span> — <span style="font-size:1rem;">12 pt</span> — <span style="font-size:1.4rem;">18 pt</span> — <span style="font-size:1.8rem;">24 pt</span></td>
           </tr>
           <tr>
             <td>3</td><td><strong>Gras</strong></td><td><i class="fas fa-bold"></i> <code>Ctrl+G</code></td>
-            <td>Épaissit les caractères. Pour faire ressortir un mot important.</td>
+            <td>Épaissit les caractères. Pour les titres, les mots-clés, les informations importantes.</td>
             <td><strong>Texte en gras</strong></td>
           </tr>
           <tr>
             <td>4</td><td><strong>Italique</strong></td><td><i class="fas fa-italic"></i> <code>Ctrl+I</code></td>
-            <td>Penche les caractères. Pour une citation, un titre d'ouvrage.</td>
+            <td>Penche les caractères vers la droite. Pour les citations, les titres d'œuvres, les mots étrangers.</td>
             <td><em>Texte en italique</em></td>
           </tr>
           <tr>
             <td>5</td><td><strong>Souligné</strong></td><td><i class="fas fa-underline"></i> <code>Ctrl+U</code></td>
-            <td>Souligne le texte. Pour insister sur un point.</td>
+            <td>Souligne le texte. Cliquez sur la flèche pour choisir le style de soulignement.</td>
             <td><u>Texte souligné</u></td>
           </tr>
           <tr>
-            <td>6</td><td><strong>Couleur</strong></td><td><i class="fas fa-palette"></i></td>
-            <td>Change la couleur du texte. Cliquez sur la flèche pour choisir.</td>
-            <td><span style="color:#dc2626;">Rouge</span>, <span style="color:#059669;">Vert</span>, <span style="color:#2b579a;">Bleu</span></td>
+            <td>6</td><td><strong>Couleur de police</strong></td><td><i class="fas fa-palette"></i></td>
+            <td>Change la couleur du texte. Cliquez sur la flèche pour afficher la palette.</td>
+            <td><span style="color:#dc2626;">Rouge</span> — <span style="color:#059669;">Vert</span> — <span style="color:var(--word-blue);">Bleu</span></td>
           </tr>
           <tr>
             <td>7</td><td><strong>Surlignage</strong></td><td><i class="fas fa-highlighter"></i></td>
             <td>Applique un fond coloré derrière le texte, comme un marqueur fluo.</td>
             <td><span style="background:#fef3c7;">Texte surligné en jaune</span></td>
+          </tr>
+          <tr>
+            <td>8</td><td><strong>Effacer la mise en forme</strong></td><td><i class="fas fa-eraser"></i></td>
+            <td>Supprime toute la mise en forme et revient au texte brut par défaut.</td>
+            <td>Très utile pour « nettoyer » un texte copié d'Internet.</td>
           </tr>
         </tbody>
       </table>
@@ -1108,7 +1014,7 @@
 
     <div class="box box-tip" style="margin-top:1.5rem;">
       <i class="fas fa-lightbulb"></i>
-      <div><strong>Astuce :</strong> Vous pouvez modifier la mise en forme <strong>avant</strong> de taper (activez le gras, puis tapez) ou <strong>après</strong> (sélectionnez le texte, puis appliquez la mise en forme).</div>
+      <div><strong>Deux méthodes :</strong> Vous pouvez appliquer la mise en forme <strong>avant</strong> de taper (activez le gras, puis tapez) ou <strong>après</strong> (sélectionnez le texte déjà écrit, puis appliquez la mise en forme).</div>
     </div>
     <div class="slide-footer"><span>NTIC SOLUTION — Formation Bureautique — Jour 2 : Microsoft Word</span><span class="page-indicator">11</span></div>
   </section>
@@ -1119,39 +1025,39 @@
       <span class="module-badge"><i class="fas fa-paragraph"></i> Module 3</span>
     </div>
     <h2>3.2 La mise en forme des paragraphes</h2>
-    <p>Un <strong>paragraphe</strong> est un bloc de texte qui se termine par un saut de ligne (touche <code>Entrée</code>). La mise en forme d'un paragraphe concerne son <strong>alignement</strong>, son <strong>retrait</strong> et son <strong>interligne</strong>.</p>
+    <p>Un <strong>paragraphe</strong> est un bloc de texte se terminant par la touche <code>Entrée</code>. Sa mise en forme concerne l'<strong>alignement</strong>, l'<strong>interligne</strong> et les <strong>retraits</strong>. Ces outils sont dans l'onglet <strong>Accueil</strong>, groupe <strong>Paragraphe</strong>.</p>
 
     <div class="grid-2" style="margin-top:1.5rem;">
       <div>
-        <h3 style="margin-top:0;"><i class="fas fa-align-left"></i> Les 4 types d'alignement</h3>
+        <h3 style="margin-top:0;"><i class="fas fa-align-left"></i> Les 4 alignements</h3>
         <div class="table-wrapper">
           <table>
-            <thead><tr><th>Alignement</th><th>Icône</th><th>Usage</th></tr></thead>
+            <thead><tr><th>Type</th><th>Icône</th><th>Usage recommandé</th></tr></thead>
             <tbody>
-              <tr><td><strong>Gauche</strong></td><td><i class="fas fa-align-left"></i></td><td>Standard, utilisé pour presque tout.</td></tr>
-              <tr><td><strong>Centré</strong></td><td><i class="fas fa-align-center"></i></td><td>Titres, invitations, affiches.</td></tr>
-              <tr><td><strong>Droite</strong></td><td><i class="fas fa-align-right"></i></td><td>Dates, signatures en haut à droite.</td></tr>
-              <tr><td><strong>Justifié</strong></td><td><i class="fas fa-align-justify"></i></td><td>Rapports, journaux. Texte aligné des deux côtés.</td></tr>
+              <tr><td><strong>Gauche</strong></td><td><i class="fas fa-align-left"></i></td><td>Standard. Pour le corps du texte.</td></tr>
+              <tr><td><strong>Centré</strong></td><td><i class="fas fa-align-center"></i></td><td>Titres principaux, invitations.</td></tr>
+              <tr><td><strong>Droite</strong></td><td><i class="fas fa-align-right"></i></td><td>Dates, signatures, en-têtes.</td></tr>
+              <tr><td><strong>Justifié</strong></td><td><i class="fas fa-align-justify"></i></td><td>Rapports, lettres officielles.</td></tr>
             </tbody>
           </table>
         </div>
       </div>
       <div>
-        <h3 style="margin-top:0;"><i class="fas fa-indent"></i> Retrait et interligne</h3>
-        <p><strong>Retrait :</strong> décale le paragraphe vers la droite. Utilisez les boutons « Augmenter le retrait » et « Diminuer le retrait ».</p>
-        <p><strong>Interligne :</strong> espace vertical entre les lignes d'un paragraphe. Bouton <i class="fas fa-text-height"></i> « Interligne » dans le groupe Paragraphe.</p>
-        <ul style="padding-left:1.2rem; margin-top:0.5rem;">
-          <li><strong>1,0</strong> : compact (brouillon)</li>
+        <h3 style="margin-top:0;"><i class="fas fa-text-height"></i> Interligne et retraits</h3>
+        <p><strong>Interligne :</strong> espacement vertical entre les lignes. Bouton <i class="fas fa-text-height"></i> dans le groupe Paragraphe.</p>
+        <ul style="padding-left:1.2rem; margin:0.8rem 0;">
+          <li><strong>1,0</strong> : compact</li>
           <li><strong>1,15</strong> : standard Word</li>
           <li><strong>1,5</strong> : recommandé pour les rapports</li>
           <li><strong>2,0</strong> : double interligne (mémoires)</li>
         </ul>
+        <p><strong>Retrait :</strong> décale le paragraphe vers la droite. Boutons <i class="fas fa-indent"></i> « Augmenter le retrait » et « Diminuer le retrait ».</p>
       </div>
     </div>
 
     <div class="box box-remember" style="margin-top:1.5rem;">
       <i class="fas fa-star"></i>
-      <div><strong>Exercice :</strong> Reprenez le texte saisi précédemment. Mettez le titre en <strong>gras, centré, taille 18</strong>. Mettez le corps du texte en <strong>justifié, interligne 1,5</strong>. Mettez « NTIC SOLUTION » en <strong>bleu et en gras</strong>.</div>
+      <div><strong>Exercice :</strong> Reprenez le texte saisi précédemment. Mettez le titre en <strong>gras, centré, taille 18</strong>. Mettez le corps en <strong>justifié, interligne 1,5</strong>. Mettez « NTIC SOLUTION » en <strong>bleu et gras</strong>.</div>
     </div>
     <div class="slide-footer"><span>NTIC SOLUTION — Formation Bureautique — Jour 2 : Microsoft Word</span><span class="page-indicator">12</span></div>
   </section>
@@ -1161,107 +1067,238 @@
     <div class="slide-header">
       <span class="module-badge"><i class="fas fa-list"></i> Module 3</span>
     </div>
-    <h2>3.3 Créer des listes</h2>
-    <p>Les <strong>listes</strong> structurent l'information et la rendent plus facile à lire. Word propose deux types de listes automatiques.</p>
+    <h2>3.3 Créer des listes à puces et numérotées</h2>
+    <p>Les <strong>listes</strong> structurent l'information. Word propose deux types de listes automatiques, accessibles dans l'onglet <strong>Accueil</strong>, groupe <strong>Paragraphe</strong>.</p>
 
     <div class="grid-2" style="margin-top:1.5rem;">
       <div>
         <h3 style="margin-top:0;"><i class="fas fa-list-ul"></i> Liste à puces</h3>
-        <p>Chaque élément est précédé d'un symbole (puce). Idéal pour énumérer des points sans ordre particulier.</p>
+        <p>Chaque élément est précédé d'un <strong>symbole</strong> (puce). Pour énumérer des points <strong>sans ordre</strong> particulier.</p>
         <div style="background:#f8fafc; border-radius:12px; padding:1rem; margin-top:0.8rem;">
-          <p style="margin:0;"><i class="fas fa-circle" style="font-size:0.4rem; vertical-align:middle; margin-right:0.5rem;"></i> Création de sites web</p>
-          <p style="margin:0;"><i class="fas fa-circle" style="font-size:0.4rem; vertical-align:middle; margin-right:0.5rem;"></i> Développement d'applications</p>
-          <p style="margin:0;"><i class="fas fa-circle" style="font-size:0.4rem; vertical-align:middle; margin-right:0.5rem;"></i> Formations en bureautique</p>
-          <p style="margin:0;"><i class="fas fa-circle" style="font-size:0.4rem; vertical-align:middle; margin-right:0.5rem;"></i> Consulting digital</p>
+          <p style="margin:0.3rem 0;"><i class="fas fa-circle" style="font-size:0.4rem; vertical-align:middle; margin-right:0.5rem;"></i> Création de sites web</p>
+          <p style="margin:0.3rem 0;"><i class="fas fa-circle" style="font-size:0.4rem; vertical-align:middle; margin-right:0.5rem;"></i> Développement d'applications</p>
+          <p style="margin:0.3rem 0;"><i class="fas fa-circle" style="font-size:0.4rem; vertical-align:middle; margin-right:0.5rem;"></i> Formations en bureautique</p>
+          <p style="margin:0.3rem 0;"><i class="fas fa-circle" style="font-size:0.4rem; vertical-align:middle; margin-right:0.5rem;"></i> Consulting digital</p>
         </div>
-        <p style="margin-top:0.8rem;">Pour créer une liste à puces : tapez <code>*</code> suivi d'un espace, ou cliquez sur le bouton <i class="fas fa-list-ul"></i> dans l'onglet Accueil.</p>
+        <p style="margin-top:0.8rem;">Pour créer : tapez <code>*</code> suivi d'un espace, ou cliquez sur <i class="fas fa-list-ul"></i>.</p>
       </div>
       <div>
         <h3 style="margin-top:0;"><i class="fas fa-list-ol"></i> Liste numérotée</h3>
-        <p>Chaque élément est précédé d'un numéro. Idéal pour des étapes, un classement, un mode d'emploi.</p>
+        <p>Chaque élément est précédé d'un <strong>numéro</strong>. Pour des étapes, un classement, un mode d'emploi.</p>
         <div style="background:#f8fafc; border-radius:12px; padding:1rem; margin-top:0.8rem;">
-          <p style="margin:0;">1. Allumer l'ordinateur</p>
-          <p style="margin:0;">2. Ouvrir Microsoft Word</p>
-          <p style="margin:0;">3. Créer un nouveau document</p>
-          <p style="margin:0;">4. Saisir votre texte</p>
-          <p style="margin:0;">5. Enregistrer (Ctrl+S)</p>
+          <p style="margin:0.3rem 0;">1. Allumer l'ordinateur</p>
+          <p style="margin:0.3rem 0;">2. Ouvrir Microsoft Word</p>
+          <p style="margin:0.3rem 0;">3. Créer un nouveau document</p>
+          <p style="margin:0.3rem 0;">4. Saisir votre texte</p>
+          <p style="margin:0.3rem 0;">5. Enregistrer (Ctrl+S)</p>
         </div>
-        <p style="margin-top:0.8rem;">Pour créer une liste numérotée : tapez <code>1.</code> suivi d'un espace, ou cliquez sur le bouton <i class="fas fa-list-ol"></i>.</p>
+        <p style="margin-top:0.8rem;">Pour créer : tapez <code>1.</code> suivi d'un espace, ou cliquez sur <i class="fas fa-list-ol"></i>.</p>
       </div>
     </div>
 
     <div class="box box-tip" style="margin-top:1.5rem;">
       <i class="fas fa-keyboard"></i>
-      <div><strong>Raccourci :</strong> Appuyez sur <code>Tab</code> pour créer un <strong>sous-niveau</strong> dans une liste (indentation). Appuyez sur <code>Shift+Tab</code> pour revenir au niveau précédent.</div>
+      <div><strong>Hiérarchie :</strong> Appuyez sur <code>Tab</code> pour créer un <strong>sous-niveau</strong> (indentation). Appuyez sur <code>Shift+Tab</code> pour revenir au niveau précédent.</div>
     </div>
     <div class="slide-footer"><span>NTIC SOLUTION — Formation Bureautique — Jour 2 : Microsoft Word</span><span class="page-indicator">13</span></div>
   </section>
 
-  <!-- ====== MODULE 4 : IMAGES ET TABLEAUX ====== -->
-  <!-- 4.1 Insérer une image -->
+  <!-- ==================================================================================== -->
+  <!-- ====================  MODULE 4 : MISE EN PAGE  ===================================== -->
+  <!-- ==================================================================================== -->
+
+  <!-- 4.1 Marges et orientation -->
   <section class="slide module-word" id="slide-m4a">
     <div class="slide-header">
-      <span class="module-badge"><i class="fas fa-image"></i> Module 4</span>
-      <span class="duration-badge">20 minutes</span>
+      <span class="module-badge"><i class="fas fa-ruler-combined"></i> Module 4</span>
+      <span class="duration-badge">15 minutes</span>
     </div>
-    <h2>4.1 Insérer et manipuler des images</h2>
+    <h2>4.1 Les marges et l'orientation de la page</h2>
+    <p>La <strong>mise en page</strong> définit l'apparence globale du document : ses marges, son orientation, son format de papier. Ces réglages se trouvent dans l'onglet <strong>Disposition</strong>.</p>
+
+    <div class="grid-2" style="margin-top:1.5rem;">
+      <div>
+        <h3 style="margin-top:0;"><i class="fas fa-arrows-alt-h"></i> Les marges</h3>
+        <p>Les <strong>marges</strong> sont les espaces blancs autour du texte, entre le texte et les bords de la page. Elles rendent le document plus lisible et permettent de relier les pages.</p>
+        <p>Onglet <strong>Disposition</strong> → <strong>Marges</strong>.</p>
+        <ul style="padding-left:1.2rem; margin-top:0.5rem;">
+          <li><strong>Normales :</strong> 2,54 cm (standard)</li>
+          <li><strong>Étroites :</strong> 1,27 cm</li>
+          <li><strong>Modérées :</strong> 2,54 cm haut/bas, 1,91 cm gauche/droite</li>
+          <li><strong>Personnalisées :</strong> vous définissez chaque valeur</li>
+        </ul>
+      </div>
+      <div>
+        <h3 style="margin-top:0;"><i class="fas fa-sync-alt"></i> L'orientation</h3>
+        <p>L'<strong>orientation</strong> détermine le sens de la page. Onglet <strong>Disposition</strong> → <strong>Orientation</strong>.</p>
+        <div class="grid-2" style="margin-top:1rem; gap:1rem;">
+          <div class="card"><i class="fas fa-file-alt fa-2x"></i><h4>Portrait</h4><p style="font-size:0.85rem;">Vertical. Standard pour les lettres, rapports.</p></div>
+          <div class="card"><i class="fas fa-file-alt fa-2x" style="transform:rotate(90deg);"></i><h4>Paysage</h4><p style="font-size:0.85rem;">Horizontal. Pour les tableaux larges, affiches.</p></div>
+        </div>
+        <p style="margin-top:0.8rem;"><strong>Format :</strong> Disposition → <strong>Taille</strong>. Le standard est <strong>A4</strong> (21 × 29,7 cm).</p>
+      </div>
+    </div>
+
+    <div class="layout-demo" style="margin-top:1.5rem;">
+      <p style="font-weight:700; margin-bottom:0.5rem;">Schéma d'une page A4 avec marges</p>
+      <div class="margin-zone">
+        <p style="font-size:0.8rem; margin:0;">Marge supérieure (2,54 cm)</p>
+        <div class="content-zone">
+          <p style="margin:0; font-weight:600;">Zone de texte</p>
+          <p style="font-size:0.85rem; margin:0;">Votre contenu s'affiche ici</p>
+        </div>
+        <p style="font-size:0.8rem; margin:0;">Marge inférieure (2,54 cm)</p>
+      </div>
+      <p style="font-size:0.75rem; margin-top:0.3rem;">Marges gauche et droite : 2,54 cm chacune</p>
+    </div>
+    <div class="slide-footer"><span>NTIC SOLUTION — Formation Bureautique — Jour 2 : Microsoft Word</span><span class="page-indicator">14</span></div>
+  </section>
+
+  <!-- 4.2 Sauts de page -->
+  <section class="slide module-word" id="slide-m4b">
+    <div class="slide-header">
+      <span class="module-badge"><i class="fas fa-ruler-combined"></i> Module 4</span>
+    </div>
+    <h2>4.2 Les sauts de page</h2>
+    <p>Un <strong>saut de page</strong> force le texte à commencer <strong>en haut de la page suivante</strong>, même si la page actuelle n'est pas pleine. C'est indispensable pour structurer un document long.</p>
+
+    <div class="grid-2" style="margin-top:1.5rem;">
+      <div>
+        <h3 style="margin-top:0;"><i class="fas fa-arrow-down"></i> Quand utiliser un saut de page ?</h3>
+        <ul style="padding-left:1.2rem;">
+          <li style="margin-bottom:0.5rem;">Pour commencer un <strong>nouveau chapitre</strong></li>
+          <li style="margin-bottom:0.5rem;">Pour placer un <strong>tableau</strong> en haut d'une page</li>
+          <li style="margin-bottom:0.5rem;">Pour éviter qu'un <strong>titre</strong> reste seul en bas de page</li>
+          <li>Pour <strong>aérer</strong> un document</li>
+        </ul>
+      </div>
+      <div>
+        <h3 style="margin-top:0;"><i class="fas fa-keyboard"></i> Comment faire ?</h3>
+        <p><strong>Méthode 1 (raccourci) :</strong> <code>Ctrl + Entrée</code>. C'est la méthode la plus rapide. Le curseur saute immédiatement en haut de la page suivante.</p>
+        <p><strong>Méthode 2 (menu) :</strong> Onglet <strong>Insertion</strong> → <strong>Saut de page</strong>.</p>
+      </div>
+    </div>
+
+    <div class="box box-warning" style="margin-top:1.5rem;">
+      <i class="fas fa-exclamation-triangle"></i>
+      <div><strong>À ne pas confondre :</strong> N'appuyez <strong>pas</strong> plusieurs fois sur <code>Entrée</code> pour descendre en bas de page. Cela crée des lignes vides qui se décaleront si vous modifiez le texte plus haut. Utilisez toujours <code>Ctrl+Entrée</code> pour un saut de page propre.</div>
+    </div>
+    <div class="slide-footer"><span>NTIC SOLUTION — Formation Bureautique — Jour 2 : Microsoft Word</span><span class="page-indicator">15</span></div>
+  </section>
+
+  <!-- 4.3 En-tête et pied de page -->
+  <section class="slide module-word" id="slide-m4c">
+    <div class="slide-header">
+      <span class="module-badge"><i class="fas fa-ruler-combined"></i> Module 4</span>
+    </div>
+    <h2>4.3 En-tête et pied de page</h2>
+    <p>L'<strong>en-tête</strong> et le <strong>pied de page</strong> sont des zones répétées automatiquement sur <strong>toutes les pages</strong> du document. On y place le logo, le titre, la date, le numéro de page.</p>
+
+    <div class="grid-2" style="margin-top:1.5rem;">
+      <div>
+        <h3 style="margin-top:0;"><i class="fas fa-arrow-up"></i> L'en-tête</h3>
+        <p>Zone située <strong>en haut</strong> de chaque page.</p>
+        <p>Onglet <strong>Insertion</strong> → <strong>En-tête</strong> → choisissez un style ou « Modifier l'en-tête ».</p>
+        <p>Exemples d'utilisation :</p>
+        <ul style="padding-left:1.2rem;">
+          <li>Logo de l'entreprise</li>
+          <li>Titre du document</li>
+          <li>Nom de l'auteur</li>
+          <li>Date</li>
+        </ul>
+      </div>
+      <div>
+        <h3 style="margin-top:0;"><i class="fas fa-arrow-down"></i> Le pied de page</h3>
+        <p>Zone située <strong>en bas</strong> de chaque page.</p>
+        <p>Onglet <strong>Insertion</strong> → <strong>Pied de page</strong> → choisissez un style.</p>
+        <p>Exemples d'utilisation :</p>
+        <ul style="padding-left:1.2rem;">
+          <li><strong>Numéro de page</strong> (le plus courant)</li>
+          <li>Mention « Confidentiel »</li>
+          <li>Coordonnées de l'entreprise</li>
+          <li>Copyright</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="box box-remember" style="margin-top:1.5rem;">
+      <i class="fas fa-star"></i>
+      <div><strong>Numéro de page :</strong> Insertion → <strong>Numéro de page</strong>. Choisissez la position (haut ou bas de page) et l'alignement. Word numérote automatiquement toutes les pages.</div>
+    </div>
+    <div class="slide-footer"><span>NTIC SOLUTION — Formation Bureautique — Jour 2 : Microsoft Word</span><span class="page-indicator">16</span></div>
+  </section>
+
+  <!-- ==================================================================================== -->
+  <!-- ====================  MODULE 5 : IMAGES ET TABLEAUX SIMPLES  ======================= -->
+  <!-- ==================================================================================== -->
+
+  <!-- 5.1 Insérer une image -->
+  <section class="slide module-word" id="slide-m5a">
+    <div class="slide-header">
+      <span class="module-badge"><i class="fas fa-image"></i> Module 5</span>
+      <span class="duration-badge">15 minutes</span>
+    </div>
+    <h2>5.1 Insérer et manipuler des images</h2>
     <p>Un document professionnel contient souvent des <strong>images</strong> : logo, photos, illustrations. Word permet de les insérer et de les redimensionner facilement.</p>
 
     <div class="grid-2" style="margin-top:1.5rem;">
       <div>
         <h3 style="margin-top:0;"><i class="fas fa-plus-circle"></i> Comment insérer une image</h3>
         <ol style="padding-left:1.2rem;">
-          <li style="margin-bottom:0.6rem;">Placez le curseur là où vous voulez l'image.</li>
-          <li style="margin-bottom:0.6rem;">Allez dans l'onglet <strong>Insertion</strong>.</li>
-          <li style="margin-bottom:0.6rem;">Cliquez sur <strong>Images</strong> (ou Images en ligne).</li>
+          <li style="margin-bottom:0.6rem;">Placez le curseur à l'endroit souhaité.</li>
+          <li style="margin-bottom:0.6rem;">Onglet <strong>Insertion</strong>.</li>
+          <li style="margin-bottom:0.6rem;">Cliquez sur <strong>Images</strong>.</li>
           <li style="margin-bottom:0.6rem;">Choisissez <strong>Cet appareil</strong>.</li>
-          <li>Naviguez jusqu'à votre image, double-cliquez.</li>
+          <li style="margin-bottom:0.6rem;">Naviguez jusqu'à votre image.</li>
+          <li>Double-cliquez sur l'image.</li>
         </ol>
       </div>
       <div>
         <h3 style="margin-top:0;"><i class="fas fa-arrows-alt"></i> Redimensionner une image</h3>
-        <p>Cliquez sur l'image. Des <strong>poignées</strong> (petits cercles blancs) apparaissent aux coins et sur les bords.</p>
-        <ul style="padding-left:1.2rem;">
-          <li><strong>Tirez un coin</strong> pour redimensionner en conservant les proportions.</li>
-          <li><strong>Tirez un bord</strong> pour déformer (déconseillé).</li>
-          <li><strong>Maintenez Shift</strong> en tirant un coin pour un redimensionnement précis.</li>
-        </ul>
+        <ol style="padding-left:1.2rem;">
+          <li style="margin-bottom:0.6rem;">Cliquez sur l'image pour la sélectionner.</li>
+          <li style="margin-bottom:0.6rem;">Des <strong>poignées</strong> (cercles blancs) apparaissent.</li>
+          <li style="margin-bottom:0.6rem;"><strong>Tirez un coin</strong> pour redimensionner en conservant les proportions.</li>
+          <li><strong>Évitez de tirer les bords</strong> (cela déforme l'image).</li>
+        </ol>
+        <p style="margin-top:0.8rem;"><strong>Astuce :</strong> maintenez <code>Shift</code> en tirant un coin pour un redimensionnement proportionnel précis.</p>
       </div>
     </div>
 
     <div class="box box-warning" style="margin-top:1.5rem;">
       <i class="fas fa-exclamation-triangle"></i>
-      <div><strong>Attention :</strong> Insérer une image très lourde (plusieurs Mo) peut ralentir Word et rendre le fichier difficile à envoyer par email. Préférez des images légères (quelques centaines de Ko).</div>
+      <div><strong>Attention :</strong> Une image très lourde (plusieurs Mo) ralentit Word et rend le fichier difficile à partager. Redimensionnez vos images avant de les insérer, ou utilisez la fonction « Compresser les images » (clic droit sur l'image).</div>
     </div>
-    <div class="slide-footer"><span>NTIC SOLUTION — Formation Bureautique — Jour 2 : Microsoft Word</span><span class="page-indicator">14</span></div>
+    <div class="slide-footer"><span>NTIC SOLUTION — Formation Bureautique — Jour 2 : Microsoft Word</span><span class="page-indicator">17</span></div>
   </section>
 
-  <!-- 4.2 Tableaux -->
-  <section class="slide module-word" id="slide-m4b">
+  <!-- 5.2 Tableaux simples -->
+  <section class="slide module-word" id="slide-m5b">
     <div class="slide-header">
-      <span class="module-badge"><i class="fas fa-table"></i> Module 4</span>
+      <span class="module-badge"><i class="fas fa-table"></i> Module 5</span>
     </div>
-    <h2>4.2 Créer et modifier des tableaux</h2>
-    <p>Un <strong>tableau</strong> organise les informations en <strong>lignes</strong> et <strong>colonnes</strong>. Il est indispensable pour présenter des données, des tarifs, des plannings.</p>
+    <h2>5.2 Créer des tableaux simples</h2>
+    <p>Un <strong>tableau</strong> organise les informations en <strong>lignes</strong> et <strong>colonnes</strong>. Il est indispensable pour présenter des tarifs, des plannings, des listes de données.</p>
 
     <div class="grid-2" style="margin-top:1.5rem;">
       <div>
         <h3 style="margin-top:0;"><i class="fas fa-plus-square"></i> Insérer un tableau</h3>
         <ol style="padding-left:1.2rem;">
-          <li>Onglet <strong>Insertion</strong>.</li>
-          <li>Cliquez sur <strong>Tableau</strong>.</li>
-          <li>Faites glisser la souris sur la grille pour choisir le nombre de lignes et de colonnes.</li>
-          <li>Cliquez pour insérer.</li>
+          <li style="margin-bottom:0.5rem;">Onglet <strong>Insertion</strong>.</li>
+          <li style="margin-bottom:0.5rem;">Cliquez sur <strong>Tableau</strong>.</li>
+          <li style="margin-bottom:0.5rem;">Faites glisser la souris sur la grille pour choisir le nombre de <strong>lignes</strong> et de <strong>colonnes</strong>.</li>
+          <li>Cliquez pour insérer le tableau.</li>
         </ol>
-        <p style="margin-top:0.8rem;">Exemple : un tableau de 3 colonnes × 4 lignes.</p>
+        <p style="margin-top:0.8rem;">Exemple : 3 colonnes × 4 lignes.</p>
       </div>
       <div>
-        <h3 style="margin-top:0;"><i class="fas fa-edit"></i> Naviguer dans un tableau</h3>
+        <h3 style="margin-top:0;"><i class="fas fa-edit"></i> Naviguer et remplir</h3>
         <table style="font-size:0.9rem;">
           <tbody>
-            <tr><td style="padding:0.4rem;"><code>Tab</code></td><td style="padding:0.4rem;">Passer à la cellule suivante.</td></tr>
+            <tr><td style="padding:0.4rem;"><code>Tab</code></td><td style="padding:0.4rem;">Passer à la cellule suivante (vers la droite).</td></tr>
             <tr><td style="padding:0.4rem;"><code>Shift+Tab</code></td><td style="padding:0.4rem;">Revenir à la cellule précédente.</td></tr>
             <tr><td style="padding:0.4rem;">Clic dans une cellule</td><td style="padding:0.4rem;">Placer le curseur pour écrire.</td></tr>
+            <tr><td style="padding:0.4rem;"><code>Tab</code> en fin de ligne</td><td style="padding:0.4rem;">Crée automatiquement une nouvelle ligne.</td></tr>
           </tbody>
         </table>
       </div>
@@ -1269,84 +1306,9 @@
 
     <div class="box box-remember" style="margin-top:1.5rem;">
       <i class="fas fa-tasks"></i>
-      <div><strong>Exercice :</strong> Créez un tableau de 3 colonnes (Service, Prix FCFA, Contact) et 4 lignes. Remplissez-le avec des informations de votre choix. Mettez l'en-tête en <strong>gras</strong> et en <strong>bleu</strong>.</div>
+      <div><strong>Exercice :</strong> Créez un tableau de 3 colonnes (Service, Prix FCFA, Contact) et 4 lignes. Remplissez-le avec des informations de votre choix. Mettez la première ligne (l'en-tête) en <strong>gras</strong> et en <strong>couleur bleue</strong>.</div>
     </div>
-    <div class="slide-footer"><span>NTIC SOLUTION — Formation Bureautique — Jour 2 : Microsoft Word</span><span class="page-indicator">15</span></div>
-  </section>
-
-  <!-- ====== MODULE 5 : ENREGISTRER ET IMPRIMER ====== -->
-  <!-- 5.1 Enregistrer -->
-  <section class="slide module-word" id="slide-m5a">
-    <div class="slide-header">
-      <span class="module-badge"><i class="fas fa-save"></i> Module 5</span>
-      <span class="duration-badge">15 minutes</span>
-    </div>
-    <h2>5.1 Enregistrer son document</h2>
-    <p><strong>Enregistrer votre travail est le réflexe le plus important.</strong> Une coupure de courant, une fermeture accidentelle, et tout votre travail peut être perdu en une seconde.</p>
-
-    <div class="grid-2" style="margin-top:1.5rem;">
-      <div>
-        <h3 style="margin-top:0;"><i class="fas fa-save"></i> Premier enregistrement</h3>
-        <ol style="padding-left:1.2rem;">
-          <li><strong>Ctrl+S</strong> (ou Fichier → Enregistrer).</li>
-          <li>La boîte de dialogue « Enregistrer sous » s'ouvre.</li>
-          <li>Choisissez <strong>l'emplacement</strong> (Documents, Bureau, clé USB...).</li>
-          <li>Donnez un <strong>nom</strong> clair au fichier.</li>
-          <li>Cliquez sur <strong>Enregistrer</strong>.</li>
-        </ol>
-        <p style="margin-top:0.8rem;">Le fichier porte désormais l'extension <code>.docx</code>.</p>
-      </div>
-      <div>
-        <h3 style="margin-top:0;"><i class="fas fa-sync-alt"></i> Enregistrements suivants</h3>
-        <p>Une fois le fichier nommé et sauvegardé une première fois, il suffit de faire <strong>Ctrl+S</strong> pour enregistrer les modifications ultérieures. Aucune boîte de dialogue ne s'ouvre : Word enregistre silencieusement.</p>
-        <div class="box box-remember" style="margin-top:1rem;">
-          <i class="fas fa-star"></i>
-          <div><strong>Faites Ctrl+S toutes les 5 minutes.</strong> C'est un réflexe qui vous sauvera des heures de travail.</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="box box-info" style="margin-top:1.5rem;">
-      <i class="fas fa-file-pdf"></i>
-      <div><strong>Exporter en PDF :</strong> Pour envoyer un document à quelqu'un qui ne doit pas le modifier, exportez-le en PDF. Fichier → Exporter → Créer un document PDF/XPS.</div>
-    </div>
-    <div class="slide-footer"><span>NTIC SOLUTION — Formation Bureautique — Jour 2 : Microsoft Word</span><span class="page-indicator">16</span></div>
-  </section>
-
-  <!-- 5.2 Imprimer -->
-  <section class="slide module-word" id="slide-m5b">
-    <div class="slide-header">
-      <span class="module-badge"><i class="fas fa-print"></i> Module 5</span>
-    </div>
-    <h2>5.2 Imprimer un document</h2>
-    <p>Avant d'imprimer, <strong>vérifiez toujours l'aperçu</strong>. Cela vous évite de gaspiller du papier et de l'encre.</p>
-
-    <div class="grid-2" style="margin-top:1.5rem;">
-      <div>
-        <h3 style="margin-top:0;"><i class="fas fa-eye"></i> Aperçu avant impression</h3>
-        <ol style="padding-left:1.2rem;">
-          <li>Fichier → <strong>Imprimer</strong> (ou <code>Ctrl+P</code>).</li>
-          <li>Un aperçu de votre document s'affiche à droite.</li>
-          <li>Vérifiez la mise en page, les marges, les coupures.</li>
-        </ol>
-      </div>
-      <div>
-        <h3 style="margin-top:0;"><i class="fas fa-cog"></i> Réglages d'impression</h3>
-        <ul style="padding-left:1.2rem;">
-          <li><strong>Imprimante :</strong> sélectionnez la bonne.</li>
-          <li><strong>Nombre de copies :</strong> par défaut 1.</li>
-          <li><strong>Pages :</strong> toutes, ou une sélection.</li>
-          <li><strong>Orientation :</strong> Portrait ou Paysage.</li>
-          <li><strong>Format :</strong> A4 (standard), A3...</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="box box-tip" style="margin-top:1.5rem;">
-      <i class="fas fa-leaf"></i>
-      <div><strong>Éco-responsabilité :</strong> N'imprimez que le nécessaire. À Banfora comme ailleurs, le papier est une ressource précieuse. L'aperçu avant impression est votre meilleur allié.</div>
-    </div>
-    <div class="slide-footer"><span>NTIC SOLUTION — Formation Bureautique — Jour 2 : Microsoft Word</span><span class="page-indicator">17</span></div>
+    <div class="slide-footer"><span>NTIC SOLUTION — Formation Bureautique — Jour 2 : Microsoft Word</span><span class="page-indicator">18</span></div>
   </section>
 
   <!-- ====== RÉCAPITULATIF ====== -->
@@ -1360,28 +1322,28 @@
       <div>
         <ol style="padding-left:1.2rem; line-height:2.4;">
           <li><strong>Word</strong> est un logiciel de traitement de texte. Il crée des fichiers <code>.docx</code>.</li>
-          <li>Le <strong>Ruban</strong> est la barre d'outils principale, organisée en onglets.</li>
+          <li>Le <strong>Ruban</strong> est la barre d'outils principale, organisée en onglets thématiques.</li>
           <li>Le <strong>curseur</strong> clignotant indique où le texte apparaîtra.</li>
-          <li>Pour modifier du texte, il faut d'abord le <strong>sélectionner</strong>.</li>
-          <li><strong>Ctrl+C / Ctrl+V</strong> (Copier/Coller) fonctionnent aussi dans Word.</li>
+          <li>Pour modifier du texte, il faut d'abord le <strong>sélectionner</strong> (surlignage gris).</li>
+          <li><strong>Ctrl+C / Ctrl+V</strong> (Copier/Coller) fonctionnent dans Word comme dans Windows.</li>
         </ol>
       </div>
       <div>
         <ol start="6" style="padding-left:1.2rem; line-height:2.4;">
-          <li>La <strong>mise en forme</strong> (police, taille, gras, couleur) rend le document professionnel.</li>
+          <li>La <strong>mise en forme</strong> (police, taille, gras, couleur) est dans l'onglet Accueil.</li>
           <li>Les <strong>listes à puces</strong> et <strong>numérotées</strong> structurent l'information.</li>
-          <li>Les <strong>images</strong> s'insèrent via l'onglet Insertion. Redimensionnez-les par les coins.</li>
-          <li>Les <strong>tableaux</strong> organisent les données en lignes et colonnes.</li>
+          <li>La <strong>mise en page</strong> (marges, orientation) se règle dans l'onglet Disposition.</li>
+          <li>Les <strong>images</strong> s'insèrent via Insertion. Redimensionnez-les par les coins.</li>
           <li><strong>Ctrl+S</strong> enregistre votre travail. Faites-le <strong>toutes les 5 minutes</strong>.</li>
         </ol>
       </div>
     </div>
 
     <div style="text-align:center; margin-top:2rem;">
-      <p style="font-size:1.3rem; font-weight:700; color:#2b579a;">Félicitations pour cette deuxième journée !</p>
-      <p>Vous savez maintenant créer un document Word professionnel.</p>
+      <p style="font-size:1.3rem; font-weight:700; color:var(--word-blue);">Félicitations pour cette deuxième journée !</p>
+      <p>Vous savez maintenant créer un document Word professionnel de A à Z.</p>
     </div>
-    <div class="slide-footer"><span>NTIC SOLUTION — Formation Bureautique — Jour 2 : Microsoft Word</span><span class="page-indicator">18</span></div>
+    <div class="slide-footer"><span>NTIC SOLUTION — Formation Bureautique — Jour 2 : Microsoft Word</span><span class="page-indicator">19</span></div>
   </section>
 
   <!-- ====== EXERCICE FINAL ====== -->
@@ -1390,16 +1352,17 @@
       <span class="module-badge"><i class="fas fa-pencil-alt"></i> Exercice final</span>
     </div>
     <h2>Exercice de révision : Créez un document complet</h2>
-    <p>Réalisez le document suivant en autonomie. Il mobilise toutes les compétences vues aujourd'hui.</p>
+    <p>Réalisez le document suivant en autonomie. Il mobilise <strong>toutes les compétences</strong> vues aujourd'hui.</p>
 
     <div style="background:#f8fafc; border-radius:16px; padding:1.5rem; margin-top:1.5rem;">
-      <p><strong>Consignes :</strong> Vous devez créer un document intitulé « Présentation NTIC SOLUTION » contenant :</p>
+      <p><strong>Consignes :</strong> Créez un document intitulé « Présentation NTIC SOLUTION » contenant :</p>
       <ol style="padding-left:1.5rem; line-height:2.2;">
         <li>Un <strong>titre</strong> centré, en gras, taille 20, couleur bleu.</li>
         <li>Un <strong>paragraphe</strong> justifié décrivant NTIC SOLUTION (3-4 lignes).</li>
-        <li>Une <strong>liste à puces</strong> des services proposés (au moins 4 services).</li>
+        <li>Une <strong>liste à puces</strong> des services proposés (minimum 4 services).</li>
         <li>Un <strong>tableau</strong> de 3 colonnes (Formation, Durée, Prix) et 3 lignes.</li>
-        <li>Le document doit être <strong>enregistré</strong> dans votre dossier <code>Formation_Bureautique > Jour_2</code>.</li>
+        <li>Un <strong>pied de page</strong> avec le numéro de page.</li>
+        <li>Le document doit être <strong>enregistré</strong> dans <code>Formation_Bureautique > Jour_2</code>.</li>
       </ol>
     </div>
 
@@ -1407,7 +1370,7 @@
       <i class="fas fa-trophy"></i>
       <div><strong>Bravo !</strong> Si vous avez réussi cet exercice, vous maîtrisez les fonctions essentielles de Microsoft Word. Vous pouvez créer des documents professionnels en toute autonomie.</div>
     </div>
-    <div class="slide-footer"><span>NTIC SOLUTION — Formation Bureautique — Jour 2 : Microsoft Word</span><span class="page-indicator">19</span></div>
+    <div class="slide-footer"><span>NTIC SOLUTION — Formation Bureautique — Jour 2 : Microsoft Word</span><span class="page-indicator">20</span></div>
   </section>
 
   <!-- ====== ANNONCE JOUR 3 ====== -->
@@ -1423,7 +1386,7 @@
     Secteur 15, Quartier Tatana, Banfora, Burkina Faso<br>
     <i class="fas fa-phone"></i> +226 05 58 58 68 &nbsp;|&nbsp; <i class="fab fa-whatsapp"></i> +226 69 69 69 24<br>
     <i class="fas fa-envelope"></i> nticsolution.bf@gmail.com</p>
-    <div class="slide-footer"><span>NTIC SOLUTION — Formation Bureautique — Jour 2 : Microsoft Word</span><span class="page-indicator">20</span></div>
+    <div class="slide-footer"><span>NTIC SOLUTION — Formation Bureautique — Jour 2 : Microsoft Word</span><span class="page-indicator">21</span></div>
   </section>
 
 </main>
@@ -1457,14 +1420,6 @@
       document.getElementById('heroAnimation').classList.add('fade-out');
     }, 2000);
   });
-
-  function switchTab(event, tabId) {
-    const container = event.target.closest('.tabs-container');
-    container.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-    container.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-    event.target.classList.add('active');
-    document.getElementById(tabId).classList.add('active');
-  }
 
   function toggleFullscreen() {
     document.body.classList.toggle('fullscreen-mode');
