@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NTIC SOLUTION · Formation Bureautique · Jour 1 — Présentation</title>
+  <title>NTIC SOLUTION · Formation Bureautique · Jour 1 — Présentation pédagogique</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap" rel="stylesheet">
@@ -16,6 +16,8 @@
       --orange: #FF6B35;
       --orange-vif: #ff5722;
       --orange-clair: #fff4e5;
+      --vert: #059669;
+      --vert-clair: #ecfdf5;
       --gris-fond: #f4f6fa;
       --texte: #1e293b;
       --texte-secondaire: #475569;
@@ -46,7 +48,6 @@
       transition: opacity 0.7s ease, visibility 0.7s ease;
     }
     .access-overlay.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
-
     .access-card {
       background: var(--blanc); border-radius: 2rem; padding: 3rem 2.5rem;
       text-align: center; box-shadow: 0 30px 60px rgba(0,0,0,0.5);
@@ -93,11 +94,10 @@
     /* ========== ZONE DE PROJECTION ========== */
     .slide-stage {
       position: absolute;
-      top: 0; left: 0; right: 0; bottom: 60px;
+      top: 0; left: 0; right: 0; bottom: 70px;
       display: flex; align-items: center; justify-content: center;
       padding: 2rem;
     }
-
     .slide-content {
       background: white;
       border-radius: 24px;
@@ -106,7 +106,7 @@
       height: 100%;
       max-width: 1100px;
       overflow-y: auto;
-      padding: 3rem 3.5rem;
+      padding: 2.5rem 3rem;
       position: relative;
       animation: slideIn 0.4s ease;
     }
@@ -115,21 +115,20 @@
       to { opacity: 1; transform: translateX(0) scale(1); }
     }
 
-    /* ========== BARRE DE CONTRÔLE (BAS) ========== */
+    /* ========== BARRE DE CONTRÔLE ========== */
     .control-bar {
-      position: absolute; bottom: 0; left: 0; right: 0; height: 60px;
+      position: absolute; bottom: 0; left: 0; right: 0; height: 70px;
       background: #1a1f2e; border-top: 1px solid #2a3040;
       display: flex; align-items: center; justify-content: space-between;
       padding: 0 1.5rem; gap: 1rem;
     }
-
     .control-left { display: flex; align-items: center; gap: 0.8rem; }
     .control-center { display: flex; align-items: center; gap: 1rem; flex: 1; justify-content: center; }
     .control-right { display: flex; align-items: center; gap: 0.8rem; }
 
     .btn-nav {
       background: #2a3040; color: white; border: none;
-      width: 40px; height: 40px; border-radius: 10px;
+      width: 42px; height: 42px; border-radius: 10px;
       cursor: pointer; transition: var(--transition);
       display: flex; align-items: center; justify-content: center;
       font-size: 1rem;
@@ -141,16 +140,14 @@
       color: #a0a8b8; font-weight: 600; font-size: 0.9rem;
       min-width: 80px; text-align: center;
     }
-
     .progress-track {
-      flex: 1; max-width: 300px; height: 4px;
+      flex: 1; max-width: 250px; height: 4px;
       background: #2a3040; border-radius: 4px; overflow: hidden;
     }
     .progress-fill {
       height: 100%; background: var(--orange);
       border-radius: 4px; transition: width 0.4s ease;
     }
-
     .btn-fullscreen {
       background: #2a3040; color: white; border: none;
       padding: 0.5rem 1rem; border-radius: 10px;
@@ -160,16 +157,16 @@
     }
     .btn-fullscreen:hover { background: var(--bleu); }
 
-    /* ========== THUMBNAILS OVERLAY ========== */
+    /* ========== THUMBNAILS ========== */
     .thumbnails-overlay {
-      position: fixed; inset: 0; background: rgba(0,0,0,0.8);
+      position: fixed; inset: 0; background: rgba(0,0,0,0.85);
       z-index: 1000; display: none;
       align-items: flex-start; justify-content: center;
       padding: 2rem; overflow-y: auto;
     }
     .thumbnails-overlay.active { display: flex; }
     .thumbnails-grid {
-      display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
       gap: 1rem; max-width: 1000px; width: 100%;
     }
     .thumbnail-card {
@@ -179,7 +176,12 @@
     }
     .thumbnail-card:hover { border-color: var(--orange); color: white; }
     .thumbnail-card.active { border-color: var(--orange); background: #2a3040; color: white; }
-    .thumbnail-card i { font-size: 1.5rem; margin-bottom: 0.5rem; display: block; }
+    .thumbnail-card .phase-label {
+      display: block; font-size: 0.65rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.5px;
+      margin-bottom: 0.3rem; color: var(--orange);
+    }
+    .thumbnail-card i { font-size: 1.2rem; margin-bottom: 0.4rem; display: block; }
     .thumbnail-card span { font-size: 0.75rem; font-weight: 600; }
     .close-thumbnails {
       position: fixed; top: 1rem; right: 1rem;
@@ -189,61 +191,96 @@
     }
 
     /* ========== CONTENU DES SLIDES ========== */
-    .slide-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem; }
-    .module-badge {
-      background: var(--bleu-clair); color: var(--bleu);
-      font-weight: 700; font-size: 0.8rem; padding: 0.35rem 1rem;
-      border-radius: 20px;
+    .slide-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.2rem; flex-wrap: wrap; gap: 0.8rem; }
+    .phase-badge {
+      background: var(--vert-clair); color: var(--vert);
+      font-weight: 700; font-size: 0.7rem; padding: 0.3rem 0.9rem;
+      border-radius: 20px; text-transform: uppercase; letter-spacing: 0.5px;
     }
+    .phase-badge.demo { background: #fff4e5; color: #d97706; }
+    .phase-badge.practice { background: var(--bleu-clair); color: var(--bleu); }
+    .phase-badge.interaction { background: #f3e8ff; color: #7c3aed; }
+    .phase-badge.consolidation { background: #fef3c7; color: #92400e; }
+
     .duration-badge {
       background: var(--orange-clair); color: var(--orange);
-      font-weight: 700; font-size: 0.8rem; padding: 0.35rem 1rem;
+      font-weight: 700; font-size: 0.75rem; padding: 0.3rem 0.9rem;
       border-radius: 20px;
     }
-    h1 { font-size: 2.2rem; font-weight: 800; letter-spacing: -0.5px; margin: 0.5rem 0; color: var(--bleu); }
+    h1 { font-size: 2rem; font-weight: 800; letter-spacing: -0.5px; margin: 0.5rem 0; color: var(--bleu); }
     h2 {
-      font-size: 1.6rem; font-weight: 700; color: var(--bleu);
-      margin: 1rem 0; padding-bottom: 0.4rem;
+      font-size: 1.5rem; font-weight: 700; color: var(--bleu);
+      margin: 0.8rem 0; padding-bottom: 0.3rem;
       border-bottom: 3px solid var(--orange); display: inline-block;
     }
-    h3 { font-size: 1.2rem; font-weight: 700; margin: 1rem 0 0.5rem; }
-    h4 { font-size: 1rem; font-weight: 700; margin: 0.8rem 0 0.3rem; }
+    h3 { font-size: 1.15rem; font-weight: 700; margin: 0.8rem 0 0.4rem; }
+    h4 { font-size: 1rem; font-weight: 700; margin: 0.6rem 0 0.3rem; }
 
-    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin: 1rem 0; }
-    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; margin: 1rem 0; }
-    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin: 1rem 0; }
+    .formateur-instruction {
+      background: #1e293b; color: white;
+      border-radius: 14px; padding: 1rem 1.3rem;
+      margin: 1rem 0; font-size: 0.95rem;
+      border-left: 5px solid var(--orange);
+    }
+    .formateur-instruction i { color: var(--orange); margin-right: 0.5rem; }
+    .formateur-instruction strong { color: #fbbf24; }
+
+    .question-ouverture {
+      background: #fef3c7; border-radius: 14px; padding: 1.2rem 1.5rem;
+      margin: 1rem 0; font-size: 1.1rem; font-weight: 600;
+      border: 2px dashed #f59e0b;
+    }
+    .question-ouverture i { color: #f59e0b; margin-right: 0.5rem; }
+
+    .consigne-exercice {
+      background: var(--bleu-clair); border-radius: 14px; padding: 1.2rem 1.5rem;
+      margin: 1rem 0; border: 2px solid var(--bleu);
+    }
+    .consigne-exercice h3 { color: var(--bleu); margin-top: 0; }
+    .consigne-exercice ol { padding-left: 1.2rem; line-height: 1.8; }
+
+    .critere-reussite {
+      background: var(--vert-clair); border-radius: 12px; padding: 0.8rem 1.2rem;
+      margin: 0.8rem 0; font-weight: 600; color: #064e3b;
+      border: 1px solid #059669;
+    }
+    .critere-reussite i { color: #059669; margin-right: 0.5rem; }
+
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin: 0.8rem 0; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin: 0.8rem 0; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.8rem; margin: 0.8rem 0; }
 
     @media (max-width: 900px) {
       .grid-3, .grid-4 { grid-template-columns: repeat(2, 1fr); }
-      .slide-content { padding: 2rem; }
+      .slide-content { padding: 1.8rem; }
     }
     @media (max-width: 600px) {
       .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
-      h1 { font-size: 1.5rem; }
-      .slide-content { padding: 1.5rem; }
+      h1 { font-size: 1.4rem; }
+      .slide-content { padding: 1.2rem; }
     }
 
     .card {
-      background: #f8fafc; border-radius: 14px; padding: 1.2rem;
+      background: #f8fafc; border-radius: 14px; padding: 1rem;
       border: 1px solid var(--bordure); text-align: center;
     }
-    .card i { font-size: 1.8rem; color: var(--bleu); margin-bottom: 0.5rem; }
+    .card i { font-size: 1.5rem; color: var(--bleu); margin-bottom: 0.4rem; }
 
     .box {
-      border-radius: 12px; padding: 1rem 1.2rem; margin: 1rem 0;
-      display: flex; align-items: flex-start; gap: 0.8rem;
-      font-weight: 500; border-left: 5px solid; font-size: 0.95rem;
+      border-radius: 12px; padding: 0.9rem 1.1rem; margin: 0.8rem 0;
+      display: flex; align-items: flex-start; gap: 0.7rem;
+      font-weight: 500; border-left: 5px solid; font-size: 0.9rem;
     }
-    .box i { font-size: 1.2rem; margin-top: 0.1rem; flex-shrink: 0; }
+    .box i { font-size: 1.1rem; margin-top: 0.1rem; flex-shrink: 0; }
     .box-tip { background: #e8f0fe; border-color: var(--bleu); color: #0a2c5c; }
     .box-warning { background: #fff4e5; border-color: var(--orange); color: #6b3a1f; }
     .box-remember { background: #ecfdf5; border-color: #059669; color: #064e3b; }
     .box-info { background: #f3e8ff; border-color: #7c3aed; color: #3b0764; }
 
-    .table-wrapper { overflow-x: auto; margin: 1rem 0; border-radius: 12px; }
+    .table-wrapper { overflow-x: auto; margin: 0.8rem 0; border-radius: 12px; }
     table { width: 100%; border-collapse: collapse; font-size: 0.9rem; background: white; }
-    th { background: var(--bleu); color: white; font-weight: 700; padding: 0.7rem 1rem; text-align: left; }
-    td { padding: 0.6rem 1rem; border-bottom: 1px solid var(--bordure); }
+    th { background: var(--bleu); color: white; font-weight: 700; padding: 0.6rem 0.9rem; text-align: left; }
+    td { padding: 0.5rem 0.9rem; border-bottom: 1px solid var(--bordure); }
     tr:last-child td { border-bottom: none; }
 
     .highlight { background: #fef3c7; padding: 0.1rem 0.4rem; border-radius: 4px; font-weight: 700; }
@@ -252,21 +289,15 @@
       font-family: 'Courier New', monospace; font-size: 0.9em;
     }
 
-    /* Slide spéciale : Cover */
+    /* Slides spéciales */
     .slide-cover {
       background: linear-gradient(135deg, #0B3FA5 0%, #0d2f6b 100%);
       color: white; text-align: center;
       display: flex; flex-direction: column; align-items: center; justify-content: center;
     }
-    .slide-cover h1 { color: white; font-size: 3rem; }
-    .slide-cover .module-badge { background: rgba(255,255,255,0.2); color: white; }
-    .slide-cover .duration-badge { background: rgba(255,255,255,0.2); color: white; }
-
-    /* Slide spéciale : Récap */
+    .slide-cover h1 { color: white; font-size: 2.8rem; }
     .slide-recap { background: #fffbeb; }
     .slide-recap h2 { color: #92400e; border-bottom-color: #f59e0b; }
-
-    /* Slide spéciale : Next */
     .slide-next {
       background: linear-gradient(135deg, #FF6B35 0%, #e55a2b 100%);
       color: white; text-align: center;
@@ -274,22 +305,21 @@
     }
     .slide-next h2 { color: white; border-bottom-color: rgba(255,255,255,0.5); }
 
-    /* Keyboard visual */
     .keyboard-visual {
       display: flex; flex-wrap: wrap; gap: 0.2rem; justify-content: center;
-      background: #e2e8f0; padding: 1rem; border-radius: 12px; margin: 0.8rem 0;
+      background: #e2e8f0; padding: 0.8rem; border-radius: 10px; margin: 0.6rem 0;
     }
     .key {
-      background: white; border: 1px solid #cbd5e1; border-radius: 6px;
-      padding: 0.35rem 0.6rem; font-weight: 600; font-size: 0.7rem;
-      min-width: 28px; text-align: center;
+      background: white; border: 1px solid #cbd5e1; border-radius: 5px;
+      padding: 0.3rem 0.5rem; font-weight: 600; font-size: 0.65rem;
+      min-width: 24px; text-align: center;
     }
     .key.highlight-key { background: var(--orange); color: white; border-color: var(--orange); }
     .key.blue-key { background: var(--bleu); color: white; border-color: var(--bleu); }
 
     pre {
-      background: #1e293b; color: white; padding: 1rem; border-radius: 10px;
-      font-size: 0.8rem; line-height: 1.6; overflow-x: auto;
+      background: #1e293b; color: white; padding: 0.8rem; border-radius: 10px;
+      font-size: 0.75rem; line-height: 1.5; overflow-x: auto;
     }
   </style>
 </head>
@@ -309,200 +339,206 @@
 
 <!-- CONTENEUR PRÉSENTATION -->
 <div class="presentation-container" id="presentationContainer">
-
-  <!-- ZONE D'AFFICHAGE DES SLIDES -->
-  <div class="slide-stage" id="slideStage">
-    <!-- Les slides seront injectées ici par JavaScript -->
-  </div>
-
-  <!-- BARRE DE CONTRÔLE -->
+  <div class="slide-stage" id="slideStage"></div>
   <div class="control-bar">
     <div class="control-left">
-      <button class="btn-nav" id="btnThumbnails" title="Voir toutes les diapositives" onclick="toggleThumbnails()">
+      <button class="btn-nav" title="Voir les diapositives" onclick="toggleThumbnails()">
         <i class="fas fa-th-large"></i>
       </button>
-      <span class="slide-counter" id="slideCounter">1 / 29</span>
+      <span class="slide-counter" id="slideCounter">1 / 20</span>
     </div>
     <div class="control-center">
-      <button class="btn-nav" id="btnPrev" title="Précédent (Flèche gauche)" onclick="goPrev()">
-        <i class="fas fa-chevron-left"></i>
-      </button>
-      <div class="progress-track">
-        <div class="progress-fill" id="progressFill"></div>
-      </div>
-      <button class="btn-nav" id="btnNext" title="Suivant (Flèche droite)" onclick="goNext()">
-        <i class="fas fa-chevron-right"></i>
-      </button>
+      <button class="btn-nav" id="btnPrev" title="Précédent" onclick="goPrev()"><i class="fas fa-chevron-left"></i></button>
+      <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+      <button class="btn-nav" id="btnNext" title="Suivant" onclick="goNext()"><i class="fas fa-chevron-right"></i></button>
     </div>
     <div class="control-right">
-      <button class="btn-fullscreen" id="btnFullscreen" title="Plein écran (F)" onclick="toggleFullscreen()">
+      <button class="btn-fullscreen" title="Plein écran" onclick="toggleFullscreen()">
         <i class="fas fa-expand"></i> <span>Plein écran</span>
       </button>
-      <button class="btn-nav" id="btnClose" title="Quitter (Échap)" onclick="quitPresentation()">
-        <i class="fas fa-times"></i>
-      </button>
+      <button class="btn-nav" title="Quitter" onclick="quitPresentation()"><i class="fas fa-times"></i></button>
     </div>
   </div>
 </div>
 
-<!-- THUMBNAILS OVERLAY -->
+<!-- THUMBNAILS -->
 <div class="thumbnails-overlay" id="thumbnailsOverlay">
   <button class="close-thumbnails" onclick="toggleThumbnails()"><i class="fas fa-times"></i></button>
   <div class="thumbnails-grid" id="thumbnailsGrid"></div>
 </div>
 
 <script>
-  // ========== DONNÉES DES SLIDES ==========
+  // ========== DONNÉES DES SLIDES — CHRONOLOGIE PÉDAGOGIQUE ==========
   const slidesData = [
-    // Slide 1 : Cover
+    // ==================== PHASE 1 : OUVERTURE (10 min) ====================
     {
-      id: 'slide-cover',
-      title: 'Jour 1 — Découverte de l\'ordinateur & Windows',
+      id: 'slide-1',
+      phase: 'Ouverture',
+      title: 'Accueil',
       content: `
         <div class="slide-header">
-          <span class="module-badge"><i class="fas fa-laptop"></i> Formation Bureautique</span>
-          <span class="duration-badge">2 heures</span>
+          <span class="phase-badge"><i class="fas fa-door-open"></i> Phase 1 · Ouverture</span>
+          <span class="duration-badge">2 minutes</span>
         </div>
         <div style="text-align:center;">
-          <h1 style="font-size:3rem; color:white;">Jour 1</h1>
-          <p style="font-size:1.5rem; font-weight:500; color:rgba(255,255,255,0.9);">Découverte de l'ordinateur & Windows</p>
-          <p style="font-size:1.2rem; color:rgba(255,255,255,0.8);">Prise en main, gestion des fichiers, sécurité</p>
-          <div style="margin-top:2rem; background:rgba(255,255,255,0.1); border-radius:16px; padding:1.5rem; display:inline-block; text-align:left;">
+          <h1 style="font-size:2.8rem; color:white;">Jour 1</h1>
+          <p style="font-size:1.4rem; color:rgba(255,255,255,0.9);">Découverte de l'ordinateur & Windows</p>
+          <div style="margin-top:1.5rem; background:rgba(255,255,255,0.1); border-radius:16px; padding:1.5rem; display:inline-block; text-align:left;">
             <p style="color:white;"><i class="fas fa-user-tie"></i> <strong>Formateur :</strong> Kévin Kiessé Sanou</p>
-            <p style="color:white;"><i class="far fa-calendar-alt"></i> <strong>Date :</strong> Août 2026</p>
             <p style="color:white;"><i class="fas fa-map-marker-alt"></i> <strong>Lieu :</strong> Siège NTIC Solution, Banfora</p>
-            <p style="color:white;"><i class="fas fa-tag"></i> <strong>Investissement :</strong> 10 000 FCFA</p>
           </div>
         </div>
       `,
       className: 'slide-cover'
     },
-    // Slide 2 : Bienvenue
     {
-      id: 'slide-welcome',
-      title: 'Bienvenue',
+      id: 'slide-2',
+      phase: 'Ouverture',
+      title: 'Tour de table',
       content: `
         <div class="slide-header">
-          <span class="module-badge"><i class="fas fa-hand-sparkles"></i> Bienvenue</span>
+          <span class="phase-badge"><i class="fas fa-door-open"></i> Phase 1 · Ouverture</span>
+          <span class="duration-badge">5 minutes</span>
         </div>
-        <h2>Bonjour et bienvenue !</h2>
-        <p style="font-size:1.1rem;">Je suis <strong>Kévin Kiessé Sanou</strong>, fondateur de NTIC SOLUTION et votre formateur. Aujourd'hui, nous posons les <strong>fondations</strong> de votre maîtrise de l'outil informatique.</p>
-        <div class="box box-remember">
-          <i class="fas fa-bullseye"></i>
-          <div><strong>5 objectifs :</strong><br>
-            1. Comprendre l'ordinateur<br>
-            2. Maîtriser souris et clavier<br>
-            3. Naviguer dans Windows<br>
-            4. Gérer les fichiers<br>
-            5. Protéger les données</div>
+        <h2>Faisons connaissance</h2>
+        <div class="formateur-instruction">
+          <i class="fas fa-chalkboard-teacher"></i>
+          <strong>Le formateur :</strong> « Chacun va se présenter en 30 secondes : votre nom, votre activité, et votre niveau avec l'ordinateur (débutant, intermédiaire, à l'aise). »
         </div>
-      `,
-      className: ''
-    },
-    // Slide 3 : Domaine informatique
-    {
-      id: 'slide-domain',
-      title: 'L\'informatique',
-      content: `
-        <div class="slide-header">
-          <span class="module-badge"><i class="fas fa-globe-africa"></i> Introduction</span>
-          <span class="duration-badge">10 minutes</span>
-        </div>
-        <h2>Qu'est-ce que l'informatique ?</h2>
-        <p>L'<strong>informatique</strong> est la science du <strong>traitement automatique de l'information</strong>. Le mot vient de <strong>INFORmation</strong> + auto<strong>MATIQUE</strong>.</p>
         <div class="grid-3">
-          <div class="card"><i class="fas fa-desktop"></i><h4>Matériel</h4><p style="font-size:0.85rem;">Ordinateurs, serveurs</p></div>
-          <div class="card"><i class="fas fa-code"></i><h4>Logiciel</h4><p style="font-size:0.85rem;">Programmes, applications</p></div>
-          <div class="card"><i class="fas fa-network-wired"></i><h4>Réseaux</h4><p style="font-size:0.85rem;">Internet, Wi-Fi</p></div>
-          <div class="card"><i class="fas fa-shield-alt"></i><h4>Cybersécurité</h4><p style="font-size:0.85rem;">Protection des données</p></div>
-          <div class="card"><i class="fas fa-database"></i><h4>Données</h4><p style="font-size:0.85rem;">Stockage, big data</p></div>
-          <div class="card"><i class="fas fa-robot"></i><h4>IA</h4><p style="font-size:0.85rem;">Automatisation</p></div>
+          <div class="card"><i class="fas fa-user"></i><h4>Votre nom</h4><p style="font-size:0.8rem;">Qui êtes-vous ?</p></div>
+          <div class="card"><i class="fas fa-briefcase"></i><h4>Votre activité</h4><p style="font-size:0.8rem;">Que faites-vous ?</p></div>
+          <div class="card"><i class="fas fa-laptop"></i><h4>Votre niveau</h4><p style="font-size:0.8rem;">Débutant ? Intermédiaire ?</p></div>
         </div>
-      `,
-      className: ''
-    },
-    // Slide 4 : 1.1 Ordinateur
-    {
-      id: 'slide-m1',
-      title: '1.1 Qu\'est-ce qu\'un ordinateur ?',
-      content: `
-        <div class="slide-header">
-          <span class="module-badge"><i class="fas fa-microchip"></i> Module 1</span>
-          <span class="duration-badge">15 minutes</span>
-        </div>
-        <h2>1.1 Qu'est-ce qu'un ordinateur ?</h2>
-        <p>Un ordinateur est une machine électronique programmable qui <span class="highlight">reçoit</span> des données, les <span class="highlight">traite</span>, puis <span class="highlight">produit</span> un résultat.</p>
         <div class="box box-tip">
           <i class="fas fa-lightbulb"></i>
-          <div><strong>Analogie :</strong> un employé infatigable, doté d'une mémoire parfaite, qui exécute des millions d'instructions par seconde.</div>
+          <div>Le formateur note les attentes et adapte le rythme de la session.</div>
+        </div>
+      `,
+      className: ''
+    },
+    {
+      id: 'slide-3',
+      phase: 'Ouverture',
+      title: 'Objectifs du jour',
+      content: `
+        <div class="slide-header">
+          <span class="phase-badge"><i class="fas fa-door-open"></i> Phase 1 · Ouverture</span>
+          <span class="duration-badge">3 minutes</span>
+        </div>
+        <h2>À la fin de cette session, vous saurez...</h2>
+        <ol style="padding-left:1.5rem; line-height:2.2; font-size:1.1rem;">
+          <li><strong>Allumer et éteindre</strong> un ordinateur correctement.</li>
+          <li><strong>Utiliser la souris</strong> et le clavier avec aisance.</li>
+          <li><strong>Naviguer</strong> dans l'environnement Windows.</li>
+          <li><strong>Créer, ranger et retrouver</strong> vos fichiers.</li>
+          <li><strong>Protéger</strong> votre poste et vos données.</li>
+        </ol>
+        <div class="box box-remember">
+          <i class="fas fa-bullseye"></i>
+          <div><strong>Méthode :</strong> On comprend → On démontre → Vous pratiquez → Vous validez.</div>
+        </div>
+      `,
+      className: ''
+    },
+
+    // ==================== PHASE 2 : DÉCOUVERTE GUIDÉE (20 min) ====================
+    {
+      id: 'slide-4',
+      phase: 'Découverte',
+      title: 'Question d\'ouverture',
+      content: `
+        <div class="slide-header">
+          <span class="phase-badge demo"><i class="fas fa-lightbulb"></i> Phase 2 · Découverte</span>
+          <span class="duration-badge">3 minutes</span>
+        </div>
+        <h2>Qu'est-ce qu'un ordinateur pour vous ?</h2>
+        <div class="question-ouverture">
+          <i class="fas fa-question-circle"></i>
+          Question au groupe : « À quoi pensez-vous quand je dis "ordinateur" ? »
+        </div>
+        <div class="formateur-instruction">
+          <i class="fas fa-chalkboard-teacher"></i>
+          <strong>Le formateur :</strong> Recueillez 3-4 réponses des participants. Écrivez les mots-clés au tableau. Rebondissez sur chaque réponse pour construire la définition ensemble.
+        </div>
+        <div class="grid-3">
+          <div class="card"><i class="fas fa-desktop"></i><p style="font-size:0.85rem;">Une machine</p></div>
+          <div class="card"><i class="fas fa-cogs"></i><p style="font-size:0.85rem;">Un outil de travail</p></div>
+          <div class="card"><i class="fas fa-globe"></i><p style="font-size:0.85rem;">Une fenêtre sur le monde</p></div>
+        </div>
+      `,
+      className: ''
+    },
+    {
+      id: 'slide-5',
+      phase: 'Découverte',
+      title: 'Définition construite',
+      content: `
+        <div class="slide-header">
+          <span class="phase-badge demo"><i class="fas fa-lightbulb"></i> Phase 2 · Découverte</span>
+          <span class="duration-badge">5 minutes</span>
+        </div>
+        <h2>Un ordinateur, c'est...</h2>
+        <p style="font-size:1.1rem;">Une machine électronique qui <span class="highlight">reçoit</span> des informations, les <span class="highlight">traite</span>, puis <span class="highlight">produit</span> un résultat.</p>
+        <div class="box box-tip">
+          <i class="fas fa-lightbulb"></i>
+          <div><strong>Analogie :</strong> Imaginez un employé infatigable, doté d'une mémoire parfaite, qui exécute des millions d'instructions par seconde sans jamais se tromper.</div>
         </div>
         <div class="grid-4">
-          <div class="card"><i class="fas fa-keyboard"></i><h4>Entrée</h4><p style="font-size:0.8rem;">Clavier, souris</p></div>
-          <div class="card"><i class="fas fa-microchip"></i><h4>Traitement</h4><p style="font-size:0.8rem;">CPU, RAM</p></div>
-          <div class="card"><i class="fas fa-desktop"></i><h4>Sortie</h4><p style="font-size:0.8rem;">Écran</p></div>
-          <div class="card"><i class="fas fa-hdd"></i><h4>Stockage</h4><p style="font-size:0.8rem;">Disque, SSD</p></div>
+          <div class="card"><i class="fas fa-keyboard"></i><h4>Entrée</h4><p style="font-size:0.75rem;">Clavier, souris</p></div>
+          <div class="card"><i class="fas fa-microchip"></i><h4>Traitement</h4><p style="font-size:0.75rem;">Processeur</p></div>
+          <div class="card"><i class="fas fa-desktop"></i><h4>Sortie</h4><p style="font-size:0.75rem;">Écran</p></div>
+          <div class="card"><i class="fas fa-hdd"></i><h4>Stockage</h4><p style="font-size:0.75rem;">Disque dur</p></div>
+        </div>
+        <div class="formateur-instruction">
+          <i class="fas fa-chalkboard-teacher"></i>
+          <strong>Le formateur :</strong> Pointez physiquement chaque composant sur un PC réel dans la salle. Faites toucher les participants si possible.
         </div>
       `,
       className: ''
     },
-    // Slide 5 : 1.2 Types d'ordinateurs
     {
-      id: 'slide-m1b',
-      title: '1.2 Types d\'ordinateurs',
+      id: 'slide-6',
+      phase: 'Découverte',
+      title: 'Types d\'ordinateurs',
       content: `
         <div class="slide-header">
-          <span class="module-badge"><i class="fas fa-microchip"></i> Module 1</span>
+          <span class="phase-badge demo"><i class="fas fa-lightbulb"></i> Phase 2 · Découverte</span>
+          <span class="duration-badge">7 minutes</span>
         </div>
-        <h2>1.2 Les 8 types d'ordinateurs</h2>
-        <div class="grid-3">
-          <div class="card"><i class="fas fa-desktop"></i><h4>Bureau</h4><p style="font-size:0.8rem;">Unité centrale + écran + clavier + souris. Puissant, évolutif, encombrant.</p></div>
-          <div class="card"><i class="fas fa-laptop"></i><h4>Portable</h4><p style="font-size:0.8rem;">Tout-en-un avec batterie. Mobile, autonome.</p></div>
-          <div class="card"><i class="fas fa-tv"></i><h4>Tout-en-un</h4><p style="font-size:0.8rem;">Unité intégrée dans l'écran. Esthétique.</p></div>
-          <div class="card"><i class="fas fa-book"></i><h4>Netbook</h4><p style="font-size:0.8rem;">Ultra-léger, 10-12 pouces. Très mobile.</p></div>
-          <div class="card"><i class="fas fa-tablet-alt"></i><h4>Tablette</h4><p style="font-size:0.8rem;">Écran tactile. iPadOS ou Android.</p></div>
-          <div class="card"><i class="fas fa-mobile-alt"></i><h4>Smartphone</h4><p style="font-size:0.8rem;">Ordinateur de poche.</p></div>
-          <div class="card"><i class="fas fa-server"></i><h4>Serveur</h4><p style="font-size:0.8rem;">Fonctionne 24h/24.</p></div>
-          <div class="card"><i class="fas fa-tools"></i><h4>Workstation</h4><p style="font-size:0.8rem;">Ultra-puissant pour pros.</p></div>
+        <h2>Quels ordinateurs utilisez-vous ?</h2>
+        <div class="question-ouverture">
+          <i class="fas fa-question-circle"></i>
+          « Qui a un ordinateur de bureau ? Un portable ? Un smartphone ? Une tablette ? »
         </div>
+        <div class="grid-4">
+          <div class="card"><i class="fas fa-desktop"></i><h4>Bureau</h4><p style="font-size:0.75rem;">Fixe, puissant</p></div>
+          <div class="card"><i class="fas fa-laptop"></i><h4>Portable</h4><p style="font-size:0.75rem;">Mobile, batterie</p></div>
+          <div class="card"><i class="fas fa-tablet-alt"></i><h4>Tablette</h4><p style="font-size:0.75rem;">Tactile</p></div>
+          <div class="card"><i class="fas fa-mobile-alt"></i><h4>Smartphone</h4><p style="font-size:0.75rem;">Poche</p></div>
+        </div>
+        <div class="formateur-instruction">
+          <i class="fas fa-chalkboard-teacher"></i>
+          <strong>Le formateur :</strong> « Dans cette salle, nous utilisons des ordinateurs de bureau. Pourquoi ? Parce qu'ils sont plus confortables pour travailler longtemps. »
+        </div>
+        <p style="font-size:0.9rem;">Il existe aussi : serveurs (24h/24), stations de travail (ingénieurs), tout-en-un, netbooks.</p>
       `,
       className: ''
     },
-    // Slide 6 : 1.3 Composants
     {
-      id: 'slide-m1c',
-      title: '1.3 Composants essentiels',
+      id: 'slide-7',
+      phase: 'Découverte',
+      title: 'Unités de mesure',
       content: `
         <div class="slide-header">
-          <span class="module-badge"><i class="fas fa-microchip"></i> Module 1</span>
+          <span class="phase-badge demo"><i class="fas fa-lightbulb"></i> Phase 2 · Découverte</span>
+          <span class="duration-badge">5 minutes</span>
         </div>
-        <h2>1.3 Les composants essentiels</h2>
-        <div class="table-wrapper">
-          <table>
-            <thead><tr><th>Composant</th><th>Fonction</th><th>Image mentale</th></tr></thead>
-            <tbody>
-              <tr><td><i class="fas fa-desktop"></i> Écran</td><td>Afficher</td><td>Feuille lumineuse</td></tr>
-              <tr><td><i class="fas fa-keyboard"></i> Clavier</td><td>Saisir</td><td>Machine à écrire</td></tr>
-              <tr><td><i class="fas fa-mouse-pointer"></i> Souris</td><td>Pointer</td><td>Main dans l'écran</td></tr>
-              <tr><td><i class="fas fa-microchip"></i> Processeur</td><td>Calculer</td><td>Cerveau</td></tr>
-              <tr><td><i class="fas fa-memory"></i> RAM</td><td>Mémoire rapide</td><td>Bureau de travail</td></tr>
-              <tr><td><i class="fas fa-hdd"></i> Disque</td><td>Stocker</td><td>Armoire</td></tr>
-              <tr><td><i class="fas fa-plug"></i> USB</td><td>Connecter</td><td>Prises universelles</td></tr>
-              <tr><td><i class="fas fa-wifi"></i> Wi-Fi</td><td>Connexion</td><td>Porte vers le monde</td></tr>
-            </tbody>
-          </table>
+        <h2>Comment mesurer l'information ?</h2>
+        <div class="box box-tip">
+          <i class="fas fa-ruler"></i>
+          <div><strong>Analogie :</strong> Comme les distances se mesurent en mètres et kilomètres, l'information se mesure en <strong>octets</strong>.</div>
         </div>
-      `,
-      className: ''
-    },
-    // Slide 7 : 1.4 Unités
-    {
-      id: 'slide-m1d',
-      title: '1.4 Unités de mesure',
-      content: `
-        <div class="slide-header">
-          <span class="module-badge"><i class="fas fa-microchip"></i> Module 1</span>
-        </div>
-        <h2>1.4 Les unités de mesure</h2>
         <div class="table-wrapper">
           <table>
             <thead><tr><th>Unité</th><th>Équivalent</th><th>Exemple concret</th></tr></thead>
@@ -515,562 +551,367 @@
             </tbody>
           </table>
         </div>
-        <div class="box box-tip">
-          <i class="fas fa-calculator"></i>
-          <div><strong>Exercice :</strong> Une photo = 3 Mo. Combien sur une clé USB de 8 Go ? <em>~2 666 photos.</em></div>
+        <div class="question-ouverture">
+          <i class="fas fa-question-circle"></i>
+          « Une photo pèse 3 Mo. Combien de photos sur une clé USB de 8 Go ? » — Faites calculer les participants.
         </div>
       `,
       className: ''
     },
-    // Slide 8 : 2.1 Souris
+
+    // ==================== PHASE 3 : PRATIQUE GUIDÉE (40 min) ====================
     {
-      id: 'slide-m2',
-      title: '2.1 Souris et pavé tactile',
+      id: 'slide-8',
+      phase: 'Pratique guidée',
+      title: 'Démo : la souris',
       content: `
         <div class="slide-header">
-          <span class="module-badge"><i class="fas fa-keyboard"></i> Module 2</span>
-          <span class="duration-badge">25 minutes</span>
+          <span class="phase-badge practice"><i class="fas fa-hand-pointer"></i> Phase 3 · Pratique guidée</span>
+          <span class="duration-badge">5 minutes</span>
         </div>
-        <h2>2.1 La souris et le pavé tactile</h2>
-        <div class="grid-2">
-          <div>
-            <h3>Les 5 gestes fondamentaux</h3>
-            <div class="table-wrapper">
-              <table>
-                <thead><tr><th>Action</th><th>Comment</th><th>Résultat</th></tr></thead>
-                <tbody>
-                  <tr><td><strong>Clic gauche</strong></td><td>Appuyer 1 fois</td><td>Sélectionner</td></tr>
-                  <tr><td><strong>Double-clic</strong></td><td>2 appuis rapides</td><td>Ouvrir</td></tr>
-                  <tr><td><strong>Clic droit</strong></td><td>Bouton droit</td><td>Menu contextuel</td></tr>
-                  <tr><td><strong>Molette</strong></td><td>Rouler</td><td>Défiler</td></tr>
-                  <tr><td><strong>Glisser-déposer</strong></td><td>Maintenir + déplacer</td><td>Déplacer</td></tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-          <div>
-            <h3>Pavé tactile (Touchpad)</h3>
-            <div class="box box-tip">
-              <i class="fas fa-lightbulb"></i>
-              <div><strong>Appui 2 doigts = clic droit.</strong><br>Glisser 2 doigts = défiler.</div>
-            </div>
-            <p style="font-size:0.9rem;">Présent sur tous les portables. Remplace la souris externe.</p>
-          </div>
+        <h2>La souris : les 5 gestes essentiels</h2>
+        <div class="formateur-instruction">
+          <i class="fas fa-chalkboard-teacher"></i>
+          <strong>Le formateur démontre sur le vidéoprojecteur :</strong> « Regardez bien. Ensuite, vous le ferez vous-mêmes. »
         </div>
-      `,
-      className: ''
-    },
-    // Slide 9 : 2.2 Positionnement clavier
-    {
-      id: 'slide-m2b',
-      title: '2.2 Positionnement des mains',
-      content: `
-        <div class="slide-header">
-          <span class="module-badge"><i class="fas fa-keyboard"></i> Module 2</span>
-        </div>
-        <h2>2.2 Positionnement des mains sur le clavier</h2>
-        <p>Index sur <span class="highlight">F</span> et <span class="highlight">J</span> (repères tactiles).</p>
-        <div class="keyboard-visual">
-          <span class="key">Échap</span><span class="key">F1</span><span class="key">F2</span><span class="key">F3</span><span class="key">F4</span><span class="key">F5</span><span class="key">F6</span><span class="key">F7</span><span class="key">F8</span><span class="key">F9</span><span class="key">F10</span><span class="key">F11</span><span class="key">F12</span>
-        </div>
-        <div class="keyboard-visual">
-          <span class="key">²</span><span class="key">1</span><span class="key">2</span><span class="key">3</span><span class="key">4</span><span class="key">5</span><span class="key">6</span><span class="key">7</span><span class="key">8</span><span class="key">9</span><span class="key">0</span><span class="key">-</span><span class="key">=</span><span class="key" style="min-width:45px;">Retour</span>
-        </div>
-        <div class="keyboard-visual">
-          <span class="key" style="min-width:48px;">Tab</span><span class="key">A</span><span class="key">Z</span><span class="key">E</span><span class="key">R</span><span class="key">T</span><span class="key">Y</span><span class="key">U</span><span class="key">I</span><span class="key">O</span><span class="key">P</span><span class="key">^</span><span class="key">$</span><span class="key" style="min-width:55px;">Entrée</span>
-        </div>
-        <div class="keyboard-visual">
-          <span class="key" style="min-width:48px;">Maj</span><span class="key">Q</span><span class="key">S</span><span class="key">D</span><span class="key highlight-key">F</span><span class="key">G</span><span class="key">H</span><span class="key highlight-key">J</span><span class="key">K</span><span class="key">L</span><span class="key">M</span><span class="key">ù</span><span class="key" style="min-width:55px;">Maj</span>
-        </div>
-        <div class="keyboard-visual">
-          <span class="key blue-key" style="min-width:42px;">Ctrl</span><span class="key blue-key" style="min-width:42px;">Win</span><span class="key blue-key" style="min-width:42px;">Alt</span><span class="key" style="min-width:160px;">Espace</span><span class="key blue-key" style="min-width:42px;">AltGr</span><span class="key blue-key" style="min-width:42px;">Win</span><span class="key blue-key" style="min-width:42px;">Ctrl</span>
-        </div>
-      `,
-      className: ''
-    },
-    // Slide 10 : 2.3 Touches essentielles
-    {
-      id: 'slide-m2c',
-      title: '2.3 Touches essentielles',
-      content: `
-        <div class="slide-header">
-          <span class="module-badge"><i class="fas fa-keyboard"></i> Module 2</span>
-        </div>
-        <h2>2.3 Les 12 touches essentielles</h2>
         <div class="table-wrapper">
           <table>
-            <thead><tr><th>N°</th><th>Touche</th><th>Symbole</th><th>Fonction</th></tr></thead>
+            <thead><tr><th>Geste</th><th>Comment</th><th>Résultat</th></tr></thead>
             <tbody>
-              <tr><td>1</td><td><strong>Entrée</strong></td><td><code>↵</code></td><td>Valider, saut de ligne</td></tr>
-              <tr><td>2</td><td><strong>Espace</strong></td><td><code>␣</code></td><td>Insérer un espace</td></tr>
-              <tr><td>3</td><td><strong>Retour arrière</strong></td><td><code>←</code></td><td>Effacer à gauche</td></tr>
-              <tr><td>4</td><td><strong>Supprimer</strong></td><td><code>Suppr</code></td><td>Effacer à droite</td></tr>
-              <tr><td>5</td><td><strong>Majuscule</strong></td><td><code>⇧</code></td><td>Majuscule / symbole</td></tr>
-              <tr><td>6</td><td><strong>Verr. Maj</strong></td><td><code>Caps Lock</code></td><td>Verrouiller majuscules</td></tr>
-              <tr><td>7</td><td><strong>Tabulation</strong></td><td><code>Tab</code></td><td>Aligner, champ suivant</td></tr>
-              <tr><td>8</td><td><strong>Échap</strong></td><td><code>Esc</code></td><td>Annuler, fermer</td></tr>
-              <tr><td>9</td><td><strong>Ctrl</strong></td><td><code>Ctrl</code></td><td>Combinaison de raccourcis</td></tr>
-              <tr><td>10</td><td><strong>Alt</strong></td><td><code>Alt</code></td><td>Combinaison alternative</td></tr>
-              <tr><td>11</td><td><strong>Windows</strong></td><td><code>Win</code></td><td>Menu Démarrer</td></tr>
-              <tr><td>12</td><td><strong>AltGr</strong></td><td><code>AltGr</code></td><td>Symboles spéciaux (€, @)</td></tr>
+              <tr><td><strong>Clic gauche</strong></td><td>Appuyer 1 fois</td><td>Sélectionner</td></tr>
+              <tr><td><strong>Double-clic</strong></td><td>2 appuis rapides</td><td>Ouvrir</td></tr>
+              <tr><td><strong>Clic droit</strong></td><td>Bouton droit</td><td>Menu contextuel</td></tr>
+              <tr><td><strong>Molette</strong></td><td>Rouler</td><td>Défiler</td></tr>
+              <tr><td><strong>Glisser-déposer</strong></td><td>Maintenir + déplacer</td><td>Déplacer</td></tr>
             </tbody>
           </table>
         </div>
       `,
       className: ''
     },
-    // Slide 11 : 2.4 Raccourcis
     {
-      id: 'slide-m2d',
-      title: '2.4 Raccourcis indispensables',
+      id: 'slide-9',
+      phase: 'Pratique guidée',
+      title: 'Exercice 1 : Souris',
       content: `
         <div class="slide-header">
-          <span class="module-badge"><i class="fas fa-keyboard"></i> Module 2</span>
-        </div>
-        <h2>2.4 Les 10 raccourcis indispensables</h2>
-        <div class="table-wrapper">
-          <table>
-            <thead><tr><th>#</th><th>Raccourci</th><th>Action</th><th>Astuce</th></tr></thead>
-            <tbody>
-              <tr><td><span class="highlight">1</span></td><td><code>Ctrl+C</code></td><td><strong>Copier</strong></td><td>C = Copier</td></tr>
-              <tr><td><span class="highlight">2</span></td><td><code>Ctrl+V</code></td><td><strong>Coller</strong></td><td>V = Velcro</td></tr>
-              <tr><td><span class="highlight">3</span></td><td><code>Ctrl+X</code></td><td><strong>Couper</strong></td><td>X = ciseaux</td></tr>
-              <tr><td>4</td><td><code>Ctrl+Z</code></td><td><strong>Annuler</strong></td><td>Z = Zut !</td></tr>
-              <tr><td>5</td><td><code>Ctrl+A</code></td><td><strong>Tout sélectionner</strong></td><td>A = All</td></tr>
-              <tr><td>6</td><td><code>Ctrl+S</code></td><td><strong>Enregistrer</strong></td><td>S = Save</td></tr>
-              <tr><td>7</td><td><code>Alt+Tab</code></td><td><strong>Changer d'app</strong></td><td>Tab = tableau</td></tr>
-              <tr><td>8</td><td><code>Win+E</code></td><td><strong>Explorateur</strong></td><td>E = Explorateur</td></tr>
-              <tr><td>9</td><td><code>Win+L</code></td><td><strong>Verrouiller</strong></td><td>L = Lock</td></tr>
-              <tr><td>10</td><td><code>Win+D</code></td><td><strong>Bureau</strong></td><td>D = Desktop</td></tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="box box-remember">
-          <i class="fas fa-star"></i>
-          <div><strong>Les 3 réflexes :</strong> <code>Ctrl+S</code> (enregistrer), <code>Ctrl+Z</code> (annuler), <code>Win+L</code> (verrouiller).</div>
-        </div>
-      `,
-      className: ''
-    },
-    // Slide 12 : 3.1 Windows
-    {
-      id: 'slide-m3',
-      title: '3.1 Windows',
-      content: `
-        <div class="slide-header">
-          <span class="module-badge"><i class="fab fa-windows"></i> Module 3</span>
-          <span class="duration-badge">30 minutes</span>
-        </div>
-        <h2>3.1 Windows, le système d'exploitation</h2>
-        <p>Un <strong>système d'exploitation</strong> (OS) est le logiciel principal qui donne vie à l'ordinateur. C'est le <strong>chef d'orchestre</strong> entre vous, les logiciels et le matériel.</p>
-        <div class="grid-2">
-          <div>
-            <h3><i class="fab fa-windows" style="color:var(--bleu);"></i> Microsoft Windows</h3>
-            <p style="font-size:0.9rem;">Lancé en 1985. Plus de <strong>70% des ordinateurs</strong> dans le monde. Version actuelle : <strong>Windows 11</strong>.</p>
-          </div>
-          <div>
-            <h3><i class="fas fa-desktop" style="color:var(--bleu);"></i> Autres systèmes</h3>
-            <table style="font-size:0.85rem;">
-              <tbody>
-                <tr><td><i class="fab fa-apple"></i> macOS</td><td>Apple, exclusif aux Mac</td></tr>
-                <tr><td><i class="fab fa-linux"></i> Linux</td><td>Gratuit, open source</td></tr>
-                <tr><td><i class="fab fa-android"></i> Android</td><td>Google, mobiles</td></tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      `,
-      className: ''
-    },
-    // Slide 13 : 3.2 Bureau
-    {
-      id: 'slide-m3b',
-      title: '3.2 Le Bureau',
-      content: `
-        <div class="slide-header">
-          <span class="module-badge"><i class="fab fa-windows"></i> Module 3</span>
-        </div>
-        <h2>3.2 Le Bureau (Desktop)</h2>
-        <p>Le <strong>Bureau</strong> est votre espace de travail principal. Il se compose de 3 zones :</p>
-        <div class="grid-3">
-          <div class="card"><i class="fas fa-image"></i><h4>1. Fond d'écran</h4><p style="font-size:0.85rem;">Image d'arrière-plan.</p></div>
-          <div class="card"><i class="fas fa-th-large"></i><h4>2. Icônes</h4><p style="font-size:0.85rem;">Raccourcis vers programmes et fichiers.</p></div>
-          <div class="card"><i class="fas fa-grip-horizontal"></i><h4>3. Barre des tâches</h4><p style="font-size:0.85rem;">En bas : Démarrer, recherche, applications, horloge.</p></div>
-        </div>
-      `,
-      className: ''
-    },
-    // Slide 14 : 3.3 Menu Démarrer
-    {
-      id: 'slide-m3c',
-      title: '3.3 Menu Démarrer',
-      content: `
-        <div class="slide-header">
-          <span class="module-badge"><i class="fab fa-windows"></i> Module 3</span>
-        </div>
-        <h2>3.3 Le menu Démarrer et la recherche</h2>
-        <p>Cliquez sur l'icône <i class="fab fa-windows"></i> ou appuyez sur <span class="highlight">Win</span>.</p>
-        <div class="box box-remember">
-          <i class="fas fa-search"></i>
-          <div><strong>La barre de recherche est l'outil le plus puissant.</strong> Tapez « bloc » → Bloc-notes s'ouvre. Tapez « imprimante » → paramètres d'impression.</div>
-        </div>
-        <div class="grid-2">
-          <div class="card"><i class="fas fa-power-off" style="color:var(--orange);"></i><h4>Marche/Arrêt</h4><p style="font-size:0.85rem;">Éteindre ou redémarrer.</p></div>
-          <div class="card"><i class="fas fa-user-circle"></i><h4>Compte utilisateur</h4><p style="font-size:0.85rem;">Verrouiller, déconnexion.</p></div>
-        </div>
-      `,
-      className: ''
-    },
-    // Slide 15 : 3.4 Fenêtres
-    {
-      id: 'slide-m3d',
-      title: '3.4 Manipuler les fenêtres',
-      content: `
-        <div class="slide-header">
-          <span class="module-badge"><i class="fab fa-windows"></i> Module 3</span>
-        </div>
-        <h2>3.4 Manipuler les fenêtres</h2>
-        <div class="grid-2">
-          <div>
-            <h3>Anatomie d'une fenêtre</h3>
-            <div class="table-wrapper">
-              <table style="font-size:0.85rem;">
-                <tbody>
-                  <tr><td><i class="far fa-window-minimize"></i> <strong>Réduire</strong></td><td>Masquer (reste dans barre des tâches)</td></tr>
-                  <tr><td><i class="far fa-window-maximize"></i> <strong>Agrandir</strong></td><td>Occuper tout l'écran</td></tr>
-                  <tr><td><i class="fas fa-times"></i> <strong>Fermer</strong></td><td>Quitter le programme</td></tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-          <div>
-            <h3>Redimensionner et organiser</h3>
-            <p style="font-size:0.9rem;"><strong>Redimensionner :</strong> tirez les bords ou coins.</p>
-            <p style="font-size:0.9rem;"><strong>Déplacer :</strong> maintenez la barre de titre.</p>
-            <p style="font-size:0.9rem;"><strong>Organiser :</strong> <code>Win + flèches</code> pour côte à côte.</p>
-          </div>
-        </div>
-      `,
-      className: ''
-    },
-    // Slide 16 : 3.5 Basculer
-    {
-      id: 'slide-m3e',
-      title: '3.5 Basculer entre applications',
-      content: `
-        <div class="slide-header">
-          <span class="module-badge"><i class="fab fa-windows"></i> Module 3</span>
-        </div>
-        <h2>3.5 Basculer entre les applications</h2>
-        <div class="grid-3">
-          <div class="card"><i class="fas fa-window-restore"></i><h4>Barre des tâches</h4><p style="font-size:0.85rem;">Clic direct sur l'icône.</p></div>
-          <div class="card"><i class="fas fa-exchange-alt" style="color:var(--orange);"></i><h4>Alt + Tab</h4><p style="font-size:0.85rem;">Le plus rapide.</p></div>
-          <div class="card"><i class="fas fa-th-large" style="color:#7c3aed;"></i><h4>Win + Tab</h4><p style="font-size:0.85rem;">Vue d'ensemble + bureaux virtuels.</p></div>
-        </div>
-        <div class="box box-info">
-          <i class="fas fa-clone"></i>
-          <div><strong>Bureaux virtuels :</strong> séparez vos applications personnelles et professionnelles.</div>
-        </div>
-      `,
-      className: ''
-    },
-    // Slide 17 : 3.6 Personnalisation
-    {
-      id: 'slide-m3f',
-      title: '3.6 Personnaliser',
-      content: `
-        <div class="slide-header">
-          <span class="module-badge"><i class="fab fa-windows"></i> Module 3</span>
-        </div>
-        <h2>3.6 Personnaliser votre environnement</h2>
-        <div class="grid-2">
-          <div>
-            <h3>Apparence</h3>
-            <ul style="padding-left:1.2rem;">
-              <li><strong>Fond d'écran :</strong> Clic droit → Personnaliser</li>
-              <li><strong>Épingler :</strong> Clic droit → Épingler à la barre</li>
-              <li><strong>Raccourci :</strong> Clic droit → Nouveau → Raccourci</li>
-            </ul>
-          </div>
-          <div>
-            <h3>Système</h3>
-            <ul style="padding-left:1.2rem;">
-              <li><strong>Luminosité :</strong> Zone de notification</li>
-              <li><strong>Volume :</strong> Zone de notification</li>
-              <li><strong>Langue :</strong> <code>Win+Espace</code></li>
-            </ul>
-          </div>
-        </div>
-        <div class="box box-tip">
-          <i class="fas fa-star"></i>
-          <div><strong>Mode sombre :</strong> Paramètres → Personnalisation → Couleurs → Sombre.</div>
-        </div>
-      `,
-      className: ''
-    },
-    // Slide 18 : 4.1 Arborescence
-    {
-      id: 'slide-m4',
-      title: '4.1 Arborescence',
-      content: `
-        <div class="slide-header">
-          <span class="module-badge"><i class="fas fa-folder-open"></i> Module 4</span>
-          <span class="duration-badge">30 minutes</span>
-        </div>
-        <h2>4.1 Comprendre l'arborescence</h2>
-        <p style="font-size:1.1rem;"><i class="fas fa-hdd"></i> <strong>Disque</strong> → <i class="fas fa-folder"></i> <strong>Dossiers</strong> → <i class="fas fa-folder-open"></i> <strong>Sous-dossiers</strong> → <i class="fas fa-file"></i> <strong>Fichiers</strong></p>
-        <p>Comme une armoire : le disque est l'armoire, les dossiers sont les tiroirs, les fichiers sont les feuilles.</p>
-        <pre>
-C:.
-├───Users
-│   └───Kevin
-│       ├───Documents
-│       ├───Images
-│       └───Bureau
-└───Program Files</pre>
-      `,
-      className: ''
-    },
-    // Slide 19 : 4.2 Explorateur
-    {
-      id: 'slide-m4b',
-      title: '4.2 Explorateur',
-      content: `
-        <div class="slide-header">
-          <span class="module-badge"><i class="fas fa-folder-open"></i> Module 4</span>
-        </div>
-        <h2>4.2 L'Explorateur de fichiers</h2>
-        <p>Ouvrez avec <span class="highlight">Win + E</span>.</p>
-        <div class="box box-remember">
-          <i class="fas fa-star"></i>
-          <div><strong>Dossiers par défaut :</strong><br>
-            <i class="fas fa-desktop"></i> <strong>Bureau</strong> — ce que vous voyez à l'écran.<br>
-            <i class="fas fa-file-alt"></i> <strong>Documents</strong> — vos fichiers de travail.<br>
-            <i class="fas fa-image"></i> <strong>Images</strong> — vos photos.<br>
-            <i class="fas fa-download"></i> <strong>Téléchargements</strong> — fichiers d'Internet.</div>
-        </div>
-      `,
-      className: ''
-    },
-    // Slide 20 : 4.3 Créer dossiers
-    {
-      id: 'slide-m4c',
-      title: '4.3 Créer des dossiers',
-      content: `
-        <div class="slide-header">
-          <span class="module-badge"><i class="fas fa-folder-open"></i> Module 4</span>
-        </div>
-        <h2>4.3 Créer et organiser des dossiers</h2>
-        <div class="grid-2">
-          <div>
-            <h3>Trois méthodes</h3>
-            <ol style="padding-left:1.2rem;">
-              <li>Clic droit → Nouveau → Dossier</li>
-              <li>Ruban → Nouveau dossier</li>
-              <li><strong><code>Ctrl+Shift+N</code></strong> (la plus rapide)</li>
-            </ol>
-          </div>
-          <div>
-            <h3>Bonnes pratiques</h3>
-            <ul style="padding-left:1.2rem;">
-              <li>Noms clairs et descriptifs</li>
-              <li>Évitez accents et caractères spéciaux</li>
-              <li>Utilisez <code>_</code> ou <code>-</code></li>
-            </ul>
-          </div>
-        </div>
-      `,
-      className: ''
-    },
-    // Slide 21 : 4.4 Manipuler fichiers
-    {
-      id: 'slide-m4d',
-      title: '4.4 Manipuler les fichiers',
-      content: `
-        <div class="slide-header">
-          <span class="module-badge"><i class="fas fa-folder-open"></i> Module 4</span>
-        </div>
-        <h2>4.4 Manipuler les fichiers</h2>
-        <div class="table-wrapper">
-          <table>
-            <thead><tr><th>Action</th><th>Raccourci</th><th>Explication</th></tr></thead>
-            <tbody>
-              <tr><td><i class="fas fa-copy"></i> <strong>Copier</strong></td><td><code>Ctrl+C</code></td><td>L'original reste en place</td></tr>
-              <tr><td><i class="fas fa-paste"></i> <strong>Coller</strong></td><td><code>Ctrl+V</code></td><td>Dépose la copie</td></tr>
-              <tr><td><i class="fas fa-cut"></i> <strong>Couper</strong></td><td><code>Ctrl+X</code></td><td>Déplace le fichier</td></tr>
-              <tr><td><i class="fas fa-trash-alt"></i> <strong>Supprimer</strong></td><td><code>Suppr</code></td><td>Va dans la Corbeille</td></tr>
-              <tr><td><i class="fas fa-edit"></i> <strong>Renommer</strong></td><td><code>F2</code></td><td>Tapez le nouveau nom</td></tr>
-              <tr><td><i class="fas fa-check-double"></i> <strong>Tout sélectionner</strong></td><td><code>Ctrl+A</code></td><td>Tout le dossier</td></tr>
-            </tbody>
-          </table>
-        </div>
-      `,
-      className: ''
-    },
-    // Slide 22 : 4.5 Corbeille
-    {
-      id: 'slide-m4e',
-      title: '4.5 La Corbeille',
-      content: `
-        <div class="slide-header">
-          <span class="module-badge"><i class="fas fa-folder-open"></i> Module 4</span>
-        </div>
-        <h2>4.5 La Corbeille</h2>
-        <p>Les fichiers supprimés vont dans la <strong>Corbeille</strong>. Ils ne sont pas perdus.</p>
-        <div class="grid-2">
-          <div class="card"><i class="fas fa-undo" style="color:#059669;"></i><h4>Restaurer</h4><p style="font-size:0.85rem;">Clic droit → Restaurer</p></div>
-          <div class="card"><i class="fas fa-exclamation-circle" style="color:#dc2626;"></i><h4>Vider</h4><p style="font-size:0.85rem;">Suppression définitive</p></div>
-        </div>
-        <div class="box box-warning">
-          <i class="fas fa-skull-crossbones"></i>
-          <div><strong><code>Shift+Suppr</code></strong> supprime définitivement sans passer par la Corbeille.</div>
-        </div>
-      `,
-      className: ''
-    },
-    // Slide 23 : 4.6 Extensions
-    {
-      id: 'slide-m4f',
-      title: '4.6 Extensions de fichiers',
-      content: `
-        <div class="slide-header">
-          <span class="module-badge"><i class="fas fa-folder-open"></i> Module 4</span>
-        </div>
-        <h2>4.6 Les extensions de fichiers</h2>
-        <div class="table-wrapper">
-          <table>
-            <thead><tr><th>Extension</th><th>Type</th><th>Programme</th></tr></thead>
-            <tbody>
-              <tr><td><code>.docx</code></td><td>Word</td><td>Microsoft Word</td></tr>
-              <tr><td><code>.xlsx</code></td><td>Excel</td><td>Microsoft Excel</td></tr>
-              <tr><td><code>.pptx</code></td><td>PowerPoint</td><td>Microsoft PowerPoint</td></tr>
-              <tr><td><code>.pdf</code></td><td>Document portable</td><td>Adobe Reader</td></tr>
-              <tr><td><code>.jpg</code> <code>.png</code></td><td>Image</td><td>Visionneuse</td></tr>
-              <tr><td><code>.txt</code></td><td>Texte brut</td><td>Bloc-notes</td></tr>
-              <tr><td><code>.zip</code></td><td>Archive</td><td>Explorateur</td></tr>
-              <tr><td><code>.exe</code></td><td>Programme</td><td>Windows</td></tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="box box-warning">
-          <i class="fas fa-shield-alt"></i>
-          <div>N'ouvrez <strong>jamais</strong> un <code>.exe</code> inconnu.</div>
-        </div>
-      `,
-      className: ''
-    },
-    // Slide 24 : 5.1 Mots de passe
-    {
-      id: 'slide-m5',
-      title: '5.1 Mots de passe',
-      content: `
-        <div class="slide-header">
-          <span class="module-badge"><i class="fas fa-shield-alt"></i> Module 5</span>
+          <span class="phase-badge practice"><i class="fas fa-hand-pointer"></i> Phase 3 · Pratique guidée</span>
           <span class="duration-badge">10 minutes</span>
         </div>
-        <h2>5.1 Les mots de passe</h2>
+        <h2>Exercice 1 : Manipulez la souris</h2>
+        <div class="consigne-exercice">
+          <h3><i class="fas fa-tasks"></i> Consignes</h3>
+          <ol>
+            <li>Sélectionnez une icône sur le Bureau (clic gauche).</li>
+            <li>Ouvrez la Corbeille (double-clic), puis fermez-la.</li>
+            <li>Faites un clic droit sur le Bureau et observez le menu.</li>
+            <li>Déplacez une icône (glisser-déposer).</li>
+            <li>Répétez 3 fois chaque geste.</li>
+          </ol>
+        </div>
+        <div class="critere-reussite">
+          <i class="fas fa-check-circle"></i>
+          Critère de réussite : ouvrir et fermer la Corbeille 3 fois sans hésiter.
+        </div>
+        <div class="formateur-instruction">
+          <i class="fas fa-chalkboard-teacher"></i>
+          <strong>Le formateur circule</strong> dans la salle et corrige les gestes : position de la main, vitesse du double-clic.
+        </div>
+      `,
+      className: ''
+    },
+    {
+      id: 'slide-10',
+      phase: 'Pratique guidée',
+      title: 'Démo : le clavier',
+      content: `
+        <div class="slide-header">
+          <span class="phase-badge practice"><i class="fas fa-keyboard"></i> Phase 3 · Pratique guidée</span>
+          <span class="duration-badge">5 minutes</span>
+        </div>
+        <h2>Le clavier : position des mains</h2>
+        <div class="formateur-instruction">
+          <i class="fas fa-chalkboard-teacher"></i>
+          <strong>Le formateur :</strong> « Cherchez les petits reliefs sur les touches F et J. Placez vos index dessus. »
+        </div>
+        <div class="keyboard-visual">
+          <span class="key" style="min-width:40px;">Maj</span><span class="key">Q</span><span class="key">S</span><span class="key">D</span><span class="key highlight-key">F</span><span class="key">G</span><span class="key">H</span><span class="key highlight-key">J</span><span class="key">K</span><span class="key">L</span><span class="key">M</span><span class="key">ù</span><span class="key" style="min-width:45px;">Maj</span>
+        </div>
         <div class="grid-2">
-          <div>
-            <h3 style="color:#dc2626;">À éviter</h3>
-            <ul style="padding-left:1.2rem;">
-              <li>« 123456 »</li>
-              <li>« password »</li>
-              <li>Date de naissance</li>
-              <li>Nom de votre enfant</li>
-            </ul>
+          <div class="box box-tip">
+            <i class="fas fa-hand-point-up"></i>
+            <div><strong>Main gauche :</strong> auriculaire Q, annulaire S, majeur D, index F.</div>
           </div>
-          <div>
-            <h3 style="color:#059669;">Critères d'un bon mot de passe</h3>
-            <ul style="padding-left:1.2rem;">
-              <li>8+ caractères (12 idéal)</li>
-              <li>Majuscules + minuscules</li>
-              <li>Chiffres + symboles</li>
-              <li>Aucun lien personnel</li>
-            </ul>
+          <div class="box box-tip">
+            <i class="fas fa-hand-point-up"></i>
+            <div><strong>Main droite :</strong> index J, majeur K, annulaire L, auriculaire M.</div>
           </div>
+        </div>
+      `,
+      className: ''
+    },
+    {
+      id: 'slide-11',
+      phase: 'Pratique guidée',
+      title: 'Exercice 2 : Saisie',
+      content: `
+        <div class="slide-header">
+          <span class="phase-badge practice"><i class="fas fa-keyboard"></i> Phase 3 · Pratique guidée</span>
+          <span class="duration-badge">15 minutes</span>
+        </div>
+        <h2>Exercice 2 : Tapez du texte</h2>
+        <div class="consigne-exercice">
+          <h3><i class="fas fa-tasks"></i> Consignes</h3>
+          <ol>
+            <li>Ouvrez le <strong>Bloc-notes</strong> (menu Démarrer → tapez « bloc-notes »).</li>
+            <li>Tapez exactement le texte suivant :</li>
+          </ol>
+          <div style="background:white; border-radius:10px; padding:1rem; margin-top:0.5rem; font-size:1.1rem; text-align:center; font-weight:600;">
+            NTIC SOLUTION est basée à Banfora, dans le Secteur 15, Quartier Tatana.
+          </div>
+          <p style="margin-top:0.8rem;">3. Ne regardez pas vos doigts. Utilisez les repères F et J.<br>
+          4. Si vous faites une erreur, utilisez <code>Retour arrière</code> pour corriger.</p>
+        </div>
+        <div class="critere-reussite">
+          <i class="fas fa-check-circle"></i>
+          Critère de réussite : taper le texte complet en moins de 5 minutes.
+        </div>
+      `,
+      className: ''
+    },
+    {
+      id: 'slide-12',
+      phase: 'Pratique guidée',
+      title: 'Raccourcis',
+      content: `
+        <div class="slide-header">
+          <span class="phase-badge practice"><i class="fas fa-keyboard"></i> Phase 3 · Pratique guidée</span>
+          <span class="duration-badge">5 minutes</span>
+        </div>
+        <h2>Les 3 raccourcis à mémoriser maintenant</h2>
+        <div class="formateur-instruction">
+          <i class="fas fa-chalkboard-teacher"></i>
+          <strong>Le formateur démontre puis fait répéter :</strong> « On copie, on colle, on annule. »
+        </div>
+        <div class="grid-3">
+          <div class="card" style="border-color:#059669;">
+            <i class="fas fa-copy" style="color:#059669;"></i>
+            <h4>Copier</h4>
+            <p style="font-size:1.2rem; font-weight:700;"><code>Ctrl+C</code></p>
+          </div>
+          <div class="card" style="border-color:var(--bleu);">
+            <i class="fas fa-paste" style="color:var(--bleu);"></i>
+            <h4>Coller</h4>
+            <p style="font-size:1.2rem; font-weight:700;"><code>Ctrl+V</code></p>
+          </div>
+          <div class="card" style="border-color:#7c3aed;">
+            <i class="fas fa-undo" style="color:#7c3aed;"></i>
+            <h4>Annuler</h4>
+            <p style="font-size:1.2rem; font-weight:700;"><code>Ctrl+Z</code></p>
+          </div>
+        </div>
+        <div class="consigne-exercice">
+          <h3><i class="fas fa-tasks"></i> À vous maintenant</h3>
+          <p>Dans le Bloc-notes : sélectionnez tout (<code>Ctrl+A</code>), copiez (<code>Ctrl+C</code>), collez 3 fois (<code>Ctrl+V</code>), annulez le dernier collage (<code>Ctrl+Z</code>).</p>
+        </div>
+      `,
+      className: ''
+    },
+
+    // ==================== PHASE 4 : APPLICATION (35 min) ====================
+    {
+      id: 'slide-13',
+      phase: 'Application',
+      title: 'Démo : le Bureau',
+      content: `
+        <div class="slide-header">
+          <span class="phase-badge"><i class="fas fa-desktop"></i> Phase 4 · Application</span>
+          <span class="duration-badge">5 minutes</span>
+        </div>
+        <h2>Votre espace de travail : le Bureau</h2>
+        <div class="formateur-instruction">
+          <i class="fas fa-chalkboard-teacher"></i>
+          <strong>Le formateur montre sur le vidéoprojecteur :</strong> « C'est votre espace de travail. Tout commence ici. »
+        </div>
+        <div class="grid-3">
+          <div class="card"><i class="fas fa-image"></i><h4>Fond d'écran</h4><p style="font-size:0.8rem;">L'image d'arrière-plan</p></div>
+          <div class="card"><i class="fas fa-th-large"></i><h4>Icônes</h4><p style="font-size:0.8rem;">Raccourcis vers programmes</p></div>
+          <div class="card"><i class="fas fa-grip-horizontal"></i><h4>Barre des tâches</h4><p style="font-size:0.8rem;">En bas : Démarrer, horloge</p></div>
         </div>
         <div class="box box-remember">
-          <i class="fas fa-lightbulb"></i>
-          <div><strong>Méthode :</strong> « Mon frère a acheté 2 voitures à Banfora en 2023 » → <code>Mfaa2vàBe2</code></div>
+          <i class="fas fa-star"></i>
+          <div><strong>La barre des tâches</strong> affiche vos applications ouvertes. Cliquez sur une icône pour basculer.</div>
         </div>
       `,
       className: ''
     },
-    // Slide 25 : 5.2 Mises à jour et menaces
     {
-      id: 'slide-m5b',
-      title: '5.2 Mises à jour et menaces',
+      id: 'slide-14',
+      phase: 'Application',
+      title: 'Exercice 3 : Explorer',
       content: `
         <div class="slide-header">
-          <span class="module-badge"><i class="fas fa-shield-alt"></i> Module 5</span>
+          <span class="phase-badge"><i class="fas fa-desktop"></i> Phase 4 · Application</span>
+          <span class="duration-badge">10 minutes</span>
         </div>
-        <h2>5.2 Mises à jour et menaces</h2>
-        <div class="grid-2">
-          <div>
-            <h3>Mises à jour</h3>
-            <p style="font-size:0.9rem;">Windows corrige les failles de sécurité. <strong>Acceptez-les toujours.</strong></p>
-          </div>
-          <div>
-            <h3>Menaces</h3>
-            <ul style="padding-left:1.2rem; font-size:0.9rem;">
-              <li>Pièces jointes suspectes</li>
-              <li>Hameçonnage (faux emails)</li>
-              <li>Liens frauduleux</li>
-              <li>Virus, rançongiciels</li>
-            </ul>
-          </div>
+        <h2>Exercice 3 : Explorez le Bureau</h2>
+        <div class="consigne-exercice">
+          <h3><i class="fas fa-tasks"></i> Consignes</h3>
+          <ol>
+            <li>Identifiez sur votre écran : la <strong>Corbeille</strong>, la <strong>barre des tâches</strong>, l'<strong>horloge</strong>.</li>
+            <li>Ouvrez le <strong>menu Démarrer</strong> (touche Windows).</li>
+            <li>Tapez « bloc-notes » dans la barre de recherche.</li>
+            <li>Fermez le Bloc-notes.</li>
+            <li>Répétez avec « calculatrice ».</li>
+          </ol>
         </div>
-        <div class="box box-warning">
-          <i class="fas fa-hand-paper"></i>
-          <div><strong>Règle d'or : en cas de doute, ne cliquez pas.</strong></div>
+        <div class="formateur-instruction">
+          <i class="fas fa-chalkboard-teacher"></i>
+          <strong>Le formateur circule</strong> et demande à chaque participant de montrer un élément précis.
         </div>
       `,
       className: ''
     },
-    // Slide 26 : 5.3 Sauvegarde
     {
-      id: 'slide-m5c',
-      title: '5.3 Sauvegarde et verrouillage',
+      id: 'slide-15',
+      phase: 'Application',
+      title: 'Démo : Explorateur',
       content: `
         <div class="slide-header">
-          <span class="module-badge"><i class="fas fa-shield-alt"></i> Module 5</span>
+          <span class="phase-badge"><i class="fas fa-desktop"></i> Phase 4 · Application</span>
+          <span class="duration-badge">5 minutes</span>
         </div>
-        <h2>5.3 Sauvegarde et verrouillage</h2>
-        <div class="grid-2">
-          <div>
-            <h3>Sauvegarde</h3>
-            <div class="box box-remember">
-              <i class="fas fa-clipboard-check"></i>
-              <div><strong>Règle 3-2-1 :</strong><br>3 copies, 2 supports, 1 hors site.</div>
-            </div>
-          </div>
-          <div>
-            <h3>Verrouillage</h3>
-            <div style="text-align:center;">
-              <div style="background:var(--bleu); color:white; display:inline-block; padding:1rem 2rem; border-radius:16px; font-size:1.5rem; font-weight:800;">Win + L</div>
-              <p style="margin-top:0.5rem;">À utiliser chaque fois que vous quittez votre poste.</p>
-            </div>
-          </div>
+        <h2>L'Explorateur de fichiers</h2>
+        <div class="formateur-instruction">
+          <i class="fas fa-chalkboard-teacher"></i>
+          <strong>Le formateur :</strong> « Appuyez sur <span class="highlight">Win + E</span>. C'est votre armoire de rangement. »
+        </div>
+        <div class="box box-remember">
+          <i class="fas fa-star"></i>
+          <div><strong>Dossiers importants :</strong><br>
+            <i class="fas fa-desktop"></i> <strong>Bureau</strong> — ce que vous voyez à l'écran<br>
+            <i class="fas fa-file-alt"></i> <strong>Documents</strong> — vos fichiers de travail<br>
+            <i class="fas fa-image"></i> <strong>Images</strong> — vos photos<br>
+            <i class="fas fa-download"></i> <strong>Téléchargements</strong> — fichiers d'Internet</div>
+        </div>
+        <p style="font-size:0.9rem;">Volet gauche : arborescence. Volet droit : contenu du dossier sélectionné.</p>
+      `,
+      className: ''
+    },
+    {
+      id: 'slide-16',
+      phase: 'Application',
+      title: 'Exercice 4 : Créer dossiers',
+      content: `
+        <div class="slide-header">
+          <span class="phase-badge"><i class="fas fa-desktop"></i> Phase 4 · Application</span>
+          <span class="duration-badge">10 minutes</span>
+        </div>
+        <h2>Exercice 4 : Créez votre arborescence</h2>
+        <div class="consigne-exercice">
+          <h3><i class="fas fa-tasks"></i> Consignes</h3>
+          <ol>
+            <li>Ouvrez l'Explorateur (<code>Win+E</code>).</li>
+            <li>Allez dans <strong>Documents</strong>.</li>
+            <li>Créez un dossier <strong>Formation_Bureautique</strong> (<code>Ctrl+Shift+N</code>).</li>
+            <li>Ouvrez-le, puis créez un sous-dossier <strong>Jour_1</strong>.</li>
+            <li>Ouvrez Jour_1, puis créez un sous-dossier <strong>Exercices</strong>.</li>
+          </ol>
+        </div>
+        <div class="critere-reussite">
+          <i class="fas fa-check-circle"></i>
+          Critère de réussite : le chemin complet <code>Documents > Formation_Bureautique > Jour_1 > Exercices</code> existe.
         </div>
       `,
       className: ''
     },
-    // Slide 27 : Récap
     {
-      id: 'slide-recap',
-      title: 'Récapitulatif',
+      id: 'slide-17',
+      phase: 'Application',
+      title: 'Exercice 5 : Manipuler fichiers',
       content: `
         <div class="slide-header">
-          <span class="module-badge" style="background:#fef3c7;color:#92400e;"><i class="fas fa-list-check"></i> Récapitulatif</span>
+          <span class="phase-badge"><i class="fas fa-desktop"></i> Phase 4 · Application</span>
+          <span class="duration-badge">5 minutes</span>
         </div>
-        <h2>Les 10 points clés</h2>
+        <h2>Exercice 5 : Déplacez votre fichier</h2>
+        <div class="consigne-exercice">
+          <h3><i class="fas fa-tasks"></i> Consignes</h3>
+          <ol>
+            <li>Retrouvez le fichier texte créé dans le Bloc-notes.</li>
+            <li>Enregistrez-le dans <strong>Documents > Formation_Bureautique > Jour_1 > Exercices</strong>.</li>
+            <li>Copiez-le (Ctrl+C) puis collez-le (Ctrl+V) dans <strong>Documents</strong>.</li>
+            <li>Renommez la copie en <strong>Mon_nom.txt</strong> (touche F2).</li>
+            <li>Supprimez la copie (touche Suppr).</li>
+          </ol>
+        </div>
+        <div class="formateur-instruction">
+          <i class="fas fa-chalkboard-teacher"></i>
+          <strong>Le formateur</strong> vérifie que chaque participant a réussi.
+        </div>
+      `,
+      className: ''
+    },
+
+    // ==================== PHASE 5 : CONSOLIDATION (15 min) ====================
+    {
+      id: 'slide-18',
+      phase: 'Consolidation',
+      title: 'Sécurité : 3 réflexes',
+      content: `
+        <div class="slide-header">
+          <span class="phase-badge consolidation"><i class="fas fa-shield-alt"></i> Phase 5 · Consolidation</span>
+          <span class="duration-badge">5 minutes</span>
+        </div>
+        <h2>Avant de terminer : 3 réflexes sécurité</h2>
+        <div class="formateur-instruction">
+          <i class="fas fa-chalkboard-teacher"></i>
+          <strong>Le formateur :</strong> « Il y a trois choses que vous devez retenir absolument. »
+        </div>
+        <div class="grid-3">
+          <div class="card" style="border-color:#dc2626;">
+            <i class="fas fa-lock" style="color:#dc2626;"></i>
+            <h4>1. Mot de passe</h4>
+            <p style="font-size:0.8rem;">8+ caractères, jamais le partager</p>
+          </div>
+          <div class="card" style="border-color:#f59e0b;">
+            <i class="fas fa-sync-alt" style="color:#f59e0b;"></i>
+            <h4>2. Mises à jour</h4>
+            <p style="font-size:0.8rem;">Toujours les accepter</p>
+          </div>
+          <div class="card" style="border-color:var(--bleu);">
+            <i class="fas fa-user-lock" style="color:var(--bleu);"></i>
+            <h4>3. Verrouiller</h4>
+            <p style="font-size:0.8rem;"><code>Win+L</code> à chaque pause</p>
+          </div>
+        </div>
+        <div class="consigne-exercice" style="margin-top:1rem;">
+          <p><strong>À vous :</strong> Verrouillez votre session avec <code>Win+L</code>, puis déverrouillez avec votre mot de passe.</p>
+        </div>
+      `,
+      className: ''
+    },
+    {
+      id: 'slide-19',
+      phase: 'Consolidation',
+      title: 'Récapitulatif interactif',
+      content: `
+        <div class="slide-header">
+          <span class="phase-badge consolidation"><i class="fas fa-shield-alt"></i> Phase 5 · Consolidation</span>
+          <span class="duration-badge">5 minutes</span>
+        </div>
+        <h2>Qu'avez-vous appris aujourd'hui ?</h2>
+        <div class="question-ouverture">
+          <i class="fas fa-question-circle"></i>
+          « Chacun va citer une chose qu'il a apprise aujourd'hui. » — Le formateur note les réponses.
+        </div>
         <div class="grid-2">
           <div>
             <ol style="padding-left:1.2rem; line-height:2;">
               <li>L'ordinateur reçoit, traite, affiche.</li>
               <li>Le Bureau = espace de travail.</li>
               <li>La recherche Windows = outil le plus rapide.</li>
-              <li>Ctrl+C/V = réflexes de base.</li>
+              <li>Ctrl+C / Ctrl+V = réflexes de base.</li>
               <li>Win+E = Explorateur.</li>
             </ol>
           </div>
@@ -1087,33 +928,41 @@ C:.
       `,
       className: 'slide-recap'
     },
-    // Slide 28 : Exercice final
     {
-      id: 'slide-exercise',
+      id: 'slide-20',
+      phase: 'Consolidation',
       title: 'Exercice final',
       content: `
         <div class="slide-header">
-          <span class="module-badge"><i class="fas fa-pencil-alt"></i> Exercice final</span>
+          <span class="phase-badge consolidation"><i class="fas fa-shield-alt"></i> Phase 5 · Consolidation</span>
+          <span class="duration-badge">5 minutes</span>
         </div>
-        <h2>10 actions à réaliser</h2>
+        <h2>Exercice final : en autonomie</h2>
+        <div class="formateur-instruction">
+          <i class="fas fa-chalkboard-teacher"></i>
+          <strong>Le formateur :</strong> « Maintenant, vous allez tout faire seuls, sans mon aide. »
+        </div>
         <ol style="padding-left:1.2rem; line-height:1.8;">
-          <li>Allumer le PC.</li>
-          <li>Créer <code>Exercice_Jour1</code> sur le Bureau.</li>
-          <li>Ouvrir le Bloc-notes, taper votre nom.</li>
-          <li>Enregistrer dans le dossier.</li>
-          <li>Copier dans Documents.</li>
-          <li>Renommer en <code>Mon_nom.txt</code>.</li>
-          <li>Supprimer l'original.</li>
-          <li>Restaurer depuis la Corbeille.</li>
-          <li>Verrouiller (Win+L).</li>
-          <li>Déverrouiller et éteindre.</li>
+          <li>Créez un dossier <code>Exercice_Jour1</code> sur le Bureau.</li>
+          <li>Ouvrez le Bloc-notes, tapez votre nom complet.</li>
+          <li>Enregistrez le fichier dans <code>Exercice_Jour1</code>.</li>
+          <li>Copiez ce fichier dans <code>Documents</code>.</li>
+          <li>Renommez la copie en <code>Mon_nom.txt</code>.</li>
+          <li>Supprimez l'original du Bureau.</li>
+          <li>Restaurez-le depuis la Corbeille.</li>
+          <li>Verrouillez votre session (Win+L).</li>
+          <li>Déverrouillez.</li>
         </ol>
+        <div class="critere-reussite">
+          <i class="fas fa-trophy"></i>
+          Si vous avez réussi ces 9 actions, vous maîtrisez les bases. Bravo !
+        </div>
       `,
       className: ''
     },
-    // Slide 29 : Annonce Jour 2
     {
-      id: 'slide-next',
+      id: 'slide-21',
+      phase: 'Conclusion',
       title: 'Jour 2',
       content: `
         <div class="slide-header">
@@ -1128,7 +977,7 @@ C:.
     }
   ];
 
-  // ========== ÉTAT DE LA PRÉSENTATION ==========
+  // ========== ÉTAT ==========
   let currentSlide = 0;
   const totalSlides = slidesData.length;
 
@@ -1217,6 +1066,7 @@ C:.
       const card = document.createElement('div');
       card.className = 'thumbnail-card';
       card.innerHTML = `
+        <span class="phase-label">${slide.phase}</span>
         <i class="fas fa-file-alt"></i>
         <span>${index + 1}. ${slide.title}</span>
       `;
