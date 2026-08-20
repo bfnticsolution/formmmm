@@ -282,6 +282,7 @@
       line-height: 1.6;
       overflow-x: auto;
       margin: 1rem 0;
+      white-space: pre-wrap;
     }
     code {
       background: #f1f5f9;
@@ -291,22 +292,23 @@
       font-size: 0.9em;
     }
 
-    .tag-demo {
-      display: inline-block;
+    .code-block {
       background: #1e293b;
       color: #4ade80;
-      padding: 0.3rem 0.7rem;
-      border-radius: 6px;
+      padding: 1.2rem;
+      border-radius: 12px;
       font-family: 'Courier New', monospace;
-      font-size: 1.1rem;
-      font-weight: 600;
-      margin: 0.2rem;
+      font-size: 1.05rem;
+      line-height: 1.7;
+      overflow-x: auto;
+      margin: 1rem 0;
+      white-space: pre-wrap;
     }
-    .tag-demo .chevron { color: #f472b6; }
-    .tag-demo .tag-name { color: #60a5fa; }
-    .tag-demo .attr { color: #fbbf24; }
-    .tag-demo .value { color: #fb923c; }
-    .tag-demo .text { color: #e2e8f0; }
+    .code-block .tag { color: #60a5fa; }
+    .code-block .attr { color: #fbbf24; }
+    .code-block .val { color: #fb923c; }
+    .code-block .txt { color: #e2e8f0; }
+    .code-block .comment { color: #64748b; font-style: italic; }
 
     @media (max-width: 768px) {
       .slide-content { padding: 2rem; }
@@ -339,7 +341,6 @@
 
 <script>
   const slidesData = [
-    // Slide 1 : Couverture
     {
       content: `
         <h1 class="anim-item">Développement Web & Mobile</h1>
@@ -353,7 +354,6 @@
       `,
       className: 'slide-cover'
     },
-    // Slide 2 : Objectifs
     {
       content: `
         <h2 class="anim-item">À la fin de cette séance, vous saurez...</h2>
@@ -382,7 +382,6 @@
       `,
       className: 'slide-objectifs'
     },
-    // Slide 3 : Retour sur le Jour 1
     {
       content: `
         <h2 class="anim-item">Retour sur le Jour 1</h2>
@@ -418,12 +417,11 @@
       `,
       className: ''
     },
-    // Slide 4 : Les titres HTML (h1 → h6)
     {
       content: `
         <h2 class="anim-item">Les 6 niveaux de titres</h2>
         <p class="anim-item" style="margin-top:1rem;">Les titres structurent votre page. Ils vont du plus grand (<code>h1</code>) au plus petit (<code>h6</code>).</p>
-        <div style="margin-top:2rem;">
+        <div style="margin-top:1.5rem;">
           <div class="anim-item" style="font-size:2.5rem; font-weight:800; color:var(--bleu);">&lt;h1&gt; Titre principal &lt;/h1&gt;</div>
           <div class="anim-item" style="font-size:2rem; font-weight:700; color:#2563eb;">&lt;h2&gt; Sous-titre &lt;/h2&gt;</div>
           <div class="anim-item" style="font-size:1.6rem; font-weight:600; color:#3b82f6;">&lt;h3&gt; Section &lt;/h3&gt;</div>
@@ -438,23 +436,22 @@
       `,
       className: ''
     },
-    // Slide 5 : Les paragraphes et sauts de ligne
     {
       content: `
         <h2 class="anim-item">Paragraphes et sauts de ligne</h2>
-        <div class="grid-2" style="display:grid; grid-template-columns:1fr 1fr; gap:2rem; margin-top:2rem;">
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:2rem; margin-top:1.5rem;">
           <div>
             <h3 class="anim-item" style="color:var(--bleu);"><i class="fas fa-paragraph"></i> Paragraphe : &lt;p&gt;</h3>
             <p class="anim-item" style="font-size:1.1rem;">Chaque bloc de texte est un paragraphe.</p>
-            <pre class="anim-item">&lt;p&gt;Premier paragraphe.&lt;/p&gt;
-&lt;p&gt;Deuxième paragraphe.&lt;/p&gt;</pre>
+            <div class="code-block anim-item">&lt;p&gt;Premier paragraphe.&lt;/p&gt;
+&lt;p&gt;Deuxième paragraphe.&lt;/p&gt;</div>
           </div>
           <div>
             <h3 class="anim-item" style="color:var(--orange);"><i class="fas fa-level-down-alt"></i> Saut de ligne : &lt;br&gt;</h3>
             <p class="anim-item" style="font-size:1.1rem;">Force un retour à la ligne à l'intérieur d'un paragraphe.</p>
-            <pre class="anim-item">&lt;p&gt;Ligne 1&lt;br&gt;
+            <div class="code-block anim-item">&lt;p&gt;Ligne 1&lt;br&gt;
 Ligne 2&lt;br&gt;
-Ligne 3&lt;/p&gt;</pre>
+Ligne 3&lt;/p&gt;</div>
           </div>
         </div>
         <div class="box box-tip anim-item" style="margin-top:1.5rem;">
@@ -464,51 +461,49 @@ Ligne 3&lt;/p&gt;</pre>
       `,
       className: ''
     },
-    // Slide 6 : Les listes
     {
       content: `
         <h2 class="anim-item">Les 3 types de listes</h2>
-        <div class="card-grid cols-3" style="margin-top:2rem;">
+        <div class="card-grid cols-3" style="margin-top:1.5rem;">
           <div class="card anim-item">
             <i class="fas fa-list-ul"></i>
             <h4>Liste à puces</h4>
             <p style="font-size:1rem;"><code>&lt;ul&gt;</code> + <code>&lt;li&gt;</code></p>
-            <pre style="font-size:0.9rem;">&lt;ul&gt;
+            <div class="code-block" style="font-size:0.85rem;">&lt;ul&gt;
   &lt;li&gt;Riz&lt;/li&gt;
   &lt;li&gt;Sucre&lt;/li&gt;
-&lt;/ul&gt;</pre>
+&lt;/ul&gt;</div>
           </div>
           <div class="card anim-item">
             <i class="fas fa-list-ol"></i>
             <h4>Liste numérotée</h4>
             <p style="font-size:1rem;"><code>&lt;ol&gt;</code> + <code>&lt;li&gt;</code></p>
-            <pre style="font-size:0.9rem;">&lt;ol&gt;
+            <div class="code-block" style="font-size:0.85rem;">&lt;ol&gt;
   &lt;li&gt;Étape 1&lt;/li&gt;
   &lt;li&gt;Étape 2&lt;/li&gt;
-&lt;/ol&gt;</pre>
+&lt;/ol&gt;</div>
           </div>
           <div class="card anim-item">
             <i class="fas fa-indent"></i>
             <h4>Liste imbriquée</h4>
             <p style="font-size:1rem;">Une liste dans une liste</p>
-            <pre style="font-size:0.9rem;">&lt;ul&gt;
+            <div class="code-block" style="font-size:0.85rem;">&lt;ul&gt;
   &lt;li&gt;Accueil
     &lt;ul&gt;
       &lt;li&gt;Intro&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
-&lt;/ul&gt;</pre>
+&lt;/ul&gt;</div>
           </div>
         </div>
       `,
       className: ''
     },
-    // Slide 7 : Les images
     {
       content: `
         <h2 class="anim-item">Insérer des images</h2>
         <p class="anim-item" style="margin-top:1rem;">La balise <code>&lt;img&gt;</code> affiche une image. Elle utilise deux attributs essentiels.</p>
-        <div style="margin-top:2rem;">
+        <div style="margin-top:1.5rem;">
           <table class="table-simple anim-item">
             <thead><tr><th>Attribut</th><th>Rôle</th><th>Exemple</th></tr></thead>
             <tbody>
@@ -517,7 +512,7 @@ Ligne 3&lt;/p&gt;</pre>
             </tbody>
           </table>
         </div>
-        <pre class="anim-item">&lt;img src="banfora.jpg" alt="Vue de Banfora"&gt;</pre>
+        <div class="code-block anim-item">&lt;img src="banfora.jpg" alt="Vue de Banfora"&gt;</div>
         <div class="box box-tip anim-item" style="margin-top:1rem;">
           <i class="fas fa-lightbulb"></i>
           <div><strong>Sources d'images gratuites :</strong> Unsplash, Pexels, Pixabay. Demandez à DeepSeek de générer une image avec un lien direct.</div>
@@ -525,27 +520,26 @@ Ligne 3&lt;/p&gt;</pre>
       `,
       className: ''
     },
-    // Slide 8 : Les liens
     {
       content: `
         <h2 class="anim-item">Créer des liens</h2>
         <p class="anim-item" style="margin-top:1rem;">La balise <code>&lt;a&gt;</code> crée un lien. L'attribut <code>href</code> indique la destination.</p>
-        <div class="grid-2" style="display:grid; grid-template-columns:1fr 1fr; gap:2rem; margin-top:2rem;">
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:2rem; margin-top:1.5rem;">
           <div class="card anim-item">
             <i class="fas fa-external-link-alt"></i>
             <h4>Lien externe</h4>
             <p>Vers un autre site web</p>
-            <pre style="font-size:0.9rem;">&lt;a href="https://google.com"&gt;
+            <div class="code-block" style="font-size:0.9rem;">&lt;a href="https://google.com"&gt;
   Google
-&lt;/a&gt;</pre>
+&lt;/a&gt;</div>
           </div>
           <div class="card anim-item">
             <i class="fas fa-file"></i>
             <h4>Lien interne</h4>
             <p>Vers une autre page de votre site</p>
-            <pre style="font-size:0.9rem;">&lt;a href="contact.html"&gt;
+            <div class="code-block" style="font-size:0.9rem;">&lt;a href="contact.html"&gt;
   Contact
-&lt;/a&gt;</pre>
+&lt;/a&gt;</div>
           </div>
         </div>
         <div class="box box-important anim-item" style="margin-top:1.5rem;">
@@ -555,11 +549,10 @@ Ligne 3&lt;/p&gt;</pre>
       `,
       className: ''
     },
-    // Slide 9 : Les tableaux
     {
       content: `
         <h2 class="anim-item">Créer un tableau</h2>
-        <div style="margin-top:2rem;">
+        <div style="margin-top:1.5rem;">
           <table class="table-simple anim-item">
             <thead><tr><th>Balise</th><th>Rôle</th></tr></thead>
             <tbody>
@@ -570,7 +563,7 @@ Ligne 3&lt;/p&gt;</pre>
             </tbody>
           </table>
         </div>
-        <pre class="anim-item">&lt;table&gt;
+        <div class="code-block anim-item">&lt;table&gt;
   &lt;tr&gt;
     &lt;th&gt;Produit&lt;/th&gt;
     &lt;th&gt;Prix&lt;/th&gt;
@@ -579,21 +572,20 @@ Ligne 3&lt;/p&gt;</pre>
     &lt;td&gt;Riz&lt;/td&gt;
     &lt;td&gt;500 F&lt;/td&gt;
   &lt;/tr&gt;
-&lt;/table&gt;</pre>
+&lt;/table&gt;</div>
       `,
       className: ''
     },
-    // Slide 10 : La barre de navigation
     {
       content: `
         <h2 class="anim-item">Créer une barre de navigation</h2>
         <p class="anim-item" style="margin-top:1rem;">Une barre de navigation relie vos différentes pages. C'est l'élément clé d'un site multi-pages.</p>
-        <pre class="anim-item">&lt;nav&gt;
+        <div class="code-block anim-item">&lt;nav&gt;
   &lt;a href="index.html"&gt;Accueil&lt;/a&gt;
   &lt;a href="apropos.html"&gt;À propos&lt;/a&gt;
   &lt;a href="services.html"&gt;Services&lt;/a&gt;
   &lt;a href="contact.html"&gt;Contact&lt;/a&gt;
-&lt;/nav&gt;</pre>
+&lt;/nav&gt;</div>
         <div class="box box-important anim-item" style="margin-top:1rem;">
           <i class="fas fa-star"></i>
           <div><strong>Chaque lien</strong> pointe vers un fichier <code>.html</code> différent. Vous devez créer ces fichiers pour que les liens fonctionnent.</div>
@@ -601,11 +593,10 @@ Ligne 3&lt;/p&gt;</pre>
       `,
       className: ''
     },
-    // Slide 11 : Les 5 prompts DeepSeek
     {
       content: `
         <h2 class="anim-item">Les 5 prompts DeepSeek du jour</h2>
-        <div style="margin-top:2rem;">
+        <div style="margin-top:1.5rem;">
           <table class="table-simple anim-item">
             <thead><tr><th>N°</th><th>Prompt</th><th>Ce que ça génère</th></tr></thead>
             <tbody>
@@ -624,11 +615,10 @@ Ligne 3&lt;/p&gt;</pre>
       `,
       className: ''
     },
-    // Slide 12 : Exercice — Créer 4 pages
     {
       content: `
         <h2 class="anim-item">Exercice : Créez 4 pages</h2>
-        <div class="exercice-box anim-item" style="margin-top:2rem;">
+        <div class="exercice-box anim-item" style="margin-top:1.5rem;">
           <h3><i class="fas fa-tasks"></i> Consignes</h3>
           <ol>
             <li>Dans VS Code, créez 4 nouveaux fichiers : <code>apropos.html</code>, <code>services.html</code>, <code>contact.html</code>, <code>galerie.html</code></li>
@@ -645,11 +635,10 @@ Ligne 3&lt;/p&gt;</pre>
       `,
       className: 'slide-exercice'
     },
-    // Slide 13 : Exercice — Personnaliser
     {
       content: `
         <h2 class="anim-item">Exercice : Personnalisez votre site</h2>
-        <div class="exercice-box anim-item" style="margin-top:2rem;">
+        <div class="exercice-box anim-item" style="margin-top:1.5rem;">
           <h3><i class="fas fa-tasks"></i> Consignes</h3>
           <ol>
             <li>Utilisez les 5 prompts DeepSeek pour enrichir votre <code>index.html</code></li>
@@ -662,11 +651,10 @@ Ligne 3&lt;/p&gt;</pre>
       `,
       className: 'slide-exercice'
     },
-    // Slide 14 : Les bonnes pratiques
     {
       content: `
         <h2 class="anim-item">Les 5 bonnes pratiques HTML</h2>
-        <div style="margin-top:2rem;">
+        <div style="margin-top:1.5rem;">
           <div class="objectif-item anim-item">
             <div class="objectif-num" style="background:#059669;">1</div>
             <div class="objectif-text">Fermez toujours vos balises : <code>&lt;p&gt;</code> → <code>&lt;/p&gt;</code></div>
@@ -691,11 +679,10 @@ Ligne 3&lt;/p&gt;</pre>
       `,
       className: 'slide-objectifs'
     },
-    // Slide 15 : Erreurs courantes
     {
       content: `
         <h2 class="anim-item">Les 4 erreurs courantes à éviter</h2>
-        <div style="margin-top:2rem;">
+        <div style="margin-top:1.5rem;">
           <table class="table-simple anim-item">
             <thead><tr><th>Erreur</th><th>Conséquence</th><th>Solution</th></tr></thead>
             <tbody>
@@ -713,11 +700,10 @@ Ligne 3&lt;/p&gt;</pre>
       `,
       className: ''
     },
-    // Slide 16 : Points clés à retenir
     {
       content: `
         <h2 class="anim-item">Les 5 points clés du Jour 2</h2>
-        <div style="margin-top:2rem;">
+        <div style="margin-top:1.5rem;">
           <div class="objectif-item anim-item">
             <div class="objectif-num" style="background:#059669;">1</div>
             <div class="objectif-text">Les titres <code>&lt;h1&gt;</code> à <code>&lt;h6&gt;</code> structurent votre page</div>
@@ -742,7 +728,6 @@ Ligne 3&lt;/p&gt;</pre>
       `,
       className: 'slide-objectifs'
     },
-    // Slide 17 : Récapitulatif
     {
       content: `
         <h2 class="anim-item">Aujourd'hui, vous avez appris à...</h2>
@@ -778,7 +763,6 @@ Ligne 3&lt;/p&gt;</pre>
       `,
       className: 'slide-recap'
     },
-    // Slide 18 : Annonce Jour 3
     {
       content: `
         <h1 class="anim-item" style="color:white; font-size:2.8rem;">Rendez-vous demain</h1>
