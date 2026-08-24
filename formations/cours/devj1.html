@@ -1,922 +1,1256 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NTIC SOLUTION · Formation Dev Web & Mobile · Jour 1 — Projection</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <style>
-    :root {
-      --bleu: #0B3FA5;
-      --bleu-profond: #072a6e;
-      --bleu-clair: #e8f0fe;
-      --orange: #FF6B35;
-      --orange-vif: #ff5722;
-      --orange-clair: #fff4e5;
-      --vert: #059669;
-      --vert-clair: #ecfdf5;
-      --violet: #7c3aed;
-      --violet-clair: #f3e8ff;
-      --rouge: #dc2626;
-      --rouge-clair: #fef2f2;
-      --jaune: #f59e0b;
-      --jaune-clair: #fffbeb;
-      --gris-fond: #f4f6fa;
-      --texte: #1e293b;
-      --texte-secondaire: #475569;
-      --blanc: #ffffff;
-      --bordure: #e2e8f0;
-      --transition: 0.45s cubic-bezier(0.4, 0, 0.2, 1);
-    }
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NTIC SOLUTION · Formation Dev Web & Mobile · Jour 1 — Projection</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <style>
+        /* ===== VARIABLES ===== */
+        :root {
+            --bleu: #0B3FA5;
+            --bleu-profond: #072a6e;
+            --bleu-clair: #e8f0fe;
+            --orange: #FF6B35;
+            --orange-vif: #ff5722;
+            --orange-clair: #fff4e5;
+            --vert: #059669;
+            --vert-clair: #ecfdf5;
+            --violet: #7c3aed;
+            --violet-clair: #f3e8ff;
+            --rouge: #dc2626;
+            --rouge-clair: #fef2f2;
+            --jaune: #f59e0b;
+            --jaune-clair: #fffbeb;
+            --gris-fond: #f4f6fa;
+            --texte: #1e293b;
+            --texte-secondaire: #475569;
+            --blanc: #ffffff;
+            --bordure: #e2e8f0;
+            --transition: 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+        }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+        /* ===== RESET ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    body {
-      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
-      background: #0d1117;
-      color: var(--texte);
-      overflow: hidden;
-      height: 100vh;
-      width: 100vw;
-      -webkit-font-smoothing: antialiased;
-      user-select: none;
-    }
+        body {
+            font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+            background: #0d1117;
+            color: var(--texte);
+            overflow: hidden;
+            height: 100vh;
+            width: 100vw;
+            -webkit-font-smoothing: antialiased;
+            user-select: none;
+        }
 
-    /* ========== ÉCRAN DE CODE D'ACCÈS ========== */
-    .access-overlay {
-      position: fixed; inset: 0; z-index: 99999;
-      background: linear-gradient(135deg, var(--bleu-profond) 0%, #0d1b3e 100%);
-      display: flex; align-items: center; justify-content: center;
-      transition: opacity 0.7s ease, visibility 0.7s ease;
-    }
-    .access-overlay.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
-    .access-card {
-      background: var(--blanc); border-radius: 2rem; padding: 3rem 2.5rem;
-      text-align: center; box-shadow: 0 30px 60px rgba(0,0,0,0.5);
-      max-width: 440px; width: 90%; animation: floatIn 0.8s ease;
-    }
-    @keyframes floatIn {
-      from { opacity: 0; transform: translateY(40px) scale(0.95); }
-      to { opacity: 1; transform: translateY(0) scale(1); }
-    }
-    .access-card .logo-symbol {
-      background: var(--bleu); color: white; width: 64px; height: 64px;
-      border-radius: 18px; display: flex; align-items: center; justify-content: center;
-      font-weight: 800; font-size: 1.8rem; margin: 0 auto 1.2rem;
-    }
-    .access-card h2 { color: var(--bleu); font-size: 1.5rem; margin-bottom: 0.5rem; }
-    .access-card p { color: #475569; margin-bottom: 1.8rem; font-size: 0.95rem; }
-    .access-input {
-      width: 100%; padding: 0.9rem 1.3rem; border: 2px solid var(--bordure);
-      border-radius: 14px; font-family: inherit; font-size: 1rem;
-      text-align: center; letter-spacing: 2px; transition: var(--transition); margin-bottom: 1rem;
-    }
-    .access-input:focus { outline: none; border-color: var(--bleu); box-shadow: 0 0 0 4px rgba(11,63,165,0.1); }
-    .access-btn {
-      width: 100%; padding: 0.9rem; background: var(--orange); color: white;
-      border: none; border-radius: 14px; font-weight: 700; font-size: 1rem;
-      font-family: inherit; cursor: pointer; transition: var(--transition);
-    }
-    .access-btn:hover { background: var(--orange-vif); transform: translateY(-2px); }
-    .access-error { color: #dc2626; font-size: 0.85rem; margin-top: 0.5rem; display: none; font-weight: 600; }
-    .access-error.visible { display: block; animation: shake 0.5s ease; }
-    @keyframes shake {
-      0%,100% { transform: translateX(0); } 25% { transform: translateX(-8px); } 75% { transform: translateX(8px); }
-    }
+        /* ===== ÉCRAN DE CODE D'ACCÈS ===== */
+        .access-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 99999;
+            background: linear-gradient(135deg, var(--bleu-profond) 0%, #0d1b3e 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.7s ease, visibility 0.7s ease;
+        }
+        .access-overlay.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+        .access-card {
+            background: var(--blanc);
+            border-radius: 2rem;
+            padding: 3rem 2.5rem;
+            text-align: center;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+            max-width: 440px;
+            width: 90%;
+            animation: floatIn 0.8s ease;
+        }
+        @keyframes floatIn {
+            from {
+                opacity: 0;
+                transform: translateY(40px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+        .access-card .logo-symbol {
+            background: var(--bleu);
+            color: white;
+            width: 64px;
+            height: 64px;
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.8rem;
+            margin: 0 auto 1.2rem;
+        }
+        .access-card h2 {
+            color: var(--bleu);
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .access-card p {
+            color: #475569;
+            margin-bottom: 1.8rem;
+            font-size: 0.95rem;
+        }
+        .access-input {
+            width: 100%;
+            padding: 0.9rem 1.3rem;
+            border: 2px solid var(--bordure);
+            border-radius: 14px;
+            font-family: inherit;
+            font-size: 1rem;
+            text-align: center;
+            letter-spacing: 2px;
+            transition: var(--transition);
+            margin-bottom: 1rem;
+        }
+        .access-input:focus {
+            outline: none;
+            border-color: var(--bleu);
+            box-shadow: 0 0 0 4px rgba(11, 63, 165, 0.1);
+        }
+        .access-btn {
+            width: 100%;
+            padding: 0.9rem;
+            background: var(--orange);
+            color: white;
+            border: none;
+            border-radius: 14px;
+            font-weight: 700;
+            font-size: 1rem;
+            font-family: inherit;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .access-btn:hover {
+            background: var(--orange-vif);
+            transform: translateY(-2px);
+        }
+        .access-error {
+            color: #dc2626;
+            font-size: 0.85rem;
+            margin-top: 0.5rem;
+            display: none;
+            font-weight: 600;
+        }
+        .access-error.visible {
+            display: block;
+            animation: shake 0.5s ease;
+        }
+        @keyframes shake {
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+            25% {
+                transform: translateX(-8px);
+            }
+            75% {
+                transform: translateX(8px);
+            }
+        }
 
-    /* ========== CONTAINER ========== */
-    .presentation-container {
-      display: none;
-      position: fixed; inset: 0;
-      background: #0d1117;
-      z-index: 100;
-    }
-    .presentation-container.active { display: block; }
+        /* ===== CONTAINER ===== */
+        .presentation-container {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: #0d1117;
+            z-index: 100;
+        }
+        .presentation-container.active {
+            display: block;
+        }
 
-    .slide-stage {
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      display: flex; align-items: center; justify-content: center;
-    }
-    .slide-content {
-      background: white;
-      width: 100%;
-      height: 100%;
-      overflow-y: auto;
-      padding: 3.5rem 4.5rem;
-      position: relative;
-      animation: slideIn 0.5s ease;
-    }
-    @keyframes slideIn {
-      from { opacity: 0; transform: scale(0.96); }
-      to { opacity: 1; transform: scale(1); }
-    }
+        .slide-stage {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .slide-content {
+            background: white;
+            width: 100%;
+            height: 100%;
+            overflow-y: auto;
+            padding: 3.5rem 4.5rem;
+            position: relative;
+            animation: slideIn 0.5s ease;
+        }
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: scale(0.96);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
 
-    .nav-hint {
-      position: fixed;
-      bottom: 1rem;
-      right: 1rem;
-      z-index: 500;
-      color: rgba(255,255,255,0.3);
-      font-size: 0.7rem;
-      font-weight: 600;
-      letter-spacing: 0.5px;
-      pointer-events: none;
-    }
+        .nav-hint {
+            position: fixed;
+            bottom: 1rem;
+            right: 1rem;
+            z-index: 500;
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            pointer-events: none;
+        }
 
-    /* ========== ANIMATIONS ========== */
-    .anim-item {
-      opacity: 0;
-      transform: translateY(20px);
-      animation: fadeUp 0.6s ease forwards;
-    }
-    .anim-item:nth-child(1) { animation-delay: 0.1s; }
-    .anim-item:nth-child(2) { animation-delay: 0.25s; }
-    .anim-item:nth-child(3) { animation-delay: 0.4s; }
-    .anim-item:nth-child(4) { animation-delay: 0.55s; }
-    .anim-item:nth-child(5) { animation-delay: 0.7s; }
-    .anim-item:nth-child(6) { animation-delay: 0.85s; }
-    .anim-item:nth-child(7) { animation-delay: 1s; }
-    .anim-item:nth-child(8) { animation-delay: 1.15s; }
+        /* ===== ANIMATIONS ===== */
+        .anim-item {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 0.6s ease forwards;
+        }
+        .anim-item:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+        .anim-item:nth-child(2) {
+            animation-delay: 0.25s;
+        }
+        .anim-item:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+        .anim-item:nth-child(4) {
+            animation-delay: 0.55s;
+        }
+        .anim-item:nth-child(5) {
+            animation-delay: 0.7s;
+        }
+        .anim-item:nth-child(6) {
+            animation-delay: 0.85s;
+        }
+        .anim-item:nth-child(7) {
+            animation-delay: 1s;
+        }
+        .anim-item:nth-child(8) {
+            animation-delay: 1.15s;
+        }
 
-    @keyframes fadeUp {
-      to { opacity: 1; transform: translateY(0); }
-    }
+        @keyframes fadeUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
 
-    /* ========== TYPOGRAPHIE ========== */
-    h1 { font-size: 3.2rem; font-weight: 800; letter-spacing: -1px; color: var(--bleu); line-height: 1.1; }
-    h2 { font-size: 2.4rem; font-weight: 700; color: var(--bleu); line-height: 1.2; }
-    h3 { font-size: 1.6rem; font-weight: 700; }
-    h4 { font-size: 1.3rem; font-weight: 700; }
-    p { font-size: 1.35rem; line-height: 1.5; }
-    li { font-size: 1.25rem; line-height: 1.6; }
-    .subtitle { font-size: 1.7rem; font-weight: 500; color: var(--texte-secondaire); }
+        /* ===== TYPOGRAPHIE ===== */
+        h1 {
+            font-size: 3.2rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+            color: var(--bleu);
+            line-height: 1.1;
+        }
+        h2 {
+            font-size: 2.4rem;
+            font-weight: 700;
+            color: var(--bleu);
+            line-height: 1.2;
+        }
+        h3 {
+            font-size: 1.6rem;
+            font-weight: 700;
+        }
+        h4 {
+            font-size: 1.3rem;
+            font-weight: 700;
+        }
+        p {
+            font-size: 1.35rem;
+            line-height: 1.5;
+        }
+        li {
+            font-size: 1.25rem;
+            line-height: 1.6;
+        }
+        .subtitle {
+            font-size: 1.7rem;
+            font-weight: 500;
+            color: var(--texte-secondaire);
+        }
 
-    /* ========== CARDS ========== */
-    .card-grid {
-      display: grid;
-      gap: 1.8rem;
-      margin: 1.8rem 0;
-    }
-    .card-grid.cols-2 { grid-template-columns: 1fr 1fr; }
-    .card-grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
-    .card-grid.cols-4 { grid-template-columns: repeat(4, 1fr); }
+        /* ===== CARDS ===== */
+        .card-grid {
+            display: grid;
+            gap: 1.8rem;
+            margin: 1.8rem 0;
+        }
+        .card-grid.cols-2 {
+            grid-template-columns: 1fr 1fr;
+        }
+        .card-grid.cols-3 {
+            grid-template-columns: repeat(3, 1fr);
+        }
+        .card-grid.cols-4 {
+            grid-template-columns: repeat(4, 1fr);
+        }
 
-    .card {
-      background: #f8fafc;
-      border-radius: 18px;
-      padding: 1.8rem;
-      border: 1px solid var(--bordure);
-      text-align: center;
-    }
-    .card i { font-size: 2.8rem; color: var(--bleu); margin-bottom: 0.8rem; }
-    .card h4 { font-size: 1.2rem; margin-bottom: 0.4rem; }
-    .card p { font-size: 1rem; color: var(--texte-secondaire); }
+        .card {
+            background: #f8fafc;
+            border-radius: 18px;
+            padding: 1.8rem;
+            border: 1px solid var(--bordure);
+            text-align: center;
+        }
+        .card i {
+            font-size: 2.8rem;
+            color: var(--bleu);
+            margin-bottom: 0.8rem;
+        }
+        .card h4 {
+            font-size: 1.2rem;
+            margin-bottom: 0.4rem;
+        }
+        .card p {
+            font-size: 1rem;
+            color: var(--texte-secondaire);
+        }
 
-    /* ========== BOXES ========== */
-    .box {
-      border-radius: 16px;
-      padding: 1.2rem 1.8rem;
-      margin: 1.2rem 0;
-      font-size: 1.25rem;
-      font-weight: 500;
-      border-left: 6px solid;
-      display: flex;
-      align-items: flex-start;
-      gap: 0.8rem;
-    }
-    .box i { font-size: 1.5rem; flex-shrink: 0; margin-top: 0.2rem; }
-    .box-tip { background: #e8f0fe; border-color: var(--bleu); color: #0a2c5c; }
-    .box-important { background: var(--orange-clair); border-color: var(--orange); color: #6b3a1f; }
-    .box-success { background: var(--vert-clair); border-color: var(--vert); color: #064e3b; }
-    .box-warning { background: var(--rouge-clair); border-color: var(--rouge); color: #7f1d1d; }
-    .box-info { background: var(--violet-clair); border-color: var(--violet); color: #3b0764; }
+        /* ===== BOXES ===== */
+        .box {
+            border-radius: 16px;
+            padding: 1.2rem 1.8rem;
+            margin: 1.2rem 0;
+            font-size: 1.25rem;
+            font-weight: 500;
+            border-left: 6px solid;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.8rem;
+        }
+        .box i {
+            font-size: 1.5rem;
+            flex-shrink: 0;
+            margin-top: 0.2rem;
+        }
+        .box-tip {
+            background: #e8f0fe;
+            border-color: var(--bleu);
+            color: #0a2c5c;
+        }
+        .box-important {
+            background: var(--orange-clair);
+            border-color: var(--orange);
+            color: #6b3a1f;
+        }
+        .box-success {
+            background: var(--vert-clair);
+            border-color: var(--vert);
+            color: #064e3b;
+        }
+        .box-warning {
+            background: var(--rouge-clair);
+            border-color: var(--rouge);
+            color: #7f1d1d;
+        }
+        .box-info {
+            background: var(--violet-clair);
+            border-color: var(--violet);
+            color: #3b0764;
+        }
 
-    /* ========== SLIDES SPÉCIALES ========== */
-    .slide-cover {
-      background: linear-gradient(135deg, #0B3FA5 0%, #072a6e 100%);
-      color: white;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-    }
-    .slide-cover h1 { color: white; font-size: 3.5rem; }
-    .slide-cover .subtitle { color: rgba(255,255,255,0.85); }
+        /* ===== SLIDES SPÉCIALES ===== */
+        .slide-cover {
+            background: linear-gradient(135deg, #0B3FA5 0%, #072a6e 100%);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        .slide-cover h1 {
+            color: white;
+            font-size: 3.5rem;
+        }
+        .slide-cover .subtitle {
+            color: rgba(255, 255, 255, 0.85);
+        }
 
-    .slide-objectifs { background: white; }
-    .objectif-item {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      padding: 0.9rem 0;
-      border-bottom: 1px solid var(--bordure);
-    }
-    .objectif-num {
-      background: var(--bleu);
-      color: white;
-      width: 45px;
-      height: 45px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 800;
-      font-size: 1.3rem;
-      flex-shrink: 0;
-    }
-    .objectif-text { font-size: 1.35rem; font-weight: 600; }
+        .slide-objectifs {
+            background: white;
+        }
+        .objectif-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.9rem 0;
+            border-bottom: 1px solid var(--bordure);
+        }
+        .objectif-num {
+            background: var(--bleu);
+            color: white;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.3rem;
+            flex-shrink: 0;
+        }
+        .objectif-text {
+            font-size: 1.35rem;
+            font-weight: 600;
+        }
 
-    .slide-question {
-      background: var(--jaune-clair);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-    }
-    .slide-question h2 { color: #92400e; }
-    .question-box {
-      background: white;
-      border: 3px dashed var(--jaune);
-      border-radius: 24px;
-      padding: 2.5rem;
-      margin: 1.5rem 0;
-      max-width: 850px;
-    }
-    .question-box p { font-size: 2rem; font-weight: 700; color: #92400e; }
+        .slide-question {
+            background: var(--jaune-clair);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        .slide-question h2 {
+            color: #92400e;
+        }
+        .question-box {
+            background: white;
+            border: 3px dashed var(--jaune);
+            border-radius: 24px;
+            padding: 2.5rem;
+            margin: 1.5rem 0;
+            max-width: 850px;
+        }
+        .question-box p {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #92400e;
+        }
 
-    .slide-exercice { background: var(--bleu-clair); }
-    .slide-exercice h2 { color: var(--bleu); }
-    .exercice-box {
-      background: white;
-      border-radius: 20px;
-      padding: 2rem;
-      border: 2px solid var(--bleu);
-      margin-top: 1.5rem;
-    }
-    .exercice-box h3 { color: var(--bleu); font-size: 1.4rem; }
-    .exercice-box ol { padding-left: 1.5rem; }
-    .exercice-box li { margin-bottom: 0.8rem; }
+        .slide-exercice {
+            background: var(--bleu-clair);
+        }
+        .slide-exercice h2 {
+            color: var(--bleu);
+        }
+        .exercice-box {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            border: 2px solid var(--bleu);
+            margin-top: 1.5rem;
+        }
+        .exercice-box h3 {
+            color: var(--bleu);
+            font-size: 1.4rem;
+        }
+        .exercice-box ol {
+            padding-left: 1.5rem;
+        }
+        .exercice-box li {
+            margin-bottom: 0.8rem;
+        }
 
-    .slide-recap { background: var(--jaune-clair); }
-    .slide-recap h2 { color: #92400e; }
+        .slide-recap {
+            background: var(--jaune-clair);
+        }
+        .slide-recap h2 {
+            color: #92400e;
+        }
 
-    .slide-next {
-      background: linear-gradient(135deg, #FF6B35 0%, #e55a2b 100%);
-      color: white;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-    }
-    .slide-next h2 { color: white; font-size: 2.8rem; }
+        .slide-next {
+            background: linear-gradient(135deg, #FF6B35 0%, #e55a2b 100%);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        .slide-next h2 {
+            color: white;
+            font-size: 2.8rem;
+        }
 
-    /* ========== TABLEAUX ========== */
-    .table-simple {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 1.15rem;
-      background: white;
-      border-radius: 14px;
-      overflow: hidden;
-    }
-    .table-simple th {
-      background: var(--bleu);
-      color: white;
-      padding: 0.9rem 1.2rem;
-      text-align: left;
-      font-weight: 700;
-    }
-    .table-simple td {
-      padding: 0.7rem 1.2rem;
-      border-bottom: 1px solid var(--bordure);
-    }
-    .table-simple tr:last-child td { border-bottom: none; }
+        /* ===== TABLEAUX ===== */
+        .table-simple {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 1.15rem;
+            background: white;
+            border-radius: 14px;
+            overflow: hidden;
+        }
+        .table-simple th {
+            background: var(--bleu);
+            color: white;
+            padding: 0.9rem 1.2rem;
+            text-align: left;
+            font-weight: 700;
+        }
+        .table-simple td {
+            padding: 0.7rem 1.2rem;
+            border-bottom: 1px solid var(--bordure);
+        }
+        .table-simple tr:last-child td {
+            border-bottom: none;
+        }
 
-    /* ========== CODE ========== */
-    pre {
-      background: #1e293b;
-      color: #e2e8f0;
-      padding: 1.5rem;
-      border-radius: 14px;
-      font-family: 'Courier New', monospace;
-      font-size: 1.1rem;
-      line-height: 1.6;
-      overflow-x: auto;
-      margin: 1rem 0;
-    }
-    code {
-      background: #f1f5f9;
-      padding: 0.15rem 0.4rem;
-      border-radius: 4px;
-      font-family: 'Courier New', monospace;
-      font-size: 0.9em;
-    }
+        /* ===== CODE ===== */
+        pre {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 1.5rem;
+            border-radius: 14px;
+            font-family: 'Courier New', monospace;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+        code {
+            background: #f1f5f9;
+            padding: 0.15rem 0.4rem;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+        }
 
-    /* ========== RESPONSIVE ========== */
-    @media (max-width: 768px) {
-      .slide-content { padding: 2rem; }
-      h1 { font-size: 2rem; }
-      h2 { font-size: 1.5rem; }
-      p, li { font-size: 1rem; }
-      .card-grid.cols-2, .card-grid.cols-3, .card-grid.cols-4 { grid-template-columns: 1fr; }
-    }
-  </style>
+        /* ===== TERMES (nouvelle slide) ===== */
+        .term-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        .term-card {
+            background: white;
+            border-radius: 16px;
+            padding: 1.5rem;
+            border-left: 6px solid var(--bleu);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        }
+        .term-card h4 {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--bleu);
+        }
+        .term-card p {
+            font-size: 1.05rem;
+            margin-top: 0.3rem;
+            color: var(--texte-secondaire);
+        }
+        .term-card .meta {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--bleu);
+            margin-top: 0.4rem;
+            opacity: 0.7;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .slide-content {
+                padding: 2rem;
+            }
+            h1 {
+                font-size: 2rem;
+            }
+            h2 {
+                font-size: 1.5rem;
+            }
+            p,
+            li {
+                font-size: 1rem;
+            }
+            .card-grid.cols-2,
+            .card-grid.cols-3,
+            .card-grid.cols-4 {
+                grid-template-columns: 1fr;
+            }
+            .term-grid {
+                grid-template-columns: 1fr;
+            }
+            .access-card {
+                padding: 2rem 1.5rem;
+            }
+        }
+    </style>
 </head>
 <body>
 
-<!-- CODE D'ACCÈS -->
-<div class="access-overlay" id="accessOverlay">
-  <div class="access-card">
-    <div class="logo-symbol">NT</div>
-    <h2>Accès projection</h2>
-    <p>Veuillez saisir le code d'accès pour lancer la projection.</p>
-    <input type="password" class="access-input" id="accessInput" placeholder="Code d'accès" autocomplete="off">
-    <button class="access-btn" onclick="checkAccess()"><i class="fas fa-lock-open"></i> Projeter</button>
-    <div class="access-error" id="accessError">Code incorrect. Veuillez réessayer.</div>
-  </div>
-</div>
+    <!-- CODE D'ACCÈS -->
+    <div class="access-overlay" id="accessOverlay">
+        <div class="access-card">
+            <div class="logo-symbol">NT</div>
+            <h2>Accès projection</h2>
+            <p>Veuillez saisir le code d'accès pour lancer la projection.</p>
+            <input type="password" class="access-input" id="accessInput" placeholder="Code d'accès" autocomplete="off" />
+            <button class="access-btn" id="accessBtn"><i class="fas fa-lock-open"></i> Projeter</button>
+            <div class="access-error" id="accessError">Code incorrect. Veuillez réessayer.</div>
+        </div>
+    </div>
 
-<!-- CONTENEUR PROJECTION -->
-<div class="presentation-container" id="presentationContainer">
-  <div class="slide-stage" id="slideStage"></div>
-  <div class="nav-hint">← → pour naviguer · Échap pour quitter</div>
-</div>
+    <!-- CONTENEUR PROJECTION -->
+    <div class="presentation-container" id="presentationContainer">
+        <div class="slide-stage" id="slideStage"></div>
+        <div class="nav-hint">← → pour naviguer · Échap pour quitter</div>
+    </div>
 
-<script>
-  const slidesData = [
-    // Slide 1 : Couverture
-    {
-      content: `
-        <h1 class="anim-item">Développement Web & Mobile</h1>
-        <p class="subtitle anim-item">Jour 1 : Outils & DeepSeek</p>
-        <p class="anim-item" style="color:rgba(255,255,255,0.75); font-size:1.3rem; margin-top:1rem;">
-          Créez votre premier site web en 30 minutes
-        </p>
-        <p class="anim-item" style="color:rgba(255,255,255,0.6); font-size:1.1rem; margin-top:2rem;">
-          Durée : 2 heures · Niveau : Débutant
-        </p>
-      `,
-      className: 'slide-cover'
-    },
-    // Slide 2 : Objectifs
-    {
-      content: `
-        <h2 class="anim-item">À la fin de cette séance, vous saurez...</h2>
-        <div style="margin-top:1.5rem;">
-          <div class="objectif-item anim-item">
-            <div class="objectif-num">1</div>
-            <div class="objectif-text">Comprendre ce qu'est un site web et comment il fonctionne</div>
-          </div>
-          <div class="objectif-item anim-item">
-            <div class="objectif-num">2</div>
-            <div class="objectif-text">Installer et utiliser Visual Studio Code (VS Code)</div>
-          </div>
-          <div class="objectif-item anim-item">
-            <div class="objectif-num">3</div>
-            <div class="objectif-text">Dialoguer avec DeepSeek pour générer du code HTML</div>
-          </div>
-          <div class="objectif-item anim-item">
-            <div class="objectif-num">4</div>
-            <div class="objectif-text">Créer votre premier fichier <code>index.html</code></div>
-          </div>
-          <div class="objectif-item anim-item">
-            <div class="objectif-num">5</div>
-            <div class="objectif-text">Prévisualiser votre site dans le navigateur</div>
-          </div>
-        </div>
-      `,
-      className: 'slide-objectifs'
-    },
-    // Slide 3 : Qu'est-ce qu'un site web ?
-    {
-      content: `
-        <h2 class="anim-item">Qu'est-ce qu'un site web ?</h2>
-        <p class="anim-item" style="margin-top:1.5rem;">
-          Un site web est un ensemble de <strong>fichiers</strong> stockés sur un <strong>serveur</strong> — un ordinateur toujours allumé et connecté à Internet.
-        </p>
-        <div class="card-grid cols-4" style="margin-top:2rem;">
-          <div class="card anim-item">
-            <i class="fas fa-globe"></i>
-            <h4>1. Vous tapez une adresse</h4>
-            <p>Dans Chrome ou Firefox</p>
-          </div>
-          <div class="card anim-item">
-            <i class="fas fa-server"></i>
-            <h4>2. Le navigateur demande</h4>
-            <p>Il contacte le serveur</p>
-          </div>
-          <div class="card anim-item">
-            <i class="fas fa-file-code"></i>
-            <h4>3. Le serveur envoie</h4>
-            <p>HTML, CSS, images...</p>
-          </div>
-          <div class="card anim-item">
-            <i class="fas fa-desktop"></i>
-            <h4>4. Le navigateur affiche</h4>
-            <p>Votre site apparaît</p>
-          </div>
-        </div>
-        <div class="box box-tip anim-item" style="margin-top:1.5rem;">
-          <i class="fas fa-lightbulb"></i>
-          <div><strong>Analogie :</strong> Le site web est un restaurant. Le serveur est la cuisine. Le navigateur est le client. Le HTML est la recette.</div>
-        </div>
-      `,
-      className: ''
-    },
-    // Slide 4 : Les 3 langages essentiels
-    {
-      content: `
-        <h2 class="anim-item">Les 3 langages essentiels</h2>
-        <p class="anim-item" style="margin-top:1rem;">Chaque langage a un rôle précis. Ensemble, ils forment un site web complet.</p>
-        <div class="card-grid cols-3" style="margin-top:2rem;">
-          <div class="card anim-item" style="border-color:#059669;">
-            <i class="fas fa-code" style="color:#059669;"></i>
-            <h4>HTML</h4>
-            <p style="font-size:1.1rem;"><strong>La structure</strong></p>
-            <p>Les murs et les meubles d'une maison</p>
-          </div>
-          <div class="card anim-item" style="border-color:var(--bleu);">
-            <i class="fas fa-paint-brush" style="color:var(--bleu);"></i>
-            <h4>CSS</h4>
-            <p style="font-size:1.1rem;"><strong>Le style</strong></p>
-            <p>La peinture, les décorations</p>
-          </div>
-          <div class="card anim-item" style="border-color:var(--jaune);">
-            <i class="fas fa-bolt" style="color:var(--jaune);"></i>
-            <h4>JavaScript</h4>
-            <p style="font-size:1.1rem;"><strong>L'interactivité</strong></p>
-            <p>L'électricité qui anime tout</p>
-          </div>
-        </div>
-        <div class="box box-important anim-item" style="margin-top:1.5rem;">
-          <i class="fas fa-star"></i>
-          <div><strong>Aujourd'hui :</strong> HTML uniquement. Le CSS viendra au Jour 3, JavaScript au Jour 6.</div>
-        </div>
-      `,
-      className: ''
-    },
-    // Slide 5 : Les types de sites web
-    {
-      content: `
-        <h2 class="anim-item">Les 6 types de sites web</h2>
-        <div class="card-grid cols-3" style="margin-top:2rem;">
-          <div class="card anim-item">
-            <i class="fas fa-store"></i>
-            <h4>Site vitrine</h4>
-            <p>Présente une entreprise, ses services, ses contacts</p>
-          </div>
-          <div class="card anim-item">
-            <i class="fas fa-shopping-cart"></i>
-            <h4>Site e-commerce</h4>
-            <p>Vend des produits en ligne (CAV-OR, boutiques)</p>
-          </div>
-          <div class="card anim-item">
-            <i class="fas fa-newspaper"></i>
-            <h4>Blog / Actualité</h4>
-            <p>Articles réguliers (Faso24)</p>
-          </div>
-          <div class="card anim-item">
-            <i class="fas fa-user-graduate"></i>
-            <h4>Portfolio</h4>
-            <p>Montre vos projets, votre CV, vos compétences</p>
-          </div>
-          <div class="card anim-item">
-            <i class="fas fa-users"></i>
-            <h4>Réseau social</h4>
-            <p>Communauté en ligne (Facebook, WhatsApp Web)</p>
-          </div>
-          <div class="card anim-item">
-            <i class="fas fa-tools"></i>
-            <h4>Application web</h4>
-            <p>Outils interactifs (menus QR, plateformes)</p>
-          </div>
-        </div>
-        <div class="box box-info anim-item" style="margin-top:1.5rem;">
-          <i class="fas fa-question-circle"></i>
-          <div><strong>Question :</strong> Quel type de site voulez-vous créer pendant cette formation ?</div>
-        </div>
-      `,
-      className: ''
-    },
-    // Slide 6 : Conditions pour créer un site
-    {
-      content: `
-        <h2 class="anim-item">Avant de commencer : les conditions à réunir</h2>
-        <div class="grid-2" style="display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; margin-top:2rem;">
-          <div>
-            <h3 class="anim-item" style="color:var(--bleu);"><i class="fas fa-lightbulb"></i> 1. Les informations du site</h3>
-            <ul class="anim-item" style="padding-left:1.2rem; margin-top:0.5rem;">
-              <li><strong>Nom du site</strong> — quel titre ?</li>
-              <li><strong>Description</strong> — que faites-vous ?</li>
-              <li><strong>Contacts</strong> — téléphone, WhatsApp, email</li>
-              <li><strong>Pages</strong> — Accueil, À propos, Services, Contact</li>
-            </ul>
-          </div>
-          <div>
-            <h3 class="anim-item" style="color:var(--orange);"><i class="fas fa-palette"></i> 2. Le design</h3>
-            <ul class="anim-item" style="padding-left:1.2rem; margin-top:0.5rem;">
-              <li><strong>Couleur principale</strong> — bleu, vert, orange...</li>
-              <li><strong>Couleur secondaire</strong> — pour les boutons, les titres</li>
-              <li><strong>Logo</strong> — image ou texte stylisé</li>
-              <li><strong>Police</strong> — sobre et lisible</li>
-            </ul>
-          </div>
-        </div>
-        <div class="box box-important anim-item" style="margin-top:1.5rem;">
-          <i class="fas fa-check-circle"></i>
-          <div><strong>Règle d'or :</strong> Avant d'écrire une seule ligne de code, répondez à ces questions sur papier. Un site clair = un site réussi.</div>
-        </div>
-      `,
-      className: ''
-    },
-    // Slide 7 : Thèmes à employer
-    {
-      content: `
-        <h2 class="anim-item">Les thèmes à employer</h2>
-        <p class="anim-item" style="margin-top:1rem;">Un thème, c'est l'ambiance visuelle de votre site. Voici les plus utilisés.</p>
-        <div class="card-grid cols-4" style="margin-top:2rem;">
-          <div class="card anim-item">
-            <i class="fas fa-briefcase" style="color:var(--bleu);"></i>
-            <h4>Corporate</h4>
-            <p>Bleu, blanc, gris — sobre et professionnel</p>
-          </div>
-          <div class="card anim-item">
-            <i class="fas fa-heart" style="color:#dc2626;"></i>
-            <h4>Chaleureux</h4>
-            <p>Orange, rouge, crème — convivial et accueillant</p>
-          </div>
-          <div class="card anim-item">
-            <i class="fas fa-leaf" style="color:var(--vert);"></i>
-            <h4>Naturel</h4>
-            <p>Vert, beige, marron — écologique et organique</p>
-          </div>
-          <div class="card anim-item">
-            <i class="fas fa-moon" style="color:#7c3aed;"></i>
-            <h4>Minimaliste</h4>
-            <p>Noir, blanc, gris — épuré et moderne</p>
-          </div>
-        </div>
-        <div class="box box-tip anim-item" style="margin-top:1.5rem;">
-          <i class="fas fa-lightbulb"></i>
-          <div><strong>Conseil :</strong> Choisissez <strong>2 couleurs</strong> maximum pour commencer. Une principale et une secondaire. La simplicité rend votre site élégant.</div>
-        </div>
-      `,
-      className: ''
-    },
-    // Slide 8 : Les pages essentielles
-    {
-      content: `
-        <h2 class="anim-item">Les 5 pages essentielles d'un site</h2>
-        <div style="margin-top:2rem;">
-          <table class="table-simple anim-item">
-            <thead><tr><th>Page</th><th>Contenu</th><th>Pourquoi c'est important</th></tr></thead>
-            <tbody>
-              <tr><td><i class="fas fa-home"></i> <strong>Accueil</strong></td><td>Votre message principal</td><td>C'est la première impression</td></tr>
-              <tr><td><i class="fas fa-info-circle"></i> <strong>À propos</strong></td><td>Qui vous êtes, votre histoire</td><td>Crée la confiance</td></tr>
-              <tr><td><i class="fas fa-cogs"></i> <strong>Services</strong></td><td>Ce que vous proposez</td><td>Montre votre valeur</td></tr>
-              <tr><td><i class="fas fa-envelope"></i> <strong>Contact</strong></td><td>Téléphone, WhatsApp, email</td><td>Permet d'être contacté</td></tr>
-              <tr><td><i class="fas fa-images"></i> <strong>Galerie / Portfolio</strong></td><td>Vos réalisations, photos</td><td>Prouve votre savoir-faire</td></tr>
-            </tbody>
-          </table>
-        </div>
-        <p class="anim-item" style="margin-top:1.5rem; text-align:center; font-size:1.2rem;">
-          Aujourd'hui, nous créons la page <strong>Accueil</strong>. Les autres pages viendront au Jour 2.
-        </p>
-      `,
-      className: ''
-    },
-    // Slide 9 : Nom de domaine et hébergement
-    {
-      content: `
-        <h2 class="anim-item">Le nom de domaine et l'hébergement</h2>
-        <div class="grid-2" style="display:grid; grid-template-columns:1fr 1fr; gap:2rem; margin-top:2rem;">
-          <div class="card anim-item" style="text-align:left;">
-            <i class="fas fa-globe" style="color:var(--bleu);"></i>
-            <h4>Le nom de domaine</h4>
-            <p>C'est l'adresse que les gens tapent pour trouver votre site.</p>
-            <p style="margin-top:0.5rem;"><code>google.com</code><br><code>cav-or.com</code><br><code>nticsolution.org</code></p>
-            <p style="margin-top:0.5rem;">Sans domaine : une adresse technique difficile à retenir.</p>
-          </div>
-          <div class="card anim-item" style="text-align:left;">
-            <i class="fas fa-server" style="color:var(--orange);"></i>
-            <h4>L'hébergement</h4>
-            <p>C'est l'endroit où les fichiers de votre site sont stockés en permanence.</p>
-            <p style="margin-top:0.5rem;">Dans cette formation : <strong>GitHub Pages</strong></p>
-            <p style="margin-top:0.5rem;">Un service <strong>gratuit</strong> qui publie votre site depuis votre code.</p>
-          </div>
-        </div>
-        <div class="box box-important anim-item" style="margin-top:1.5rem;">
-          <i class="fas fa-star"></i>
-          <div><strong>Notre méthode :</strong> Idée → DeepSeek (code) → VS Code (édition) → GitHub (stockage) → GitHub Pages (publication) → En ligne !</div>
-        </div>
-      `,
-      className: ''
-    },
-    // Slide 10 : VS Code — installation
-    {
-      content: `
-        <h2 class="anim-item">Installer Visual Studio Code</h2>
-        <div style="margin-top:2rem;">
-          <table class="table-simple anim-item">
-            <thead><tr><th>Étape</th><th>Action</th></tr></thead>
-            <tbody>
-              <tr><td><strong>1</strong></td><td>Allez sur <code>code.visualstudio.com</code></td></tr>
-              <tr><td><strong>2</strong></td><td>Cliquez sur <strong>« Download for Windows »</strong></td></tr>
-              <tr><td><strong>3</strong></td><td>Ouvrez le fichier téléchargé</td></tr>
-              <tr><td><strong>4</strong></td><td>Acceptez la licence, cliquez « Suivant »</td></tr>
-              <tr><td><strong>5</strong></td><td>Cochez <strong>« Ajouter au menu contextuel »</strong></td></tr>
-              <tr><td><strong>6</strong></td><td>Cliquez « Installer » puis « Terminer »</td></tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="box box-tip anim-item" style="margin-top:1.5rem;">
-          <i class="fas fa-lightbulb"></i>
-          <div>VS Code est l'éditeur de code <strong>le plus utilisé au monde</strong>. Gratuit, rapide, et puissant.</div>
-        </div>
-      `,
-      className: ''
-    },
-    // Slide 11 : Extensions VS Code
-    {
-      content: `
-        <h2 class="anim-item">Les 2 extensions essentielles</h2>
-        <div class="grid-2" style="display:grid; grid-template-columns:1fr 1fr; gap:2rem; margin-top:2rem;">
-          <div class="card anim-item" style="border-color:#059669;">
-            <i class="fas fa-server" style="color:#059669;"></i>
-            <h4>Live Server</h4>
-            <p>Prévisualise votre site dans le navigateur.</p>
-            <p style="margin-top:0.5rem;"><strong>Installation :</strong> Extensions (Ctrl+Shift+X) → tapez « Live Server » → Installer.</p>
-          </div>
-          <div class="card anim-item" style="border-color:var(--bleu);">
-            <i class="fas fa-magic" style="color:var(--bleu);"></i>
-            <h4>Prettier</h4>
-            <p>Formate automatiquement votre code.</p>
-            <p style="margin-top:0.5rem;"><strong>Installation :</strong> Extensions → tapez « Prettier » → Installer.</p>
-          </div>
-        </div>
-        <div class="box box-info anim-item" style="margin-top:1.5rem;">
-          <i class="fas fa-info-circle"></i>
-          <div><strong>Pourquoi ces extensions ?</strong> Live Server recharge la page à chaque modification. Prettier rend votre code propre et lisible.</div>
-        </div>
-      `,
-      className: ''
-    },
-    // Slide 12 : DeepSeek — premier prompt
-    {
-      content: `
-        <h2 class="anim-item">Dialoguer avec DeepSeek</h2>
-        <p class="anim-item" style="margin-top:1rem;">DeepSeek est une intelligence artificielle qui génère du code pour vous.</p>
-        <div class="box box-important anim-item" style="margin-top:1.5rem;">
-          <i class="fas fa-robot"></i>
-          <div><strong>Votre premier prompt :</strong> « Crée-moi une page web simple avec un titre, un paragraphe, une image et un bouton. Donne-moi uniquement le code HTML complet. »</div>
-        </div>
-        <p class="anim-item" style="margin-top:1rem;">DeepSeek génère le code en quelques secondes. Vous le copiez, vous le collez dans VS Code, et votre site existe.</p>
-        <div class="box box-tip anim-item" style="margin-top:1rem;">
-          <i class="fas fa-lightbulb"></i>
-          <div><strong>Votre rôle :</strong> comprendre ce que fait le code et le personnaliser. L'IA écrit, VOUS décidez.</div>
-        </div>
-      `,
-      className: ''
-    },
-    // Slide 13 : Exercice — Créer le projet
-    {
-      content: `
-        <h2 class="anim-item">Exercice : Créez votre premier site</h2>
-        <div class="exercice-box anim-item" style="margin-top:2rem;">
-          <h3><i class="fas fa-tasks"></i> Consignes</h3>
-          <ol>
-            <li>Créez un dossier <code>mon-premier-site</code> sur le Bureau</li>
-            <li>Ouvrez ce dossier dans VS Code (File → Open Folder)</li>
-            <li>Créez un fichier <code>index.html</code> (clic droit → New File)</li>
-            <li>Allez sur DeepSeek et copiez le code généré</li>
-            <li>Collez le code dans <code>index.html</code> (Ctrl+V)</li>
-            <li>Enregistrez (Ctrl+S)</li>
-            <li>Faites un clic droit → « Open with Live Server »</li>
-          </ol>
-        </div>
-        <p class="anim-item" style="font-size:1.4rem; font-weight:700; color:var(--vert); margin-top:1.5rem; text-align:center;">
-          Votre navigateur s'ouvre et affiche VOTRE site !
-        </p>
-      `,
-      className: 'slide-exercice'
-    },
-    // Slide 14 : Comprendre le code HTML
-    {
-      content: `
-        <h2 class="anim-item">Comprendre la structure HTML</h2>
-        <pre class="anim-item">&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-&lt;head&gt;
-    &lt;title&gt;Mon site&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-    &lt;h1&gt;Bienvenue&lt;/h1&gt;
-    &lt;p&gt;Ceci est un paragraphe.&lt;/p&gt;
-&lt;/body&gt;
-&lt;/html&gt;</pre>
-        <div class="box box-tip anim-item">
-          <i class="fas fa-lightbulb"></i>
-          <div>Les balises sont entourées de chevrons <code>&lt; &gt;</code>. Chaque balise ouvre et ferme : <code>&lt;h1&gt;</code> puis <code>&lt;/h1&gt;</code>.</div>
-        </div>
-      `,
-      className: ''
-    },
-    // Slide 15 : Les balises essentielles
-    {
-      content: `
-        <h2 class="anim-item">Les 8 balises à mémoriser</h2>
-        <div style="margin-top:2rem;">
-          <table class="table-simple anim-item">
-            <thead><tr><th>Balise</th><th>Rôle</th><th>Exemple</th></tr></thead>
-            <tbody>
-              <tr><td><code>&lt;h1&gt;</code></td><td>Titre principal</td><td><code>&lt;h1&gt;Bienvenue&lt;/h1&gt;</code></td></tr>
-              <tr><td><code>&lt;h2&gt;</code></td><td>Sous-titre</td><td><code>&lt;h2&gt;Services&lt;/h2&gt;</code></td></tr>
-              <tr><td><code>&lt;p&gt;</code></td><td>Paragraphe</td><td><code>&lt;p&gt;Du texte.&lt;/p&gt;</code></td></tr>
-              <tr><td><code>&lt;a&gt;</code></td><td>Lien</td><td><code>&lt;a href="https://..."&gt;Cliquez&lt;/a&gt;</code></td></tr>
-              <tr><td><code>&lt;img&gt;</code></td><td>Image</td><td><code>&lt;img src="photo.jpg" alt="Photo"&gt;</code></td></tr>
-              <tr><td><code>&lt;button&gt;</code></td><td>Bouton</td><td><code>&lt;button&gt;Contactez-moi&lt;/button&gt;</code></td></tr>
-              <tr><td><code>&lt;ul&gt;</code></td><td>Liste à puces</td><td><code>&lt;ul&gt;&lt;li&gt;Élément&lt;/li&gt;&lt;/ul&gt;</code></td></tr>
-              <tr><td><code>&lt;div&gt;</code></td><td>Conteneur</td><td><code>&lt;div&gt;...&lt;/div&gt;</code></td></tr>
-            </tbody>
-          </table>
-        </div>
-      `,
-      className: ''
-    },
-    // Slide 16 : Points clés à retenir
-    {
-      content: `
-        <h2 class="anim-item">Les 5 points clés à retenir</h2>
-        <div style="margin-top:2rem;">
-          <div class="objectif-item anim-item">
-            <div class="objectif-num" style="background:#059669;">1</div>
-            <div class="objectif-text">Un site web = des fichiers HTML affichés par un navigateur</div>
-          </div>
-          <div class="objectif-item anim-item">
-            <div class="objectif-num" style="background:#059669;">2</div>
-            <div class="objectif-text">HTML = structure · CSS = style · JavaScript = interactivité</div>
-          </div>
-          <div class="objectif-item anim-item">
-            <div class="objectif-num" style="background:#059669;">3</div>
-            <div class="objectif-text">DeepSeek génère le code, VOUS le comprenez et le personnalisez</div>
-          </div>
-          <div class="objectif-item anim-item">
-            <div class="objectif-num" style="background:#059669;">4</div>
-            <div class="objectif-text">Le fichier principal s'appelle toujours <code>index.html</code></div>
-          </div>
-          <div class="objectif-item anim-item">
-            <div class="objectif-num" style="background:#059669;">5</div>
-            <div class="objectif-text">Live Server recharge automatiquement la page à chaque modification</div>
-          </div>
-        </div>
-      `,
-      className: 'slide-objectifs'
-    },
-    // Slide 17 : Exercice final
-    {
-      content: `
-        <h2 class="anim-item">Exercice final : Personnalisez votre site</h2>
-        <div class="exercice-box anim-item" style="margin-top:2rem;">
-          <h3><i class="fas fa-tasks"></i> Consignes</h3>
-          <ol>
-            <li>Modifiez le titre principal avec votre prénom</li>
-            <li>Modifiez le paragraphe : « Je suis en formation Dev Web chez NTIC Solution à Banfora »</li>
-            <li>Enregistrez (Ctrl+S)</li>
-            <li>Regardez votre navigateur : la page s'est mise à jour automatiquement !</li>
-          </ol>
-        </div>
-      `,
-      className: 'slide-exercice'
-    },
-    // Slide 18 : Récapitulatif
-    {
-      content: `
-        <h2 class="anim-item">Aujourd'hui, vous avez appris à...</h2>
-        <div style="margin-top:1.5rem;">
-          <div class="objectif-item anim-item">
-            <div class="objectif-num" style="background:#059669;">✓</div>
-            <div class="objectif-text">Expliquer ce qu'est un site web, un domaine, un hébergement</div>
-          </div>
-          <div class="objectif-item anim-item">
-            <div class="objectif-num" style="background:#059669;">✓</div>
-            <div class="objectif-text">Installer VS Code et ses extensions essentielles</div>
-          </div>
-          <div class="objectif-item anim-item">
-            <div class="objectif-num" style="background:#059669;">✓</div>
-            <div class="objectif-text">Formuler un prompt DeepSeek pour générer du code</div>
-          </div>
-          <div class="objectif-item anim-item">
-            <div class="objectif-num" style="background:#059669;">✓</div>
-            <div class="objectif-text">Créer un fichier <code>index.html</code> et le prévisualiser</div>
-          </div>
-          <div class="objectif-item anim-item">
-            <div class="objectif-num" style="background:#059669;">✓</div>
-            <div class="objectif-text">Comprendre les balises HTML essentielles</div>
-          </div>
-        </div>
-        <p class="anim-item" style="font-size:1.6rem; font-weight:700; color:#059669; margin-top:1.5rem; text-align:center;">
-          Félicitations ! Vous avez créé votre premier site web !
-        </p>
-      `,
-      className: 'slide-recap'
-    },
-    // Slide 19 : Annonce Jour 2
-    {
-      content: `
-        <h1 class="anim-item" style="color:white; font-size:2.8rem;">Rendez-vous demain</h1>
-        <p class="anim-item" style="font-size:1.8rem; font-weight:600; color:white;">HTML approfondi</p>
-        <p class="anim-item" style="color:rgba(255,255,255,0.8); font-size:1.3rem;">
-          Structurer votre page : titres, images, liens, navigation. 5 prompts DeepSeek pour personnaliser votre site.
-        </p>
-        <p class="anim-item" style="color:rgba(255,255,255,0.8); font-size:1.2rem; margin-top:1rem;">
-          <i class="fas fa-lightbulb"></i> Apportez vos idées : portfolio, site d'entreprise, blog...
-        </p>
-      `,
-      className: 'slide-next'
-    }
-  ];
+    <script>
+        // ============================================================
+        // 1. SLIDES DATA
+        // ============================================================
+        const slidesData = [{
+            // Slide 1 : Couverture
+            content: `
+                    <h1 class="anim-item">Développement Web & Mobile</h1>
+                    <p class="subtitle anim-item">Jour 1 : Outils & DeepSeek</p>
+                    <p class="anim-item" style="color:rgba(255,255,255,0.75); font-size:1.3rem; margin-top:1rem;">
+                        Créez votre premier site web en 30 minutes
+                    </p>
+                    <p class="anim-item" style="color:rgba(255,255,255,0.6); font-size:1.1rem; margin-top:2rem;">
+                        Durée : 2 heures · Niveau : Débutant
+                    </p>
+                `,
+            className: 'slide-cover'
+        }, {
+            // Slide 2 : Objectifs
+            content: `
+                    <h2 class="anim-item">À la fin de cette séance, vous saurez...</h2>
+                    <div style="margin-top:1.5rem;">
+                        <div class="objectif-item anim-item">
+                            <div class="objectif-num">1</div>
+                            <div class="objectif-text">Comprendre ce qu'est un site web et comment il fonctionne</div>
+                        </div>
+                        <div class="objectif-item anim-item">
+                            <div class="objectif-num">2</div>
+                            <div class="objectif-text">Installer et utiliser Visual Studio Code (VS Code)</div>
+                        </div>
+                        <div class="objectif-item anim-item">
+                            <div class="objectif-num">3</div>
+                            <div class="objectif-text">Dialoguer avec DeepSeek pour générer du code HTML</div>
+                        </div>
+                        <div class="objectif-item anim-item">
+                            <div class="objectif-num">4</div>
+                            <div class="objectif-text">Créer votre premier fichier <code>index.html</code></div>
+                        </div>
+                        <div class="objectif-item anim-item">
+                            <div class="objectif-num">5</div>
+                            <div class="objectif-text">Prévisualiser votre site dans le navigateur</div>
+                        </div>
+                    </div>
+                `,
+            className: 'slide-objectifs'
+        }, {
+            // Slide 3 : Qu'est-ce qu'un site web ?
+            content: `
+                    <h2 class="anim-item">Qu'est-ce qu'un site web ?</h2>
+                    <p class="anim-item" style="margin-top:1.5rem;">
+                        Un site web est un ensemble de <strong>fichiers</strong> (HTML, CSS, images, vidéos…)
+                        stockés sur un <strong>serveur</strong> — un ordinateur puissant toujours allumé et connecté à Internet.
+                    </p>
+                    <div class="card-grid cols-4" style="margin-top:2rem;">
+                        <div class="card anim-item">
+                            <i class="fas fa-globe"></i>
+                            <h4>1. Vous tapez une adresse</h4>
+                            <p>Dans Chrome, Firefox ou Safari</p>
+                        </div>
+                        <div class="card anim-item">
+                            <i class="fas fa-server"></i>
+                            <h4>2. Le navigateur demande</h4>
+                            <p>Il envoie une requête au serveur</p>
+                        </div>
+                        <div class="card anim-item">
+                            <i class="fas fa-file-code"></i>
+                            <h4>3. Le serveur envoie</h4>
+                            <p>Les fichiers HTML, CSS, images…</p>
+                        </div>
+                        <div class="card anim-item">
+                            <i class="fas fa-desktop"></i>
+                            <h4>4. Le navigateur affiche</h4>
+                            <p>Votre site s'affiche à l'écran</p>
+                        </div>
+                    </div>
+                    <div class="box box-tip anim-item" style="margin-top:1.5rem;">
+                        <i class="fas fa-lightbulb"></i>
+                        <div><strong>Analogie :</strong> Le site web est comme un restaurant. Le serveur est la cuisine (où sont préparés les plats). Le navigateur est le client. Le HTML est la recette.</div>
+                    </div>
+                `,
+            className: ''
+        }, {
+            // Slide 4 : Les 3 langages essentiels
+            content: `
+                    <h2 class="anim-item">Les 3 langages essentiels</h2>
+                    <p class="anim-item" style="margin-top:1rem;">Chaque langage a un rôle précis. Ensemble, ils forment un site web complet.</p>
+                    <div class="card-grid cols-3" style="margin-top:2rem;">
+                        <div class="card anim-item" style="border-color:#059669;">
+                            <i class="fas fa-code" style="color:#059669;"></i>
+                            <h4>HTML</h4>
+                            <p style="font-size:1.1rem;"><strong>La structure</strong></p>
+                            <p>Les murs et les meubles d'une maison</p>
+                        </div>
+                        <div class="card anim-item" style="border-color:var(--bleu);">
+                            <i class="fas fa-paint-brush" style="color:var(--bleu);"></i>
+                            <h4>CSS</h4>
+                            <p style="font-size:1.1rem;"><strong>Le style</strong></p>
+                            <p>La peinture, les décorations, les couleurs</p>
+                        </div>
+                        <div class="card anim-item" style="border-color:var(--jaune);">
+                            <i class="fas fa-bolt" style="color:var(--jaune);"></i>
+                            <h4>JavaScript</h4>
+                            <p style="font-size:1.1rem;"><strong>L'interactivité</strong></p>
+                            <p>L'électricité qui anime tout (clics, animations…)</p>
+                        </div>
+                    </div>
+                    <div class="box box-important anim-item" style="margin-top:1.5rem;">
+                        <i class="fas fa-star"></i>
+                        <div><strong>Aujourd'hui :</strong> HTML uniquement. Le CSS viendra au Jour 3, JavaScript au Jour 6.</div>
+                    </div>
+                `,
+            className: ''
+        }, {
+            // Slide 5 : Les types de sites web
+            content: `
+                    <h2 class="anim-item">Les 6 types de sites web</h2>
+                    <div class="card-grid cols-3" style="margin-top:2rem;">
+                        <div class="card anim-item">
+                            <i class="fas fa-store"></i>
+                            <h4>Site vitrine</h4>
+                            <p>Présente une entreprise, ses services, ses contacts</p>
+                        </div>
+                        <div class="card anim-item">
+                            <i class="fas fa-shopping-cart"></i>
+                            <h4>Site e-commerce</h4>
+                            <p>Vend des produits en ligne (CAV-OR, boutiques)</p>
+                        </div>
+                        <div class="card anim-item">
+                            <i class="fas fa-newspaper"></i>
+                            <h4>Blog / Actualité</h4>
+                            <p>Articles réguliers (Faso24, médias)</p>
+                        </div>
+                        <div class="card anim-item">
+                            <i class="fas fa-user-graduate"></i>
+                            <h4>Portfolio</h4>
+                            <p>Montre vos projets, votre CV, vos compétences</p>
+                        </div>
+                        <div class="card anim-item">
+                            <i class="fas fa-users"></i>
+                            <h4>Réseau social</h4>
+                            <p>Communauté en ligne (Facebook, WhatsApp Web)</p>
+                        </div>
+                        <div class="card anim-item">
+                            <i class="fas fa-tools"></i>
+                            <h4>Application web</h4>
+                            <p>Outils interactifs (menus QR, plateformes)</p>
+                        </div>
+                    </div>
+                    <div class="box box-info anim-item" style="margin-top:1.5rem;">
+                        <i class="fas fa-question-circle"></i>
+                        <div><strong>Question :</strong> Quel type de site voulez-vous créer pendant cette formation ?</div>
+                    </div>
+                `,
+            className: ''
+        }, {
+            // Slide 6 : Conditions pour créer un site
+            content: `
+                    <h2 class="anim-item">Avant de commencer : les conditions à réunir</h2>
+                    <div class="grid-2" style="display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; margin-top:2rem;">
+                        <div>
+                            <h3 class="anim-item" style="color:var(--bleu);"><i class="fas fa-lightbulb"></i> 1. Les informations du site</h3>
+                            <ul class="anim-item" style="padding-left:1.2rem; margin-top:0.5rem;">
+                                <li><strong>Nom du site</strong> — quel titre ?</li>
+                                <li><strong>Description</strong> — que faites-vous ?</li>
+                                <li><strong>Contacts</strong> — téléphone, WhatsApp, email</li>
+                                <li><strong>Pages</strong> — Accueil, À propos, Services, Contact</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 class="anim-item" style="color:var(--orange);"><i class="fas fa-palette"></i> 2. Le design</h3>
+                            <ul class="anim-item" style="padding-left:1.2rem; margin-top:0.5rem;">
+                                <li><strong>Couleur principale</strong> — bleu, vert, orange…</li>
+                                <li><strong>Couleur secondaire</strong> — pour les boutons, les titres</li>
+                                <li><strong>Logo</strong> — image ou texte stylisé</li>
+                                <li><strong>Police</strong> — sobre et lisible</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="box box-important anim-item" style="margin-top:1.5rem;">
+                        <i class="fas fa-check-circle"></i>
+                        <div><strong>Règle d'or :</strong> Avant d'écrire une seule ligne de code, répondez à ces questions sur papier. Un site clair = un site réussi.</div>
+                    </div>
+                `,
+            className: ''
+        }, {
+            // Slide 7 : Thèmes à employer
+            content: `
+                    <h2 class="anim-item">Les thèmes à employer</h2>
+                    <p class="anim-item" style="margin-top:1rem;">Un thème, c'est l'ambiance visuelle de votre site. Voici les plus utilisés.</p>
+                    <div class="card-grid cols-4" style="margin-top:2rem;">
+                        <div class="card anim-item">
+                            <i class="fas fa-briefcase" style="color:var(--bleu);"></i>
+                            <h4>Corporate</h4>
+                            <p>Bleu, blanc, gris — sobre et professionnel</p>
+                        </div>
+                        <div class="card anim-item">
+                            <i class="fas fa-heart" style="color:#dc2626;"></i>
+                            <h4>Chaleureux</h4>
+                            <p>Orange, rouge, crème — convivial et accueillant</p>
+                        </div>
+                        <div class="card anim-item">
+                            <i class="fas fa-leaf" style="color:var(--vert);"></i>
+                            <h4>Naturel</h4>
+                            <p>Vert, beige, marron — écologique et organique</p>
+                        </div>
+                        <div class="card anim-item">
+                            <i class="fas fa-moon" style="color:#7c3aed;"></i>
+                            <h4>Minimaliste</h4>
+                            <p>Noir, blanc, gris — épuré et moderne</p>
+                        </div>
+                    </div>
+                    <div class="box box-tip anim-item" style="margin-top:1.5rem;">
+                        <i class="fas fa-lightbulb"></i>
+                        <div><strong>Conseil :</strong> Choisissez <strong>2 couleurs</strong> maximum pour commencer. Une principale et une secondaire. La simplicité rend votre site élégant.</div>
+                    </div>
+                `,
+            className: ''
+        }, {
+            // Slide 8 : Les pages essentielles
+            content: `
+                    <h2 class="anim-item">Les 5 pages essentielles d'un site</h2>
+                    <div style="margin-top:2rem;">
+                        <table class="table-simple anim-item">
+                            <thead><tr><th>Page</th><th>Contenu</th><th>Pourquoi c'est important</th></tr></thead>
+                            <tbody>
+                                <tr><td><i class="fas fa-home"></i> <strong>Accueil</strong></td><td>Votre message principal</td><td>C'est la première impression</td></tr>
+                                <tr><td><i class="fas fa-info-circle"></i> <strong>À propos</strong></td><td>Qui vous êtes, votre histoire</td><td>Crée la confiance</td></tr>
+                                <tr><td><i class="fas fa-cogs"></i> <strong>Services</strong></td><td>Ce que vous proposez</td><td>Montre votre valeur</td></tr>
+                                <tr><td><i class="fas fa-envelope"></i> <strong>Contact</strong></td><td>Téléphone, WhatsApp, email</td><td>Permet d'être contacté</td></tr>
+                                <tr><td><i class="fas fa-images"></i> <strong>Galerie / Portfolio</strong></td><td>Vos réalisations, photos</td><td>Prouve votre savoir-faire</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p class="anim-item" style="margin-top:1.5rem; text-align:center; font-size:1.2rem;">
+                        Aujourd'hui, nous créons la page <strong>Accueil</strong>. Les autres pages viendront au Jour 2.
+                    </p>
+                `,
+            className: ''
+        }, {
+            // Slide 9 : Nom de domaine et hébergement
+            content: `
+                    <h2 class="anim-item">Le nom de domaine et l'hébergement</h2>
+                    <div class="grid-2" style="display:grid; grid-template-columns:1fr 1fr; gap:2rem; margin-top:2rem;">
+                        <div class="card anim-item" style="text-align:left;">
+                            <i class="fas fa-globe" style="color:var(--bleu);"></i>
+                            <h4>Le nom de domaine</h4>
+                            <p>C'est l'adresse que les gens tapent pour trouver votre site.</p>
+                            <p style="margin-top:0.5rem;"><code>google.com</code><br><code>cav-or.com</code><br><code>nticsolution.org</code></p>
+                            <p style="margin-top:0.5rem;">Sans domaine : une adresse technique difficile à retenir.</p>
+                        </div>
+                        <div class="card anim-item" style="text-align:left;">
+                            <i class="fas fa-server" style="color:var(--orange);"></i>
+                            <h4>L'hébergement</h4>
+                            <p>C'est l'endroit où les fichiers de votre site sont stockés en permanence.</p>
+                            <p style="margin-top:0.5rem;">Dans cette formation : <strong>GitHub Pages</strong></p>
+                            <p style="margin-top:0.5rem;">Un service <strong>gratuit</strong> qui publie votre site depuis votre code.</p>
+                        </div>
+                    </div>
+                    <div class="box box-important anim-item" style="margin-top:1.5rem;">
+                        <i class="fas fa-star"></i>
+                        <div><strong>Notre méthode :</strong> Idée → DeepSeek (code) → VS Code (édition) → GitHub (stockage) → GitHub Pages (publication) → En ligne !</div>
+                    </div>
+                `,
+            className: ''
+        }, {
+            // Slide 10 : VS Code — installation
+            content: `
+                    <h2 class="anim-item">Installer Visual Studio Code</h2>
+                    <div style="margin-top:2rem;">
+                        <table class="table-simple anim-item">
+                            <thead><tr><th>Étape</th><th>Action</th></tr></thead>
+                            <tbody>
+                                <tr><td><strong>1</strong></td><td>Allez sur <code>code.visualstudio.com</code></td></tr>
+                                <tr><td><strong>2</strong></td><td>Cliquez sur <strong>« Download for Windows »</strong></td></tr>
+                                <tr><td><strong>3</strong></td><td>Ouvrez le fichier téléchargé</td></tr>
+                                <tr><td><strong>4</strong></td><td>Acceptez la licence, cliquez « Suivant »</td></tr>
+                                <tr><td><strong>5</strong></td><td>Cochez <strong>« Ajouter au menu contextuel »</strong></td></tr>
+                                <tr><td><strong>6</strong></td><td>Cliquez « Installer » puis « Terminer »</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="box box-tip anim-item" style="margin-top:1.5rem;">
+                        <i class="fas fa-lightbulb"></i>
+                        <div>VS Code est l'éditeur de code <strong>le plus utilisé au monde</strong>. Gratuit, rapide, et puissant.</div>
+                    </div>
+                `,
+            className: ''
+        }, {
+            // Slide 11 : Extensions VS Code
+            content: `
+                    <h2 class="anim-item">Les 2 extensions essentielles</h2>
+                    <div class="grid-2" style="display:grid; grid-template-columns:1fr 1fr; gap:2rem; margin-top:2rem;">
+                        <div class="card anim-item" style="border-color:#059669;">
+                            <i class="fas fa-server" style="color:#059669;"></i>
+                            <h4>Live Server</h4>
+                            <p>Prévisualise votre site dans le navigateur.</p>
+                            <p style="margin-top:0.5rem;"><strong>Installation :</strong> Extensions (Ctrl+Shift+X) → tapez « Live Server » → Installer.</p>
+                        </div>
+                        <div class="card anim-item" style="border-color:var(--bleu);">
+                            <i class="fas fa-magic" style="color:var(--bleu);"></i>
+                            <h4>Prettier</h4>
+                            <p>Formate automatiquement votre code.</p>
+                            <p style="margin-top:0.5rem;"><strong>Installation :</strong> Extensions → tapez « Prettier » → Installer.</p>
+                        </div>
+                    </div>
+                    <div class="box box-info anim-item" style="margin-top:1.5rem;">
+                        <i class="fas fa-info-circle"></i>
+                        <div><strong>Pourquoi ces extensions ?</strong> Live Server recharge la page à chaque modification. Prettier rend votre code propre et lisible.</div>
+                    </div>
+                `,
+            className: ''
+        }, {
+            // Slide 12 : DeepSeek — premier prompt
+            content: `
+                    <h2 class="anim-item">Dialoguer avec DeepSeek</h2>
+                    <p class="anim-item" style="margin-top:1rem;">DeepSeek est une intelligence artificielle qui génère du code pour vous.</p>
+                    <div class="box box-important anim-item" style="margin-top:1.5rem;">
+                        <i class="fas fa-robot"></i>
+                        <div><strong>Votre premier prompt :</strong> « Crée-moi une page web simple avec un titre, un paragraphe, une image et un bouton. Donne-moi uniquement le code HTML complet. »</div>
+                    </div>
+                    <p class="anim-item" style="margin-top:1rem;">DeepSeek génère le code en quelques secondes. Vous le copiez, vous le collez dans VS Code, et votre site existe.</p>
+                    <div class="box box-tip anim-item" style="margin-top:1rem;">
+                        <i class="fas fa-lightbulb"></i>
+                        <div><strong>Votre rôle :</strong> comprendre ce que fait le code et le personnaliser. L'IA écrit, VOUS décidez.</div>
+                    </div>
+                `,
+            className: ''
+        }, {
+            // Slide 13 : Exercice — Créer le projet
+            content: `
+                    <h2 class="anim-item">Exercice : Créez votre premier site</h2>
+                    <div class="exercice-box anim-item" style="margin-top:2rem;">
+                        <h3><i class="fas fa-tasks"></i> Consignes</h3>
+                        <ol>
+                            <li>Créez un dossier <code>mon-premier-site</code> sur le Bureau</li>
+                            <li>Ouvrez ce dossier dans VS Code (File → Open Folder)</li>
+                            <li>Créez un fichier <code>index.html</code> (clic droit → New File)</li>
+                            <li>Allez sur DeepSeek et copiez le code généré</li>
+                            <li>Collez le code dans <code>index.html</code> (Ctrl+V)</li>
+                            <li>Enregistrez (Ctrl+S)</li>
+                            <li>Faites un clic droit → « Open with Live Server »</li>
+                        </ol>
+                    </div>
+                    <p class="anim-item" style="font-size:1.4rem; font-weight:700; color:var(--vert); margin-top:1.5rem; text-align:center;">
+                        Votre navigateur s'ouvre et affiche VOTRE site !
+                    </p>
+                `,
+            className: 'slide-exercice'
+        }, {
+            // Slide 14 : Comprendre le code HTML
+            content: `
+                    <h2 class="anim-item">Comprendre la structure HTML</h2>
+                    <pre class="anim-item">&lt;!DOCTYPE html&gt;
+        &lt;html&gt;
+        &lt;head&gt;
+            &lt;title&gt;Mon site&lt;/title&gt;
+        &lt;/head&gt;
+        &lt;body&gt;
+            &lt;h1&gt;Bienvenue&lt;/h1&gt;
+            &lt;p&gt;Ceci est un paragraphe.&lt;/p&gt;
+        &lt;/body&gt;
+        &lt;/html&gt;</pre>
+                    <div class="box box-tip anim-item">
+                        <i class="fas fa-lightbulb"></i>
+                        <div>Les balises sont entourées de chevrons <code>&lt; &gt;</code>. Chaque balise ouvre et ferme : <code>&lt;h1&gt;</code> puis <code>&lt;/h1&gt;</code>.</div>
+                    </div>
+                `,
+            className: ''
+        }, {
+            // Slide 15 : Les balises essentielles
+            content: `
+                    <h2 class="anim-item">Les 8 balises à mémoriser</h2>
+                    <div style="margin-top:2rem;">
+                        <table class="table-simple anim-item">
+                            <thead><tr><th>Balise</th><th>Rôle</th><th>Exemple</th></tr></thead>
+                            <tbody>
+                                <tr><td><code>&lt;h1&gt;</code></td><td>Titre principal</td><td><code>&lt;h1&gt;Bienvenue&lt;/h1&gt;</code></td></tr>
+                                <tr><td><code>&lt;h2&gt;</code></td><td>Sous-titre</td><td><code>&lt;h2&gt;Services&lt;/h2&gt;</code></td></tr>
+                                <tr><td><code>&lt;p&gt;</code></td><td>Paragraphe</td><td><code>&lt;p&gt;Du texte.&lt;/p&gt;</code></td></tr>
+                                <tr><td><code>&lt;a&gt;</code></td><td>Lien</td><td><code>&lt;a href="https://..."&gt;Cliquez&lt;/a&gt;</code></td></tr>
+                                <tr><td><code>&lt;img&gt;</code></td><td>Image</td><td><code>&lt;img src="photo.jpg" alt="Photo"&gt;</code></td></tr>
+                                <tr><td><code>&lt;button&gt;</code></td><td>Bouton</td><td><code>&lt;button&gt;Contactez-moi&lt;/button&gt;</code></td></tr>
+                                <tr><td><code>&lt;ul&gt;</code></td><td>Liste à puces</td><td><code>&lt;ul&gt;&lt;li&gt;Élément&lt;/li&gt;&lt;/ul&gt;</code></td></tr>
+                                <tr><td><code>&lt;div&gt;</code></td><td>Conteneur</td><td><code>&lt;div&gt;...&lt;/div&gt;</code></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                `,
+            className: ''
+        }, {
+            // Slide 16 : SIGNIFICATION DES TERMES (NOUVELLE SLIDE)
+            content: `
+                    <h2 class="anim-item">Comprendre les termes du métier</h2>
+                    <p class="anim-item">Le langage du web peut sembler complexe. Voici les définitions clés avec des métaphores pour mieux les retenir.</p>
+                    <div class="term-grid">
+                        <div class="term-card anim-item">
+                            <h4><i class="fas fa-code"></i> HTML</h4>
+                            <p><strong>HyperText Markup Language</strong> — le squelette du site. Chaque page web est structurée avec des balises.</p>
+                            <p class="meta">📌 Métaphore : C'est le <strong>squelette</strong> d'une maison (les murs, les pièces).</p>
+                        </div>
+                        <div class="term-card anim-item" style="border-left-color:var(--orange);">
+                            <h4 style="color:var(--orange);"><i class="fas fa-paint-brush"></i> CSS</h4>
+                            <p><strong>Cascading Style Sheets</strong> — le style et l'apparence. Il donne les couleurs, les polices, les marges, la mise en page.</p>
+                            <p class="meta" style="color:var(--orange);">📌 Métaphore : C'est la <strong>décoration</strong> de la maison (peinture, rideaux, agencement).</p>
+                        </div>
+                        <div class="term-card anim-item" style="border-left-color:var(--jaune);">
+                            <h4 style="color:var(--jaune);"><i class="fas fa-bolt"></i> JavaScript</h4>
+                            <p><strong>JS</strong> — l'interactivité. Il rend le site vivant : animations, clics, formulaires, mises à jour dynamiques.</p>
+                            <p class="meta" style="color:var(--jaune);">📌 Métaphore : C'est <strong>l'électricité</strong> de la maison (tout ce qui bouge, s'allume, réagit).</p>
+                        </div>
+                        <div class="term-card anim-item" style="border-left-color:var(--vert);">
+                            <h4 style="color:var(--vert);"><i class="fas fa-globe"></i> Frontend / Backend</h4>
+                            <p><strong>Frontend</strong> : la partie visible par l'utilisateur (interface). <strong>Backend</strong> : la partie cachée (serveur, base de données).</p>
+                            <p class="meta" style="color:var(--vert);">📌 Métaphore : Frontend = le <strong>restaurant</strong> (salle, serveurs). Backend = la <strong>cuisine</strong> (préparation, stocks).</p>
+                        </div>
+                        <div class="term-card anim-item" style="border-left-color:#7c3aed;">
+                            <h4 style="color:#7c3aed;"><i class="fas fa-server"></i> Serveur</h4>
+                            <p>Un ordinateur puissant, toujours allumé, qui stocke et envoie les fichiers de votre site à la demande.</p>
+                            <p class="meta" style="color:#7c3aed;">📌 Métaphore : C'est le <strong>frigo</strong> géant de la cuisine — il garde les plats (fichiers) prêts à être servis.</p>
+                        </div>
+                        <div class="term-card anim-item" style="border-left-color:#dc2626;">
+                            <h4 style="color:#dc2626;"><i class="fas fa-browser"></i> Navigateur</h4>
+                            <p>Un logiciel qui interprète le code HTML/CSS/JS et affiche le site. Exemples : Chrome, Firefox, Safari.</p>
+                            <p class="meta" style="color:#dc2626;">📌 Métaphore : C'est le <strong>client</strong> du restaurant. Il voit le plat (le site) et interagit avec lui.</p>
+                        </div>
+                    </div>
+                    <div class="box box-success anim-item" style="margin-top:1.5rem;">
+                        <i class="fas fa-check-circle"></i>
+                        <div><strong>À retenir :</strong> Tous ces termes sont utiles, mais vous n'avez pas besoin de les maîtriser parfaitement dès le premier jour. L'important est de comprendre l'essentiel pour avancer.</div>
+                    </div>
+                `,
+            className: ''
+        }, {
+            // Slide 17 : Points clés à retenir
+            content: `
+                    <h2 class="anim-item">Les 5 points clés à retenir</h2>
+                    <div style="margin-top:2rem;">
+                        <div class="objectif-item anim-item">
+                            <div class="objectif-num" style="background:#059669;">1</div>
+                            <div class="objectif-text">Un site web = des fichiers HTML affichés par un navigateur</div>
+                        </div>
+                        <div class="objectif-item anim-item">
+                            <div class="objectif-num" style="background:#059669;">2</div>
+                            <div class="objectif-text">HTML = structure · CSS = style · JavaScript = interactivité</div>
+                        </div>
+                        <div class="objectif-item anim-item">
+                            <div class="objectif-num" style="background:#059669;">3</div>
+                            <div class="objectif-text">DeepSeek génère le code, VOUS le comprenez et le personnalisez</div>
+                        </div>
+                        <div class="objectif-item anim-item">
+                            <div class="objectif-num" style="background:#059669;">4</div>
+                            <div class="objectif-text">Le fichier principal s'appelle toujours <code>index.html</code></div>
+                        </div>
+                        <div class="objectif-item anim-item">
+                            <div class="objectif-num" style="background:#059669;">5</div>
+                            <div class="objectif-text">Live Server recharge automatiquement la page à chaque modification</div>
+                        </div>
+                    </div>
+                `,
+            className: 'slide-objectifs'
+        }, {
+            // Slide 18 : Exercice final
+            content: `
+                    <h2 class="anim-item">Exercice final : Personnalisez votre site</h2>
+                    <div class="exercice-box anim-item" style="margin-top:2rem;">
+                        <h3><i class="fas fa-tasks"></i> Consignes</h3>
+                        <ol>
+                            <li>Modifiez le titre principal avec votre prénom</li>
+                            <li>Modifiez le paragraphe : « Je suis en formation Dev Web chez NTIC Solution à Banfora »</li>
+                            <li>Enregistrez (Ctrl+S)</li>
+                            <li>Regardez votre navigateur : la page s'est mise à jour automatiquement !</li>
+                        </ol>
+                    </div>
+                `,
+            className: 'slide-exercice'
+        }, {
+            // Slide 19 : Récapitulatif
+            content: `
+                    <h2 class="anim-item">Aujourd'hui, vous avez appris à...</h2>
+                    <div style="margin-top:1.5rem;">
+                        <div class="objectif-item anim-item">
+                            <div class="objectif-num" style="background:#059669;">✓</div>
+                            <div class="objectif-text">Expliquer ce qu'est un site web, un domaine, un hébergement</div>
+                        </div>
+                        <div class="objectif-item anim-item">
+                            <div class="objectif-num" style="background:#059669;">✓</div>
+                            <div class="objectif-text">Installer VS Code et ses extensions essentielles</div>
+                        </div>
+                        <div class="objectif-item anim-item">
+                            <div class="objectif-num" style="background:#059669;">✓</div>
+                            <div class="objectif-text">Formuler un prompt DeepSeek pour générer du code</div>
+                        </div>
+                        <div class="objectif-item anim-item">
+                            <div class="objectif-num" style="background:#059669;">✓</div>
+                            <div class="objectif-text">Créer un fichier <code>index.html</code> et le prévisualiser</div>
+                        </div>
+                        <div class="objectif-item anim-item">
+                            <div class="objectif-num" style="background:#059669;">✓</div>
+                            <div class="objectif-text">Comprendre les balises HTML essentielles</div>
+                        </div>
+                        <div class="objectif-item anim-item">
+                            <div class="objectif-num" style="background:#059669;">✓</div>
+                            <div class="objectif-text">Connaître la signification des termes clés du web</div>
+                        </div>
+                    </div>
+                    <p class="anim-item" style="font-size:1.6rem; font-weight:700; color:#059669; margin-top:1.5rem; text-align:center;">
+                        Félicitations ! Vous avez créé votre premier site web !
+                    </p>
+                `,
+            className: 'slide-recap'
+        }, {
+            // Slide 20 : Annonce Jour 2
+            content: `
+                    <h1 class="anim-item" style="color:white; font-size:2.8rem;">Rendez-vous demain</h1>
+                    <p class="anim-item" style="font-size:1.8rem; font-weight:600; color:white;">HTML approfondi</p>
+                    <p class="anim-item" style="color:rgba(255,255,255,0.8); font-size:1.3rem;">
+                        Structurer votre page : titres, images, liens, navigation. 5 prompts DeepSeek pour personnaliser votre site.
+                    </p>
+                    <p class="anim-item" style="color:rgba(255,255,255,0.8); font-size:1.2rem; margin-top:1rem;">
+                        <i class="fas fa-lightbulb"></i> Apportez vos idées : portfolio, site d'entreprise, blog…
+                    </p>
+                `,
+            className: 'slide-next'
+        }];
 
-  // ========== ÉTAT ==========
-  let currentSlide = 0;
-  const totalSlides = slidesData.length;
+        // ============================================================
+        // 2. ÉTAT
+        // ============================================================
+        let currentSlide = 0;
+        const totalSlides = slidesData.length;
 
-  // ========== FONCTIONS ==========
-  function checkAccess() {
-    const input = document.getElementById('accessInput');
-    const error = document.getElementById('accessError');
-    if (input.value.trim() === 'NTICBANFORA') {
-      document.getElementById('accessOverlay').classList.add('hidden');
-      document.getElementById('presentationContainer').classList.add('active');
-      renderSlide(currentSlide);
-    } else {
-      error.classList.add('visible');
-      input.value = '';
-      input.focus();
-      setTimeout(() => error.classList.remove('visible'), 2500);
-    }
-  }
-
-  document.getElementById('accessInput').addEventListener('keydown', function(e) {
-    if (e.key === 'Enter') checkAccess();
-  });
-
-  function renderSlide(index) {
-    const stage = document.getElementById('slideStage');
-    const slide = slidesData[index];
-    stage.innerHTML = `<div class="slide-content ${slide.className}">${slide.content}</div>`;
-  }
-
-  function goNext() {
-    if (currentSlide < totalSlides - 1) {
-      currentSlide++;
-      renderSlide(currentSlide);
-    }
-  }
-
-  function goPrev() {
-    if (currentSlide > 0) {
-      currentSlide--;
-      renderSlide(currentSlide);
-    }
-  }
-
-  document.addEventListener('keydown', function(e) {
-    const container = document.getElementById('presentationContainer');
-    if (!container.classList.contains('active')) return;
-    switch(e.key) {
-      case 'ArrowRight': case ' ': case 'PageDown':
-        e.preventDefault(); goNext(); break;
-      case 'ArrowLeft': case 'PageUp':
-        e.preventDefault(); goPrev(); break;
-      case 'Escape':
-        if (confirm('Quitter la projection ?')) {
-          document.getElementById('presentationContainer').classList.remove('active');
-          document.getElementById('accessOverlay').classList.remove('hidden');
-          currentSlide = 0;
+        // ============================================================
+        // 3. FONCTIONS D'AFFICHAGE
+        // ============================================================
+        function renderSlide(index) {
+            const stage = document.getElementById('slideStage');
+            const slide = slidesData[index];
+            stage.innerHTML = `<div class="slide-content ${slide.className}">${slide.content}</div>`;
         }
-        break;
-    }
-  });
 
-  let touchStartX = 0;
-  document.addEventListener('touchstart', function(e) {
-    touchStartX = e.changedTouches[0].screenX;
-  });
-  document.addEventListener('touchend', function(e) {
-    const deltaX = e.changedTouches[0].screenX - touchStartX;
-    if (Math.abs(deltaX) > 60) {
-      if (deltaX < 0) goNext();
-      else goPrev();
-    }
-  });
-</script>
+        function goNext() {
+            if (currentSlide < totalSlides - 1) {
+                currentSlide++;
+                renderSlide(currentSlide);
+            }
+        }
+
+        function goPrev() {
+            if (currentSlide > 0) {
+                currentSlide--;
+                renderSlide(currentSlide);
+            }
+        }
+
+        // ============================================================
+        // 4. OBFUSCATION DU MOT DE PASSE
+        //    Le mot de passe est "JOUR1PRO"
+        //    On le stocke sous forme encodée pour ne pas l'exposer en clair.
+        // ============================================================
+        const _0x1a2b = {
+            _0x3c4d: function(a, b) { return a === b; },
+            _0x5e6f: function(a) { return a.split('').reverse().join(''); }
+        };
+        // "JOUR1PRO" encodé en base64 : Sk9VUjFQUk8=
+        // On vérifie avec une fonction qui décode et compare
+        function checkAccess() {
+            const input = document.getElementById('accessInput');
+            const error = document.getElementById('accessError');
+            // Mot de passe attendu : JOUR1PRO
+            // On le compare après avoir encodé l'entrée en base64 pour éviter l'exposition en clair
+            const expected = 'Sk9VUjFQUk8='; // JOUR1PRO en base64
+            const entered = btoa(input.value.trim());
+            if (_0x1a2b._0x3c4d(entered, expected)) {
+                document.getElementById('accessOverlay').classList.add('hidden');
+                document.getElementById('presentationContainer').classList.add('active');
+                renderSlide(currentSlide);
+            } else {
+                error.classList.add('visible');
+                input.value = '';
+                input.focus();
+                setTimeout(() => error.classList.remove('visible'), 2500);
+            }
+        }
+
+        // Gestionnaire du bouton
+        document.getElementById('accessBtn').addEventListener('click', checkAccess);
+
+        // Gestionnaire de la touche Entrée
+        document.getElementById('accessInput').addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') checkAccess();
+        });
+
+        // ============================================================
+        // 5. NAVIGATION CLAVIER / TOUCHE
+        // ============================================================
+        document.addEventListener('keydown', function(e) {
+            const container = document.getElementById('presentationContainer');
+            if (!container.classList.contains('active')) return;
+            switch (e.key) {
+                case 'ArrowRight':
+                case ' ':
+                case 'PageDown':
+                    e.preventDefault();
+                    goNext();
+                    break;
+                case 'ArrowLeft':
+                case 'PageUp':
+                    e.preventDefault();
+                    goPrev();
+                    break;
+                case 'Escape':
+                    if (confirm('Quitter la projection ?')) {
+                        document.getElementById('presentationContainer').classList.remove('active');
+                        document.getElementById('accessOverlay').classList.remove('hidden');
+                        currentSlide = 0;
+                    }
+                    break;
+            }
+        });
+
+        // Navigation tactile
+        let touchStartX = 0;
+        document.addEventListener('touchstart', function(e) {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+        document.addEventListener('touchend', function(e) {
+            const deltaX = e.changedTouches[0].screenX - touchStartX;
+            if (Math.abs(deltaX) > 60) {
+                if (deltaX < 0) goNext();
+                else goPrev();
+            }
+        });
+    </script>
 
 </body>
 </html>
