@@ -1,977 +1,752 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>NTIC SOLUTION · Jour 2 — Atelier Pratique HTML</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
-    <style>
-        /* ===== VARIABLES ===== */
-        :root {
-            --bleu: #0B3FA5;
-            --bleu-profond: #072a6e;
-            --bleu-clair: #e8f0fe;
-            --orange: #FF6B35;
-            --orange-vif: #ff5722;
-            --orange-clair: #fff4e5;
-            --vert: #059669;
-            --vert-clair: #ecfdf5;
-            --violet: #7c3aed;
-            --violet-clair: #f3e8ff;
-            --rouge: #dc2626;
-            --rouge-clair: #fef2f2;
-            --jaune: #f59e0b;
-            --jaune-clair: #fffbeb;
-            --cyan: #0891b2;
-            --cyan-clair: #e6f7fb;
-            --texte: #1e293b;
-            --texte-secondaire: #475569;
-            --blanc: #ffffff;
-            --bordure: #e2e8f0;
-            --transition: 0.45s cubic-bezier(0.4, 0, 0.2, 1);
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NTIC SOLUTION · Jour 2 — Atelier HTML Pratique</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <style>
+    :root {
+      --bleu: #0B3FA5;
+      --bleu-profond: #072a6e;
+      --bleu-clair: #e8f0fe;
+      --orange: #FF6B35;
+      --orange-vif: #ff5722;
+      --orange-clair: #fff4e5;
+      --vert: #059669;
+      --vert-clair: #ecfdf5;
+      --violet: #7c3aed;
+      --violet-clair: #f3e8ff;
+      --rouge: #dc2626;
+      --rouge-clair: #fef2f2;
+      --jaune: #f59e0b;
+      --jaune-clair: #fffbeb;
+      --cyan: #0891b2;
+      --cyan-clair: #e6f7fb;
+      --texte: #1e293b;
+      --texte-secondaire: #475569;
+      --blanc: #ffffff;
+      --bordure: #e2e8f0;
+      --transition: 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+    }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        body {
-            font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
-            background: #0d1117;
-            color: var(--texte);
-            overflow: hidden;
-            height: 100vh;
-            width: 100vw;
-            -webkit-font-smoothing: antialiased;
-            user-select: none;
-        }
+    body {
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      background: #0d1117;
+      color: var(--texte);
+      overflow: hidden;
+      height: 100vh;
+      width: 100vw;
+      -webkit-font-smoothing: antialiased;
+      user-select: none;
+    }
 
-        /* ===== ACCÈS ===== */
-        .access-overlay {
-            position: fixed;
-            inset: 0;
-            z-index: 99999;
-            background: linear-gradient(135deg, var(--bleu-profond) 0%, #0d1b3e 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: opacity 0.7s ease, visibility 0.7s ease;
-        }
-        .access-overlay.hidden {
-            opacity: 0;
-            visibility: hidden;
-            pointer-events: none;
-        }
-        .access-card {
-            background: var(--blanc);
-            border-radius: 2rem;
-            padding: 3rem 2.5rem;
-            text-align: center;
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
-            max-width: 440px;
-            width: 90%;
-            animation: floatIn 0.8s ease;
-        }
-        @keyframes floatIn {
-            from {
-                opacity: 0;
-                transform: translateY(40px) scale(0.95);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
-        }
-        .access-card .logo-symbol {
-            background: var(--bleu);
-            color: white;
-            width: 64px;
-            height: 64px;
-            border-radius: 18px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 800;
-            font-size: 1.8rem;
-            margin: 0 auto 1.2rem;
-        }
-        .access-card h2 {
-            color: var(--bleu);
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
-        }
-        .access-card p {
-            color: #475569;
-            margin-bottom: 1.8rem;
-            font-size: 0.95rem;
-        }
-        .access-input {
-            width: 100%;
-            padding: 0.9rem 1.3rem;
-            border: 2px solid var(--bordure);
-            border-radius: 14px;
-            font-family: inherit;
-            font-size: 1rem;
-            text-align: center;
-            letter-spacing: 2px;
-            transition: var(--transition);
-            margin-bottom: 1rem;
-        }
-        .access-input:focus {
-            outline: none;
-            border-color: var(--bleu);
-            box-shadow: 0 0 0 4px rgba(11, 63, 165, 0.1);
-        }
-        .access-btn {
-            width: 100%;
-            padding: 0.9rem;
-            background: var(--orange);
-            color: white;
-            border: none;
-            border-radius: 14px;
-            font-weight: 700;
-            font-size: 1rem;
-            font-family: inherit;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-        .access-btn:hover {
-            background: var(--orange-vif);
-            transform: translateY(-2px);
-        }
-        .access-error {
-            color: #dc2626;
-            font-size: 0.85rem;
-            margin-top: 0.5rem;
-            display: none;
-            font-weight: 600;
-        }
-        .access-error.visible {
-            display: block;
-            animation: shake 0.5s ease;
-        }
-        @keyframes shake {
-            0%,
-            100% {
-                transform: translateX(0);
-            }
-            25% {
-                transform: translateX(-8px);
-            }
-            75% {
-                transform: translateX(8px);
-            }
-        }
+    .access-overlay {
+      position: fixed; inset: 0; z-index: 99999;
+      background: linear-gradient(135deg, var(--bleu-profond) 0%, #0d1b3e 100%);
+      display: flex; align-items: center; justify-content: center;
+      transition: opacity 0.7s ease, visibility 0.7s ease;
+    }
+    .access-overlay.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+    .access-card {
+      background: var(--blanc); border-radius: 2rem; padding: 3rem 2.5rem;
+      text-align: center; box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+      max-width: 440px; width: 90%; animation: floatIn 0.8s ease;
+    }
+    @keyframes floatIn {
+      from { opacity: 0; transform: translateY(40px) scale(0.95); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    .access-card .logo-symbol {
+      background: var(--bleu); color: white; width: 64px; height: 64px;
+      border-radius: 18px; display: flex; align-items: center; justify-content: center;
+      font-weight: 800; font-size: 1.8rem; margin: 0 auto 1.2rem;
+    }
+    .access-card h2 { color: var(--bleu); font-size: 1.5rem; margin-bottom: 0.5rem; }
+    .access-card p { color: #475569; margin-bottom: 1.8rem; font-size: 0.95rem; }
+    .access-input {
+      width: 100%; padding: 0.9rem 1.3rem; border: 2px solid var(--bordure);
+      border-radius: 14px; font-family: inherit; font-size: 1rem;
+      text-align: center; letter-spacing: 2px; transition: var(--transition); margin-bottom: 1rem;
+    }
+    .access-input:focus { outline: none; border-color: var(--bleu); box-shadow: 0 0 0 4px rgba(11,63,165,0.1); }
+    .access-btn {
+      width: 100%; padding: 0.9rem; background: var(--orange); color: white;
+      border: none; border-radius: 14px; font-weight: 700; font-size: 1rem;
+      font-family: inherit; cursor: pointer; transition: var(--transition);
+    }
+    .access-btn:hover { background: var(--orange-vif); transform: translateY(-2px); }
+    .access-error { color: #dc2626; font-size: 0.85rem; margin-top: 0.5rem; display: none; font-weight: 600; }
+    .access-error.visible { display: block; animation: shake 0.5s ease; }
+    @keyframes shake {
+      0%,100% { transform: translateX(0); } 25% { transform: translateX(-8px); } 75% { transform: translateX(8px); }
+    }
 
-        /* ===== PROJECTION ===== */
-        .presentation-container {
-            display: none;
-            position: fixed;
-            inset: 0;
-            background: #0d1117;
-            z-index: 100;
-        }
-        .presentation-container.active {
-            display: block;
-        }
+    .presentation-container {
+      display: none;
+      position: fixed; inset: 0;
+      background: #0d1117;
+      z-index: 100;
+    }
+    .presentation-container.active { display: block; }
 
-        .slide-stage {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .slide-content {
-            background: white;
-            width: 100%;
-            height: 100%;
-            overflow-y: auto;
-            padding: 3.5rem 4.5rem;
-            position: relative;
-            animation: slideIn 0.5s ease;
-        }
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: scale(0.96);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
+    .slide-stage {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .slide-content {
+      background: white;
+      width: 100%;
+      height: 100%;
+      overflow-y: auto;
+      padding: 3.5rem 4.5rem;
+      position: relative;
+      animation: slideIn 0.5s ease;
+    }
+    @keyframes slideIn {
+      from { opacity: 0; transform: scale(0.96); }
+      to { opacity: 1; transform: scale(1); }
+    }
 
-        .nav-hint {
-            position: fixed;
-            bottom: 1rem;
-            right: 1rem;
-            z-index: 500;
-            color: rgba(255, 255, 255, 0.3);
-            font-size: 0.7rem;
-            font-weight: 600;
-            letter-spacing: 0.5px;
-            pointer-events: none;
-        }
+    .nav-hint {
+      position: fixed;
+      bottom: 1rem;
+      right: 1rem;
+      z-index: 500;
+      color: rgba(255,255,255,0.3);
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      pointer-events: none;
+    }
 
-        /* ===== ANIMATIONS ===== */
-        .anim-item {
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeUp 0.6s ease forwards;
-        }
-        .anim-item:nth-child(1) {
-            animation-delay: 0.1s;
-        }
-        .anim-item:nth-child(2) {
-            animation-delay: 0.25s;
-        }
-        .anim-item:nth-child(3) {
-            animation-delay: 0.4s;
-        }
-        .anim-item:nth-child(4) {
-            animation-delay: 0.55s;
-        }
-        .anim-item:nth-child(5) {
-            animation-delay: 0.7s;
-        }
-        .anim-item:nth-child(6) {
-            animation-delay: 0.85s;
-        }
-        .anim-item:nth-child(7) {
-            animation-delay: 1s;
-        }
-        .anim-item:nth-child(8) {
-            animation-delay: 1.15s;
-        }
-        @keyframes fadeUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+    .anim-item {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.6s ease forwards;
+    }
+    .anim-item:nth-child(1) { animation-delay: 0.1s; }
+    .anim-item:nth-child(2) { animation-delay: 0.25s; }
+    .anim-item:nth-child(3) { animation-delay: 0.4s; }
+    .anim-item:nth-child(4) { animation-delay: 0.55s; }
+    .anim-item:nth-child(5) { animation-delay: 0.7s; }
+    .anim-item:nth-child(6) { animation-delay: 0.85s; }
+    .anim-item:nth-child(7) { animation-delay: 1s; }
+    .anim-item:nth-child(8) { animation-delay: 1.15s; }
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
 
-        /* ===== TYPOGRAPHIE ===== */
-        h1 {
-            font-size: 3.2rem;
-            font-weight: 800;
-            letter-spacing: -1px;
-            color: var(--bleu);
-            line-height: 1.1;
-        }
-        h2 {
-            font-size: 2.4rem;
-            font-weight: 700;
-            color: var(--bleu);
-            line-height: 1.2;
-        }
-        h3 {
-            font-size: 1.6rem;
-            font-weight: 700;
-        }
-        h4 {
-            font-size: 1.3rem;
-            font-weight: 700;
-        }
-        p {
-            font-size: 1.35rem;
-            line-height: 1.5;
-        }
-        li {
-            font-size: 1.25rem;
-            line-height: 1.6;
-        }
-        .subtitle {
-            font-size: 1.7rem;
-            font-weight: 500;
-            color: var(--texte-secondaire);
-        }
+    h1 { font-size: 3.2rem; font-weight: 800; letter-spacing: -1px; color: var(--bleu); line-height: 1.1; }
+    h2 { font-size: 2.4rem; font-weight: 700; color: var(--bleu); line-height: 1.2; }
+    h3 { font-size: 1.6rem; font-weight: 700; }
+    h4 { font-size: 1.3rem; font-weight: 700; }
+    p { font-size: 1.35rem; line-height: 1.5; }
+    li { font-size: 1.25rem; line-height: 1.6; }
+    .subtitle { font-size: 1.7rem; font-weight: 500; color: var(--texte-secondaire); }
 
-        /* ===== CARTES ===== */
-        .card-grid {
-            display: grid;
-            gap: 1.8rem;
-            margin: 1.8rem 0;
-        }
-        .card-grid.cols-2 {
-            grid-template-columns: 1fr 1fr;
-        }
-        .card-grid.cols-3 {
-            grid-template-columns: repeat(3, 1fr);
-        }
-        .card-grid.cols-4 {
-            grid-template-columns: repeat(4, 1fr);
-        }
-        .card {
-            background: #f8fafc;
-            border-radius: 18px;
-            padding: 1.8rem;
-            border: 1px solid var(--bordure);
-            text-align: center;
-        }
-        .card i {
-            font-size: 2.8rem;
-            color: var(--bleu);
-            margin-bottom: 0.8rem;
-        }
-        .card h4 {
-            font-size: 1.2rem;
-            margin-bottom: 0.4rem;
-        }
-        .card p {
-            font-size: 1rem;
-            color: var(--texte-secondaire);
-        }
+    .card-grid {
+      display: grid;
+      gap: 1.8rem;
+      margin: 1.8rem 0;
+    }
+    .card-grid.cols-2 { grid-template-columns: 1fr 1fr; }
+    .card-grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
+    .card-grid.cols-4 { grid-template-columns: repeat(4, 1fr); }
 
-        /* ===== BOÎTES ===== */
-        .box {
-            border-radius: 16px;
-            padding: 1.2rem 1.8rem;
-            margin: 1.2rem 0;
-            font-size: 1.25rem;
-            font-weight: 500;
-            border-left: 6px solid;
-            display: flex;
-            align-items: flex-start;
-            gap: 0.8rem;
-        }
-        .box i {
-            font-size: 1.5rem;
-            flex-shrink: 0;
-            margin-top: 0.2rem;
-        }
-        .box-tip {
-            background: #e8f0fe;
-            border-color: var(--bleu);
-            color: #0a2c5c;
-        }
-        .box-important {
-            background: var(--orange-clair);
-            border-color: var(--orange);
-            color: #6b3a1f;
-        }
-        .box-success {
-            background: var(--vert-clair);
-            border-color: var(--vert);
-            color: #064e3b;
-        }
-        .box-warning {
-            background: var(--rouge-clair);
-            border-color: var(--rouge);
-            color: #7f1d1d;
-        }
-        .box-info {
-            background: var(--violet-clair);
-            border-color: var(--violet);
-            color: #3b0764;
-        }
+    .card {
+      background: #f8fafc;
+      border-radius: 18px;
+      padding: 1.8rem;
+      border: 1px solid var(--bordure);
+      text-align: center;
+    }
+    .card i { font-size: 2.8rem; color: var(--bleu); margin-bottom: 0.8rem; }
+    .card h4 { font-size: 1.2rem; margin-bottom: 0.4rem; }
+    .card p { font-size: 1rem; color: var(--texte-secondaire); }
 
-        /* ===== SLIDES ===== */
-        .slide-cover {
-            background: linear-gradient(135deg, #0B3FA5 0%, #072a6e 100%);
-            color: white;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-        }
-        .slide-cover h1 {
-            color: white;
-            font-size: 3.5rem;
-        }
-        .slide-cover .subtitle {
-            color: rgba(255, 255, 255, 0.85);
-        }
+    .box {
+      border-radius: 16px;
+      padding: 1.2rem 1.8rem;
+      margin: 1.2rem 0;
+      font-size: 1.25rem;
+      font-weight: 500;
+      border-left: 6px solid;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.8rem;
+    }
+    .box i { font-size: 1.5rem; flex-shrink: 0; margin-top: 0.2rem; }
+    .box-tip { background: #e8f0fe; border-color: var(--bleu); color: #0a2c5c; }
+    .box-important { background: var(--orange-clair); border-color: var(--orange); color: #6b3a1f; }
+    .box-success { background: var(--vert-clair); border-color: var(--vert); color: #064e3b; }
+    .box-warning { background: var(--rouge-clair); border-color: var(--rouge); color: #7f1d1d; }
+    .box-info { background: var(--violet-clair); border-color: var(--violet); color: #3b0764; }
 
-        .slide-exercice {
-            background: var(--bleu-clair);
-        }
-        .slide-exercice h2 {
-            color: var(--bleu);
-        }
+    .slide-cover {
+      background: linear-gradient(135deg, #0B3FA5 0%, #072a6e 100%);
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+    .slide-cover h1 { color: white; font-size: 3.5rem; }
+    .slide-cover .subtitle { color: rgba(255,255,255,0.85); }
 
-        .exercice-box {
-            background: white;
-            border-radius: 20px;
-            padding: 2rem;
-            border: 2px solid var(--bleu);
-            margin-top: 1.5rem;
-        }
-        .exercice-box h3 {
-            color: var(--bleu);
-            font-size: 1.4rem;
-        }
-        .exercice-box ol {
-            padding-left: 1.5rem;
-        }
-        .exercice-box li {
-            margin-bottom: 0.8rem;
-        }
-        .exercice-box li strong {
-            color: var(--bleu);
-        }
+    .slide-objectifs { background: white; }
+    .objectif-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.9rem 0;
+      border-bottom: 1px solid var(--bordure);
+    }
+    .objectif-num {
+      background: var(--bleu);
+      color: white;
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 1.3rem;
+      flex-shrink: 0;
+    }
+    .objectif-text { font-size: 1.35rem; font-weight: 600; }
 
-        .slide-recap {
-            background: var(--jaune-clair);
-        }
-        .slide-recap h2 {
-            color: #92400e;
-        }
+    .slide-exercice { background: var(--bleu-clair); }
+    .slide-exercice h2 { color: var(--bleu); }
+    .exercice-box {
+      background: white;
+      border-radius: 20px;
+      padding: 2rem;
+      border: 2px solid var(--bleu);
+      margin-top: 1.5rem;
+    }
+    .exercice-box h3 { color: var(--bleu); font-size: 1.4rem; }
+    .exercice-box ol { padding-left: 1.5rem; }
+    .exercice-box li { margin-bottom: 0.8rem; }
 
-        .slide-next {
-            background: linear-gradient(135deg, #FF6B35 0%, #e55a2b 100%);
-            color: white;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-        }
-        .slide-next h2 {
-            color: white;
-            font-size: 2.8rem;
-        }
+    .slide-recap { background: var(--jaune-clair); }
+    .slide-recap h2 { color: #92400e; }
 
-        .slide-atelier {
-            background: #f0f9ff;
-        }
-        .slide-atelier h2 {
-            color: var(--cyan);
-        }
+    .slide-next {
+      background: linear-gradient(135deg, #FF6B35 0%, #e55a2b 100%);
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+    .slide-next h2 { color: white; font-size: 2.8rem; }
 
-        /* ===== TABLEAUX ===== */
-        .table-simple {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 1.15rem;
-            background: white;
-            border-radius: 14px;
-            overflow: hidden;
-        }
-        .table-simple th {
-            background: var(--bleu);
-            color: white;
-            padding: 0.9rem 1.2rem;
-            text-align: left;
-            font-weight: 700;
-        }
-        .table-simple td {
-            padding: 0.7rem 1.2rem;
-            border-bottom: 1px solid var(--bordure);
-        }
-        .table-simple tr:last-child td {
-            border-bottom: none;
-        }
+    .table-simple {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 1.15rem;
+      background: white;
+      border-radius: 14px;
+      overflow: hidden;
+    }
+    .table-simple th {
+      background: var(--bleu);
+      color: white;
+      padding: 0.9rem 1.2rem;
+      text-align: left;
+      font-weight: 700;
+    }
+    .table-simple td {
+      padding: 0.7rem 1.2rem;
+      border-bottom: 1px solid var(--bordure);
+    }
+    .table-simple tr:last-child td { border-bottom: none; }
 
-        /* ===== CODE ===== */
-        pre {
-            background: #1e293b;
-            color: #e2e8f0;
-            padding: 1.5rem;
-            border-radius: 14px;
-            font-family: 'Courier New', monospace;
-            font-size: 1.1rem;
-            line-height: 1.6;
-            overflow-x: auto;
-            margin: 1rem 0;
-            white-space: pre-wrap;
-        }
-        code {
-            background: #f1f5f9;
-            padding: 0.15rem 0.4rem;
-            border-radius: 4px;
-            font-family: 'Courier New', monospace;
-            font-size: 0.9em;
-        }
+    pre {
+      background: #1e293b;
+      color: #e2e8f0;
+      padding: 1.5rem;
+      border-radius: 14px;
+      font-family: 'Courier New', monospace;
+      font-size: 1.1rem;
+      line-height: 1.6;
+      overflow-x: auto;
+      margin: 1rem 0;
+    }
+    code {
+      background: #f1f5f9;
+      padding: 0.15rem 0.4rem;
+      border-radius: 4px;
+      font-family: 'Courier New', monospace;
+      font-size: 0.9em;
+    }
 
-        .code-block {
-            background: #1e293b;
-            color: #4ade80;
-            padding: 1.2rem;
-            border-radius: 12px;
-            font-family: 'Courier New', monospace;
-            font-size: 0.95rem;
-            line-height: 1.7;
-            overflow-x: auto;
-            margin: 1rem 0;
-            white-space: pre-wrap;
-        }
-        .code-block .tag {
-            color: #60a5fa;
-        }
-        .code-block .attr {
-            color: #fbbf24;
-        }
-        .code-block .val {
-            color: #fb923c;
-        }
-        .code-block .txt {
-            color: #e2e8f0;
-        }
-        .code-block .comment {
-            color: #64748b;
-            font-style: italic;
-        }
+    .code-block {
+      background: #1e293b;
+      color: #4ade80;
+      padding: 1.2rem;
+      border-radius: 12px;
+      font-family: 'Courier New', monospace;
+      font-size: 0.95rem;
+      line-height: 1.7;
+      overflow-x: auto;
+      margin: 1rem 0;
+      white-space: pre-wrap;
+    }
+    .code-block .tag { color: #60a5fa; }
+    .code-block .attr { color: #fbbf24; }
+    .code-block .val { color: #fb923c; }
+    .code-block .txt { color: #e2e8f0; }
+    .code-block .comment { color: #64748b; font-style: italic; }
 
-        /* ===== BADGE ===== */
-        .badge {
-            display: inline-block;
-            background: var(--bleu);
-            color: white;
-            padding: 0.2rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 700;
-            margin-right: 0.5rem;
-        }
-
-        /* ===== RESPONSIVE ===== */
-        @media (max-width: 768px) {
-            .slide-content {
-                padding: 2rem;
-            }
-            h1 {
-                font-size: 2rem;
-            }
-            h2 {
-                font-size: 1.5rem;
-            }
-            p,
-            li {
-                font-size: 1rem;
-            }
-            .card-grid.cols-2,
-            .card-grid.cols-3,
-            .card-grid.cols-4 {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+    @media (max-width: 768px) {
+      .slide-content { padding: 2rem; }
+      h1 { font-size: 2rem; }
+      h2 { font-size: 1.5rem; }
+      p, li { font-size: 1rem; }
+      .card-grid.cols-2, .card-grid.cols-3, .card-grid.cols-4 { grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
 <body>
 
-    <!-- CODE D'ACCÈS -->
-    <div class="access-overlay" id="accessOverlay">
-        <div class="access-card">
-            <div class="logo-symbol">NT</div>
-            <h2>Accès projection — Jour 2</h2>
-            <p>Veuillez saisir le code d'accès pour lancer l'atelier pratique.</p>
-            <input type="password" class="access-input" id="accessInput" placeholder="Code d'accès" autocomplete="off" />
-            <button class="access-btn" id="accessBtn"><i class="fas fa-lock-open"></i> Démarrer l'atelier</button>
-            <div class="access-error" id="accessError">Code incorrect. Veuillez réessayer.</div>
+<!-- CODE D'ACCÈS -->
+<div class="access-overlay" id="accessOverlay">
+  <div class="access-card">
+    <div class="logo-symbol">NT</div>
+    <h2>Accès atelier — Jour 2</h2>
+    <p>Veuillez saisir le code d'accès pour lancer l'atelier pratique.</p>
+    <input type="password" class="access-input" id="accessInput" placeholder="Code d'accès" autocomplete="off">
+    <button class="access-btn" id="accessBtn"><i class="fas fa-lock-open"></i> Démarrer l'atelier</button>
+    <div class="access-error" id="accessError">Code incorrect. Veuillez réessayer.</div>
+  </div>
+</div>
+
+<!-- CONTENEUR PROJECTION -->
+<div class="presentation-container" id="presentationContainer">
+  <div class="slide-stage" id="slideStage"></div>
+  <div class="nav-hint">← → pour naviguer · Échap pour quitter</div>
+</div>
+
+<script>
+  // ============================================================
+  // SLIDES — 100% PRATIQUE, EXERCICES PAS À PAS
+  // ============================================================
+  const slidesData = [
+    // Slide 1 : Couverture
+    {
+      content: `
+        <h1 class="anim-item">Atelier HTML</h1>
+        <p class="subtitle anim-item">Jour 2 : Coder en direct</p>
+        <p class="anim-item" style="color:rgba(255,255,255,0.75); font-size:1.3rem; margin-top:1rem;">
+          Ouvrez VS Code et votre navigateur
+        </p>
+        <p class="anim-item" style="color:rgba(255,255,255,0.6); font-size:1.1rem; margin-top:2rem;">
+          <i class="fas fa-laptop-code"></i> Prêt à coder ? Allons-y !
+        </p>
+      `,
+      className: 'slide-cover'
+    },
+
+    // Slide 2 : Préparation
+    {
+      content: `
+        <h2 class="anim-item">Préparez votre poste de travail</h2>
+        <div style="margin-top:1.5rem;">
+          <div class="objectif-item anim-item">
+            <div class="objectif-num" style="background:#059669;">1</div>
+            <div class="objectif-text">Ouvrez <strong>VS Code</strong> sur votre ordinateur</div>
+          </div>
+          <div class="objectif-item anim-item">
+            <div class="objectif-num" style="background:#059669;">2</div>
+            <div class="objectif-text">Ouvrez le dossier <code>mon-premier-site</code></div>
+          </div>
+          <div class="objectif-item anim-item">
+            <div class="objectif-num" style="background:#059669;">3</div>
+            <div class="objectif-text">Ouvrez <code>index.html</code> et lancez <strong>Live Server</strong></div>
+          </div>
         </div>
-    </div>
+        <div class="box box-success anim-item" style="margin-top:1.5rem;">
+          <i class="fas fa-check-circle"></i>
+          <div>VS Code à gauche, navigateur à droite. <strong>On ne ferme rien</strong> de toute la séance !</div>
+        </div>
+      `,
+      className: ''
+    },
 
-    <!-- CONTENEUR PROJECTION -->
-    <div class="presentation-container" id="presentationContainer">
-        <div class="slide-stage" id="slideStage"></div>
-        <div class="nav-hint">← → pour naviguer · Échap pour quitter</div>
-    </div>
+    // Slide 3 : Exercice 1 — Titres
+    {
+      content: `
+        <h2 class="anim-item">Exercice 1 : Structurez avec des titres</h2>
+        <div class="exercice-box anim-item">
+          <h3><i class="fas fa-pencil-alt"></i> À faire (5 min)</h3>
+          <ol>
+            <li>Dans <code>index.html</code>, trouvez le <code>&lt;h1&gt;</code> existant</li>
+            <li>Remplacez-le par : <strong>« Votre Prénom — Mon Portfolio »</strong></li>
+            <li>Juste en dessous, ajoutez un <code>&lt;h2&gt;</code> : votre métier ou formation</li>
+            <li>Ajoutez un <code>&lt;h3&gt;</code> : une citation ou un slogan</li>
+            <li><strong>Ctrl+S</strong> et observez le résultat</li>
+          </ol>
+        </div>
+        <div class="code-block anim-item"><span class="tag">&lt;h1&gt;</span><span class="txt">Moussa Diallo — Mon Portfolio</span><span class="tag">&lt;/h1&gt;</span>
+<span class="tag">&lt;h2&gt;</span><span class="txt">Développeur Web en formation</span><span class="tag">&lt;/h2&gt;</span>
+<span class="tag">&lt;h3&gt;</span><span class="txt">"Je crée des sites web qui racontent des histoires"</span><span class="tag">&lt;/h3&gt;</span></div>
+      `,
+      className: 'slide-exercice'
+    },
 
-    <script>
-        // ============================================================
-        // SLIDES — CONTENU 100% PRATIQUE
-        // ============================================================
-        const slidesData = [{
-            // Slide 1 : Couverture
-            content: `
-                    <h1 class="anim-item">Atelier Pratique</h1>
-                    <p class="subtitle anim-item">Jour 2 : HTML en action</p>
-                    <p class="anim-item" style="color:rgba(255,255,255,0.75); font-size:1.3rem; margin-top:1rem;">
-                        Ouvrez VS Code et votre navigateur
-                    </p>
-                    <p class="anim-item" style="color:rgba(255,255,255,0.6); font-size:1.1rem; margin-top:2rem;">
-                        <i class="fas fa-laptop-code"></i> Prêt à coder ? Allons-y !
-                    </p>
-                `,
-            className: 'slide-cover'
-        }, {
-            // Slide 2 : Installation de l'environnement
-            content: `
-                    <h2 class="anim-item">Étape 0 : Préparez votre environnement</h2>
-                    <div style="margin-top:1.5rem;">
-                        <div class="objectif-item anim-item">
-                            <div class="objectif-num" style="background:#059669;">1</div>
-                            <div class="objectif-text">Ouvrez <strong>VS Code</strong> sur votre ordinateur</div>
-                        </div>
-                        <div class="objectif-item anim-item">
-                            <div class="objectif-num" style="background:#059669;">2</div>
-                            <div class="objectif-text">Ouvrez le dossier <code>mon-premier-site</code> (File → Open Folder)</div>
-                        </div>
-                        <div class="objectif-item anim-item">
-                            <div class="objectif-num" style="background:#059669;">3</div>
-                            <div class="objectif-text">Ouvrez le fichier <code>index.html</code></div>
-                        </div>
-                        <div class="objectif-item anim-item">
-                            <div class="objectif-num" style="background:#059669;">4</div>
-                            <div class="objectif-text">Lancez <strong>Live Server</strong> (clic droit → Open with Live Server)</div>
-                        </div>
-                    </div>
-                    <div class="box box-success anim-item" style="margin-top:1.5rem;">
-                        <i class="fas fa-check-circle"></i>
-                        <div>Votre navigateur affiche votre page d'accueil. <strong>Gardez les deux fenêtres ouvertes</strong> (VS Code + navigateur).</div>
-                    </div>
-                `,
-            className: ''
-        }, {
-            // Slide 3 : Exercice 1 — Ajouter un titre et des sous-titres
-            content: `
-                    <h2 class="anim-item">Exercice 1 : Structurez avec des titres</h2>
-                    <div class="exercice-box anim-item">
-                        <h3><i class="fas fa-pencil-alt"></i> À faire</h3>
-                        <ol>
-                            <li>Dans <code>index.html</code>, trouvez le titre principal <code>&lt;h1&gt;</code></li>
-                            <li>Remplacez-le par <strong>votre nom + " — Portfolio"</strong></li>
-                            <li>Juste en dessous, ajoutez un <code>&lt;h2&gt;</code> avec votre métier</li>
-                            <li>Ajoutez un <code>&lt;h3&gt;</code> avec votre slogan ou citation</li>
-                            <li><strong>Enregistrez (Ctrl+S)</strong> et regardez le résultat dans le navigateur</li>
-                        </ol>
-                    </div>
-                    <div class="code-block anim-item"><span class="tag">&lt;h1&gt;</span><span class="txt">Moussa Diallo — Portfolio</span><span class="tag">&lt;/h1&gt;</span>
-        <span class="tag">&lt;h2&gt;</span><span class="txt">Développeur Web en formation</span><span class="tag">&lt;/h2&gt;</span>
-        <span class="tag">&lt;h3&gt;</span><span class="txt">"Je crée des sites qui racontent des histoires"</span><span class="tag">&lt;/h3&gt;</span></div>
-                `,
-            className: 'slide-exercice'
-        }, {
-            // Slide 4 : Exercice 2 — Paragraphes et présentation
-            content: `
-                    <h2 class="anim-item">Exercice 2 : Racontez votre histoire</h2>
-                    <div class="exercice-box anim-item">
-                        <h3><i class="fas fa-pencil-alt"></i> À faire</h3>
-                        <ol>
-                            <li>Ajoutez un <code>&lt;p&gt;</code> (paragraphe) qui vous présente en 3 phrases</li>
-                            <li>Ajoutez un deuxième <code>&lt;p&gt;</code> sur votre parcours ou vos ambitions</li>
-                            <li>Utilisez <code>&lt;br&gt;</code> à l'intérieur d'un paragraphe pour un saut de ligne</li>
-                            <li>Enregistrez et observez le résultat</li>
-                        </ol>
-                    </div>
-                    <div class="box box-tip anim-item">
-                        <i class="fas fa-lightbulb"></i>
-                        <div>Exemple de paragraphe : <br /><code>&lt;p&gt;Je suis Moussa, passionné par le numérique. J'ai rejoint NTIC Solution pour apprendre à créer des sites web.&lt;/p&gt;</code></div>
-                    </div>
-                `,
-            className: 'slide-exercice'
-        }, {
-            // Slide 5 : Exercice 3 — Liste de compétences
-            content: `
-                    <h2 class="anim-item">Exercice 3 : Listez vos compétences</h2>
-                    <div class="exercice-box anim-item">
-                        <h3><i class="fas fa-pencil-alt"></i> À faire</h3>
-                        <ol>
-                            <li>Ajoutez un titre <code>&lt;h2&gt;</code> : « Mes compétences »</li>
-                            <li>Créez une <strong>liste à puces</strong> (<code>&lt;ul&gt;</code>) avec 4 compétences</li>
-                            <li>Chaque compétence est un <code>&lt;li&gt;</code></li>
-                            <li>Créez une <strong>liste numérotée</strong> (<code>&lt;ol&gt;</code>) avec vos 3 objectifs de formation</li>
-                        </ol>
-                    </div>
-                    <div class="code-block anim-item"><span class="tag">&lt;h2&gt;</span><span class="txt">Mes compétences</span><span class="tag">&lt;/h2&gt;</span>
-        <span class="tag">&lt;ul&gt;</span>
-          <span class="tag">&lt;li&gt;</span><span class="txt">HTML / CSS</span><span class="tag">&lt;/li&gt;</span>
-          <span class="tag">&lt;li&gt;</span><span class="txt">VS Code</span><span class="tag">&lt;/li&gt;</span>
-          <span class="tag">&lt;li&gt;</span><span class="txt">DeepSeek (IA)</span><span class="tag">&lt;/li&gt;</span>
-          <span class="tag">&lt;li&gt;</span><span class="txt">GitHub Pages</span><span class="tag">&lt;/li&gt;</span>
-        <span class="tag">&lt;/ul&gt;</span></div>
-                `,
-            className: 'slide-exercice'
-        }, {
-            // Slide 6 : Exercice 4 — Ajouter une image
-            content: `
-                    <h2 class="anim-item">Exercice 4 : Insérez une image</h2>
-                    <div class="exercice-box anim-item">
-                        <h3><i class="fas fa-pencil-alt"></i> À faire</h3>
-                        <ol>
-                            <li>Trouvez une image sur <strong>Unsplash</strong> ou <strong>Pexels</strong></li>
-                            <li>Téléchargez-la dans votre dossier <code>mon-premier-site</code></li>
-                            <li>Ajoutez la balise <code>&lt;img&gt;</code> avec <code>src</code> et <code>alt</code></li>
-                            <li>Ajoutez une <strong>légende</strong> avec la balise <code>&lt;p&gt;</code> juste en dessous</li>
-                        </ol>
-                    </div>
-                    <div class="code-block anim-item"><span class="tag">&lt;img</span> <span class="attr">src</span>=<span class="val">"mon-image.jpg"</span> <span class="attr">alt</span>=<span class="val">"Ma photo de profil"</span><span class="tag">&gt;</span>
-        <span class="tag">&lt;p&gt;</span><span class="txt">Voici ma photo prise à Banfora</span><span class="tag">&lt;/p&gt;</span></div>
-                    <div class="box box-warning anim-item">
-                        <i class="fas fa-exclamation-triangle"></i>
-                        <div><strong>Attention :</strong> Le nom du fichier doit correspondre exactement (majuscules/minuscules).</div>
-                    </div>
-                `,
-            className: 'slide-exercice'
-        }, {
-            // Slide 7 : Exercice 5 — Lien WhatsApp
-            content: `
-                    <h2 class="anim-item">Exercice 5 : Ajoutez un lien WhatsApp</h2>
-                    <div class="exercice-box anim-item">
-                        <h3><i class="fas fa-pencil-alt"></i> À faire</h3>
-                        <ol>
-                            <li>Ajoutez un titre <code>&lt;h2&gt;</code> : « Contactez-moi »</li>
-                            <li>Créez un lien <code>&lt;a&gt;</code> vers WhatsApp</li>
-                            <li>Le lien doit s'ouvrir dans un <strong>nouvel onglet</strong> avec <code>target="_blank"</code></li>
-                            <li>Le texte du lien : « Écrivez-moi sur WhatsApp »</li>
-                        </ol>
-                    </div>
-                    <div class="code-block anim-item"><span class="tag">&lt;a</span> <span class="attr">href</span>=<span class="val">"https://wa.me/22669696924"</span> <span class="attr">target</span>=<span class="val">"_blank"</span><span class="tag">&gt;</span>
-          <span class="txt">📱 Écrivez-moi sur WhatsApp</span>
-        <span class="tag">&lt;/a&gt;</span></div>
-                    <div class="box box-tip anim-item">
-                        <i class="fas fa-lightbulb"></i>
-                        <div>Remplacez <code>22669696924</code> par votre numéro de téléphone (avec l'indicatif pays).</div>
-                    </div>
-                `,
-            className: 'slide-exercice'
-        }, {
-            // Slide 8 : Exercice 6 — Tableau de services
-            content: `
-                    <h2 class="anim-item">Exercice 6 : Créez un tableau de services</h2>
-                    <div class="exercice-box anim-item">
-                        <h3><i class="fas fa-pencil-alt"></i> À faire</h3>
-                        <ol>
-                            <li>Ajoutez un titre <code>&lt;h2&gt;</code> : « Mes services »</li>
-                            <li>Créez un tableau avec <strong>3 colonnes</strong> : Service, Prix, Délai</li>
-                            <li>Ajoutez <strong>3 lignes</strong> de services (ex: création site, maintenance, formation)</li>
-                        </ol>
-                    </div>
-                    <div class="code-block anim-item"><span class="tag">&lt;table&gt;</span>
-          <span class="tag">&lt;tr&gt;</span>
-            <span class="tag">&lt;th&gt;</span><span class="txt">Service</span><span class="tag">&lt;/th&gt;</span>
-            <span class="tag">&lt;th&gt;</span><span class="txt">Prix</span><span class="tag">&lt;/th&gt;</span>
-            <span class="tag">&lt;th&gt;</span><span class="txt">Délai</span><span class="tag">&lt;/th&gt;</span>
-          <span class="tag">&lt;/tr&gt;</span>
-          <span class="tag">&lt;tr&gt;</span>
-            <span class="tag">&lt;td&gt;</span><span class="txt">Création de site</span><span class="tag">&lt;/td&gt;</span>
-            <span class="tag">&lt;td&gt;</span><span class="txt">150 000 F</span><span class="tag">&lt;/td&gt;</span>
-            <span class="tag">&lt;td&gt;</span><span class="txt">5 jours</span><span class="tag">&lt;/td&gt;</span>
-          <span class="tag">&lt;/tr&gt;</span>
-        <span class="tag">&lt;/table&gt;</span></div>
-                `,
-            className: 'slide-exercice'
-        }, {
-            // Slide 9 : Exercice 7 — Barre de navigation
-            content: `
-                    <h2 class="anim-item">Exercice 7 : Créez votre menu de navigation</h2>
-                    <div class="exercice-box anim-item">
-                        <h3><i class="fas fa-pencil-alt"></i> À faire</h3>
-                        <ol>
-                            <li>Ajoutez une barre de navigation (<code>&lt;nav&gt;</code>) en <strong>haut de page</strong></li>
-                            <li>Créez <strong>4 liens</strong> : Accueil, À propos, Services, Contact</li>
-                            <li>Pour l'instant, mettez <code>#</code> dans les liens (on les reliera plus tard)</li>
-                        </ol>
-                    </div>
-                    <div class="code-block anim-item"><span class="tag">&lt;nav&gt;</span>
-          <span class="tag">&lt;a</span> <span class="attr">href</span>=<span class="val">"#"</span><span class="tag">&gt;</span><span class="txt">Accueil</span><span class="tag">&lt;/a&gt;</span>
-          <span class="tag">&lt;a</span> <span class="attr">href</span>=<span class="val">"#"</span><span class="tag">&gt;</span><span class="txt">À propos</span><span class="tag">&lt;/a&gt;</span>
-          <span class="tag">&lt;a</span> <span class="attr">href</span>=<span class="val">"#"</span><span class="tag">&gt;</span><span class="txt">Services</span><span class="tag">&lt;/a&gt;</span>
-          <span class="tag">&lt;a</span> <span class="attr">href</span>=<span class="val">"#"</span><span class="tag">&gt;</span><span class="txt">Contact</span><span class="tag">&lt;/a&gt;</span>
-        <span class="tag">&lt;/nav&gt;</span></div>
-                `,
-            className: 'slide-exercice'
-        }, {
-            // Slide 10 : Exercice 8 — Créer les pages
-            content: `
-                    <h2 class="anim-item">Exercice 8 : Créez les pages du site</h2>
-                    <div class="exercice-box anim-item">
-                        <h3><i class="fas fa-pencil-alt"></i> À faire</h3>
-                        <ol>
-                            <li>Dans VS Code, créez <strong>3 nouveaux fichiers</strong> :</li>
-                            <li><code>apropos.html</code>, <code>services.html</code>, <code>contact.html</code></li>
-                            <li>Copiez le contenu de <code>index.html</code> dans chaque fichier</li>
-                            <li>Modifiez le <code>&lt;h1&gt;</code> de chaque page (ex: « À propos de moi »)</li>
-                            <li>Remplacez les <code>#</code> dans la navigation par les bons fichiers</li>
-                        </ol>
-                    </div>
-                    <div class="code-block anim-item"><span class="tag">&lt;nav&gt;</span>
-          <span class="tag">&lt;a</span> <span class="attr">href</span>=<span class="val">"index.html"</span><span class="tag">&gt;</span><span class="txt">Accueil</span><span class="tag">&lt;/a&gt;</span>
-          <span class="tag">&lt;a</span> <span class="attr">href</span>=<span class="val">"apropos.html"</span><span class="tag">&gt;</span><span class="txt">À propos</span><span class="tag">&lt;/a&gt;</span>
-          <span class="tag">&lt;a</span> <span class="attr">href</span>=<span class="val">"services.html"</span><span class="tag">&gt;</span><span class="txt">Services</span><span class="tag">&lt;/a&gt;</span>
-          <span class="tag">&lt;a</span> <span class="attr">href</span>=<span class="val">"contact.html"</span><span class="tag">&gt;</span><span class="txt">Contact</span><span class="tag">&lt;/a&gt;</span>
-        <span class="tag">&lt;/nav&gt;</span></div>
-                `,
-            className: 'slide-exercice'
-        }, {
-            // Slide 11 : Exercice 9 — Pied de page
-            content: `
-                    <h2 class="anim-item">Exercice 9 : Ajoutez un pied de page</h2>
-                    <div class="exercice-box anim-item">
-                        <h3><i class="fas fa-pencil-alt"></i> À faire</h3>
-                        <ol>
-                            <li>En <strong>bas de chaque page</strong>, ajoutez un <code>&lt;footer&gt;</code></li>
-                            <li>À l'intérieur : votre nom, l'année, et un lien vers WhatsApp</li>
-                            <li>Utilisez la balise <code>&lt;small&gt;</code> pour un texte plus petit</li>
-                        </ol>
-                    </div>
-                    <div class="code-block anim-item"><span class="tag">&lt;footer&gt;</span>
-          <span class="tag">&lt;p&gt;</span><span class="txt">© 2026 Moussa Diallo ·</span>
-          <span class="tag">&lt;a</span> <span class="attr">href</span>=<span class="val">"https://wa.me/22669696924"</span><span class="tag">&gt;</span><span class="txt">WhatsApp</span><span class="tag">&lt;/a&gt;</span>
-        <span class="tag">&lt;/footer&gt;</span></div>
-                `,
-            className: 'slide-exercice'
-        }, {
-            // Slide 12 : Exercice 10 — Personnalisation libre
-            content: `
-                    <h2 class="anim-item">Exercice 10 : Personnalisez votre site</h2>
-                    <div class="exercice-box anim-item">
-                        <h3><i class="fas fa-pencil-alt"></i> À faire</h3>
-                        <ol>
-                            <li>Ajoutez une <strong>liste imbriquée</strong> (une liste dans une liste)</li>
-                            <li>Ajoutez un <strong>lien externe</strong> vers un site que vous aimez</li>
-                            <li>Ajoutez une <strong>ligne horizontale</strong> avec <code>&lt;hr&gt;</code></li>
-                            <li>Ajoutez du <strong>texte en gras</strong> (<code>&lt;strong&gt;</code>) et en <strong>italique</strong> (<code>&lt;em&gt;</code>)</li>
-                        </ol>
-                    </div>
-                    <div class="box box-success anim-item">
-                        <i class="fas fa-check-circle"></i>
-                        <div>Votre site est maintenant <strong>complet et structuré</strong> ! Félicitations !</div>
-                    </div>
-                `,
-            className: 'slide-exercice'
-        }, {
-            // Slide 13 : Récapitulatif
-            content: `
-                    <h2 class="anim-item">Ce que vous avez construit aujourd'hui</h2>
-                    <div style="margin-top:1.5rem;">
-                        <div class="objectif-item anim-item">
-                            <div class="objectif-num" style="background:#059669;">✓</div>
-                            <div class="objectif-text">Un site avec des titres hiérarchisés (h1 → h6)</div>
-                        </div>
-                        <div class="objectif-item anim-item">
-                            <div class="objectif-num" style="background:#059669;">✓</div>
-                            <div class="objectif-text">Des paragraphes et des listes (à puces et numérotées)</div>
-                        </div>
-                        <div class="objectif-item anim-item">
-                            <div class="objectif-num" style="background:#059669;">✓</div>
-                            <div class="objectif-text">Une image avec une légende</div>
-                        </div>
-                        <div class="objectif-item anim-item">
-                            <div class="objectif-num" style="background:#059669;">✓</div>
-                            <div class="objectif-text">Un lien WhatsApp et des liens internes</div>
-                        </div>
-                        <div class="objectif-item anim-item">
-                            <div class="objectif-num" style="background:#059669;">✓</div>
-                            <div class="objectif-text">Un tableau de services</div>
-                        </div>
-                        <div class="objectif-item anim-item">
-                            <div class="objectif-num" style="background:#059669;">✓</div>
-                            <div class="objectif-text">Une barre de navigation et un pied de page</div>
-                        </div>
-                    </div>
-                `,
-            className: 'slide-recap'
-        }, {
-            // Slide 14 : Annonce Jour 3
-            content: `
-                    <h1 class="anim-item" style="color:white; font-size:2.8rem;">Rendez-vous demain</h1>
-                    <p class="anim-item" style="font-size:1.8rem; font-weight:600; color:white;">CSS : Le style de votre site</p>
-                    <p class="anim-item" style="color:rgba(255,255,255,0.8); font-size:1.3rem;">
-                        Couleurs, polices, marges, alignement — votre site prendra vie !
-                    </p>
-                    <p class="anim-item" style="color:rgba(255,255,255,0.8); font-size:1.2rem; margin-top:1rem;">
-                        <i class="fas fa-lightbulb"></i> Réfléchissez à vos couleurs préférées pour demain.
-                    </p>
-                `,
-            className: 'slide-next'
-        }];
+    // Slide 4 : Exercice 2 — Paragraphes
+    {
+      content: `
+        <h2 class="anim-item">Exercice 2 : Racontez votre histoire</h2>
+        <div class="exercice-box anim-item">
+          <h3><i class="fas fa-pencil-alt"></i> À faire (5 min)</h3>
+          <ol>
+            <li>Ajoutez un <code>&lt;p&gt;</code> qui vous présente en 2-3 phrases</li>
+            <li>Ajoutez un deuxième <code>&lt;p&gt;</code> sur vos ambitions</li>
+            <li>Utilisez <code>&lt;br&gt;</code> pour un saut de ligne à l'intérieur d'un paragraphe</li>
+          </ol>
+        </div>
+        <div class="code-block anim-item"><span class="tag">&lt;p&gt;</span><span class="txt">Je m'appelle Moussa, j'ai 22 ans et je suis passionné par le numérique. J'ai rejoint NTIC Solution pour apprendre à créer des sites web professionnels.</span><span class="tag">&lt;/p&gt;</span>
+<span class="tag">&lt;p&gt;</span><span class="txt">Mon objectif : devenir développeur full-stack et créer des solutions digitales pour les entreprises locales.<span class="tag">&lt;br&gt;</span>La formation dure 6 mois.</span><span class="tag">&lt;/p&gt;</span></div>
+      `,
+      className: 'slide-exercice'
+    },
 
-        // ============================================================
-        // ÉTAT
-        // ============================================================
-        let currentSlide = 0;
-        const totalSlides = slidesData.length;
+    // Slide 5 : Exercice 3 — Listes
+    {
+      content: `
+        <h2 class="anim-item">Exercice 3 : Listez vos compétences</h2>
+        <div class="exercice-box anim-item">
+          <h3><i class="fas fa-pencil-alt"></i> À faire (5 min)</h3>
+          <ol>
+            <li>Ajoutez <code>&lt;h2&gt;Mes compétences&lt;/h2&gt;</code></li>
+            <li>Créez une <strong>liste à puces</strong> (<code>&lt;ul&gt;</code>) avec 4 compétences</li>
+            <li>Créez une <strong>liste numérotée</strong> (<code>&lt;ol&gt;</code>) avec vos 3 objectifs de formation</li>
+          </ol>
+        </div>
+        <div class="code-block anim-item"><span class="tag">&lt;h2&gt;</span><span class="txt">Mes compétences</span><span class="tag">&lt;/h2&gt;</span>
+<span class="tag">&lt;ul&gt;</span>
+  <span class="tag">&lt;li&gt;</span><span class="txt">HTML / CSS</span><span class="tag">&lt;/li&gt;</span>
+  <span class="tag">&lt;li&gt;</span><span class="txt">VS Code</span><span class="tag">&lt;/li&gt;</span>
+  <span class="tag">&lt;li&gt;</span><span class="txt">DeepSeek (IA)</span><span class="tag">&lt;/li&gt;</span>
+  <span class="tag">&lt;li&gt;</span><span class="txt">GitHub Pages</span><span class="tag">&lt;/li&gt;</span>
+<span class="tag">&lt;/ul&gt;</span></div>
+      `,
+      className: 'slide-exercice'
+    },
 
-        // ============================================================
-        // OBFUSCATION DU MOT DE PASSE (JOUR1PRO)
-        // ============================================================
-        const _0x1a2b = {
-            _0x3c4d: function(a, b) { return a === b; }
-        };
+    // Slide 6 : Exercice 4 — Image
+    {
+      content: `
+        <h2 class="anim-item">Exercice 4 : Insérez une image</h2>
+        <div class="exercice-box anim-item">
+          <h3><i class="fas fa-pencil-alt"></i> À faire (5 min)</h3>
+          <ol>
+            <li>Trouvez une image sur <strong>Unsplash</strong> ou <strong>Pexels</strong></li>
+            <li>Téléchargez-la dans le dossier <code>mon-premier-site</code></li>
+            <li>Ajoutez <code>&lt;img src="..." alt="..."&gt;</code></li>
+            <li>Ajoutez une légende avec <code>&lt;p&gt;</code> sous l'image</li>
+          </ol>
+        </div>
+        <div class="code-block anim-item"><span class="tag">&lt;img</span> <span class="attr">src</span>=<span class="val">"banfora.jpg"</span> <span class="attr">alt</span>=<span class="val">"Vue de Banfora"</span><span class="tag">&gt;</span>
+<span class="tag">&lt;p&gt;</span><span class="txt">Ma ville natale, Banfora</span><span class="tag">&lt;/p&gt;</span></div>
+        <div class="box box-warning anim-item">
+          <i class="fas fa-exclamation-triangle"></i>
+          <div>Le nom du fichier doit correspondre <strong>exactement</strong> (majuscules/minuscules).</div>
+        </div>
+      `,
+      className: 'slide-exercice'
+    },
 
-        function checkAccess() {
-            const input = document.getElementById('accessInput');
-            const error = document.getElementById('accessError');
-            const expected = 'Sk9VUjFQUk8='; // JOUR1PRO en base64
-            const entered = btoa(input.value.trim());
-            if (_0x1a2b._0x3c4d(entered, expected)) {
-                document.getElementById('accessOverlay').classList.add('hidden');
-                document.getElementById('presentationContainer').classList.add('active');
-                renderSlide(currentSlide);
-            } else {
-                error.classList.add('visible');
-                input.value = '';
-                input.focus();
-                setTimeout(() => error.classList.remove('visible'), 2500);
-            }
+    // Slide 7 : Exercice 5 — Lien WhatsApp
+    {
+      content: `
+        <h2 class="anim-item">Exercice 5 : Ajoutez un lien WhatsApp</h2>
+        <div class="exercice-box anim-item">
+          <h3><i class="fas fa-pencil-alt"></i> À faire (5 min)</h3>
+          <ol>
+            <li>Ajoutez <code>&lt;h2&gt;Contactez-moi&lt;/h2&gt;</code></li>
+            <li>Créez un lien <code>&lt;a&gt;</code> vers WhatsApp avec <code>target="_blank"</code></li>
+            <li>Texte du lien : « 📱 Écrivez-moi sur WhatsApp »</li>
+          </ol>
+        </div>
+        <div class="code-block anim-item"><span class="tag">&lt;a</span> <span class="attr">href</span>=<span class="val">"https://wa.me/22669696924"</span> <span class="attr">target</span>=<span class="val">"_blank"</span><span class="tag">&gt;</span>
+  <span class="txt">📱 Écrivez-moi sur WhatsApp</span>
+<span class="tag">&lt;/a&gt;</span></div>
+        <div class="box box-tip anim-item">
+          <i class="fas fa-lightbulb"></i>
+          <div>Remplacez <code>22669696924</code> par <strong>votre numéro</strong> (indicatif pays inclus).</div>
+        </div>
+      `,
+      className: 'slide-exercice'
+    },
+
+    // Slide 8 : Exercice 6 — Tableau
+    {
+      content: `
+        <h2 class="anim-item">Exercice 6 : Créez un tableau de services</h2>
+        <div class="exercice-box anim-item">
+          <h3><i class="fas fa-pencil-alt"></i> À faire (7 min)</h3>
+          <ol>
+            <li>Ajoutez <code>&lt;h2&gt;Mes services&lt;/h2&gt;</code></li>
+            <li>Créez un tableau avec <strong>3 colonnes</strong> : Service, Prix, Délai</li>
+            <li>Ajoutez <strong>3 lignes</strong> de services</li>
+          </ol>
+        </div>
+        <div class="code-block anim-item"><span class="tag">&lt;table&gt;</span>
+  <span class="tag">&lt;tr&gt;</span>
+    <span class="tag">&lt;th&gt;</span><span class="txt">Service</span><span class="tag">&lt;/th&gt;</span>
+    <span class="tag">&lt;th&gt;</span><span class="txt">Prix</span><span class="tag">&lt;/th&gt;</span>
+    <span class="tag">&lt;th&gt;</span><span class="txt">Délai</span><span class="tag">&lt;/th&gt;</span>
+  <span class="tag">&lt;/tr&gt;</span>
+  <span class="tag">&lt;tr&gt;</span>
+    <span class="tag">&lt;td&gt;</span><span class="txt">Site vitrine</span><span class="tag">&lt;/td&gt;</span>
+    <span class="tag">&lt;td&gt;</span><span class="txt">150 000 F</span><span class="tag">&lt;/td&gt;</span>
+    <span class="tag">&lt;td&gt;</span><span class="txt">5 jours</span><span class="tag">&lt;/td&gt;</span>
+  <span class="tag">&lt;/tr&gt;</span>
+<span class="tag">&lt;/table&gt;</span></div>
+      `,
+      className: 'slide-exercice'
+    },
+
+    // Slide 9 : Exercice 7 — Navigation
+    {
+      content: `
+        <h2 class="anim-item">Exercice 7 : Créez votre menu de navigation</h2>
+        <div class="exercice-box anim-item">
+          <h3><i class="fas fa-pencil-alt"></i> À faire (5 min)</h3>
+          <ol>
+            <li>Ajoutez <code>&lt;nav&gt;</code> en <strong>haut de page</strong></li>
+            <li>Créez <strong>4 liens</strong> : Accueil, À propos, Services, Contact</li>
+            <li>Pour l'instant, mettez <code>href="#"</code> (on les reliera plus tard)</li>
+          </ol>
+        </div>
+        <div class="code-block anim-item"><span class="tag">&lt;nav&gt;</span>
+  <span class="tag">&lt;a</span> <span class="attr">href</span>=<span class="val">"#"</span><span class="tag">&gt;</span><span class="txt">Accueil</span><span class="tag">&lt;/a&gt;</span>
+  <span class="tag">&lt;a</span> <span class="attr">href</span>=<span class="val">"#"</span><span class="tag">&gt;</span><span class="txt">À propos</span><span class="tag">&lt;/a&gt;</span>
+  <span class="tag">&lt;a</span> <span class="attr">href</span>=<span class="val">"#"</span><span class="tag">&gt;</span><span class="txt">Services</span><span class="tag">&lt;/a&gt;</span>
+  <span class="tag">&lt;a</span> <span class="attr">href</span>=<span class="val">"#"</span><span class="tag">&gt;</span><span class="txt">Contact</span><span class="tag">&lt;/a&gt;</span>
+<span class="tag">&lt;/nav&gt;</span></div>
+      `,
+      className: 'slide-exercice'
+    },
+
+    // Slide 10 : Exercice 8 — Créer les pages
+    {
+      content: `
+        <h2 class="anim-item">Exercice 8 : Créez les pages du site</h2>
+        <div class="exercice-box anim-item">
+          <h3><i class="fas fa-pencil-alt"></i> À faire (10 min)</h3>
+          <ol>
+            <li>Créez <strong>3 nouveaux fichiers</strong> : <code>apropos.html</code>, <code>services.html</code>, <code>contact.html</code></li>
+            <li>Copiez le contenu de <code>index.html</code> dans chaque fichier</li>
+            <li>Modifiez le <code>&lt;h1&gt;</code> de chaque page</li>
+            <li>Remplacez les <code>#</code> par les bons fichiers (ex: <code>apropos.html</code>)</li>
+          </ol>
+        </div>
+        <div class="code-block anim-item"><span class="tag">&lt;nav&gt;</span>
+  <span class="tag">&lt;a</span> <span class="attr">href</span>=<span class="val">"index.html"</span><span class="tag">&gt;</span><span class="txt">Accueil</span><span class="tag">&lt;/a&gt;</span>
+  <span class="tag">&lt;a</span> <span class="attr">href</span>=<span class="val">"apropos.html"</span><span class="tag">&gt;</span><span class="txt">À propos</span><span class="tag">&lt;/a&gt;</span>
+  <span class="tag">&lt;a</span> <span class="attr">href</span>=<span class="val">"services.html"</span><span class="tag">&gt;</span><span class="txt">Services</span><span class="tag">&lt;/a&gt;</span>
+  <span class="tag">&lt;a</span> <span class="attr">href</span>=<span class="val">"contact.html"</span><span class="tag">&gt;</span><span class="txt">Contact</span><span class="tag">&lt;/a&gt;</span>
+<span class="tag">&lt;/nav&gt;</span></div>
+      `,
+      className: 'slide-exercice'
+    },
+
+    // Slide 11 : Exercice 9 — Pied de page
+    {
+      content: `
+        <h2 class="anim-item">Exercice 9 : Ajoutez un pied de page</h2>
+        <div class="exercice-box anim-item">
+          <h3><i class="fas fa-pencil-alt"></i> À faire (5 min)</h3>
+          <ol>
+            <li>En <strong>bas de chaque page</strong>, ajoutez <code>&lt;footer&gt;</code></li>
+            <li>À l'intérieur : votre nom, l'année, et un lien WhatsApp</li>
+          </ol>
+        </div>
+        <div class="code-block anim-item"><span class="tag">&lt;footer&gt;</span>
+  <span class="tag">&lt;p&gt;</span><span class="txt">© 2026 Moussa Diallo ·</span>
+  <span class="tag">&lt;a</span> <span class="attr">href</span>=<span class="val">"https://wa.me/22669696924"</span><span class="tag">&gt;</span><span class="txt">WhatsApp</span><span class="tag">&lt;/a&gt;</span>
+<span class="tag">&lt;/footer&gt;</span></div>
+      `,
+      className: 'slide-exercice'
+    },
+
+    // Slide 12 : Exercice 10 — Personnalisation
+    {
+      content: `
+        <h2 class="anim-item">Exercice 10 : Personnalisez librement</h2>
+        <div class="exercice-box anim-item">
+          <h3><i class="fas fa-pencil-alt"></i> À faire (10 min)</h3>
+          <ol>
+            <li>Ajoutez une <strong>liste imbriquée</strong> (liste dans une liste)</li>
+            <li>Ajoutez un <strong>lien externe</strong> vers un site que vous aimez</li>
+            <li>Ajoutez une <strong>ligne horizontale</strong> avec <code>&lt;hr&gt;</code></li>
+            <li>Utilisez <code>&lt;strong&gt;</code> (gras) et <code>&lt;em&gt;</code> (italique)</li>
+          </ol>
+        </div>
+        <div class="box box-success anim-item">
+          <i class="fas fa-check-circle"></i>
+          <div>Votre site est maintenant <strong>complet et structuré</strong> !</div>
+        </div>
+      `,
+      className: 'slide-exercice'
+    },
+
+    // Slide 13 : Récapitulatif
+    {
+      content: `
+        <h2 class="anim-item">Ce que vous avez construit</h2>
+        <div style="margin-top:1.5rem;">
+          <div class="objectif-item anim-item">
+            <div class="objectif-num" style="background:#059669;">✓</div>
+            <div class="objectif-text">Titres hiérarchisés (h1 → h6)</div>
+          </div>
+          <div class="objectif-item anim-item">
+            <div class="objectif-num" style="background:#059669;">✓</div>
+            <div class="objectif-text">Paragraphes et sauts de ligne</div>
+          </div>
+          <div class="objectif-item anim-item">
+            <div class="objectif-num" style="background:#059669;">✓</div>
+            <div class="objectif-text">Listes à puces et numérotées</div>
+          </div>
+          <div class="objectif-item anim-item">
+            <div class="objectif-num" style="background:#059669;">✓</div>
+            <div class="objectif-text">Image avec légende</div>
+          </div>
+          <div class="objectif-item anim-item">
+            <div class="objectif-num" style="background:#059669;">✓</div>
+            <div class="objectif-text">Lien WhatsApp et liens internes</div>
+          </div>
+          <div class="objectif-item anim-item">
+            <div class="objectif-num" style="background:#059669;">✓</div>
+            <div class="objectif-text">Tableau de services</div>
+          </div>
+          <div class="objectif-item anim-item">
+            <div class="objectif-num" style="background:#059669;">✓</div>
+            <div class="objectif-text">Barre de navigation et pied de page</div>
+          </div>
+        </div>
+      `,
+      className: 'slide-recap'
+    },
+
+    // Slide 14 : Annonce Jour 3
+    {
+      content: `
+        <h1 class="anim-item" style="color:white; font-size:2.8rem;">Rendez-vous demain</h1>
+        <p class="anim-item" style="font-size:1.8rem; font-weight:600; color:white;">CSS : Le style</p>
+        <p class="anim-item" style="color:rgba(255,255,255,0.8); font-size:1.3rem;">
+          Couleurs, polices, marges — votre site prendra vie !
+        </p>
+        <p class="anim-item" style="color:rgba(255,255,255,0.8); font-size:1.2rem; margin-top:1rem;">
+          <i class="fas fa-lightbulb"></i> Réfléchissez à vos couleurs préférées.
+        </p>
+      `,
+      className: 'slide-next'
+    }
+  ];
+
+  // ============================================================
+  // ÉTAT
+  // ============================================================
+  let currentSlide = 0;
+  const totalSlides = slidesData.length;
+
+  // ============================================================
+  // OBFUSCATION DU MOT DE PASSE (JOUR1PRO)
+  // ============================================================
+  const _0x1a2b = {
+    _0x3c4d: function(a, b) { return a === b; }
+  };
+
+  function checkAccess() {
+    const input = document.getElementById('accessInput');
+    const error = document.getElementById('accessError');
+    const expected = 'Sk9VUjFQUk8='; // JOUR1PRO en base64
+    const entered = btoa(input.value.trim());
+    if (_0x1a2b._0x3c4d(entered, expected)) {
+      document.getElementById('accessOverlay').classList.add('hidden');
+      document.getElementById('presentationContainer').classList.add('active');
+      renderSlide(currentSlide);
+    } else {
+      error.classList.add('visible');
+      input.value = '';
+      input.focus();
+      setTimeout(() => error.classList.remove('visible'), 2500);
+    }
+  }
+
+  document.getElementById('accessBtn').addEventListener('click', checkAccess);
+  document.getElementById('accessInput').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') checkAccess();
+  });
+
+  // ============================================================
+  // NAVIGATION
+  // ============================================================
+  function renderSlide(index) {
+    const stage = document.getElementById('slideStage');
+    const slide = slidesData[index];
+    stage.innerHTML = `<div class="slide-content ${slide.className}">${slide.content}</div>`;
+  }
+
+  function goNext() {
+    if (currentSlide < totalSlides - 1) {
+      currentSlide++;
+      renderSlide(currentSlide);
+    }
+  }
+
+  function goPrev() {
+    if (currentSlide > 0) {
+      currentSlide--;
+      renderSlide(currentSlide);
+    }
+  }
+
+  document.addEventListener('keydown', function(e) {
+    const container = document.getElementById('presentationContainer');
+    if (!container.classList.contains('active')) return;
+    switch(e.key) {
+      case 'ArrowRight': case ' ': case 'PageDown':
+        e.preventDefault(); goNext(); break;
+      case 'ArrowLeft': case 'PageUp':
+        e.preventDefault(); goPrev(); break;
+      case 'Escape':
+        if (confirm('Quitter l\'atelier ?')) {
+          document.getElementById('presentationContainer').classList.remove('active');
+          document.getElementById('accessOverlay').classList.remove('hidden');
+          currentSlide = 0;
         }
+        break;
+    }
+  });
 
-        document.getElementById('accessBtn').addEventListener('click', checkAccess);
-        document.getElementById('accessInput').addEventListener('keydown', function(e) {
-            if (e.key === 'Enter') checkAccess();
-        });
-
-        // ============================================================
-        // NAVIGATION
-        // ============================================================
-        function renderSlide(index) {
-            const stage = document.getElementById('slideStage');
-            const slide = slidesData[index];
-            stage.innerHTML = `<div class="slide-content ${slide.className}">${slide.content}</div>`;
-        }
-
-        function goNext() {
-            if (currentSlide < totalSlides - 1) {
-                currentSlide++;
-                renderSlide(currentSlide);
-            }
-        }
-
-        function goPrev() {
-            if (currentSlide > 0) {
-                currentSlide--;
-                renderSlide(currentSlide);
-            }
-        }
-
-        document.addEventListener('keydown', function(e) {
-            const container = document.getElementById('presentationContainer');
-            if (!container.classList.contains('active')) return;
-            switch (e.key) {
-                case 'ArrowRight':
-                case ' ':
-                case 'PageDown':
-                    e.preventDefault();
-                    goNext();
-                    break;
-                case 'ArrowLeft':
-                case 'PageUp':
-                    e.preventDefault();
-                    goPrev();
-                    break;
-                case 'Escape':
-                    if (confirm('Quitter la projection ?')) {
-                        document.getElementById('presentationContainer').classList.remove('active');
-                        document.getElementById('accessOverlay').classList.remove('hidden');
-                        currentSlide = 0;
-                    }
-                    break;
-            }
-        });
-
-        let touchStartX = 0;
-        document.addEventListener('touchstart', function(e) {
-            touchStartX = e.changedTouches[0].screenX;
-        });
-        document.addEventListener('touchend', function(e) {
-            const deltaX = e.changedTouches[0].screenX - touchStartX;
-            if (Math.abs(deltaX) > 60) {
-                if (deltaX < 0) goNext();
-                else goPrev();
-            }
-        });
-    </script>
+  let touchStartX = 0;
+  document.addEventListener('touchstart', function(e) {
+    touchStartX = e.changedTouches[0].screenX;
+  });
+  document.addEventListener('touchend', function(e) {
+    const deltaX = e.changedTouches[0].screenX - touchStartX;
+    if (Math.abs(deltaX) > 60) {
+      if (deltaX < 0) goNext();
+      else goPrev();
+    }
+  });
+</script>
 
 </body>
 </html>
