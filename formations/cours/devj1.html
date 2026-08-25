@@ -176,15 +176,7 @@
     .code-block .val { color: #fb923c; }
     .code-block .txt { color: #e2e8f0; }
     .code-block .comment { color: #64748b; font-style: italic; }
-    .code-block .highlight-line { background: #2a3a5a; border-left: 3px solid var(--orange); padding-left: 0.5rem; }
-
-    .highlight-zone {
-      background: #fef3c7;
-      border: 2px dashed #f59e0b;
-      border-radius: 8px;
-      padding: 0.1rem 0.4rem;
-      font-weight: 700;
-    }
+    .code-block .punct { color: #f472b6; }
 
     .box {
       border-radius: 16px;
@@ -376,7 +368,6 @@
 /* ============================================================
    NTIC SOLUTION — Formation Dev Web — Jours 1 à 4
    Méthode : Étude d'un site complet · 100% pratique
-   Code offusqué pour protection
    ============================================================ */
 
 // ===== PROTECTION ANTI-DEVTOOLS ET ANTI-COPIE =====
@@ -433,22 +424,7 @@ function buildAllSlidesData(){
   });
 
   s.push({
-    content:'<h2 class="anim-item">La structure du fichier index.html</h2><p class="anim-item" style="margin-top:1rem;">Chaque fichier HTML suit la même structure. Voici le squelette complet :</p><div class="code-block anim-item"><span class="comment">&lt;!-- Déclaration du type de document --&gt;</span>
-<span class="tag">&lt;!DOCTYPE html&gt;</span>
-<span class="comment">&lt;!-- Racine du document --&gt;</span>
-<span class="tag">&lt;html lang="fr"&gt;</span>
-<span class="comment">&lt;!-- En-tête : informations invisibles --&gt;</span>
-<span class="tag">&lt;head&gt;</span>
-    <span class="tag">&lt;meta charset="UTF-8"&gt;</span>
-    <span class="tag">&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</span>
-    <span class="tag">&lt;title&gt;</span><span class="txt">FasoTech Services — Accueil</span><span class="tag">&lt;/title&gt;</span>
-    <span class="tag">&lt;link rel="stylesheet" href="style.css"&gt;</span>
-<span class="tag">&lt;/head&gt;</span>
-<span class="comment">&lt;!-- Corps : tout ce qui est visible --&gt;</span>
-<span class="tag">&lt;body&gt;</span>
-    <span class="comment">&lt;!-- Le contenu visible va ici --&gt;</span>
-<span class="tag">&lt;/body&gt;</span>
-<span class="tag">&lt;/html&gt;</span></div>',
+    content:'<h2 class="anim-item">La structure du fichier index.html</h2><p class="anim-item" style="margin-top:1rem;">Chaque fichier HTML suit la même structure. Voici le squelette complet :</p><div class="code-block anim-item"><span class="comment">&lt;!-- Déclaration du type de document --&gt;</span>\n<span class="tag">&lt;!DOCTYPE html&gt;</span>\n<span class="comment">&lt;!-- Racine du document --&gt;</span>\n<span class="tag">&lt;html lang="fr"&gt;</span>\n<span class="comment">&lt;!-- En-tête : informations invisibles --&gt;</span>\n<span class="tag">&lt;head&gt;</span>\n    <span class="tag">&lt;meta charset="UTF-8"&gt;</span>\n    <span class="tag">&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</span>\n    <span class="tag">&lt;title&gt;</span><span class="txt">FasoTech Services — Accueil</span><span class="tag">&lt;/title&gt;</span>\n    <span class="tag">&lt;link rel="stylesheet" href="style.css"&gt;</span>\n<span class="tag">&lt;/head&gt;</span>\n<span class="comment">&lt;!-- Corps : tout ce qui est visible --&gt;</span>\n<span class="tag">&lt;body&gt;</span>\n    <span class="comment">&lt;!-- Le contenu visible va ici --&gt;</span>\n<span class="tag">&lt;/body&gt;</span>\n<span class="tag">&lt;/html&gt;</span></div>',
     className:''
   });
 
@@ -458,33 +434,12 @@ function buildAllSlidesData(){
   });
 
   s.push({
-    content:'<h2 class="anim-item">Le header et la navigation</h2><p class="anim-item" style="margin-top:1rem;">Le header contient le logo et la barre de navigation. Voici le code exact :</p><div class="code-block anim-item"><span class="comment">&lt;!-- En-tête du site --&gt;</span>
-<span class="tag">&lt;header&gt;</span>
-    <span class="comment">&lt;!-- Logo cliquable qui ramène à l\'accueil --&gt;</span>
-    <span class="tag">&lt;a href="index.html" class="logo"&gt;</span>
-        <span class="tag">&lt;img src="images/logo.png" alt="FasoTech Services"&gt;</span>
-    <span class="tag">&lt;/a&gt;</span>
-    <span class="comment">&lt;!-- Barre de navigation --&gt;</span>
-    <span class="tag">&lt;nav&gt;</span>
-        <span class="tag">&lt;a href="index.html"&gt;</span><span class="txt">Accueil</span><span class="tag">&lt;/a&gt;</span>
-        <span class="tag">&lt;a href="apropos.html"&gt;</span><span class="txt">À propos</span><span class="tag">&lt;/a&gt;</span>
-        <span class="tag">&lt;a href="services.html"&gt;</span><span class="txt">Services</span><span class="tag">&lt;/a&gt;</span>
-        <span class="tag">&lt;a href="contact.html"&gt;</span><span class="txt">Contact</span><span class="tag">&lt;/a&gt;</span>
-    <span class="tag">&lt;/nav&gt;</span>
-<span class="tag">&lt;/header&gt;</span></div><div class="box box-important anim-item"><i class="fas fa-star"></i><div><strong>À retenir :</strong> <code>&lt;header&gt;</code> = en-tête · <code>&lt;nav&gt;</code> = navigation · <code>&lt;a&gt;</code> = lien</div></div>',
+    content:'<h2 class="anim-item">Le header et la navigation</h2><p class="anim-item" style="margin-top:1rem;">Le header contient le logo et la barre de navigation. Voici le code exact :</p><div class="code-block anim-item"><span class="comment">&lt;!-- En-tête du site --&gt;</span>\n<span class="tag">&lt;header&gt;</span>\n    <span class="comment">&lt;!-- Logo cliquable qui ramène à l\'accueil --&gt;</span>\n    <span class="tag">&lt;a href="index.html" class="logo"&gt;</span>\n        <span class="tag">&lt;img src="images/logo.png" alt="FasoTech Services"&gt;</span>\n    <span class="tag">&lt;/a&gt;</span>\n    <span class="comment">&lt;!-- Barre de navigation --&gt;</span>\n    <span class="tag">&lt;nav&gt;</span>\n        <span class="tag">&lt;a href="index.html"&gt;</span><span class="txt">Accueil</span><span class="tag">&lt;/a&gt;</span>\n        <span class="tag">&lt;a href="apropos.html"&gt;</span><span class="txt">À propos</span><span class="tag">&lt;/a&gt;</span>\n        <span class="tag">&lt;a href="services.html"&gt;</span><span class="txt">Services</span><span class="tag">&lt;/a&gt;</span>\n        <span class="tag">&lt;a href="contact.html"&gt;</span><span class="txt">Contact</span><span class="tag">&lt;/a&gt;</span>\n    <span class="tag">&lt;/nav&gt;</span>\n<span class="tag">&lt;/header&gt;</span></div><div class="box box-important anim-item"><i class="fas fa-star"></i><div><strong>À retenir :</strong> <code>&lt;header&gt;</code> = en-tête · <code>&lt;nav&gt;</code> = navigation · <code>&lt;a&gt;</code> = lien</div></div>',
     className:''
   });
 
   s.push({
-    content:'<h2 class="anim-item">Le main : le contenu principal</h2><p class="anim-item" style="margin-top:1rem;">Tout le contenu visible de la page se trouve dans <code>&lt;main&gt;</code>. Voici le code de la section héro :</p><div class="code-block anim-item"><span class="comment">&lt;!-- Contenu principal --&gt;</span>
-<span class="tag">&lt;main&gt;</span>
-    <span class="comment">&lt;!-- Section héro : la première chose qu\'on voit --&gt;</span>
-    <span class="tag">&lt;section class="hero"&gt;</span>
-        <span class="tag">&lt;h1&gt;</span><span class="txt">FasoTech Services</span><span class="tag">&lt;/h1&gt;</span>
-        <span class="tag">&lt;p&gt;</span><span class="txt">Votre partenaire numérique au Burkina Faso</span><span class="tag">&lt;/p&gt;</span>
-        <span class="tag">&lt;a href="contact.html" class="btn"&gt;</span><span class="txt">Contactez-nous</span><span class="tag">&lt;/a&gt;</span>
-    <span class="tag">&lt;/section&gt;</span>
-<span class="tag">&lt;/main&gt;</span></div><div class="box box-tip anim-item"><i class="fas fa-lightbulb"></i><div><strong>La classe :</strong> <code>class="hero"</code> permet au CSS de styliser cette section spécifiquement. C\'est le lien entre HTML et CSS.</div></div>',
+    content:'<h2 class="anim-item">Le main : le contenu principal</h2><p class="anim-item" style="margin-top:1rem;">Tout le contenu visible de la page se trouve dans <code>&lt;main&gt;</code>. Voici le code de la section héro :</p><div class="code-block anim-item"><span class="comment">&lt;!-- Contenu principal --&gt;</span>\n<span class="tag">&lt;main&gt;</span>\n    <span class="comment">&lt;!-- Section héro : la première chose qu\'on voit --&gt;</span>\n    <span class="tag">&lt;section class="hero"&gt;</span>\n        <span class="tag">&lt;h1&gt;</span><span class="txt">FasoTech Services</span><span class="tag">&lt;/h1&gt;</span>\n        <span class="tag">&lt;p&gt;</span><span class="txt">Votre partenaire numérique au Burkina Faso</span><span class="tag">&lt;/p&gt;</span>\n        <span class="tag">&lt;a href="contact.html" class="btn"&gt;</span><span class="txt">Contactez-nous</span><span class="tag">&lt;/a&gt;</span>\n    <span class="tag">&lt;/section&gt;</span>\n<span class="tag">&lt;/main&gt;</span></div><div class="box box-tip anim-item"><i class="fas fa-lightbulb"></i><div><strong>La classe :</strong> <code>class="hero"</code> permet au CSS de styliser cette section spécifiquement. C\'est le lien entre HTML et CSS.</div></div>',
     className:''
   });
 
@@ -515,53 +470,17 @@ function buildAllSlidesData(){
   });
 
   s.push({
-    content:'<h2 class="anim-item">La page À propos (apropos.html)</h2><p class="anim-item" style="margin-top:1rem;">Le code complet de la page À propos :</p><div class="code-block anim-item"><span class="tag">&lt;main&gt;</span>
-    <span class="tag">&lt;section class="apropos"&gt;</span>
-        <span class="tag">&lt;h1&gt;</span><span class="txt">À propos de nous</span><span class="tag">&lt;/h1&gt;</span>
-        <span class="tag">&lt;div class="contenu"&gt;</span>
-            <span class="tag">&lt;img src="images/equipe.jpg" alt="Notre équipe"&gt;</span>
-            <span class="tag">&lt;p&gt;</span><span class="txt">FasoTech Services est née à Banfora...</span><span class="tag">&lt;/p&gt;</span>
-        <span class="tag">&lt;/div&gt;</span>
-    <span class="tag">&lt;/section&gt;</span>
-<span class="tag">&lt;/main&gt;</span></div><div class="box box-tip anim-item"><i class="fas fa-lightbulb"></i><div><strong>Nouveauté :</strong> <code>&lt;div&gt;</code> = un conteneur qui regroupe des éléments pour les organiser ensemble.</div></div>',
+    content:'<h2 class="anim-item">La page À propos (apropos.html)</h2><p class="anim-item" style="margin-top:1rem;">Le code complet de la page À propos :</p><div class="code-block anim-item"><span class="tag">&lt;main&gt;</span>\n    <span class="tag">&lt;section class="apropos"&gt;</span>\n        <span class="tag">&lt;h1&gt;</span><span class="txt">À propos de nous</span><span class="tag">&lt;/h1&gt;</span>\n        <span class="tag">&lt;div class="contenu"&gt;</span>\n            <span class="tag">&lt;img src="images/equipe.jpg" alt="Notre équipe"&gt;</span>\n            <span class="tag">&lt;p&gt;</span><span class="txt">FasoTech Services est née à Banfora...</span><span class="tag">&lt;/p&gt;</span>\n        <span class="tag">&lt;/div&gt;</span>\n    <span class="tag">&lt;/section&gt;</span>\n<span class="tag">&lt;/main&gt;</span></div><div class="box box-tip anim-item"><i class="fas fa-lightbulb"></i><div><strong>Nouveauté :</strong> <code>&lt;div&gt;</code> = un conteneur qui regroupe des éléments pour les organiser ensemble.</div></div>',
     className:''
   });
 
   s.push({
-    content:'<h2 class="anim-item">La page Services (services.html)</h2><p class="anim-item" style="margin-top:1rem;">Cette page utilise des <strong>cartes</strong> pour présenter les services :</p><div class="code-block anim-item"><span class="tag">&lt;main&gt;</span>
-    <span class="tag">&lt;section class="services"&gt;</span>
-        <span class="tag">&lt;h1&gt;</span><span class="txt">Nos services</span><span class="tag">&lt;/h1&gt;</span>
-        <span class="tag">&lt;div class="cartes"&gt;</span>
-            <span class="tag">&lt;div class="carte"&gt;</span>
-                <span class="tag">&lt;h2&gt;</span><span class="txt">Sites Web</span><span class="tag">&lt;/h2&gt;</span>
-                <span class="tag">&lt;p&gt;</span><span class="txt">Création de sites vitrines</span><span class="tag">&lt;/p&gt;</span>
-            <span class="tag">&lt;/div&gt;</span>
-            <span class="tag">&lt;div class="carte"&gt;</span>
-                <span class="tag">&lt;h2&gt;</span><span class="txt">Applications</span><span class="tag">&lt;/h2&gt;</span>
-                <span class="tag">&lt;p&gt;</span><span class="txt">Développement mobile</span><span class="tag">&lt;/p&gt;</span>
-            <span class="tag">&lt;/div&gt;</span>
-        <span class="tag">&lt;/div&gt;</span>
-    <span class="tag">&lt;/section&gt;</span>
-<span class="tag">&lt;/main&gt;</span></div><div class="box box-important anim-item"><i class="fas fa-star"></i><div><strong>À retenir :</strong> Les cartes sont des <code>&lt;div&gt;</code> avec la classe <code>carte</code>. Le CSS les mettra côte à côte.</div></div>',
+    content:'<h2 class="anim-item">La page Services (services.html)</h2><p class="anim-item" style="margin-top:1rem;">Cette page utilise des <strong>cartes</strong> pour présenter les services :</p><div class="code-block anim-item"><span class="tag">&lt;main&gt;</span>\n    <span class="tag">&lt;section class="services"&gt;</span>\n        <span class="tag">&lt;h1&gt;</span><span class="txt">Nos services</span><span class="tag">&lt;/h1&gt;</span>\n        <span class="tag">&lt;div class="cartes"&gt;</span>\n            <span class="tag">&lt;div class="carte"&gt;</span>\n                <span class="tag">&lt;h2&gt;</span><span class="txt">Sites Web</span><span class="tag">&lt;/h2&gt;</span>\n                <span class="tag">&lt;p&gt;</span><span class="txt">Création de sites vitrines</span><span class="tag">&lt;/p&gt;</span>\n            <span class="tag">&lt;/div&gt;</span>\n            <span class="tag">&lt;div class="carte"&gt;</span>\n                <span class="tag">&lt;h2&gt;</span><span class="txt">Applications</span><span class="tag">&lt;/h2&gt;</span>\n                <span class="tag">&lt;p&gt;</span><span class="txt">Développement mobile</span><span class="tag">&lt;/p&gt;</span>\n            <span class="tag">&lt;/div&gt;</span>\n        <span class="tag">&lt;/div&gt;</span>\n    <span class="tag">&lt;/section&gt;</span>\n<span class="tag">&lt;/main&gt;</span></div><div class="box box-important anim-item"><i class="fas fa-star"></i><div><strong>À retenir :</strong> Les cartes sont des <code>&lt;div&gt;</code> avec la classe <code>carte</code>. Le CSS les mettra côte à côte.</div></div>',
     className:''
   });
 
   s.push({
-    content:'<h2 class="anim-item">La page Contact (contact.html)</h2><p class="anim-item" style="margin-top:1rem;">Un formulaire et un lien WhatsApp :</p><div class="code-block anim-item"><span class="tag">&lt;main&gt;</span>
-    <span class="tag">&lt;section class="contact"&gt;</span>
-        <span class="tag">&lt;h1&gt;</span><span class="txt">Contactez-nous</span><span class="tag">&lt;/h1&gt;</span>
-        <span class="tag">&lt;form&gt;</span>
-            <span class="tag">&lt;label&gt;</span><span class="txt">Votre nom</span><span class="tag">&lt;/label&gt;</span>
-            <span class="tag">&lt;input type="text" placeholder="Votre nom"&gt;</span>
-            <span class="tag">&lt;label&gt;</span><span class="txt">Votre message</span><span class="tag">&lt;/label&gt;</span>
-            <span class="tag">&lt;textarea&gt;&lt;/textarea&gt;</span>
-            <span class="tag">&lt;button type="submit"&gt;</span><span class="txt">Envoyer</span><span class="tag">&lt;/button&gt;</span>
-        <span class="tag">&lt;/form&gt;</span>
-        <span class="tag">&lt;a href="https://wa.me/22669696924" class="btn-whatsapp"&gt;</span>
-            <span class="txt">Écrivez-nous sur WhatsApp</span>
-        <span class="tag">&lt;/a&gt;</span>
-    <span class="tag">&lt;/section&gt;</span>
-<span class="tag">&lt;/main&gt;</span></div><div class="box box-tip anim-item"><i class="fas fa-lightbulb"></i><div><strong>Nouveauté :</strong> <code>&lt;form&gt;</code> = formulaire · <code>&lt;input&gt;</code> = champ de saisie · <code>&lt;textarea&gt;</code> = grand champ de texte</div></div>',
+    content:'<h2 class="anim-item">La page Contact (contact.html)</h2><p class="anim-item" style="margin-top:1rem;">Un formulaire et un lien WhatsApp :</p><div class="code-block anim-item"><span class="tag">&lt;main&gt;</span>\n    <span class="tag">&lt;section class="contact"&gt;</span>\n        <span class="tag">&lt;h1&gt;</span><span class="txt">Contactez-nous</span><span class="tag">&lt;/h1&gt;</span>\n        <span class="tag">&lt;form&gt;</span>\n            <span class="tag">&lt;label&gt;</span><span class="txt">Votre nom</span><span class="tag">&lt;/label&gt;</span>\n            <span class="tag">&lt;input type="text" placeholder="Votre nom"&gt;</span>\n            <span class="tag">&lt;label&gt;</span><span class="txt">Votre message</span><span class="tag">&lt;/label&gt;</span>\n            <span class="tag">&lt;textarea&gt;&lt;/textarea&gt;</span>\n            <span class="tag">&lt;button type="submit"&gt;</span><span class="txt">Envoyer</span><span class="tag">&lt;/button&gt;</span>\n        <span class="tag">&lt;/form&gt;</span>\n        <span class="tag">&lt;a href="https://wa.me/22669696924" class="btn-whatsapp"&gt;</span>\n            <span class="txt">Écrivez-nous sur WhatsApp</span>\n        <span class="tag">&lt;/a&gt;</span>\n    <span class="tag">&lt;/section&gt;</span>\n<span class="tag">&lt;/main&gt;</span></div><div class="box box-tip anim-item"><i class="fas fa-lightbulb"></i><div><strong>Nouveauté :</strong> <code>&lt;form&gt;</code> = formulaire · <code>&lt;input&gt;</code> = champ de saisie · <code>&lt;textarea&gt;</code> = grand champ de texte</div></div>',
     className:''
   });
 
@@ -587,79 +506,22 @@ function buildAllSlidesData(){
   });
 
   s.push({
-    content:'<h2 class="anim-item">Le fichier style.css complet</h2><p class="anim-item" style="margin-top:1rem;">Le CSS est organisé en sections. Chaque section stylise une partie du site :</p><div class="code-block anim-item"><span class="comment">/* ============ 1. VARIABLES DE COULEURS ============ */</span>
-<span class="tag">:root</span> <span class="punct">{</span>
-    <span class="attr">--bleu</span><span class="punct">:</span> <span class="val">#0B3FA5</span><span class="punct">;</span>
-    <span class="attr">--orange</span><span class="punct">:</span> <span class="val">#FF6B35</span><span class="punct">;</span>
-    <span class="attr">--blanc</span><span class="punct">:</span> <span class="val">#FFFFFF</span><span class="punct">;</span>
-<span class="punct">}</span>
-
-<span class="comment">/* ============ 2. STYLE GÉNÉRAL ============ */</span>
-<span class="tag">body</span> <span class="punct">{</span>
-    <span class="attr">font-family</span><span class="punct">:</span> <span class="val">'Plus Jakarta Sans', sans-serif</span><span class="punct">;</span>
-    <span class="attr">margin</span><span class="punct">:</span> <span class="val">0</span><span class="punct">;</span>
-    <span class="attr">padding</span><span class="punct">:</span> <span class="val">0</span><span class="punct">;</span>
-<span class="punct">}</span></div><div class="box box-tip anim-item"><i class="fas fa-lightbulb"></i><div><strong>Les variables :</strong> <code>--bleu</code> et <code>--orange</code> définissent les couleurs une seule fois. Pour changer la couleur du site, modifiez juste ces 2 lignes !</div></div>',
+    content:'<h2 class="anim-item">Le fichier style.css complet</h2><p class="anim-item" style="margin-top:1rem;">Le CSS est organisé en sections. Chaque section stylise une partie du site :</p><div class="code-block anim-item"><span class="comment">/* ============ 1. VARIABLES DE COULEURS ============ */</span>\n<span class="tag">:root</span> <span class="punct">{</span>\n    <span class="attr">--bleu</span><span class="punct">:</span> <span class="val">#0B3FA5</span><span class="punct">;</span>\n    <span class="attr">--orange</span><span class="punct">:</span> <span class="val">#FF6B35</span><span class="punct">;</span>\n    <span class="attr">--blanc</span><span class="punct">:</span> <span class="val">#FFFFFF</span><span class="punct">;</span>\n<span class="punct">}</span>\n\n<span class="comment">/* ============ 2. STYLE GÉNÉRAL ============ */</span>\n<span class="tag">body</span> <span class="punct">{</span>\n    <span class="attr">font-family</span><span class="punct">:</span> <span class="val">\'Plus Jakarta Sans\', sans-serif</span><span class="punct">;</span>\n    <span class="attr">margin</span><span class="punct">:</span> <span class="val">0</span><span class="punct">;</span>\n    <span class="attr">padding</span><span class="punct">:</span> <span class="val">0</span><span class="punct">;</span>\n<span class="punct">}</span></div><div class="box box-tip anim-item"><i class="fas fa-lightbulb"></i><div><strong>Les variables :</strong> <code>--bleu</code> et <code>--orange</code> définissent les couleurs une seule fois. Pour changer la couleur du site, modifiez juste ces 2 lignes !</div></div>',
     className:''
   });
 
   s.push({
-    content:'<h2 class="anim-item">Styliser le header et la navigation</h2><div class="code-block anim-item"><span class="comment">/* ============ 3. HEADER ET NAVIGATION ============ */</span>
-<span class="tag">header</span> <span class="punct">{</span>
-    <span class="attr">background</span><span class="punct">:</span> <span class="val">var(--bleu)</span><span class="punct">;</span>
-    <span class="attr">padding</span><span class="punct">:</span> <span class="val">20px</span><span class="punct">;</span>
-    <span class="attr">display</span><span class="punct">:</span> <span class="val">flex</span><span class="punct">;</span>
-    <span class="attr">justify-content</span><span class="punct">:</span> <span class="val">space-between</span><span class="punct">;</span>
-    <span class="attr">align-items</span><span class="punct">:</span> <span class="val">center</span><span class="punct">;</span>
-<span class="punct">}</span>
-
-<span class="tag">nav a</span> <span class="punct">{</span>
-    <span class="attr">color</span><span class="punct">:</span> <span class="val">white</span><span class="punct">;</span>
-    <span class="attr">text-decoration</span><span class="punct">:</span> <span class="val">none</span><span class="punct">;</span>
-    <span class="attr">margin</span><span class="punct">:</span> <span class="val">0 10px</span><span class="punct">;</span>
-    <span class="attr">font-weight</span><span class="punct">:</span> <span class="val">600</span><span class="punct">;</span>
-<span class="punct">}</span></div><div class="box box-important anim-item"><i class="fas fa-star"></i><div><strong>À retenir :</strong> <code>display: flex</code> aligne les éléments horizontalement. <code>justify-content</code> les répartit. <code>align-items</code> les centre verticalement.</div></div>',
+    content:'<h2 class="anim-item">Styliser le header et la navigation</h2><div class="code-block anim-item"><span class="comment">/* ============ 3. HEADER ET NAVIGATION ============ */</span>\n<span class="tag">header</span> <span class="punct">{</span>\n    <span class="attr">background</span><span class="punct">:</span> <span class="val">var(--bleu)</span><span class="punct">;</span>\n    <span class="attr">padding</span><span class="punct">:</span> <span class="val">20px</span><span class="punct">;</span>\n    <span class="attr">display</span><span class="punct">:</span> <span class="val">flex</span><span class="punct">;</span>\n    <span class="attr">justify-content</span><span class="punct">:</span> <span class="val">space-between</span><span class="punct">;</span>\n    <span class="attr">align-items</span><span class="punct">:</span> <span class="val">center</span><span class="punct">;</span>\n<span class="punct">}</span>\n\n<span class="tag">nav a</span> <span class="punct">{</span>\n    <span class="attr">color</span><span class="punct">:</span> <span class="val">white</span><span class="punct">;</span>\n    <span class="attr">text-decoration</span><span class="punct">:</span> <span class="val">none</span><span class="punct">;</span>\n    <span class="attr">margin</span><span class="punct">:</span> <span class="val">0 10px</span><span class="punct">;</span>\n    <span class="attr">font-weight</span><span class="punct">:</span> <span class="val">600</span><span class="punct">;</span>\n<span class="punct">}</span></div><div class="box box-important anim-item"><i class="fas fa-star"></i><div><strong>À retenir :</strong> <code>display: flex</code> aligne les éléments horizontalement. <code>justify-content</code> les répartit. <code>align-items</code> les centre verticalement.</div></div>',
     className:''
   });
 
   s.push({
-    content:'<h2 class="anim-item">Styliser la section héro</h2><div class="code-block anim-item"><span class="comment">/* ============ 4. SECTION HÉRO ============ */</span>
-<span class="tag">.hero</span> <span class="punct">{</span>
-    <span class="attr">text-align</span><span class="punct">:</span> <span class="val">center</span><span class="punct">;</span>
-    <span class="attr">padding</span><span class="punct">:</span> <span class="val">80px 20px</span><span class="punct">;</span>
-    <span class="attr">background</span><span class="punct">:</span> <span class="val">linear-gradient(135deg, var(--bleu), #072a6e)</span><span class="punct">;</span>
-<span class="punct">}</span>
-
-<span class="tag">.hero h1</span> <span class="punct">{</span>
-    <span class="attr">font-size</span><span class="punct">:</span> <span class="val">3rem</span><span class="punct">;</span>
-    <span class="attr">color</span><span class="punct">:</span> <span class="val">white</span><span class="punct">;</span>
-<span class="punct">}</span>
-
-<span class="tag">.hero .btn</span> <span class="punct">{</span>
-    <span class="attr">background</span><span class="punct">:</span> <span class="val">var(--orange)</span><span class="punct">;</span>
-    <span class="attr">color</span><span class="punct">:</span> <span class="val">white</span><span class="punct">;</span>
-    <span class="attr">padding</span><span class="punct">:</span> <span class="val">12px 30px</span><span class="punct">;</span>
-    <span class="attr">border-radius</span><span class="punct">:</span> <span class="val">25px</span><span class="punct">;</span>
-    <span class="attr">text-decoration</span><span class="punct">:</span> <span class="val">none</span><span class="punct">;</span>
-<span class="punct">}</span></div><div class="box box-tip anim-item"><i class="fas fa-lightbulb"></i><div><strong>Le point (.)</strong> = cible une classe. <code>.hero</code> stylise tous les éléments avec <code>class="hero"</code>. <code>.hero h1</code> stylise les h1 dans la classe hero.</div></div>',
+    content:'<h2 class="anim-item">Styliser la section héro</h2><div class="code-block anim-item"><span class="comment">/* ============ 4. SECTION HÉRO ============ */</span>\n<span class="tag">.hero</span> <span class="punct">{</span>\n    <span class="attr">text-align</span><span class="punct">:</span> <span class="val">center</span><span class="punct">;</span>\n    <span class="attr">padding</span><span class="punct">:</span> <span class="val">80px 20px</span><span class="punct">;</span>\n    <span class="attr">background</span><span class="punct">:</span> <span class="val">linear-gradient(135deg, var(--bleu), #072a6e)</span><span class="punct">;</span>\n<span class="punct">}</span>\n\n<span class="tag">.hero h1</span> <span class="punct">{</span>\n    <span class="attr">font-size</span><span class="punct">:</span> <span class="val">3rem</span><span class="punct">;</span>\n    <span class="attr">color</span><span class="punct">:</span> <span class="val">white</span><span class="punct">;</span>\n<span class="punct">}</span>\n\n<span class="tag">.hero .btn</span> <span class="punct">{</span>\n    <span class="attr">background</span><span class="punct">:</span> <span class="val">var(--orange)</span><span class="punct">;</span>\n    <span class="attr">color</span><span class="punct">:</span> <span class="val">white</span><span class="punct">;</span>\n    <span class="attr">padding</span><span class="punct">:</span> <span class="val">12px 30px</span><span class="punct">;</span>\n    <span class="attr">border-radius</span><span class="punct">:</span> <span class="val">25px</span><span class="punct">;</span>\n    <span class="attr">text-decoration</span><span class="punct">:</span> <span class="val">none</span><span class="punct">;</span>\n<span class="punct">}</span></div><div class="box box-tip anim-item"><i class="fas fa-lightbulb"></i><div><strong>Le point (.)</strong> = cible une classe. <code>.hero</code> stylise tous les éléments avec <code>class="hero"</code>. <code>.hero h1</code> stylise les h1 dans la classe hero.</div></div>',
     className:''
   });
 
   s.push({
-    content:'<h2 class="anim-item">Styliser les cartes services</h2><div class="code-block anim-item"><span class="comment">/* ============ 5. CARTES SERVICES ============ */</span>
-<span class="tag">.cartes</span> <span class="punct">{</span>
-    <span class="attr">display</span><span class="punct">:</span> <span class="val">flex</span><span class="punct">;</span>
-    <span class="attr">gap</span><span class="punct">:</span> <span class="val">20px</span><span class="punct">;</span>
-    <span class="attr">justify-content</span><span class="punct">:</span> <span class="val">center</span><span class="punct">;</span>
-<span class="punct">}</span>
-
-<span class="tag">.carte</span> <span class="punct">{</span>
-    <span class="attr">background</span><span class="punct">:</span> <span class="val">#f8fafc</span><span class="punct">;</span>
-    <span class="attr">border-radius</span><span class="punct">:</span> <span class="val">12px</span><span class="punct">;</span>
-    <span class="attr">padding</span><span class="punct">:</span> <span class="val">25px</span><span class="punct">;</span>
-    <span class="attr">width</span><span class="punct">:</span> <span class="val">300px</span><span class="punct">;</span>
-    <span class="attr">text-align</span><span class="punct">:</span> <span class="val">center</span><span class="punct">;</span>
-<span class="punct">}</span></div><div class="box box-important anim-item"><i class="fas fa-star"></i><div><strong>À retenir :</strong> <code>gap</code> = espace entre les cartes. <code>width: 300px</code> = largeur fixe. <code>border-radius</code> = coins arrondis.</div></div>',
+    content:'<h2 class="anim-item">Styliser les cartes services</h2><div class="code-block anim-item"><span class="comment">/* ============ 5. CARTES SERVICES ============ */</span>\n<span class="tag">.cartes</span> <span class="punct">{</span>\n    <span class="attr">display</span><span class="punct">:</span> <span class="val">flex</span><span class="punct">;</span>\n    <span class="attr">gap</span><span class="punct">:</span> <span class="val">20px</span><span class="punct">;</span>\n    <span class="attr">justify-content</span><span class="punct">:</span> <span class="val">center</span><span class="punct">;</span>\n<span class="punct">}</span>\n\n<span class="tag">.carte</span> <span class="punct">{</span>\n    <span class="attr">background</span><span class="punct">:</span> <span class="val">#f8fafc</span><span class="punct">;</span>\n    <span class="attr">border-radius</span><span class="punct">:</span> <span class="val">12px</span><span class="punct">;</span>\n    <span class="attr">padding</span><span class="punct">:</span> <span class="val">25px</span><span class="punct">;</span>\n    <span class="attr">width</span><span class="punct">:</span> <span class="val">300px</span><span class="punct">;</span>\n    <span class="attr">text-align</span><span class="punct">:</span> <span class="val">center</span><span class="punct">;</span>\n<span class="punct">}</span></div><div class="box box-important anim-item"><i class="fas fa-star"></i><div><strong>À retenir :</strong> <code>gap</code> = espace entre les cartes. <code>width: 300px</code> = largeur fixe. <code>border-radius</code> = coins arrondis.</div></div>',
     className:''
   });
 
@@ -685,20 +547,7 @@ function buildAllSlidesData(){
   });
 
   s.push({
-    content:'<h2 class="anim-item">Le responsive design dans le CSS</h2><p class="anim-item" style="margin-top:1rem;">Le fichier <code>style.css</code> contient déjà une section responsive. Étudions-la :</p><div class="code-block anim-item"><span class="comment">/* ============ 6. RESPONSIVE DESIGN ============ */</span>
-<span class="comment">/* Quand l\'écran fait moins de 768px (mobile) */</span>
-<span class="tag">@media (max-width: 768px)</span> <span class="punct">{</span>
-    <span class="tag">.cartes</span> <span class="punct">{</span>
-        <span class="attr">flex-direction</span><span class="punct">:</span> <span class="val">column</span><span class="punct">;</span>
-        <span class="attr">align-items</span><span class="punct">:</span> <span class="val">center</span><span class="punct">;</span>
-    <span class="punct">}</span>
-    <span class="tag">.hero h1</span> <span class="punct">{</span>
-        <span class="attr">font-size</span><span class="punct">:</span> <span class="val">2rem</span><span class="punct">;</span>
-    <span class="punct">}</span>
-    <span class="tag">header</span> <span class="punct">{</span>
-        <span class="attr">flex-direction</span><span class="punct">:</span> <span class="val">column</span><span class="punct">;</span>
-    <span class="punct">}</span>
-<span class="punct">}</span></div><div class="box box-important anim-item"><i class="fas fa-star"></i><div><strong>@media :</strong> applique des styles uniquement quand la condition est vraie. <code>max-width: 768px</code> = écran de téléphone.</div></div>',
+    content:'<h2 class="anim-item">Le responsive design dans le CSS</h2><p class="anim-item" style="margin-top:1rem;">Le fichier <code>style.css</code> contient déjà une section responsive. Étudions-la :</p><div class="code-block anim-item"><span class="comment">/* ============ 6. RESPONSIVE DESIGN ============ */</span>\n<span class="comment">/* Quand l\'écran fait moins de 768px (mobile) */</span>\n<span class="tag">@media (max-width: 768px)</span> <span class="punct">{</span>\n    <span class="tag">.cartes</span> <span class="punct">{</span>\n        <span class="attr">flex-direction</span><span class="punct">:</span> <span class="val">column</span><span class="punct">;</span>\n        <span class="attr">align-items</span><span class="punct">:</span> <span class="val">center</span><span class="punct">;</span>\n    <span class="punct">}</span>\n    <span class="tag">.hero h1</span> <span class="punct">{</span>\n        <span class="attr">font-size</span><span class="punct">:</span> <span class="val">2rem</span><span class="punct">;</span>\n    <span class="punct">}</span>\n    <span class="tag">header</span> <span class="punct">{</span>\n        <span class="attr">flex-direction</span><span class="punct">:</span> <span class="val">column</span><span class="punct">;</span>\n    <span class="punct">}</span>\n<span class="punct">}</span></div><div class="box box-important anim-item"><i class="fas fa-star"></i><div><strong>@media :</strong> applique des styles uniquement quand la condition est vraie. <code>max-width: 768px</code> = écran de téléphone.</div></div>',
     className:''
   });
 
