@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NTIC SOLUTION · Formation Dev Web & Mobile · Jour 3 — Projection</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    :root {
+      --bleu: #0B3FA5;
+      --bleu-profond: #072a6e;
+      --bleu-clair: #e8f0fe;
+      --orange: #FF6B35;
+      --orange-vif: #ff5722;
+      --orange-clair: #fff4e5;
+      --vert: #059669;
+      --vert-clair: #ecfdf5;
+      --violet: #7c3aed;
+      --violet-clair: #f3e8ff;
+      --rouge: #dc2626;
+      --rouge-clair: #fef2f2;
+      --jaune: #f59e0b;
+      --jaune-clair: #fffbeb;
+      --rose: #ec4899;
+      --rose-clair: #fdf2f8;
+      --cyan: #0891b2;
+      --cyan-clair: #e6f7fb;
+      --texte: #1e293b;
+      --texte-secondaire: #475569;
+      --blanc: #ffffff;
+      --bordure: #e2e8f0;
+      --transition: 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      background: #0d1117;
+      color: var(--texte);
+      overflow: hidden;
+      height: 100vh;
+      width: 100vw;
+      -webkit-font-smoothing: antialiased;
+      user-select: none;
+    }
+
+    .access-overlay {
+      position: fixed; inset: 0; z-index: 99999;
+      background: linear-gradient(135deg, var(--bleu-profond) 0%, #0d1b3e 100%);
+      display: flex; align-items: center; justify-content: center;
+      transition: opacity 0.7s ease, visibility 0.7s ease;
+    }
+    .access-overlay.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+    .access-card {
+      background: var(--blanc); border-radius: 2rem; padding: 3rem 2.5rem;
+      text-align: center; box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+      max-width: 440px; width: 90%; animation: floatIn 0.8s ease;
+    }
+    @keyframes floatIn {
+      from { opacity: 0; transform: translateY(40px) scale(0.95); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    .access-card .logo-symbol {
+      background: var(--bleu); color: white; width: 64px; height: 64px;
+      border-radius: 18px; display: flex; align-items: center; justify-content: center;
+      font-weight: 800; font-size: 1.8rem; margin: 0 auto 1.2rem;
+    }
+    .access-card h2 { color: var(--bleu); font-size: 1.5rem; margin-bottom: 0.5rem; }
+    .access-card p { color: #475569; margin-bottom: 1.8rem; font-size: 0.95rem; }
+    .access-input {
+      width: 100%; padding: 0.9rem 1.3rem; border: 2px solid var(--bordure);
+      border-radius: 14px; font-family: inherit; font-size: 1rem;
+      text-align: center; letter-spacing: 2px; transition: var(--transition); margin-bottom: 1rem;
+    }
+    .access-input:focus { outline: none; border-color: var(--bleu); box-shadow: 0 0 0 4px rgba(11,63,165,0.1); }
+    .access-btn {
+      width: 100%; padding: 0.9rem; background: var(--orange); color: white;
+      border: none; border-radius: 14px; font-weight: 700; font-size: 1rem;
+      font-family: inherit; cursor: pointer; transition: var(--transition);
+    }
+    .access-btn:hover { background: var(--orange-vif); transform: translateY(-2px); }
+    .access-error { color: #dc2626; font-size: 0.85rem; margin-top: 0.5rem; display: none; font-weight: 600; }
+    .access-error.visible { display: block; animation: shake 0.5s ease; }
+    @keyframes shake {
+      0%,100% { transform: translateX(0); } 25% { transform: translateX(-8px); } 75% { transform: translateX(8px); }
+    }
+
+    .presentation-container {
+      display: none;
+      position: fixed; inset: 0;
+      background: #0d1117;
+      z-index: 100;
+    }
+    .presentation-container.active { display: block; }
+
+    .slide-stage {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .slide-content {
+      background: white;
+      width: 100%;
+      height: 100%;
+      overflow-y: auto;
+      padding: 3.5rem 4.5rem;
+      position: relative;
+      animation: slideIn 0.5s ease;
+    }
+    @keyframes slideIn {
+      from { opacity: 0; transform: scale(0.96); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    .nav-hint {
+      position: fixed;
+      bottom: 1rem;
+      right: 1rem;
+      z-index: 500;
+      color: rgba(255,255,255,0.3);
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      pointer-events: none;
+    }
+
+    .anim-item {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.6s ease forwards;
+    }
+    .anim-item:nth-child(1) { animation-delay: 0.1s; }
+    .anim-item:nth-child(2) { animation-delay: 0.25s; }
+    .anim-item:nth-child(3) { animation-delay: 0.4s; }
+    .anim-item:nth-child(4) { animation-delay: 0.55s; }
+    .anim-item:nth-child(5) { animation-delay: 0.7s; }
+    .anim-item:nth-child(6) { animation-delay: 0.85s; }
+    .anim-item:nth-child(7) { animation-delay: 1s; }
+    .anim-item:nth-child(8) { animation-delay: 1.15s; }
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h1 { font-size: 3.2rem; font-weight: 800; letter-spacing: -1px; color: var(--bleu); line-height: 1.1; }
+    h2 { font-size: 2.4rem; font-weight: 700; color: var(--bleu); line-height: 1.2; }
+    h3 { font-size: 1.6rem; font-weight: 700; }
+    h4 { font-size: 1.3rem; font-weight: 700; }
+    p { font-size: 1.35rem; line-height: 1.5; }
+    li { font-size: 1.25rem; line-height: 1.6; }
+    .subtitle { font-size: 1.7rem; font-weight: 500; color: var(--texte-secondaire); }
+
+    .card-grid {
+      display: grid;
+      gap: 1.8rem;
+      margin: 1.8rem 0;
+    }
+    .card-grid.cols-2 { grid-template-columns: 1fr 1fr; }
+    .card-grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
+    .card-grid.cols-4 { grid-template-columns: repeat(4, 1fr); }
+
+    .card {
+      background: #f8fafc;
+      border-radius: 18px;
+      padding: 1.8rem;
+      border: 1px solid var(--bordure);
+      text-align: center;
+    }
+    .card i { font-size: 2.8rem; color: var(--bleu); margin-bottom: 0.8rem; }
+    .card h4 { font-size: 1.2rem; margin-bottom: 0.4rem; }
+    .card p { font-size: 1rem; color: var(--texte-secondaire); }
+
+    .box {
+      border-radius: 16px;
+      padding: 1.2rem 1.8rem;
+      margin: 1.2rem 0;
+      font-size: 1.25rem;
+      font-weight: 500;
+      border-left: 6px solid;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.8rem;
+    }
+    .box i { font-size: 1.5rem; flex-shrink: 0; margin-top: 0.2rem; }
+    .box-tip { background: #e8f0fe; border-color: var(--bleu); color: #0a2c5c; }
+    .box-important { background: var(--orange-clair); border-color: var(--orange); color: #6b3a1f; }
+    .box-success { background: var(--vert-clair); border-color: var(--vert); color: #064e3b; }
+    .box-warning { background: var(--rouge-clair); border-color: var(--rouge); color: #7f1d1d; }
+    .box-info { background: var(--violet-clair); border-color: var(--violet); color: #3b0764; }
+
+    .slide-cover {
+      background: linear-gradient(135deg, #0B3FA5 0%, #072a6e 100%);
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+    .slide-cover h1 { color: white; font-size: 3.5rem; }
+    .slide-cover .subtitle { color: rgba(255,255,255,0.85); }
+
+    .slide-objectifs { background: white; }
+    .objectif-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.9rem 0;
+      border-bottom: 1px solid var(--bordure);
+    }
+    .objectif-num {
+      background: var(--bleu);
+      color: white;
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 1.3rem;
+      flex-shrink: 0;
+    }
+    .objectif-text { font-size: 1.35rem; font-weight: 600; }
+
+    .slide-exercice { background: var(--bleu-clair); }
+    .slide-exercice h2 { color: var(--bleu); }
+    .exercice-box {
+      background: white;
+      border-radius: 20px;
+      padding: 2rem;
+      border: 2px solid var(--bleu);
+      margin-top: 1.5rem;
+    }
+    .exercice-box h3 { color: var(--bleu); font-size: 1.4rem; }
+    .exercice-box ol { padding-left: 1.5rem; }
+    .exercice-box li { margin-bottom: 0.8rem; }
+
+    .slide-recap { background: var(--jaune-clair); }
+    .slide-recap h2 { color: #92400e; }
+
+    .slide-next {
+      background: linear-gradient(135deg, #FF6B35 0%, #e55a2b 100%);
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+    .slide-next h2 { color: white; font-size: 2.8rem; }
+
+    .table-simple {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 1.15rem;
+      background: white;
+      border-radius: 14px;
+      overflow: hidden;
+    }
+    .table-simple th {
+      background: var(--bleu);
+      color: white;
+      padding: 0.9rem 1.2rem;
+      text-align: left;
+      font-weight: 700;
+    }
+    .table-simple td {
+      padding: 0.7rem 1.2rem;
+      border-bottom: 1px solid var(--bordure);
+    }
+    .table-simple tr:last-child td { border-bottom: none; }
+
+    pre {
+      background: #1e293b;
+      color: #e2e8f0;
+      padding: 1.5rem;
+      border-radius: 14px;
+      font-family: 'Courier New', monospace;
+      font-size: 1.1rem;
+      line-height: 1.6;
+      overflow-x: auto;
+      margin: 1rem 0;
+      white-space: pre-wrap;
+    }
+    code {
+      background: #f1f5f9;
+      padding: 0.15rem 0.4rem;
+      border-radius: 4px;
+      font-family: 'Courier New', monospace;
+      font-size: 0.9em;
+    }
+
+    .code-block {
+      background: #1e293b;
+      color: #4ade80;
+      padding: 1.2rem;
+      border-radius: 12px;
+      font-family: 'Courier New', monospace;
+      font-size: 1.05rem;
+      line-height: 1.7;
+      overflow-x: auto;
+      margin: 1rem 0;
+      white-space: pre-wrap;
+    }
+    .code-block .sel { color: #60a5fa; }
+    .code-block .prop { color: #fbbf24; }
+    .code-block .val { color: #fb923c; }
+    .code-block .comment { color: #64748b; font-style: italic; }
+    .code-block .punct { color: #f472b6; }
+
+    .color-demo {
+      display: inline-block;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      border: 2px solid #cbd5e1;
+      vertical-align: middle;
+      margin-right: 0.5rem;
+    }
+
+    .demo-box {
+      border-radius: 12px;
+      padding: 1.5rem;
+      text-align: center;
+      font-weight: 700;
+      font-size: 1.2rem;
+      margin: 0.5rem 0;
+    }
+
+    @media (max-width: 768px) {
+      .slide-content { padding: 2rem; }
+      h1 { font-size: 2rem; }
+      h2 { font-size: 1.5rem; }
+      p, li { font-size: 1rem; }
+      .card-grid.cols-2, .card-grid.cols-3, .card-grid.cols-4 { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- CODE D'ACCÈS -->
+<div class="access-overlay" id="accessOverlay">
+  <div class="access-card">
+    <div class="logo-symbol">NT</div>
+    <h2>Accès projection — Jour 3</h2>
+    <p>Veuillez saisir le code d'accès pour lancer la projection.</p>
+    <input type="password" class="access-input" id="accessInput" placeholder="Code d'accès" autocomplete="off">
+    <button class="access-btn" onclick="checkAccess()"><i class="fas fa-lock-open"></i> Projeter</button>
+    <div class="access-error" id="accessError">Code incorrect. Veuillez réessayer.</div>
+  </div>
+</div>
+
+<!-- CONTENEUR PROJECTION -->
+<div class="presentation-container" id="presentationContainer">
+  <div class="slide-stage" id="slideStage"></div>
+  <div class="nav-hint">← → pour naviguer · Échap pour quitter</div>
+</div>
+
+<script>
+  const slidesData = [
+    // Slide 1 : Couverture
+    {
+      content: `
+        <h1 class="anim-item">Développement Web & Mobile</h1>
+        <p class="subtitle anim-item">Jour 3 : CSS — Donnez du style à votre site</p>
+        <p class="anim-item" style="color:rgba(255,255,255,0.75); font-size:1.3rem; margin-top:1rem;">
+          Couleurs, polices, marges, alignement
+        </p>
+        <p class="anim-item" style="color:rgba(255,255,255,0.6); font-size:1.1rem; margin-top:2rem;">
+          Durée : 2 heures · Niveau : Débutant
+        </p>
+      `,
+      className: 'slide-cover'
+    },
+    // Slide 2 : Objectifs
+    {
+      content: `
+        <h2 class="anim-item">À la fin de cette séance, vous saurez...</h2>
+        <div style="margin-top:1.5rem;">
+          <div class="objectif-item anim-item">
+            <div class="objectif-num">1</div>
+            <div class="objectif-text">Comprendre ce qu'est le CSS et à quoi il sert</div>
+          </div>
+          <div class="objectif-item anim-item">
+            <div class="objectif-num">2</div>
+            <div class="objectif-text">Créer un fichier <code>style.css</code> et le relier à votre page</div>
+          </div>
+          <div class="objectif-item anim-item">
+            <div class="objectif-num">3</div>
+            <div class="objectif-text">Changer les couleurs, les polices et les tailles</div>
+          </div>
+          <div class="objectif-item anim-item">
+            <div class="objectif-num">4</div>
+            <div class="objectif-text">Ajouter des marges, des bordures et des arrondis</div>
+          </div>
+          <div class="objectif-item anim-item">
+            <div class="objectif-num">5</div>
+            <div class="objectif-text">Utiliser DeepSeek pour générer du CSS professionnel</div>
+          </div>
+        </div>
+      `,
+      className: 'slide-objectifs'
+    },
+    // Slide 3 : Retour sur le Jour 2
+    {
+      content: `
+        <h2 class="anim-item">Retour sur le Jour 2</h2>
+        <div class="box box-success anim-item" style="margin-top:1.5rem;">
+          <i class="fas fa-check-circle"></i>
+          <div>Vous avez créé un site multi-pages avec des titres, des images, des liens et une barre de navigation. Excellent travail !</div>
+        </div>
+        <div class="card-grid cols-4" style="margin-top:2rem;">
+          <div class="card anim-item">
+            <i class="fas fa-heading"></i>
+            <h4>Titres</h4>
+            <p>h1 → h6</p>
+          </div>
+          <div class="card anim-item">
+            <i class="fas fa-image"></i>
+            <h4>Images</h4>
+            <p>Balise img</p>
+          </div>
+          <div class="card anim-item">
+            <i class="fas fa-link"></i>
+            <h4>Liens</h4>
+            <p>Balise a</p>
+          </div>
+          <div class="card anim-item">
+            <i class="fas fa-bars"></i>
+            <h4>Navigation</h4>
+            <p>Balise nav</p>
+          </div>
+        </div>
+        <p class="anim-item" style="margin-top:1.5rem; text-align:center; font-size:1.3rem;">
+          Aujourd'hui, votre site va passer du <strong>noir et blanc</strong> à la <strong>couleur</strong>.
+        </p>
+      `,
+      className: ''
+    },
+    // Slide 4 : Qu'est-ce que le CSS ?
+    {
+      content: `
+        <h2 class="anim-item">Qu'est-ce que le CSS ?</h2>
+        <p class="anim-item" style="margin-top:1rem;">
+          <strong>CSS</strong> = <strong>C</strong>ascading <strong>S</strong>tyle <strong>S</strong>heets (Feuilles de style en cascade).
+        </p>
+        <p class="anim-item" style="margin-top:0.5rem;">C'est le langage qui donne du <strong>style</strong> à votre page HTML.</p>
+        <div class="card-grid cols-3" style="margin-top:2rem;">
+          <div class="card anim-item">
+            <i class="fas fa-palette" style="color:var(--orange);"></i>
+            <h4>Couleurs</h4>
+            <p>Texte, fond, bordures</p>
+          </div>
+          <div class="card anim-item">
+            <i class="fas fa-font" style="color:var(--bleu);"></i>
+            <h4>Polices</h4>
+            <p>Style, taille, graisse</p>
+          </div>
+          <div class="card anim-item">
+            <i class="fas fa-ruler" style="color:var(--vert);"></i>
+            <h4>Mise en page</h4>
+            <p>Marges, alignement, espacement</p>
+          </div>
+        </div>
+        <div class="box box-tip anim-item" style="margin-top:1.5rem;">
+          <i class="fas fa-lightbulb"></i>
+          <div><strong>Analogie :</strong> HTML = les murs d'une maison. CSS = la peinture, les meubles, la décoration.</div>
+        </div>
+      `,
+      className: ''
+    },
+    // Slide 5 : Comment fonctionne le CSS
+    {
+      content: `
+        <h2 class="anim-item">Comment fonctionne le CSS ?</h2>
+        <p class="anim-item" style="margin-top:1rem;">Le CSS fonctionne avec une règle simple :</p>
+        <div class="card-grid cols-3" style="margin-top:2rem;">
+          <div class="card anim-item" style="border-color:var(--bleu);">
+            <i class="fas fa-crosshairs" style="color:var(--bleu);"></i>
+            <h4>1. Le sélecteur</h4>
+            <p>Quoi styler ?</p>
+            <p style="font-size:1.2rem; font-weight:700;"><code>h1</code>, <code>p</code>, <code>.bouton</code></p>
+          </div>
+          <div class="card anim-item" style="border-color:var(--orange);">
+            <i class="fas fa-sliders-h" style="color:var(--orange);"></i>
+            <h4>2. La propriété</h4>
+            <p>Quoi changer ?</p>
+            <p style="font-size:1.2rem; font-weight:700;"><code>color</code>, <code>font-size</code></p>
+          </div>
+          <div class="card anim-item" style="border-color:var(--vert);">
+            <i class="fas fa-check" style="color:var(--vert);"></i>
+            <h4>3. La valeur</h4>
+            <p>Quelle nouvelle valeur ?</p>
+            <p style="font-size:1.2rem; font-weight:700;"><code>red</code>, <code>24px</code></p>
+          </div>
+        </div>
+        <div class="code-block anim-item" style="margin-top:1.5rem;">
+<span class="sel">h1</span> <span class="punct">{</span>
+    <span class="prop">color</span><span class="punct">:</span> <span class="val">#0B3FA5</span><span class="punct">;</span>
+    <span class="prop">font-size</span><span class="punct">:</span> <span class="val">36px</span><span class="punct">;</span>
+<span class="punct">}</span>
+        </div>
+        <p class="anim-item" style="text-align:center; font-size:1.1rem; color:var(--texte-secondaire);">
+          « Je veux que tous les titres h1 soient bleus et mesurent 36 pixels. »
+        </p>
+      `,
+      className: ''
+    },
+    // Slide 6 : Les 3 façons d'ajouter du CSS
+    {
+      content: `
+        <h2 class="anim-item">Les 3 façons d'ajouter du CSS</h2>
+        <div class="card-grid cols-3" style="margin-top:2rem;">
+          <div class="card anim-item" style="border-color:var(--vert);">
+            <i class="fas fa-file-code" style="color:var(--vert);"></i>
+            <h4>Fichier externe</h4>
+            <p style="font-size:1rem;"><strong>Recommandé</strong></p>
+            <div class="code-block" style="font-size:0.85rem;">&lt;link rel="stylesheet" href="style.css"&gt;</div>
+            <p style="font-size:0.9rem;">Un fichier <code>style.css</code> séparé</p>
+          </div>
+          <div class="card anim-item">
+            <i class="fas fa-file"></i>
+            <h4>Dans le &lt;head&gt;</h4>
+            <p style="font-size:1rem;">Balise &lt;style&gt;</p>
+            <div class="code-block" style="font-size:0.85rem;">&lt;style&gt;
+  h1 { color: red; }
+&lt;/style&gt;</div>
+            <p style="font-size:0.9rem;">Pour une seule page</p>
+          </div>
+          <div class="card anim-item">
+            <i class="fas fa-tag"></i>
+            <h4>En ligne</h4>
+            <p style="font-size:1rem;">Attribut style</p>
+            <div class="code-block" style="font-size:0.85rem;">&lt;h1 style="color:red;"&gt;</div>
+            <p style="font-size:0.9rem;">Pour un seul élément</p>
+          </div>
+        </div>
+        <div class="box box-important anim-item" style="margin-top:1.5rem;">
+          <i class="fas fa-star"></i>
+          <div><strong>Nous utiliserons la méthode 1 :</strong> un fichier <code>style.css</code> séparé, relié à toutes vos pages.</div>
+        </div>
+      `,
+      className: ''
+    },
+    // Slide 7 : Les couleurs en CSS
+    {
+      content: `
+        <h2 class="anim-item">Les couleurs en CSS</h2>
+        <p class="anim-item" style="margin-top:1rem;">Il existe 4 façons de définir une couleur :</p>
+        <div style="margin-top:1.5rem;">
+          <table class="table-simple anim-item">
+            <thead><tr><th>Méthode</th><th>Exemple</th><th>Quand l'utiliser</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Nom anglais</strong></td><td><code>red</code>, <code>blue</code>, <code>green</code></td><td>Simple et rapide</td></tr>
+              <tr><td><strong>Hexadécimal</strong></td><td><code>#0B3FA5</code></td><td>Le plus utilisé (demandez à DeepSeek)</td></tr>
+              <tr><td><strong>RGB</strong></td><td><code>rgb(11, 63, 165)</code></td><td>Précis</td></tr>
+              <tr><td><strong>HSL</strong></td><td><code>hsl(220, 90%, 34%)</code></td><td>Design avancé</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="card-grid cols-3" style="margin-top:1.5rem;">
+          <div class="card anim-item">
+            <div class="demo-box" style="background:#0B3FA5; color:white;">Bleu NTIC</div>
+            <code>#0B3FA5</code>
+          </div>
+          <div class="card anim-item">
+            <div class="demo-box" style="background:#FF6B35; color:white;">Orange NTIC</div>
+            <code>#FF6B35</code>
+          </div>
+          <div class="card anim-item">
+            <div class="demo-box" style="background:#059669; color:white;">Vert</div>
+            <code>#059669</code>
+          </div>
+        </div>
+      `,
+      className: ''
+    },
+    // Slide 8 : Les polices
+    {
+      content: `
+        <h2 class="anim-item">Les polices de caractères</h2>
+        <div class="card-grid cols-3" style="margin-top:2rem;">
+          <div class="card anim-item">
+            <i class="fas fa-font"></i>
+            <h4>font-family</h4>
+            <p>Le style d'écriture</p>
+            <p style="font-size:1rem;"><code>font-family: Arial;</code></p>
+            <p style="font-size:0.9rem;">Arial, Times New Roman, Courier...</p>
+          </div>
+          <div class="card anim-item">
+            <i class="fas fa-text-height"></i>
+            <h4>font-size</h4>
+            <p>La taille du texte</p>
+            <p style="font-size:1rem;"><code>font-size: 24px;</code></p>
+            <p style="font-size:0.9rem;">En pixels (px) ou en rem</p>
+          </div>
+          <div class="card anim-item">
+            <i class="fas fa-bold"></i>
+            <h4>font-weight</h4>
+            <p>L'épaisseur</p>
+            <p style="font-size:1rem;"><code>font-weight: bold;</code></p>
+            <p style="font-size:0.9rem;">normal, bold, 400, 700...</p>
+          </div>
+        </div>
+        <div class="code-block anim-item" style="margin-top:1.5rem;">
+<span class="sel">body</span> <span class="punct">{</span>
+    <span class="prop">font-family</span><span class="punct">:</span> <span class="val">'Plus Jakarta Sans', sans-serif</span><span class="punct">;</span>
+    <span class="prop">font-size</span><span class="punct">:</span> <span class="val">16px</span><span class="punct">;</span>
+    <span class="prop">font-weight</span><span class="punct">:</span> <span class="val">400</span><span class="punct">;</span>
+<span class="punct">}</span>
+        </div>
+        <div class="box box-tip anim-item">
+          <i class="fas fa-lightbulb"></i>
+          <div>Demandez à DeepSeek : « Donne-moi une police élégante pour un site professionnel avec le code CSS Google Fonts. »</div>
+        </div>
+      `,
+      className: ''
+    },
+    // Slide 9 : Les marges et l'espacement
+    {
+      content: `
+        <h2 class="anim-item">Marges et espacement</h2>
+        <div class="card-grid cols-2" style="margin-top:2rem;">
+          <div class="card anim-item" style="border-color:var(--bleu);">
+            <i class="fas fa-arrows-alt" style="color:var(--bleu);"></i>
+            <h4>margin</h4>
+            <p>L'espace <strong>extérieur</strong> autour d'un élément</p>
+            <p style="font-size:1rem;"><code>margin: 20px;</code></p>
+            <p style="font-size:0.9rem;">Éloigne l'élément des autres</p>
+          </div>
+          <div class="card anim-item" style="border-color:var(--orange);">
+            <i class="fas fa-compress" style="color:var(--orange);"></i>
+            <h4>padding</h4>
+            <p>L'espace <strong>intérieur</strong> dans un élément</p>
+            <p style="font-size:1rem;"><code>padding: 20px;</code></p>
+            <p style="font-size:0.9rem;">Aère le contenu à l'intérieur</p>
+          </div>
+        </div>
+        <div class="code-block anim-item" style="margin-top:1.5rem;">
+<span class="sel">.card</span> <span class="punct">{</span>
+    <span class="prop">margin</span><span class="punct">:</span> <span class="val">20px</span><span class="punct">;</span>   <span class="comment">/* espace extérieur */</span>
+    <span class="prop">padding</span><span class="punct">:</span> <span class="val">30px</span><span class="punct">;</span>  <span class="comment">/* espace intérieur */</span>
+<span class="punct">}</span>
+        </div>
+        <div class="box box-tip anim-item">
+          <i class="fas fa-lightbulb"></i>
+          <div><strong>Astuce :</strong> margin pousse vers l'extérieur, padding pousse vers l'intérieur.</div>
+        </div>
+      `,
+      className: ''
+    },
+    // Slide 10 : Les bordures et arrondis
+    {
+      content: `
+        <h2 class="anim-item">Bordures et arrondis</h2>
+        <div class="card-grid cols-2" style="margin-top:2rem;">
+          <div class="card anim-item">
+            <i class="fas fa-border-all"></i>
+            <h4>border</h4>
+            <p>Ajoute une bordure</p>
+            <p style="font-size:1rem;"><code>border: 2px solid #0B3FA5;</code></p>
+            <p style="font-size:0.9rem;">Épaisseur · Style · Couleur</p>
+          </div>
+          <div class="card anim-item">
+            <i class="fas fa-circle-notch"></i>
+            <h4>border-radius</h4>
+            <p>Arrondit les coins</p>
+            <p style="font-size:1rem;"><code>border-radius: 12px;</code></p>
+            <p style="font-size:0.9rem;">0 = carré, 50% = cercle</p>
+          </div>
+        </div>
+        <div class="code-block anim-item" style="margin-top:1.5rem;">
+<span class="sel">.bouton</span> <span class="punct">{</span>
+    <span class="prop">background</span><span class="punct">:</span> <span class="val">#FF6B35</span><span class="punct">;</span>
+    <span class="prop">border</span><span class="punct">:</span> <span class="val">none</span><span class="punct">;</span>
+    <span class="prop">border-radius</span><span class="punct">:</span> <span class="val">25px</span><span class="punct">;</span>
+    <span class="prop">padding</span><span class="punct">:</span> <span class="val">12px 24px</span><span class="punct">;</span>
+<span class="punct">}</span>
+        </div>
+      `,
+      className: ''
+    },
+    // Slide 11 : L'alignement
+    {
+      content: `
+        <h2 class="anim-item">Aligner le texte</h2>
+        <div class="card-grid cols-4" style="margin-top:2rem;">
+          <div class="card anim-item">
+            <i class="fas fa-align-left"></i>
+            <h4>Gauche</h4>
+            <p><code>text-align: left;</code></p>
+          </div>
+          <div class="card anim-item">
+            <i class="fas fa-align-center"></i>
+            <h4>Centré</h4>
+            <p><code>text-align: center;</code></p>
+          </div>
+          <div class="card anim-item">
+            <i class="fas fa-align-right"></i>
+            <h4>Droite</h4>
+            <p><code>text-align: right;</code></p>
+          </div>
+          <div class="card anim-item">
+            <i class="fas fa-align-justify"></i>
+            <h4>Justifié</h4>
+            <p><code>text-align: justify;</code></p>
+          </div>
+        </div>
+        <div class="box box-tip anim-item" style="margin-top:1.5rem;">
+          <i class="fas fa-lightbulb"></i>
+          <div>Pour centrer horizontalement un bloc : <code>margin: 0 auto;</code></div>
+        </div>
+      `,
+      className: ''
+    },
+    // Slide 12 : Les 5 prompts DeepSeek CSS
+    {
+      content: `
+        <h2 class="anim-item">Les 5 prompts DeepSeek CSS</h2>
+        <div style="margin-top:1.5rem;">
+          <table class="table-simple anim-item">
+            <thead><tr><th>N°</th><th>Prompt</th><th>Ce que ça génère</th></tr></thead>
+            <tbody>
+              <tr><td><strong>1</strong></td><td>« Crée un fichier style.css pour mon site avec un thème bleu et orange »</td><td>Les couleurs de base</td></tr>
+              <tr><td><strong>2</strong></td><td>« Donne un style à ma barre de navigation »</td><td>Le menu stylisé</td></tr>
+              <tr><td><strong>3</strong></td><td>« Donne un style à mes boutons avec des coins arrondis »</td><td>Les boutons</td></tr>
+              <tr><td><strong>4</strong></td><td>« Ajoute une police élégante avec Google Fonts »</td><td>La typographie</td></tr>
+              <tr><td><strong>5</strong></td><td>« Donne un style à mes images avec des bordures arrondies »</td><td>Les images</td></tr>
+            </tbody>
+          </table>
+        </div>
+      `,
+      className: ''
+    },
+    // Slide 13 : Exercice — Créer style.css
+    {
+      content: `
+        <h2 class="anim-item">Exercice : Créez votre style.css</h2>
+        <div class="exercice-box anim-item" style="margin-top:1.5rem;">
+          <h3><i class="fas fa-tasks"></i> Consignes</h3>
+          <ol>
+            <li>Dans VS Code, créez un fichier <code>style.css</code></li>
+            <li>Reliez-le à toutes vos pages avec : <code>&lt;link rel="stylesheet" href="style.css"&gt;</code> dans le <code>&lt;head&gt;</code></li>
+            <li>Demandez à DeepSeek : « Crée un style.css avec un thème bleu et orange »</li>
+            <li>Copiez le code généré dans <code>style.css</code></li>
+            <li>Enregistrez (Ctrl+S) et regardez votre site changer !</li>
+          </ol>
+        </div>
+        <div class="box box-success anim-item" style="margin-top:1.5rem;">
+          <i class="fas fa-check-circle"></i>
+          <div><strong>Critère de réussite :</strong> votre site a des couleurs, une belle police et des éléments stylisés.</div>
+        </div>
+      `,
+      className: 'slide-exercice'
+    },
+    // Slide 14 : Exercice — Personnaliser
+    {
+      content: `
+        <h2 class="anim-item">Exercice : Personnalisez votre design</h2>
+        <div class="exercice-box anim-item" style="margin-top:1.5rem;">
+          <h3><i class="fas fa-tasks"></i> Consignes</h3>
+          <ol>
+            <li>Choisissez <strong>2 couleurs</strong> pour votre site (une principale, une secondaire)</li>
+            <li>Changez la <strong>police</strong> avec Google Fonts (demandez à DeepSeek)</li>
+            <li>Ajoutez des <strong>marges</strong> pour aérer votre contenu</li>
+            <li>Arrondissez les coins de vos <strong>boutons</strong> et <strong>images</strong></li>
+            <li>Centre votre titre principal avec <code>text-align: center;</code></li>
+          </ol>
+        </div>
+      `,
+      className: 'slide-exercice'
+    },
+    // Slide 15 : Les bonnes pratiques CSS
+    {
+      content: `
+        <h2 class="anim-item">Les 5 bonnes pratiques CSS</h2>
+        <div style="margin-top:1.5rem;">
+          <div class="objectif-item anim-item">
+            <div class="objectif-num" style="background:#059669;">1</div>
+            <div class="objectif-text">Utilisez un fichier <code>style.css</code> séparé pour toutes vos pages</div>
+          </div>
+          <div class="objectif-item anim-item">
+            <div class="objectif-num" style="background:#059669;">2</div>
+            <div class="objectif-text">Choisissez 2 couleurs maximum et restez cohérent</div>
+          </div>
+          <div class="objectif-item anim-item">
+            <div class="objectif-num" style="background:#059669;">3</div>
+            <div class="objectif-text">Utilisez des commentaires pour organiser votre code</div>
+          </div>
+          <div class="objectif-item anim-item">
+            <div class="objectif-num" style="background:#059669;">4</div>
+            <div class="objectif-text">Testez votre site sur mobile et sur ordinateur</div>
+          </div>
+          <div class="objectif-item anim-item">
+            <div class="objectif-num" style="background:#059669;">5</div>
+            <div class="objectif-text">Enregistrez et prévisualisez après chaque modification</div>
+          </div>
+        </div>
+      `,
+      className: 'slide-objectifs'
+    },
+    // Slide 16 : Erreurs courantes
+    {
+      content: `
+        <h2 class="anim-item">Les 4 erreurs CSS courantes</h2>
+        <div style="margin-top:1.5rem;">
+          <table class="table-simple anim-item">
+            <thead><tr><th>Erreur</th><th>Conséquence</th><th>Solution</th></tr></thead>
+            <tbody>
+              <tr><td>Oublier le point-virgule <code>;</code></td><td>La règle ne s'applique pas</td><td>Vérifiez chaque fin de ligne</td></tr>
+              <tr><td>Mauvais sélecteur</td><td>Le style ne cible rien</td><td>Vérifiez les noms exacts</td></tr>
+              <tr><td>Fichier non relié</td><td>Aucun style appliqué</td><td>Vérifiez la balise <code>&lt;link&gt;</code></td></tr>
+              <tr><td>Confondre <code>margin</code> et <code>padding</code></td><td>Espacement inattendu</td><td>margin = extérieur, padding = intérieur</td></tr>
+            </tbody>
+          </table>
+        </div>
+      `,
+      className: ''
+    },
+    // Slide 17 : Points clés
+    {
+      content: `
+        <h2 class="anim-item">Les 5 points clés du Jour 3</h2>
+        <div style="margin-top:1.5rem;">
+          <div class="objectif-item anim-item">
+            <div class="objectif-num" style="background:#059669;">1</div>
+            <div class="objectif-text">CSS = le style de votre page (couleurs, polices, mise en page)</div>
+          </div>
+          <div class="objectif-item anim-item">
+            <div class="objectif-num" style="background:#059669;">2</div>
+            <div class="objectif-text">Une règle CSS = sélecteur + propriété + valeur</div>
+          </div>
+          <div class="objectif-item anim-item">
+            <div class="objectif-num" style="background:#059669;">3</div>
+            <div class="objectif-text">Utilisez un fichier <code>style.css</code> relié à toutes vos pages</div>
+          </div>
+          <div class="objectif-item anim-item">
+            <div class="objectif-num" style="background:#059669;">4</div>
+            <div class="objectif-text">margin = extérieur, padding = intérieur</div>
+          </div>
+          <div class="objectif-item anim-item">
+            <div class="objectif-num" style="background:#059669;">5</div>
+            <div class="objectif-text">DeepSeek génère le CSS, VOUS choisissez les couleurs et le style</div>
+          </div>
+        </div>
+      `,
+      className: 'slide-objectifs'
+    },
+    // Slide 18 : Récapitulatif
+    {
+      content: `
+        <h2 class="anim-item">Aujourd'hui, vous avez appris à...</h2>
+        <div style="margin-top:1.5rem;">
+          <div class="objectif-item anim-item">
+            <div class="objectif-num" style="background:#059669;">✓</div>
+            <div class="objectif-text">Comprendre le rôle du CSS</div>
+          </div>
+          <div class="objectif-item anim-item">
+            <div class="objectif-num" style="background:#059669;">✓</div>
+            <div class="objectif-text">Créer un fichier <code>style.css</code> et le relier à vos pages</div>
+          </div>
+          <div class="objectif-item anim-item">
+            <div class="objectif-num" style="background:#059669;">✓</div>
+            <div class="objectif-text">Changer les couleurs, polices et tailles</div>
+          </div>
+          <div class="objectif-item anim-item">
+            <div class="objectif-num" style="background:#059669;">✓</div>
+            <div class="objectif-text">Ajouter des marges, bordures et arrondis</div>
+          </div>
+          <div class="objectif-item anim-item">
+            <div class="objectif-num" style="background:#059669;">✓</div>
+            <div class="objectif-text">Utiliser DeepSeek pour générer du CSS professionnel</div>
+          </div>
+        </div>
+        <p class="anim-item" style="font-size:1.6rem; font-weight:700; color:#059669; margin-top:1.5rem; text-align:center;">
+          Votre site est maintenant coloré et stylisé !
+        </p>
+      `,
+      className: 'slide-recap'
+    },
+    // Slide 19 : Annonce Jour 4
+    {
+      content: `
+        <h1 class="anim-item" style="color:white; font-size:2.8rem;">Rendez-vous demain</h1>
+        <p class="anim-item" style="font-size:1.8rem; font-weight:600; color:white;">CSS avancé : Flexbox et responsive design</p>
+        <p class="anim-item" style="color:rgba(255,255,255,0.8); font-size:1.3rem;">
+          Votre site s'adaptera à toutes les tailles d'écran : ordinateur, tablette, téléphone.
+        </p>
+        <p class="anim-item" style="color:rgba(255,255,255,0.8); font-size:1.2rem; margin-top:1rem;">
+          <i class="fas fa-lightbulb"></i> Testez votre site sur votre téléphone ce soir et notez ce qui ne va pas.
+        </p>
+      `,
+      className: 'slide-next'
+    }
+  ];
+
+  // ========== ÉTAT ==========
+  let currentSlide = 0;
+  const totalSlides = slidesData.length;
+
+  function checkAccess() {
+    const input = document.getElementById('accessInput');
+    const error = document.getElementById('accessError');
+    if (input.value.trim() === 'NTICBANFORA') {
+      document.getElementById('accessOverlay').classList.add('hidden');
+      document.getElementById('presentationContainer').classList.add('active');
+      renderSlide(currentSlide);
+    } else {
+      error.classList.add('visible');
+      input.value = '';
+      input.focus();
+      setTimeout(() => error.classList.remove('visible'), 2500);
+    }
+  }
+
+  document.getElementById('accessInput').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') checkAccess();
+  });
+
+  function renderSlide(index) {
+    const stage = document.getElementById('slideStage');
+    const slide = slidesData[index];
+    stage.innerHTML = `<div class="slide-content ${slide.className}">${slide.content}</div>`;
+  }
+
+  function goNext() {
+    if (currentSlide < totalSlides - 1) {
+      currentSlide++;
+      renderSlide(currentSlide);
+    }
+  }
+
+  function goPrev() {
+    if (currentSlide > 0) {
+      currentSlide--;
+      renderSlide(currentSlide);
+    }
+  }
+
+  document.addEventListener('keydown', function(e) {
+    const container = document.getElementById('presentationContainer');
+    if (!container.classList.contains('active')) return;
+    switch(e.key) {
+      case 'ArrowRight': case ' ': case 'PageDown':
+        e.preventDefault(); goNext(); break;
+      case 'ArrowLeft': case 'PageUp':
+        e.preventDefault(); goPrev(); break;
+      case 'Escape':
+        if (confirm('Quitter la projection ?')) {
+          document.getElementById('presentationContainer').classList.remove('active');
+          document.getElementById('accessOverlay').classList.remove('hidden');
+          currentSlide = 0;
+        }
+        break;
+    }
+  });
+
+  let touchStartX = 0;
+  document.addEventListener('touchstart', function(e) {
+    touchStartX = e.changedTouches[0].screenX;
+  });
+  document.addEventListener('touchend', function(e) {
+    const deltaX = e.changedTouches[0].screenX - touchStartX;
+    if (Math.abs(deltaX) > 60) {
+      if (deltaX < 0) goNext();
+      else goPrev();
+    }
+  });
+</script>
+
+</body>
+</html>
