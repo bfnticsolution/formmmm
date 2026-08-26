@@ -3,19 +3,20 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>NTIC SOLUTION · Formation Dev Web & Mobile · Jour 3 — Maîtrise du code</title>
+    <title>NTIC SOLUTION · Jour 3 — Maîtrise du code</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
     <style>
-        /* ===== VARIABLES ===== */
+        /* ========================================
+           VARIABLES
+           ======================================== */
         :root {
             --bleu: #0B3FA5;
-            --bleu-profond: #072a6e;
             --bleu-clair: #e8f0fe;
+            --bleu-fonce: #072a6e;
             --orange: #FF6B35;
-            --orange-vif: #ff5722;
             --orange-clair: #fff4e5;
             --vert: #059669;
             --vert-clair: #ecfdf5;
@@ -25,14 +26,19 @@
             --rouge-clair: #fef2f2;
             --jaune: #f59e0b;
             --jaune-clair: #fffbeb;
+            --gris: #f1f5f9;
+            --gris-fonce: #475569;
             --texte: #1e293b;
-            --texte-secondaire: #475569;
             --blanc: #ffffff;
             --bordure: #e2e8f0;
-            --transition: 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+            --shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+            --radius: 16px;
+            --transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        /* ===== RESET ===== */
+        /* ========================================
+           RESET
+           ======================================== */
         * {
             margin: 0;
             padding: 0;
@@ -40,216 +46,136 @@
         }
 
         body {
-            font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+            font-family: 'Plus Jakarta Sans', sans-serif;
             background: #0d1117;
             color: var(--texte);
             overflow: hidden;
             height: 100vh;
             width: 100vw;
             -webkit-font-smoothing: antialiased;
-            user-select: none;
         }
 
-        /* ===== ÉCRAN DE CODE D'ACCÈS ===== */
-        .access-overlay {
-            position: fixed;
-            inset: 0;
-            z-index: 99999;
-            background: linear-gradient(135deg, var(--bleu-profond) 0%, #0d1b3e 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: opacity 0.7s ease, visibility 0.7s ease;
-        }
-        .access-overlay.hidden {
-            opacity: 0;
-            visibility: hidden;
-            pointer-events: none;
-        }
-        .access-card {
-            background: var(--blanc);
-            border-radius: 2rem;
-            padding: 3rem 2.5rem;
-            text-align: center;
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
-            max-width: 440px;
-            width: 90%;
-            animation: floatIn 0.8s ease;
-        }
-        @keyframes floatIn {
-            from {
-                opacity: 0;
-                transform: translateY(40px) scale(0.95);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
-        }
-        .access-card .logo-symbol {
-            background: var(--bleu);
-            color: white;
-            width: 64px;
-            height: 64px;
-            border-radius: 18px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 800;
-            font-size: 1.8rem;
-            margin: 0 auto 1.2rem;
-        }
-        .access-card h2 {
-            color: var(--bleu);
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
-        }
-        .access-card p {
-            color: #475569;
-            margin-bottom: 1.8rem;
-            font-size: 0.95rem;
-        }
-        .access-input {
-            width: 100%;
-            padding: 0.9rem 1.3rem;
-            border: 2px solid var(--bordure);
-            border-radius: 14px;
-            font-family: inherit;
-            font-size: 1rem;
-            text-align: center;
-            letter-spacing: 2px;
-            transition: var(--transition);
-            margin-bottom: 1rem;
-        }
-        .access-input:focus {
-            outline: none;
-            border-color: var(--bleu);
-            box-shadow: 0 0 0 4px rgba(11, 63, 165, 0.1);
-        }
-        .access-btn {
-            width: 100%;
-            padding: 0.9rem;
-            background: var(--orange);
-            color: white;
-            border: none;
-            border-radius: 14px;
-            font-weight: 700;
-            font-size: 1rem;
-            font-family: inherit;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-        .access-btn:hover {
-            background: var(--orange-vif);
-            transform: translateY(-2px);
-        }
-        .access-error {
-            color: #dc2626;
-            font-size: 0.85rem;
-            margin-top: 0.5rem;
-            display: none;
-            font-weight: 600;
-        }
-        .access-error.visible {
-            display: block;
-            animation: shake 0.5s ease;
-        }
-        @keyframes shake {
-            0%,
-            100% {
-                transform: translateX(0);
-            }
-            25% {
-                transform: translateX(-8px);
-            }
-            75% {
-                transform: translateX(8px);
-            }
-        }
-
-        /* ===== CONTAINER ===== */
+        /* ========================================
+           CONTAINER
+           ======================================== */
         .presentation-container {
-            display: none;
             position: fixed;
             inset: 0;
             background: #0d1117;
             z-index: 100;
         }
-        .presentation-container.active {
-            display: block;
-        }
 
         .slide-stage {
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
+            inset: 0;
             display: flex;
             align-items: center;
             justify-content: center;
         }
+
         .slide-content {
-            background: white;
+            background: var(--blanc);
             width: 100%;
             height: 100%;
             overflow-y: auto;
-            padding: 3.5rem 4.5rem;
+            padding: 3rem 4.5rem;
             position: relative;
             animation: slideIn 0.5s ease;
         }
+
         @keyframes slideIn {
             from {
                 opacity: 0;
-                transform: scale(0.96);
+                transform: scale(0.96) translateY(12px);
             }
             to {
                 opacity: 1;
-                transform: scale(1);
+                transform: scale(1) translateY(0);
             }
+        }
+
+        /* ========================================
+           PROGRESS BAR
+           ======================================== */
+        .progress-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            z-index: 200;
+            height: 4px;
+            background: var(--orange);
+            transition: width 0.4s ease;
+            border-radius: 0 2px 2px 0;
+        }
+
+        .slide-counter {
+            position: fixed;
+            bottom: 1.2rem;
+            left: 1.5rem;
+            z-index: 200;
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            backdrop-filter: blur(8px);
         }
 
         .nav-hint {
             position: fixed;
-            bottom: 1rem;
-            right: 1rem;
-            z-index: 500;
+            bottom: 1.2rem;
+            right: 1.5rem;
+            z-index: 200;
             color: rgba(255, 255, 255, 0.3);
             font-size: 0.7rem;
             font-weight: 600;
             letter-spacing: 0.5px;
-            pointer-events: none;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            backdrop-filter: blur(8px);
         }
 
-        /* ===== ANIMATIONS ===== */
+        /* ========================================
+           ANIMATIONS
+           ======================================== */
         .anim-item {
             opacity: 0;
-            transform: translateY(20px);
-            animation: fadeUp 0.6s ease forwards;
+            transform: translateY(24px);
+            animation: fadeUp 0.7s ease forwards;
         }
+
         .anim-item:nth-child(1) {
-            animation-delay: 0.1s;
+            animation-delay: 0.05s;
         }
         .anim-item:nth-child(2) {
-            animation-delay: 0.25s;
+            animation-delay: 0.15s;
         }
         .anim-item:nth-child(3) {
-            animation-delay: 0.4s;
+            animation-delay: 0.25s;
         }
         .anim-item:nth-child(4) {
-            animation-delay: 0.55s;
+            animation-delay: 0.35s;
         }
         .anim-item:nth-child(5) {
-            animation-delay: 0.7s;
+            animation-delay: 0.45s;
         }
         .anim-item:nth-child(6) {
-            animation-delay: 0.85s;
+            animation-delay: 0.55s;
         }
         .anim-item:nth-child(7) {
-            animation-delay: 1s;
+            animation-delay: 0.65s;
         }
         .anim-item:nth-child(8) {
-            animation-delay: 1.15s;
+            animation-delay: 0.75s;
+        }
+        .anim-item:nth-child(9) {
+            animation-delay: 0.85s;
+        }
+        .anim-item:nth-child(10) {
+            animation-delay: 0.95s;
         }
 
         @keyframes fadeUp {
@@ -259,48 +185,160 @@
             }
         }
 
-        /* ===== TYPOGRAPHIE ===== */
+        /* ========================================
+           TYPOGRAPHIE
+           ======================================== */
         h1 {
             font-size: 3.2rem;
             font-weight: 800;
-            letter-spacing: -1px;
+            letter-spacing: -1.5px;
             color: var(--bleu);
             line-height: 1.1;
         }
+
         h2 {
             font-size: 2.4rem;
             font-weight: 700;
             color: var(--bleu);
             line-height: 1.2;
-        }
-        h3 {
-            font-size: 1.6rem;
-            font-weight: 700;
-        }
-        h4 {
-            font-size: 1.3rem;
-            font-weight: 700;
-        }
-        p {
-            font-size: 1.35rem;
-            line-height: 1.5;
-        }
-        li {
-            font-size: 1.25rem;
-            line-height: 1.6;
-        }
-        .subtitle {
-            font-size: 1.7rem;
-            font-weight: 500;
-            color: var(--texte-secondaire);
+            margin-bottom: 0.5rem;
         }
 
-        /* ===== CARDS ===== */
+        h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        h4 {
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+
+        p {
+            font-size: 1.25rem;
+            line-height: 1.6;
+            color: var(--gris-fonce);
+        }
+
+        .subtitle {
+            font-size: 1.6rem;
+            font-weight: 500;
+            color: var(--gris-fonce);
+        }
+
+        /* ========================================
+           SLIDES SPÉCIALES
+           ======================================== */
+        .slide-cover {
+            background: linear-gradient(135deg, var(--bleu-fonce) 0%, #0d1b3e 100%);
+            color: var(--blanc);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .slide-cover h1 {
+            color: var(--blanc);
+            font-size: 3.5rem;
+        }
+
+        .slide-cover .subtitle {
+            color: rgba(255, 255, 255, 0.85);
+        }
+
+        .slide-cover p {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .slide-cover .highlight {
+            color: var(--orange);
+        }
+
+        .slide-next {
+            background: linear-gradient(135deg, var(--orange) 0%, #e55a2b 100%);
+            color: var(--blanc);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .slide-next h1,
+        .slide-next h2 {
+            color: var(--blanc);
+        }
+
+        .slide-next p {
+            color: rgba(255, 255, 255, 0.85);
+        }
+
+        .slide-objectifs {
+            background: var(--bleu-clair);
+        }
+
+        .slide-exercice {
+            background: var(--orange-clair);
+        }
+
+        .slide-exercice h2 {
+            color: #a0401a;
+        }
+
+        .slide-recap {
+            background: var(--vert-clair);
+        }
+
+        .slide-recap h2 {
+            color: #064e3b;
+        }
+
+        /* ========================================
+           OBJECTIFS
+           ======================================== */
+        .objectif-item {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+            padding: 0.8rem 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+        }
+
+        .objectif-item:last-child {
+            border-bottom: none;
+        }
+
+        .objectif-num {
+            background: var(--bleu);
+            color: var(--blanc);
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .objectif-text {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--texte);
+        }
+
+        /* ========================================
+           CARDS
+           ======================================== */
         .card-grid {
             display: grid;
-            gap: 1.8rem;
-            margin: 1.8rem 0;
+            gap: 1.5rem;
+            margin: 1.5rem 0;
         }
+
         .card-grid.cols-2 {
             grid-template-columns: 1fr 1fr;
         }
@@ -312,375 +350,534 @@
         }
 
         .card {
-            background: #f8fafc;
-            border-radius: 18px;
-            padding: 1.8rem;
+            background: var(--gris);
+            border-radius: var(--radius);
+            padding: 1.8rem 1.5rem;
             border: 1px solid var(--bordure);
             text-align: center;
+            transition: var(--transition);
         }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow);
+        }
+
         .card i {
-            font-size: 2.8rem;
+            font-size: 2.6rem;
             color: var(--bleu);
-            margin-bottom: 0.8rem;
+            margin-bottom: 0.6rem;
         }
+
         .card h4 {
-            font-size: 1.2rem;
-            margin-bottom: 0.4rem;
-        }
-        .card p {
-            font-size: 1rem;
-            color: var(--texte-secondaire);
-        }
-
-        /* ===== BOXES ===== */
-        .box {
-            border-radius: 16px;
-            padding: 1.2rem 1.8rem;
-            margin: 1.2rem 0;
-            font-size: 1.25rem;
-            font-weight: 500;
-            border-left: 6px solid;
-            display: flex;
-            align-items: flex-start;
-            gap: 0.8rem;
-        }
-        .box i {
-            font-size: 1.5rem;
-            flex-shrink: 0;
-            margin-top: 0.2rem;
-        }
-        .box-tip {
-            background: #e8f0fe;
-            border-color: var(--bleu);
-            color: #0a2c5c;
-        }
-        .box-important {
-            background: var(--orange-clair);
-            border-color: var(--orange);
-            color: #6b3a1f;
-        }
-        .box-success {
-            background: var(--vert-clair);
-            border-color: var(--vert);
-            color: #064e3b;
-        }
-        .box-warning {
-            background: var(--rouge-clair);
-            border-color: var(--rouge);
-            color: #7f1d1d;
-        }
-        .box-info {
-            background: var(--violet-clair);
-            border-color: var(--violet);
-            color: #3b0764;
-        }
-
-        /* ===== SLIDES SPÉCIALES ===== */
-        .slide-cover {
-            background: linear-gradient(135deg, #0B3FA5 0%, #072a6e 100%);
-            color: white;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-        }
-        .slide-cover h1 {
-            color: white;
-            font-size: 3.5rem;
-        }
-        .slide-cover .subtitle {
-            color: rgba(255, 255, 255, 0.85);
-        }
-
-        .slide-objectifs {
-            background: white;
-        }
-        .objectif-item {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            padding: 0.9rem 0;
-            border-bottom: 1px solid var(--bordure);
-        }
-        .objectif-num {
-            background: var(--bleu);
-            color: white;
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 800;
-            font-size: 1.3rem;
-            flex-shrink: 0;
-        }
-        .objectif-text {
-            font-size: 1.35rem;
-            font-weight: 600;
-        }
-
-        .slide-next {
-            background: linear-gradient(135deg, #FF6B35 0%, #e55a2b 100%);
-            color: white;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-        }
-        .slide-next h2 {
-            color: white;
-            font-size: 2.8rem;
-        }
-
-        .slide-exercice {
-            background: var(--bleu-clair);
-        }
-        .slide-exercice h2 {
-            color: var(--bleu);
-        }
-        .exercice-box {
-            background: white;
-            border-radius: 20px;
-            padding: 2rem;
-            border: 2px solid var(--bleu);
-            margin-top: 1.5rem;
-        }
-        .exercice-box h3 {
-            color: var(--bleu);
-            font-size: 1.4rem;
-        }
-        .exercice-box ol {
-            padding-left: 1.5rem;
-        }
-        .exercice-box li {
-            margin-bottom: 0.8rem;
-        }
-
-        .slide-recap {
-            background: var(--jaune-clair);
-        }
-        .slide-recap h2 {
-            color: #92400e;
-        }
-
-        /* ===== TABLEAUX ===== */
-        .table-simple {
-            width: 100%;
-            border-collapse: collapse;
             font-size: 1.15rem;
-            background: white;
-            border-radius: 14px;
-            overflow: hidden;
-            margin: 1rem 0;
-        }
-        .table-simple th {
-            background: var(--bleu);
-            color: white;
-            padding: 0.9rem 1.2rem;
-            text-align: left;
-            font-weight: 700;
-        }
-        .table-simple td {
-            padding: 0.7rem 1.2rem;
-            border-bottom: 1px solid var(--bordure);
-        }
-        .table-simple tr:last-child td {
-            border-bottom: none;
-        }
-        .table-simple tr:hover td {
-            background: #f1f5f9;
+            margin-bottom: 0.3rem;
         }
 
-        /* ===== COMPARAISON ===== */
+        .card p {
+            font-size: 0.95rem;
+            color: var(--gris-fonce);
+        }
+
+        /* ========================================
+           COMPARAISON
+           ======================================== */
         .compare-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 2rem;
             margin: 1.5rem 0;
         }
+
         .compare-col {
-            border-radius: 16px;
-            padding: 1.5rem;
+            border-radius: var(--radius);
+            padding: 1.8rem 1.5rem;
             text-align: center;
+            transition: var(--transition);
         }
+
         .compare-col.negative {
             background: var(--rouge-clair);
             border: 2px solid var(--rouge);
         }
+
         .compare-col.positive {
             background: var(--vert-clair);
             border: 2px solid var(--vert);
         }
+
+        .compare-col .icon-big {
+            font-size: 3.2rem;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
         .compare-col h3 {
             margin-bottom: 0.8rem;
         }
+
         .compare-col ul {
             list-style: none;
             padding: 0;
             text-align: left;
         }
+
         .compare-col ul li {
             padding: 0.5rem 0;
             border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-            font-size: 1.1rem;
+            font-size: 1.05rem;
         }
+
         .compare-col ul li:last-child {
             border-bottom: none;
         }
-        .compare-col .icon-big {
-            font-size: 3rem;
-            display: block;
-            margin-bottom: 0.5rem;
+
+        .compare-col.negative ul li::before {
+            content: "✗ ";
+            color: var(--rouge);
+            font-weight: 700;
         }
 
-        /* ===== CODE ===== */
+        .compare-col.positive ul li::before {
+            content: "✓ ";
+            color: var(--vert);
+            font-weight: 700;
+        }
+
+        /* ========================================
+           BOXES
+           ======================================== */
+        .box {
+            border-radius: var(--radius);
+            padding: 1.2rem 1.8rem;
+            margin: 1.2rem 0;
+            font-size: 1.15rem;
+            font-weight: 500;
+            border-left: 6px solid;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.8rem;
+            transition: var(--transition);
+        }
+
+        .box i {
+            font-size: 1.4rem;
+            flex-shrink: 0;
+            margin-top: 0.15rem;
+        }
+
+        .box-tip {
+            background: var(--bleu-clair);
+            border-color: var(--bleu);
+            color: #0a2c5c;
+        }
+
+        .box-important {
+            background: var(--orange-clair);
+            border-color: var(--orange);
+            color: #6b3a1f;
+        }
+
+        .box-success {
+            background: var(--vert-clair);
+            border-color: var(--vert);
+            color: #064e3b;
+        }
+
+        .box-warning {
+            background: var(--rouge-clair);
+            border-color: var(--rouge);
+            color: #7f1d1d;
+        }
+
+        .box-info {
+            background: var(--violet-clair);
+            border-color: var(--violet);
+            color: #3b0764;
+        }
+
+        /* ========================================
+           TABLEAUX
+           ======================================== */
+        .table-wrapper {
+            overflow-x: auto;
+            margin: 1.2rem 0;
+            border-radius: var(--radius);
+            border: 1px solid var(--bordure);
+        }
+
+        .table-simple {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 1.05rem;
+            background: var(--blanc);
+        }
+
+        .table-simple th {
+            background: var(--bleu);
+            color: var(--blanc);
+            padding: 0.9rem 1.2rem;
+            text-align: left;
+            font-weight: 700;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .table-simple td {
+            padding: 0.7rem 1.2rem;
+            border-bottom: 1px solid var(--bordure);
+        }
+
+        .table-simple tr:last-child td {
+            border-bottom: none;
+        }
+
+        .table-simple tr:nth-child(even) td {
+            background: #fafbfc;
+        }
+
+        .table-simple tr:hover td {
+            background: var(--bleu-clair);
+        }
+
+        /* ========================================
+           CODE
+           ======================================== */
         pre {
             background: #1e293b;
             color: #e2e8f0;
             padding: 1.5rem;
-            border-radius: 14px;
-            font-family: 'Courier New', monospace;
-            font-size: 1rem;
-            line-height: 1.6;
+            border-radius: var(--radius);
+            font-family: 'JetBrains Mono', 'Courier New', monospace;
+            font-size: 0.95rem;
+            line-height: 1.7;
             overflow-x: auto;
             margin: 1rem 0;
+            border: 1px solid #334155;
         }
+
+        pre .comment {
+            color: #94a3b8;
+        }
+
+        pre .tag {
+            color: #f472b6;
+        }
+
+        pre .attr {
+            color: #60a5fa;
+        }
+
+        pre .string {
+            color: #a3e635;
+        }
+
+        pre .selector {
+            color: #fbbf24;
+        }
+
+        pre .property {
+            color: #34d399;
+        }
+
         code {
-            background: #f1f5f9;
-            padding: 0.15rem 0.4rem;
+            background: var(--gris);
+            padding: 0.15rem 0.45rem;
             border-radius: 4px;
-            font-family: 'Courier New', monospace;
+            font-family: 'JetBrains Mono', 'Courier New', monospace;
             font-size: 0.9em;
-        }
-        pre code {
-            background: transparent;
-            padding: 0;
-            color: inherit;
+            color: var(--bleu-fonce);
         }
 
-        /* ===== TERMES ===== */
-        .term-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1.5rem;
+        .exercice-box {
+            background: var(--blanc);
+            border-radius: var(--radius);
+            padding: 2rem;
+            border: 2px solid var(--bleu);
             margin-top: 1.5rem;
-        }
-        .term-card {
-            background: white;
-            border-radius: 16px;
-            padding: 1.5rem;
-            border-left: 6px solid var(--bleu);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-        }
-        .term-card h4 {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: var(--bleu);
-        }
-        .term-card p {
-            font-size: 1.05rem;
-            margin-top: 0.3rem;
-            color: var(--texte-secondaire);
+            box-shadow: var(--shadow);
         }
 
-        /* ===== LISTE DES BLOCS ===== */
+        .exercice-box h3 {
+            color: var(--bleu);
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .exercice-box ol {
+            padding-left: 1.5rem;
+        }
+
+        .exercice-box li {
+            font-size: 1.1rem;
+            margin-bottom: 0.6rem;
+            color: var(--texte);
+        }
+
+        /* ========================================
+           BLOCKS LIST
+           ======================================== */
         .block-list {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 0.8rem;
+            gap: 0.6rem;
             margin: 1rem 0;
         }
+
         .block-item {
             display: flex;
             align-items: center;
             gap: 0.8rem;
-            background: #f8fafc;
+            background: var(--gris);
             padding: 0.6rem 1rem;
             border-radius: 10px;
             border: 1px solid var(--bordure);
+            transition: var(--transition);
         }
+
+        .block-item:hover {
+            background: var(--bleu-clair);
+            border-color: var(--bleu);
+        }
+
         .block-item .num {
             background: var(--bleu);
-            color: white;
-            width: 30px;
-            height: 30px;
+            color: var(--blanc);
+            width: 28px;
+            height: 28px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: 700;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             flex-shrink: 0;
         }
+
         .block-item .role {
-            font-size: 0.95rem;
-            color: var(--texte-secondaire);
+            font-size: 0.9rem;
+            color: var(--gris-fonce);
         }
 
-        /* ===== RESPONSIVE ===== */
+        .block-item strong {
+            font-size: 0.95rem;
+        }
+
+        /* ========================================
+           TERMS
+           ======================================== */
+        .term-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.2rem;
+            margin-top: 1.5rem;
+        }
+
+        .term-card {
+            background: var(--blanc);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            border-left: 6px solid var(--bleu);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .term-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .term-card h4 {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            color: var(--bleu);
+        }
+
+        .term-card p {
+            font-size: 1rem;
+            margin-top: 0.3rem;
+            color: var(--gris-fonce);
+        }
+
+        /* ========================================
+           STATS
+           ======================================== */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 1.5rem;
+            background: var(--gris);
+            border-radius: var(--radius);
+            border: 1px solid var(--bordure);
+        }
+
+        .stat-item .number {
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: var(--bleu);
+        }
+
+        .stat-item .label {
+            font-size: 0.95rem;
+            color: var(--gris-fonce);
+            margin-top: 0.2rem;
+        }
+
+        /* ========================================
+           RESPONSIVE
+           ======================================== */
+        @media (max-width: 1024px) {
+            .slide-content {
+                padding: 2.5rem 3rem;
+            }
+        }
+
         @media (max-width: 768px) {
             .slide-content {
-                padding: 2rem 1.5rem;
+                padding: 1.8rem 1.5rem;
             }
+
             h1 {
-                font-size: 2rem;
+                font-size: 1.8rem;
             }
+
             h2 {
-                font-size: 1.5rem;
+                font-size: 1.4rem;
             }
-            p,
-            li {
+
+            p {
                 font-size: 1rem;
             }
+
+            .subtitle {
+                font-size: 1.2rem;
+            }
+
             .card-grid.cols-2,
             .card-grid.cols-3,
             .card-grid.cols-4 {
                 grid-template-columns: 1fr;
             }
+
             .compare-grid {
                 grid-template-columns: 1fr;
+                gap: 1rem;
             }
+
             .term-grid {
                 grid-template-columns: 1fr;
             }
+
             .block-list {
                 grid-template-columns: 1fr;
             }
-            .access-card {
-                padding: 2rem 1.5rem;
+
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
             }
+
             .table-simple {
-                font-size: 0.9rem;
+                font-size: 0.85rem;
             }
+
             .table-simple th,
             .table-simple td {
-                padding: 0.5rem 0.8rem;
+                padding: 0.4rem 0.6rem;
+            }
+
+            .slide-cover h1 {
+                font-size: 2rem;
+            }
+
+            .slide-next h1 {
+                font-size: 2rem;
+            }
+
+            .nav-hint,
+            .slide-counter {
+                font-size: 0.6rem;
+                padding: 0.2rem 0.7rem;
+            }
+
+            pre {
+                font-size: 0.75rem;
+                padding: 1rem;
+            }
+
+            .exercice-box {
+                padding: 1.2rem;
+            }
+
+            .exercice-box li {
+                font-size: 0.95rem;
+            }
+
+            .objectif-text {
+                font-size: 1rem;
+            }
+
+            .objectif-num {
+                width: 36px;
+                height: 36px;
+                font-size: 1rem;
+            }
+
+            .box {
+                font-size: 1rem;
+                padding: 1rem 1.2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .slide-content {
+                padding: 1.2rem 1rem;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            h2 {
+                font-size: 1.2rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 0.8rem;
+            }
+
+            .stat-item .number {
+                font-size: 2rem;
+            }
+
+            .compare-col {
+                padding: 1.2rem 1rem;
+            }
+
+            .compare-col ul li {
+                font-size: 0.9rem;
             }
         }
     </style>
 </head>
 <body>
 
-    <!-- CODE D'ACCÈS -->
-    <div class="access-overlay" id="accessOverlay">
-        <div class="access-card">
-            <div class="logo-symbol">NT</div>
-            <h2>Accès projection</h2>
-            <p>Veuillez saisir le code d'accès pour lancer la projection.</p>
-            <input type="password" class="access-input" id="accessInput" placeholder="Code d'accès" autocomplete="off" />
-            <button class="access-btn" id="accessBtn"><i class="fas fa-lock-open"></i> Projeter</button>
-            <div class="access-error" id="accessError">Code incorrect. Veuillez réessayer.</div>
-        </div>
-    </div>
-
-    <!-- CONTENEUR PROJECTION -->
-    <div class="presentation-container" id="presentationContainer">
+    <!-- ========================================
+    CONTENEUR PROJECTION
+    ======================================== -->
+    <div class="presentation-container">
         <div class="slide-stage" id="slideStage"></div>
-        <div class="nav-hint">← → pour naviguer · Échap pour quitter</div>
+        <div class="progress-bar" id="progressBar"></div>
+        <div class="slide-counter" id="slideCounter">1 / 26</div>
+        <div class="nav-hint">← → naviguer · Échap quitter</div>
     </div>
 
     <script>
@@ -690,22 +887,29 @@
         const slidesData = [{
             // Slide 1 : Couverture
             content: `
-                    <h1 class="anim-item">Maîtrise du code généré par DeepSeek</h1>
+                    <h1 class="anim-item">Maîtrise du code généré par <span class="highlight">DeepSeek</span></h1>
                     <p class="subtitle anim-item">Jour 3 — Analyser, Comprendre, Adapter</p>
-                    <p class="anim-item" style="color:rgba(255,255,255,0.75); font-size:1.3rem; margin-top:1rem;">
+                    <p class="anim-item" style="font-size:1.3rem; margin-top:0.5rem;">
                         Lire le HTML · Comprendre le CSS · Identifier le JavaScript
                     </p>
-                    <p class="anim-item" style="color:rgba(255,255,255,0.6); font-size:1.1rem; margin-top:2rem;">
-                        NTIC Solution — Banfora, Burkina Faso
-                    </p>
+                    <div style="margin-top:2rem;">
+                        <p class="anim-item" style="font-size:1.1rem; color:rgba(255,255,255,0.6);">
+                            <i class="fas fa-map-pin"></i> NTIC Solution — Banfora, Burkina Faso
+                        </p>
+                        <p class="anim-item" style="font-size:0.95rem; color:rgba(255,255,255,0.4); margin-top:0.5rem;">
+                            Durée : 2 heures · Niveau : Débutant
+                        </p>
+                    </div>
                 `,
             className: 'slide-cover'
         }, {
             // Slide 2 : Objectifs
             content: `
-                    <h2 class="anim-item">Objectifs du Jour 3</h2>
-                    <p class="anim-item" style="margin-top:0.5rem; color:var(--texte-secondaire);">À la fin de cette séance, chaque participant saura :</p>
-                    <div style="margin-top:1.5rem;">
+                    <h2 class="anim-item">🎯 Objectifs du Jour 3</h2>
+                    <p class="anim-item" style="font-size:1.1rem; color:var(--gris-fonce); margin-bottom:1rem;">
+                        À la fin de cette séance, chaque participant saura :
+                    </p>
+                    <div>
                         <div class="objectif-item anim-item">
                             <div class="objectif-num">1</div>
                             <div class="objectif-text">Lire et identifier les 3 parties d'un fichier HTML</div>
@@ -732,26 +936,26 @@
         }, {
             // Slide 3 : Pourquoi comprendre le code ?
             content: `
-                    <h2 class="anim-item">Pourquoi comprendre le code ?</h2>
+                    <h2 class="anim-item">💡 Pourquoi comprendre le code ?</h2>
                     <div class="compare-grid anim-item">
                         <div class="compare-col negative">
                             <span class="icon-big">❌</span>
                             <h3 style="color:var(--rouge);">Celui qui copie</h3>
                             <ul>
-                                <li>❌ Peut créer UN site</li>
-                                <li>❌ Bloqué au moindre problème</li>
-                                <li>❌ Dépend de DeepSeek</li>
-                                <li>❌ Copie le code</li>
+                                <li>Peut créer UN site</li>
+                                <li>Bloqué au moindre problème</li>
+                                <li>Dépend de DeepSeek</li>
+                                <li>Copie le code sans comprendre</li>
                             </ul>
                         </div>
                         <div class="compare-col positive">
                             <span class="icon-big">✅</span>
                             <h3 style="color:var(--vert);">Celui qui maîtrise</h3>
                             <ul>
-                                <li>✅ Peut créer N'IMPORTE QUEL site</li>
-                                <li>✅ Sait réparer et adapter</li>
-                                <li>✅ Utilise DeepSeek comme outil</li>
-                                <li>✅ Comprend le code</li>
+                                <li>Peut créer N'IMPORTE QUEL site</li>
+                                <li>Sait réparer et adapter</li>
+                                <li>Utilise DeepSeek comme outil</li>
+                                <li>Comprend le code et l'explique</li>
                             </ul>
                         </div>
                     </div>
@@ -764,19 +968,23 @@
         }, {
             // Slide 4 : La page d'étude
             content: `
-                    <h2 class="anim-item">La page d'étude</h2>
-                    <div class="card-grid cols-2 anim-item" style="margin-top:1.5rem;">
+                    <h2 class="anim-item">📚 La page d'étude</h2>
+                    <div class="card-grid cols-2 anim-item" style="margin-top:1.2rem;">
                         <div class="card" style="border-color:var(--bleu);">
                             <i class="fas fa-school" style="color:var(--bleu);"></i>
                             <h4>Cours Privé le Partenaire (CPP)</h4>
                             <p>Une école à Banfora</p>
-                            <p style="margin-top:0.5rem; font-size:0.9rem;">Un site professionnel créé avec DeepSeek</p>
+                            <p style="margin-top:0.5rem; font-size:0.85rem; color:var(--gris-fonce);">
+                                Un site professionnel créé avec DeepSeek
+                            </p>
                         </div>
                         <div class="card" style="border-color:var(--vert);">
                             <i class="fas fa-code" style="color:var(--vert);"></i>
                             <h4>Les 3 langages</h4>
                             <p>HTML · CSS · JavaScript</p>
-                            <p style="margin-top:0.5rem; font-size:0.9rem;">Structure complète : menu, sections, formulaire, calendrier, WhatsApp</p>
+                            <p style="margin-top:0.5rem; font-size:0.85rem; color:var(--gris-fonce);">
+                                Structure complète : menu, sections, formulaire, calendrier, WhatsApp
+                            </p>
                         </div>
                     </div>
                     <div class="box box-info anim-item">
@@ -788,10 +996,15 @@
         }, {
             // Slide 5 : Les 3 zones d'un fichier HTML
             content: `
-                    <h2 class="anim-item">Les 3 zones d'un fichier HTML</h2>
-                    <pre class="anim-item">1. &lt;!DOCTYPE html&gt;  → La déclaration
-        2. &lt;head&gt;           → L'en-tête invisible
-        3. &lt;body&gt;           → Le contenu visible</pre>
+                    <h2 class="anim-item">📄 Les 3 zones d'un fichier HTML</h2>
+                    <pre class="anim-item"><span class="comment">// 1. La déclaration</span>
+        <span class="tag">&lt;!DOCTYPE html&gt;</span>  → Carte d'identité
+
+        <span class="comment">// 2. L'en-tête (invisible)</span>
+        <span class="tag">&lt;head&gt;</span>           → Le cerveau
+
+        <span class="comment">// 3. Le corps (visible)</span>
+        <span class="tag">&lt;body&gt;</span>           → Ce que tout le monde voit</pre>
                     <div class="term-grid anim-item">
                         <div class="term-card" style="border-left-color:#7c3aed;">
                             <h4 style="color:#7c3aed;"><i class="fas fa-id-card"></i> DOCTYPE</h4>
@@ -799,11 +1012,11 @@
                         </div>
                         <div class="term-card" style="border-left-color:var(--bleu);">
                             <h4 style="color:var(--bleu);"><i class="fas fa-brain"></i> &lt;head&gt;</h4>
-                            <p>Le cerveau (invisible mais essentiel) : métadonnées, titre, polices, CSS.</p>
+                            <p>Le cerveau : métadonnées, titre, polices, CSS — invisible mais essentiel.</p>
                         </div>
                         <div class="term-card" style="border-left-color:var(--orange);">
                             <h4 style="color:var(--orange);"><i class="fas fa-child"></i> &lt;body&gt;</h4>
-                            <p>Le corps (ce que tout le monde voit) : tout le contenu affiché à l'écran.</p>
+                            <p>Le corps : tout le contenu affiché à l'écran — ce que l'utilisateur voit.</p>
                         </div>
                     </div>
                 `,
@@ -811,32 +1024,34 @@
         }, {
             // Slide 6 : Le head
             content: `
-                    <h2 class="anim-item">Le <code>&lt;head&gt;</code> — L'en-tête</h2>
-                    <pre class="anim-item">&lt;head&gt;
-        &lt;meta charset="UTF-8" /&gt;
-        &lt;meta name="viewport" content="width=device-width, initial-scale=1.0" /&gt;
-        &lt;title&gt;CPP - Un autre regard de l'éducation&lt;/title&gt;
-        &lt;meta name="description" content="..." /&gt;
-        &lt;link rel="stylesheet" href="font-awesome.css" /&gt;
-        &lt;link href="fonts.googleapis.com/inter.css" rel="stylesheet" /&gt;
-        &lt;/head&gt;</pre>
-                    <table class="table-simple anim-item">
-                        <thead><tr><th>Ligne</th><th>Rôle</th></tr></thead>
-                        <tbody>
-                            <tr><td><code>charset</code></td><td>Afficher les accents correctement</td></tr>
-                            <tr><td><code>viewport</code></td><td>Adapter le site aux téléphones</td></tr>
-                            <tr><td><code>title</code></td><td>Texte dans l'onglet du navigateur</td></tr>
-                            <tr><td><code>description</code></td><td>Description vue par Google</td></tr>
-                            <tr><td>Font Awesome</td><td>Charger les icônes</td></tr>
-                            <tr><td>Google Fonts</td><td>Charger la police "Inter"</td></tr>
-                        </tbody>
-                    </table>
+                    <h2 class="anim-item">🧠 Le <code>&lt;head&gt;</code> — L'en-tête</h2>
+                    <pre class="anim-item"><span class="tag">&lt;head&gt;</span>
+        <span class="tag">&lt;meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span> <span class="tag">/&gt;</span>
+        <span class="tag">&lt;meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1.0"</span> <span class="tag">/&gt;</span>
+        <span class="tag">&lt;title&gt;</span>CPP - Un autre regard de l'éducation<span class="tag">&lt;/title&gt;</span>
+        <span class="tag">&lt;meta</span> <span class="attr">name</span>=<span class="string">"description"</span> <span class="attr">content</span>=<span class="string">"..."</span> <span class="tag">/&gt;</span>
+        <span class="tag">&lt;link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"font-awesome.css"</span> <span class="tag">/&gt;</span>
+        <span class="tag">&lt;link</span> <span class="attr">href</span>=<span class="string">"fonts.googleapis.com/inter.css"</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="tag">/&gt;</span>
+        <span class="tag">&lt;/head&gt;</span></pre>
+                    <div class="table-wrapper anim-item">
+                        <table class="table-simple">
+                            <thead><tr><th>Ligne</th><th>Rôle</th></tr></thead>
+                            <tbody>
+                                <tr><td><code>charset</code></td><td>Afficher les accents correctement</td></tr>
+                                <tr><td><code>viewport</code></td><td>Adapter le site aux téléphones</td></tr>
+                                <tr><td><code>title</code></td><td>Texte dans l'onglet du navigateur</td></tr>
+                                <tr><td><code>description</code></td><td>Description vue par Google (SEO)</td></tr>
+                                <tr><td>Font Awesome</td><td>Charger les icônes</td></tr>
+                                <tr><td>Google Fonts</td><td>Charger la police "Inter"</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
                 `,
             className: ''
         }, {
             // Slide 7 : Les 11 blocs du body
             content: `
-                    <h2 class="anim-item">Le <code>&lt;body&gt;</code> — Les 11 blocs</h2>
+                    <h2 class="anim-item">🏗️ Le <code>&lt;body&gt;</code> — Les 11 blocs</h2>
                     <div class="block-list anim-item">
                         <div class="block-item"><span class="num">1</span> <span><strong>Loader</strong> <span class="role">Écran de chargement</span></span></div>
                         <div class="block-item"><span class="num">2</span> <span><strong>Top bar</strong> <span class="role">Téléphone / Email</span></span></div>
@@ -859,39 +1074,40 @@
         }, {
             // Slide 8 : Les id pour la navigation
             content: `
-                    <h2 class="anim-item">Les <code>id</code> — ancêtres de la navigation</h2>
-                    <pre class="anim-item">&lt;section id="contact"&gt;</pre>
+                    <h2 class="anim-item">🔗 Les <code>id</code> — ancêtres de la navigation</h2>
+                    <pre class="anim-item"><span class="tag">&lt;section</span> <span class="attr">id</span>=<span class="string">"contact"</span><span class="tag">&gt;</span></pre>
                     <p class="anim-item">Le menu utilise ces <code>id</code> pour naviguer :</p>
-                    <pre class="anim-item">&lt;a href="#contact"&gt;Contact&lt;/a&gt;</pre>
+                    <pre class="anim-item"><span class="tag">&lt;a</span> <span class="attr">href</span>=<span class="string">"#contact"</span><span class="tag">&gt;</span>Contact<span class="tag">&lt;/a&gt;</span></pre>
                     <div class="box box-important anim-item">
                         <i class="fas fa-arrow-down"></i>
                         <div><strong>Quand on clique sur "Contact", la page descend jusqu'à <code>id="contact"</code>.</strong></div>
                     </div>
-                    <p class="anim-item" style="margin-top:0.5rem; font-size:1.1rem; color:var(--texte-secondaire);">
-                        🔍 <strong>Exercice :</strong> Trouvez tous les <code>id</code> dans la page (Ctrl+F → tapez <code>id="</code>).
-                    </p>
+                    <div class="box box-info anim-item">
+                        <i class="fas fa-search"></i>
+                        <div><strong>Exercice :</strong> Trouvez tous les <code>id</code> dans la page (Ctrl+F → tapez <code>id="</code>).</div>
+                    </div>
                 `,
             className: ''
         }, {
             // Slide 9 : Où est le CSS ?
             content: `
-                    <h2 class="anim-item">Où est le CSS ?</h2>
+                    <h2 class="anim-item">🎨 Où est le CSS ?</h2>
                     <p class="anim-item">Dans cette page, le CSS est dans la balise <code>&lt;style&gt;</code> à l'intérieur du <code>&lt;head&gt;</code> :</p>
-                    <pre class="anim-item">&lt;style&gt;
-        /* ================================================
+                    <pre class="anim-item"><span class="tag">&lt;style&gt;</span>
+        <span class="comment">/* ================================================
            RESET & VARIABLES
-           ================================================ */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        :root {
-            --blanc: #FFFFFF;
-            --vert-citron: #C5E1A5;
-            --vert-fonce: #2E7D32;
+           ================================================ */</span>
+        <span class="selector">*</span> { <span class="property">margin</span>: 0; <span class="property">padding</span>: 0; <span class="property">box-sizing</span>: border-box; }
+        <span class="selector">:root</span> {
+            <span class="property">--blanc</span>: <span class="string">#FFFFFF</span>;
+            <span class="property">--vert-citron</span>: <span class="string">#C5E1A5</span>;
+            <span class="property">--vert-fonce</span>: <span class="string">#2E7D32</span>;
         }
-        body {
-            font-family: var(--font);
-            background: var(--blanc);
+        <span class="selector">body</span> {
+            <span class="property">font-family</span>: var(--font);
+            <span class="property">background</span>: var(--blanc);
         }
-        &lt;/style&gt;</pre>
+        <span class="tag">&lt;/style&gt;</span></pre>
                     <div class="box box-tip anim-item">
                         <i class="fas fa-lightbulb"></i>
                         <div>Le CSS peut aussi être dans un fichier séparé (<code>style.css</code>), mais ici il est intégré.</div>
@@ -901,20 +1117,20 @@
         }, {
             // Slide 10 : Les variables CSS
             content: `
-                    <h2 class="anim-item">Les variables CSS (<code>:root</code>)</h2>
-                    <pre class="anim-item">:root {
-        --blanc: #FFFFFF;
-        --vert-citron: #C5E1A5;
-        --vert-fonce: #2E7D32;
-        --vert-tres-fonce: #1B5E20;
-        --noir: #1A1A1A;
-        --gris: #9E9E9E;
+                    <h2 class="anim-item">🎨 Les variables CSS (<code>:root</code>)</h2>
+                    <pre class="anim-item"><span class="selector">:root</span> {
+        <span class="property">--blanc</span>: <span class="string">#FFFFFF</span>;
+        <span class="property">--vert-citron</span>: <span class="string">#C5E1A5</span>;
+        <span class="property">--vert-fonce</span>: <span class="string">#2E7D32</span>;
+        <span class="property">--vert-tres-fonce</span>: <span class="string">#1B5E20</span>;
+        <span class="property">--noir</span>: <span class="string">#1A1A1A</span>;
+        <span class="property">--gris</span>: <span class="string">#9E9E9E</span>;
         }</pre>
                     <div class="box box-important anim-item">
                         <i class="fas fa-magic"></i>
                         <div><strong>Principe :</strong> On définit une variable UNE fois, on l'utilise PARTOUT.</div>
                     </div>
-                    <p class="anim-item" style="font-size:1.1rem; color:var(--texte-secondaire);">
+                    <p class="anim-item" style="font-size:1.1rem; color:var(--gris-fonce);">
                         🔥 <strong>Si on change <code>--vert-fonce</code>, tout le site change.</strong>
                     </p>
                     <div class="box box-success anim-item">
@@ -926,18 +1142,18 @@
         }, {
             // Slide 11 : Le format universel du CSS
             content: `
-                    <h2 class="anim-item">Le format universel du CSS</h2>
-                    <pre class="anim-item">.nom-de-classe {
-        propriété: valeur;
-        propriété: valeur;
-        propriété: valeur;
+                    <h2 class="anim-item">📐 Le format universel du CSS</h2>
+                    <pre class="anim-item"><span class="selector">.nom-de-classe</span> {
+        <span class="property">propriété</span>: valeur;
+        <span class="property">propriété</span>: valeur;
+        <span class="property">propriété</span>: valeur;
         }</pre>
                     <p class="anim-item" style="margin-top:0.5rem;"><strong>Exemple concret :</strong></p>
-                    <pre class="anim-item">.section-title {
-        font-size: 2.2rem;
-        font-weight: 800;
-        text-align: center;
-        margin-bottom: 12px;
+                    <pre class="anim-item"><span class="selector">.section-title</span> {
+        <span class="property">font-size</span>: <span class="string">2.2rem</span>;
+        <span class="property">font-weight</span>: <span class="string">800</span>;
+        <span class="property">text-align</span>: <span class="string">center</span>;
+        <span class="property">margin-bottom</span>: <span class="string">12px</span>;
         }</pre>
                     <div class="box box-tip anim-item">
                         <i class="fas fa-lightbulb"></i>
@@ -948,12 +1164,14 @@
         }, {
             // Slide 12 : Les commentaires CSS
             content: `
-                    <h2 class="anim-item">Les commentaires CSS</h2>
-                    <pre class="anim-item">/* ================================================================
+                    <h2 class="anim-item">💬 Les commentaires CSS</h2>
+                    <pre class="anim-item"><span class="comment">/* ================================================================
            HEADER / NAV
-           ================================================================ */</pre>
+           ================================================================ */</span></pre>
                     <p class="anim-item">Les commentaires servent de <strong>guide</strong> dans le code.</p>
-                    <p class="anim-item" style="font-size:1.1rem; color:var(--texte-secondaire);">Ils disent : "Tout ce qui suit concerne le menu".</p>
+                    <p class="anim-item" style="font-size:1.1rem; color:var(--gris-fonce);">
+                        Ils disent : "Tout ce qui suit concerne le menu".
+                    </p>
                     <div class="box box-info anim-item">
                         <i class="fas fa-search"></i>
                         <div><strong>Exercice :</strong> Trouvez le commentaire qui indique la section FOOTER.</div>
@@ -963,31 +1181,33 @@
         }, {
             // Slide 13 : Les classes essentielles
             content: `
-                    <h2 class="anim-item">Les classes essentielles</h2>
-                    <table class="table-simple anim-item">
-                        <thead><tr><th>Classe</th><th>Rôle</th></tr></thead>
-                        <tbody>
-                            <tr><td><code>.container</code></td><td>Centre le contenu, largeur max 1200px</td></tr>
-                            <tr><td><code>.btn-primary</code></td><td>Bouton vert principal</td></tr>
-                            <tr><td><code>.btn-secondary</code></td><td>Bouton avec bordure</td></tr>
-                            <tr><td><code>.section-title</code></td><td>Grands titres de section</td></tr>
-                            <tr><td><code>.hero</code></td><td>Section d'accueil</td></tr>
-                            <tr><td><code>.header</code></td><td>Menu de navigation</td></tr>
-                        </tbody>
-                    </table>
+                    <h2 class="anim-item">🏷️ Les classes essentielles</h2>
+                    <div class="table-wrapper anim-item">
+                        <table class="table-simple">
+                            <thead><tr><th>Classe</th><th>Rôle</th></tr></thead>
+                            <tbody>
+                                <tr><td><code>.container</code></td><td>Centre le contenu, largeur max 1200px</td></tr>
+                                <tr><td><code>.btn-primary</code></td><td>Bouton vert principal</td></tr>
+                                <tr><td><code>.btn-secondary</code></td><td>Bouton avec bordure</td></tr>
+                                <tr><td><code>.section-title</code></td><td>Grands titres de section</td></tr>
+                                <tr><td><code>.hero</code></td><td>Section d'accueil</td></tr>
+                                <tr><td><code>.header</code></td><td>Menu de navigation</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
                 `,
             className: ''
         }, {
             // Slide 14 : Où est le JavaScript ?
             content: `
-                    <h2 class="anim-item">Où est le JavaScript ?</h2>
+                    <h2 class="anim-item">⚡ Où est le JavaScript ?</h2>
                     <p class="anim-item">Tout en bas du fichier, dans la balise <code>&lt;script&gt;</code> :</p>
-                    <pre class="anim-item">&lt;script&gt;
-        (function() {
-            'use strict';
-            // ... tout le code JS ici
+                    <pre class="anim-item"><span class="tag">&lt;script&gt;</span>
+        <span class="selector">(function()</span> {
+            <span class="string">'use strict'</span>;
+            <span class="comment">// ... tout le code JS ici</span>
         })();
-        &lt;/script&gt;</pre>
+        <span class="tag">&lt;/script&gt;</span></pre>
                     <div class="box box-important anim-item">
                         <i class="fas fa-bolt"></i>
                         <div>Le JavaScript est placé en bas pour ne pas bloquer le chargement du site.</div>
@@ -997,7 +1217,7 @@
         }, {
             // Slide 15 : Les 8 blocs du JavaScript
             content: `
-                    <h2 class="anim-item">Les 8 blocs du JavaScript</h2>
+                    <h2 class="anim-item">⚡ Les 8 blocs du JavaScript</h2>
                     <div class="block-list anim-item">
                         <div class="block-item"><span class="num">1</span> <span><strong>Loader</strong> <span class="role">Cacher l'écran de chargement</span></span></div>
                         <div class="block-item"><span class="num">2</span> <span><strong>Menu mobile</strong> <span class="role">Ouvrir/fermer le menu sur téléphone</span></span></div>
@@ -1013,39 +1233,43 @@
         }, {
             // Slide 16 : Le format universel du JS
             content: `
-                    <h2 class="anim-item">Le format universel du JavaScript</h2>
-                    <pre class="anim-item">// 1. Récupérer l'élément
-        const element = document.getElementById('monElement');
+                    <h2 class="anim-item">📐 Le format universel du JavaScript</h2>
+                    <pre class="anim-item"><span class="comment">// 1. Récupérer l'élément</span>
+        <span class="selector">const element</span> = <span class="property">document</span>.<span class="property">getElementById</span>(<span class="string">'monElement'</span>);
 
-        // 2. Écouter un événement (clic, scroll, chargement)
-        element.addEventListener('click', function() {
-            // 3. Exécuter une action
-            element.classList.add('active');
+        <span class="comment">// 2. Écouter un événement (clic, scroll, chargement)</span>
+        <span class="selector">element</span>.<span class="property">addEventListener</span>(<span class="string">'click'</span>, <span class="selector">function</span>() {
+            <span class="comment">// 3. Exécuter une action</span>
+            <span class="selector">element</span>.<span class="property">classList</span>.<span class="property">add</span>(<span class="string">'active'</span>);
         });</pre>
-                    <table class="table-simple anim-item">
-                        <thead><tr><th>Commande</th><th>Rôle</th></tr></thead>
-                        <tbody>
-                            <tr><td><code>getElementById('...')</code></td><td>Chercher par id</td></tr>
-                            <tr><td><code>querySelector('...')</code></td><td>Chercher par classe ou balise</td></tr>
-                            <tr><td><code>addEventListener('click', ...)</code></td><td>Réagir à un clic</td></tr>
-                            <tr><td><code>classList.add('...')</code></td><td>Ajouter une classe</td></tr>
-                            <tr><td><code>classList.remove('...')</code></td><td>Retirer une classe</td></tr>
-                            <tr><td><code>classList.toggle('...')</code></td><td>Ajouter / retirer</td></tr>
-                        </tbody>
-                    </table>
+                    <div class="table-wrapper anim-item">
+                        <table class="table-simple">
+                            <thead><tr><th>Commande</th><th>Rôle</th></tr></thead>
+                            <tbody>
+                                <tr><td><code>getElementById('...')</code></td><td>Chercher par id</td></tr>
+                                <tr><td><code>querySelector('...')</code></td><td>Chercher par classe ou balise</td></tr>
+                                <tr><td><code>addEventListener('click', ...)</code></td><td>Réagir à un clic</td></tr>
+                                <tr><td><code>classList.add('...')</code></td><td>Ajouter une classe</td></tr>
+                                <tr><td><code>classList.remove('...')</code></td><td>Retirer une classe</td></tr>
+                                <tr><td><code>classList.toggle('...')</code></td><td>Ajouter / retirer</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
                 `,
             className: ''
         }, {
             // Slide 17 : Exercice guidé 1
             content: `
-                    <h2 class="anim-item">Exercice guidé 1 : Changer le titre</h2>
+                    <h2 class="anim-item">✏️ Exercice guidé 1 : Changer le titre</h2>
                     <div class="exercice-box anim-item">
                         <h3><i class="fas fa-search"></i> Chercher :</h3>
-                        <pre>&lt;h1&gt;Réussissez avec &lt;span&gt;Le Partenaire&lt;/span&gt;&lt;/h1&gt;</pre>
-                        <h3 style="margin-top:1rem;"><i class="fas fa-pen"></i> Remplacer par :</h3>
-                        <pre>&lt;h1&gt;Apprenez avec &lt;span&gt;NTIC Solution&lt;/span&gt;&lt;/h1&gt;</pre>
+                        <pre style="background:#f8fafc; color:#1e293b; border:1px solid var(--bordure);">
+        &lt;h1&gt;Réussissez avec &lt;span&gt;Le Partenaire&lt;/span&gt;&lt;/h1&gt;</pre>
+                        <h3 style="margin-top:1.2rem;"><i class="fas fa-pen"></i> Remplacer par :</h3>
+                        <pre style="background:#f8fafc; color:#1e293b; border:1px solid var(--bordure);">
+        &lt;h1&gt;Apprenez avec &lt;span&gt;NTIC Solution&lt;/span&gt;&lt;/h1&gt;</pre>
                         <p style="margin-top:1rem; font-size:1.1rem; font-weight:600; color:var(--vert);">
-                            Ctrl+S → Vérifier dans le navigateur
+                            <i class="fas fa-save"></i> Ctrl+S → Vérifier dans le navigateur
                         </p>
                     </div>
                 `,
@@ -1053,14 +1277,16 @@
         }, {
             // Slide 18 : Exercice guidé 2
             content: `
-                    <h2 class="anim-item">Exercice guidé 2 : Modifier le footer</h2>
+                    <h2 class="anim-item">✏️ Exercice guidé 2 : Modifier le footer</h2>
                     <div class="exercice-box anim-item">
                         <h3><i class="fas fa-search"></i> Chercher :</h3>
-                        <pre>&copy; 2026 &lt;span&gt;Cours Privé le Partenaire (CPP)&lt;/span&gt;</pre>
-                        <h3 style="margin-top:1rem;"><i class="fas fa-pen"></i> Remplacer par :</h3>
-                        <pre>&copy; 2026 &lt;span&gt;CPP — Modifié par [Votre Prénom]&lt;/span&gt;</pre>
+                        <pre style="background:#f8fafc; color:#1e293b; border:1px solid var(--bordure);">
+        &copy; 2026 &lt;span&gt;Cours Privé le Partenaire (CPP)&lt;/span&gt;</pre>
+                        <h3 style="margin-top:1.2rem;"><i class="fas fa-pen"></i> Remplacer par :</h3>
+                        <pre style="background:#f8fafc; color:#1e293b; border:1px solid var(--bordure);">
+        &copy; 2026 &lt;span&gt;CPP — Modifié par [Votre Prénom]&lt;/span&gt;</pre>
                         <p style="margin-top:1rem; font-size:1.1rem; font-weight:600; color:var(--vert);">
-                            Ctrl+S → Vérifier dans le navigateur
+                            <i class="fas fa-save"></i> Ctrl+S → Vérifier dans le navigateur
                         </p>
                     </div>
                 `,
@@ -1068,14 +1294,16 @@
         }, {
             // Slide 19 : Exercice guidé 3
             content: `
-                    <h2 class="anim-item">Exercice guidé 3 : Changer une statistique</h2>
+                    <h2 class="anim-item">✏️ Exercice guidé 3 : Changer une statistique</h2>
                     <div class="exercice-box anim-item">
                         <h3><i class="fas fa-search"></i> Chercher :</h3>
-                        <pre>&lt;span class="number"&gt;98%&lt;/span&gt;</pre>
-                        <h3 style="margin-top:1rem;"><i class="fas fa-pen"></i> Remplacer par :</h3>
-                        <pre>&lt;span class="number"&gt;100%&lt;/span&gt;</pre>
+                        <pre style="background:#f8fafc; color:#1e293b; border:1px solid var(--bordure);">
+        &lt;span class="number"&gt;98%&lt;/span&gt;</pre>
+                        <h3 style="margin-top:1.2rem;"><i class="fas fa-pen"></i> Remplacer par :</h3>
+                        <pre style="background:#f8fafc; color:#1e293b; border:1px solid var(--bordure);">
+        &lt;span class="number"&gt;100%&lt;/span&gt;</pre>
                         <p style="margin-top:1rem; font-size:1.1rem; font-weight:600; color:var(--vert);">
-                            Ctrl+S → Vérifier l'animation
+                            <i class="fas fa-save"></i> Ctrl+S → Vérifier l'animation
                         </p>
                     </div>
                 `,
@@ -1083,7 +1311,7 @@
         }, {
             // Slide 20 : Exercice libre
             content: `
-                    <h2 class="anim-item">Exercice libre : 3 modifications</h2>
+                    <h2 class="anim-item">🚀 Exercice libre : 3 modifications</h2>
                     <div class="exercice-box anim-item">
                         <h3><i class="fas fa-tasks"></i> Choisissez parmi :</h3>
                         <ol>
@@ -1097,7 +1325,7 @@
                             <li>Changer le titre "Actualités"</li>
                         </ol>
                         <p style="margin-top:1rem; font-size:1.1rem; font-weight:600; color:var(--rouge);">
-                            Règle : Après chaque modification → Ctrl+S → vérifier.
+                            ⚠️ Règle : Après chaque modification → Ctrl+S → vérifier.
                         </p>
                     </div>
                 `,
@@ -1105,42 +1333,47 @@
         }, {
             // Slide 21 : Récapitulatif
             content: `
-                    <h2 class="anim-item">Ce que vous savez faire maintenant</h2>
-                    <table class="table-simple anim-item">
-                        <thead><tr><th>Compétence</th><th>Statut</th></tr></thead>
-                        <tbody>
-                            <tr><td>Lire le HTML</td><td>✅</td></tr>
-                            <tr><td>Comprendre les 3 zones (DOCTYPE, head, body)</td><td>✅</td></tr>
-                            <tr><td>Lire le CSS</td><td>✅</td></tr>
-                            <tr><td>Comprendre les variables <code>:root</code></td><td>✅</td></tr>
-                            <tr><td>Lire le JavaScript</td><td>✅</td></tr>
-                            <tr><td>Identifier les 8 blocs JS</td><td>✅</td></tr>
-                            <tr><td>Modifier les couleurs</td><td>✅</td></tr>
-                            <tr><td>Modifier les textes</td><td>✅</td></tr>
-                            <tr><td>Personnaliser une page</td><td>✅</td></tr>
-                        </tbody>
-                    </table>
+                    <h2 class="anim-item">✅ Ce que vous savez faire maintenant</h2>
+                    <div class="table-wrapper anim-item">
+                        <table class="table-simple">
+                            <thead><tr><th>Compétence</th><th>Statut</th></tr></thead>
+                            <tbody>
+                                <tr><td>Lire le HTML</td><td>✅</td></tr>
+                                <tr><td>Comprendre les 3 zones (DOCTYPE, head, body)</td><td>✅</td></tr>
+                                <tr><td>Lire le CSS</td><td>✅</td></tr>
+                                <tr><td>Comprendre les variables <code>:root</code></td><td>✅</td></tr>
+                                <tr><td>Lire le JavaScript</td><td>✅</td></tr>
+                                <tr><td>Identifier les 8 blocs JS</td><td>✅</td></tr>
+                                <tr><td>Modifier les couleurs</td><td>✅</td></tr>
+                                <tr><td>Modifier les textes</td><td>✅</td></tr>
+                                <tr><td>Personnaliser une page</td><td>✅</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
                 `,
             className: 'slide-recap'
         }, {
             // Slide 22 : Les 3 commandes à retenir
             content: `
-                    <h2 class="anim-item">Les 3 commandes à retenir</h2>
+                    <h2 class="anim-item">⌨️ Les 3 commandes à retenir</h2>
                     <div class="card-grid cols-3 anim-item" style="margin-top:2rem;">
                         <div class="card" style="border-color:var(--bleu);">
                             <i class="fas fa-search" style="color:var(--bleu);"></i>
                             <h4>Ctrl + F</h4>
                             <p>Rechercher dans le fichier</p>
+                            <p style="font-size:0.8rem; color:var(--gris-fonce);">Trouvez n'importe quel texte</p>
                         </div>
                         <div class="card" style="border-color:var(--vert);">
                             <i class="fas fa-save" style="color:var(--vert);"></i>
                             <h4>Ctrl + S</h4>
                             <p>Enregistrer</p>
+                            <p style="font-size:0.8rem; color:var(--gris-fonce);">Sauvegardez vos modifications</p>
                         </div>
                         <div class="card" style="border-color:var(--orange);">
                             <i class="fas fa-text-width" style="color:var(--orange);"></i>
                             <h4>Alt + Z</h4>
-                            <p>Activer/désactiver le retour à la ligne</p>
+                            <p>Retour à la ligne</p>
+                            <p style="font-size:0.8rem; color:var(--gris-fonce);">Activer/désactiver le wrap</p>
                         </div>
                     </div>
                 `,
@@ -1148,12 +1381,12 @@
         }, {
             // Slide 23 : Structure d'une page HTML
             content: `
-                    <h2 class="anim-item">Structure d'une page HTML</h2>
-                    <pre class="anim-item">&lt;!DOCTYPE html&gt;  → Déclaration
-        &lt;html&gt;           → Racine
-            &lt;head&gt;       → En-tête (invisible)
-            &lt;body&gt;       → Contenu (visible)
-        &lt;/html&gt;</pre>
+                    <h2 class="anim-item">📄 Structure d'une page HTML</h2>
+                    <pre class="anim-item"><span class="comment">&lt;!DOCTYPE html&gt;  → Déclaration</span>
+        <span class="tag">&lt;html&gt;</span>           → Racine
+            <span class="tag">&lt;head&gt;</span>       → En-tête (invisible)
+            <span class="tag">&lt;body&gt;</span>       → Contenu (visible)
+        <span class="tag">&lt;/html&gt;</span></pre>
                     <div class="box box-tip anim-item">
                         <i class="fas fa-lightbulb"></i>
                         <div>C'est le même schéma pour <strong>toutes</strong> les pages web.</div>
@@ -1163,15 +1396,32 @@
         }, {
             // Slide 24 : Les 3 langages
             content: `
-                    <h2 class="anim-item">Les 3 langages</h2>
-                    <table class="table-simple anim-item">
-                        <thead><tr><th>Langage</th><th>Où</th><th>Rôle</th></tr></thead>
-                        <tbody>
-                            <tr><td><strong style="color:#059669;">HTML</strong></td><td><code>&lt;body&gt;</code></td><td>Structure et contenu</td></tr>
-                            <tr><td><strong style="color:var(--bleu);">CSS</strong></td><td><code>&lt;style&gt;</code></td><td>Style et apparence</td></tr>
-                            <tr><td><strong style="color:var(--jaune);">JavaScript</strong></td><td><code>&lt;script&gt;</code></td><td>Interactivité</td></tr>
-                        </tbody>
-                    </table>
+                    <h2 class="anim-item">📚 Les 3 langages</h2>
+                    <div class="table-wrapper anim-item">
+                        <table class="table-simple">
+                            <thead><tr><th>Langage</th><th>Où</th><th>Rôle</th><th>Métaphore</th></tr></thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong style="color:#059669;">HTML</strong></td>
+                                    <td><code>&lt;body&gt;</code></td>
+                                    <td>Structure et contenu</td>
+                                    <td>🏠 Les murs</td>
+                                </tr>
+                                <tr>
+                                    <td><strong style="color:var(--bleu);">CSS</strong></td>
+                                    <td><code>&lt;style&gt;</code></td>
+                                    <td>Style et apparence</td>
+                                    <td>🎨 La peinture</td>
+                                </tr>
+                                <tr>
+                                    <td><strong style="color:var(--jaune);">JavaScript</strong></td>
+                                    <td><code>&lt;script&gt;</code></td>
+                                    <td>Interactivité</td>
+                                    <td>⚡ L'électricité</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                     <div class="box box-important anim-item">
                         <i class="fas fa-star"></i>
                         <div><strong>À retenir :</strong> Ces 3 langages sont toujours ensemble dans une page web moderne.</div>
@@ -1181,25 +1431,25 @@
         }, {
             // Slide 25 : Annonce Jour 4
             content: `
-                    <h1 class="anim-item" style="color:white; font-size:2.8rem;">Rendez-vous demain</h1>
-                    <p class="anim-item" style="font-size:2rem; font-weight:700; color:white;">Jour 4 — Publication sur GitHub Pages</p>
-                    <div style="margin-top:1.5rem; text-align:left; max-width:600px; margin-left:auto; margin-right:auto;">
-                        <p class="anim-item" style="color:rgba(255,255,255,0.9); font-size:1.2rem; text-align:center;">
+                    <h1 class="anim-item" style="font-size:2.8rem;">🚀 Rendez-vous demain</h1>
+                    <p class="anim-item" style="font-size:2rem; font-weight:700;">Jour 4 — Publication sur GitHub Pages</p>
+                    <div style="margin-top:1.5rem; max-width:600px; margin-left:auto; margin-right:auto; text-align:left;">
+                        <p class="anim-item" style="color:rgba(255,255,255,0.9); font-size:1.2rem; padding:0.5rem 0; border-bottom:1px solid rgba(255,255,255,0.1);">
                             <i class="fas fa-check-circle" style="color:#C5E1A5;"></i> Créer un compte GitHub
                         </p>
-                        <p class="anim-item" style="color:rgba(255,255,255,0.9); font-size:1.2rem; text-align:center;">
+                        <p class="anim-item" style="color:rgba(255,255,255,0.9); font-size:1.2rem; padding:0.5rem 0; border-bottom:1px solid rgba(255,255,255,0.1);">
                             <i class="fas fa-check-circle" style="color:#C5E1A5;"></i> Uploader le fichier index.html
                         </p>
-                        <p class="anim-item" style="color:rgba(255,255,255,0.9); font-size:1.2rem; text-align:center;">
+                        <p class="anim-item" style="color:rgba(255,255,255,0.9); font-size:1.2rem; padding:0.5rem 0; border-bottom:1px solid rgba(255,255,255,0.1);">
                             <i class="fas fa-check-circle" style="color:#C5E1A5;"></i> Activer GitHub Pages
                         </p>
-                        <p class="anim-item" style="color:rgba(255,255,255,0.9); font-size:1.2rem; text-align:center;">
+                        <p class="anim-item" style="color:rgba(255,255,255,0.9); font-size:1.2rem; padding:0.5rem 0; border-bottom:1px solid rgba(255,255,255,0.1);">
                             <i class="fas fa-check-circle" style="color:#C5E1A5;"></i> Obtenir l'URL publique
                         </p>
-                        <p class="anim-item" style="color:rgba(255,255,255,0.9); font-size:1.2rem; text-align:center;">
+                        <p class="anim-item" style="color:rgba(255,255,255,0.9); font-size:1.2rem; padding:0.5rem 0; border-bottom:1px solid rgba(255,255,255,0.1);">
                             <i class="fas fa-check-circle" style="color:#C5E1A5;"></i> Partager le lien sur WhatsApp
                         </p>
-                        <p class="anim-item" style="color:rgba(255,255,255,0.9); font-size:1.2rem; text-align:center;">
+                        <p class="anim-item" style="color:rgba(255,255,255,0.9); font-size:1.2rem; padding:0.5rem 0;">
                             <i class="fas fa-check-circle" style="color:#C5E1A5;"></i> Votre site est EN LIGNE !
                         </p>
                     </div>
@@ -1208,17 +1458,19 @@
         }, {
             // Slide 26 : Merci
             content: `
-                    <h1 class="anim-item" style="color:white; font-size:3rem;">Merci de votre attention</h1>
-                    <p class="anim-item" style="font-size:1.8rem; font-weight:600; color:white;">NTIC Solution</p>
-                    <p class="anim-item" style="color:rgba(255,255,255,0.8); font-size:1.2rem;">L'univers du digital, à votre portée.</p>
+                    <h1 class="anim-item" style="font-size:3rem;">🙏 Merci de votre attention</h1>
+                    <p class="anim-item" style="font-size:2rem; font-weight:700;">NTIC Solution</p>
+                    <p class="anim-item" style="font-size:1.2rem; color:rgba(255,255,255,0.8);">
+                        L'univers du digital, à votre portée.
+                    </p>
                     <div style="margin-top:1.5rem;">
-                        <p class="anim-item" style="color:rgba(255,255,255,0.9); font-size:1.1rem;">
+                        <p class="anim-item" style="color:rgba(255,255,255,0.9); font-size:1.1rem; padding:0.3rem 0;">
                             <i class="fab fa-whatsapp" style="color:#25D366;"></i> WhatsApp : +226 69 69 69 24
                         </p>
-                        <p class="anim-item" style="color:rgba(255,255,255,0.9); font-size:1.1rem;">
+                        <p class="anim-item" style="color:rgba(255,255,255,0.9); font-size:1.1rem; padding:0.3rem 0;">
                             <i class="fas fa-phone" style="color:#C5E1A5;"></i> Téléphone : +226 05 58 58 68
                         </p>
-                        <p class="anim-item" style="color:rgba(255,255,255,0.9); font-size:1.1rem;">
+                        <p class="anim-item" style="color:rgba(255,255,255,0.9); font-size:1.1rem; padding:0.3rem 0;">
                             <i class="fas fa-globe" style="color:#C5E1A5;"></i> www.nticsolution.org
                         </p>
                     </div>
@@ -1239,6 +1491,17 @@
             const stage = document.getElementById('slideStage');
             const slide = slidesData[index];
             stage.innerHTML = `<div class="slide-content ${slide.className}">${slide.content}</div>`;
+            updateProgress(index);
+            updateCounter(index);
+        }
+
+        function updateProgress(index) {
+            const progress = ((index + 1) / totalSlides) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+        }
+
+        function updateCounter(index) {
+            document.getElementById('slideCounter').textContent = (index + 1) + ' / ' + totalSlides;
         }
 
         function goNext() {
@@ -1256,70 +1519,87 @@
         }
 
         // ============================================================
-        // 4. ACCÈS — mot de passe "JOUR3PRO"
+        // 4. INITIALISATION
         // ============================================================
-        function checkAccess() {
-            const input = document.getElementById('accessInput');
-            const error = document.getElementById('accessError');
-            // Mot de passe : JOUR3PRO encodé en base64
-            const expected = 'Sk9VUjNQUk8=';
-            const entered = btoa(input.value.trim());
-            if (entered === expected) {
-                document.getElementById('accessOverlay').classList.add('hidden');
-                document.getElementById('presentationContainer').classList.add('active');
-                renderSlide(currentSlide);
-            } else {
-                error.classList.add('visible');
-                input.value = '';
-                input.focus();
-                setTimeout(() => error.classList.remove('visible'), 2500);
-            }
-        }
-
-        document.getElementById('accessBtn').addEventListener('click', checkAccess);
-        document.getElementById('accessInput').addEventListener('keydown', function(e) {
-            if (e.key === 'Enter') checkAccess();
-        });
+        renderSlide(currentSlide);
 
         // ============================================================
         // 5. NAVIGATION CLAVIER / TACTILE
         // ============================================================
         document.addEventListener('keydown', function(e) {
-            const container = document.getElementById('presentationContainer');
-            if (!container.classList.contains('active')) return;
+            const container = document.querySelector('.presentation-container');
+            if (!container) return;
+
             switch (e.key) {
                 case 'ArrowRight':
                 case ' ':
                 case 'PageDown':
+                case 'ArrowDown':
                     e.preventDefault();
                     goNext();
                     break;
                 case 'ArrowLeft':
                 case 'PageUp':
+                case 'ArrowUp':
                     e.preventDefault();
                     goPrev();
                     break;
                 case 'Escape':
                     if (confirm('Quitter la projection ?')) {
-                        document.getElementById('presentationContainer').classList.remove('active');
-                        document.getElementById('accessOverlay').classList.remove('hidden');
-                        currentSlide = 0;
+                        document.querySelector('.presentation-container').style.display = 'none';
                     }
+                    break;
+                case 'Home':
+                    e.preventDefault();
+                    currentSlide = 0;
+                    renderSlide(currentSlide);
+                    break;
+                case 'End':
+                    e.preventDefault();
+                    currentSlide = totalSlides - 1;
+                    renderSlide(currentSlide);
                     break;
             }
         });
 
+        // Navigation tactile
         let touchStartX = 0;
+        let touchStartY = 0;
+
         document.addEventListener('touchstart', function(e) {
             touchStartX = e.changedTouches[0].screenX;
+            touchStartY = e.changedTouches[0].screenY;
         });
+
         document.addEventListener('touchend', function(e) {
             const deltaX = e.changedTouches[0].screenX - touchStartX;
-            if (Math.abs(deltaX) > 60) {
+            const deltaY = e.changedTouches[0].screenY - touchStartY;
+
+            if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 50) {
                 if (deltaX < 0) goNext();
                 else goPrev();
             }
         });
+
+        // Scroll sur les slides (pour les ordinateurs portables)
+        let scrollTimeout = false;
+
+        document.addEventListener('wheel', function(e) {
+            if (scrollTimeout) return;
+            const container = document.querySelector('.presentation-container');
+            if (!container || container.style.display === 'none') return;
+
+            // Ne déclencher que si le scroll est significatif
+            if (Math.abs(e.deltaY) > 40) {
+                scrollTimeout = true;
+                if (e.deltaY > 0) {
+                    goNext();
+                } else {
+                    goPrev();
+                }
+                setTimeout(() => { scrollTimeout = false; }, 600);
+            }
+        }, { passive: true });
     </script>
 
 </body>
