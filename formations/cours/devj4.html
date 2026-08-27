@@ -1,0 +1,1593 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NTIC SOLUTION · Jour 4 — Maîtrise des balises & Déploiement</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <style>
+        /* ========================================
+           VARIABLES
+           ======================================== */
+        :root {
+            --bleu: #0B3FA5;
+            --bleu-clair: #e8f0fe;
+            --bleu-fonce: #072a6e;
+            --orange: #FF6B35;
+            --orange-clair: #fff4e5;
+            --vert: #059669;
+            --vert-clair: #ecfdf5;
+            --violet: #7c3aed;
+            --violet-clair: #f3e8ff;
+            --rouge: #dc2626;
+            --rouge-clair: #fef2f2;
+            --jaune: #f59e0b;
+            --jaune-clair: #fffbeb;
+            --gris: #f1f5f9;
+            --gris-fonce: #475569;
+            --texte: #1e293b;
+            --blanc: #ffffff;
+            --bordure: #e2e8f0;
+            --shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+            --radius: 16px;
+            --transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* ========================================
+           RESET
+           ======================================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: #0d1117;
+            color: var(--texte);
+            overflow: hidden;
+            height: 100vh;
+            width: 100vw;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ========================================
+           CONTAINER
+           ======================================== */
+        .presentation-container {
+            position: fixed;
+            inset: 0;
+            background: #0d1117;
+            z-index: 100;
+        }
+
+        .slide-stage {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .slide-content {
+            background: var(--blanc);
+            width: 100%;
+            height: 100%;
+            overflow-y: auto;
+            padding: 3rem 4.5rem;
+            position: relative;
+            animation: slideIn 0.5s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: scale(0.96) translateY(12px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        /* ========================================
+           PROGRESS BAR
+           ======================================== */
+        .progress-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            z-index: 200;
+            height: 4px;
+            background: var(--orange);
+            transition: width 0.4s ease;
+            border-radius: 0 2px 2px 0;
+        }
+
+        .slide-counter {
+            position: fixed;
+            bottom: 1.2rem;
+            left: 1.5rem;
+            z-index: 200;
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            backdrop-filter: blur(8px);
+        }
+
+        .nav-hint {
+            position: fixed;
+            bottom: 1.2rem;
+            right: 1.5rem;
+            z-index: 200;
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            backdrop-filter: blur(8px);
+        }
+
+        /* ========================================
+           ANIMATIONS
+           ======================================== */
+        .anim-item {
+            opacity: 0;
+            transform: translateY(24px);
+            animation: fadeUp 0.7s ease forwards;
+        }
+
+        .anim-item:nth-child(1) { animation-delay: 0.05s; }
+        .anim-item:nth-child(2) { animation-delay: 0.15s; }
+        .anim-item:nth-child(3) { animation-delay: 0.25s; }
+        .anim-item:nth-child(4) { animation-delay: 0.35s; }
+        .anim-item:nth-child(5) { animation-delay: 0.45s; }
+        .anim-item:nth-child(6) { animation-delay: 0.55s; }
+        .anim-item:nth-child(7) { animation-delay: 0.65s; }
+        .anim-item:nth-child(8) { animation-delay: 0.75s; }
+        .anim-item:nth-child(9) { animation-delay: 0.85s; }
+        .anim-item:nth-child(10) { animation-delay: 0.95s; }
+
+        @keyframes fadeUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ========================================
+           TYPOGRAPHIE
+           ======================================== */
+        h1 {
+            font-size: 3.2rem;
+            font-weight: 800;
+            letter-spacing: -1.5px;
+            color: var(--bleu);
+            line-height: 1.1;
+        }
+
+        h2 {
+            font-size: 2.4rem;
+            font-weight: 700;
+            color: var(--bleu);
+            line-height: 1.2;
+            margin-bottom: 0.5rem;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        h4 {
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+
+        p {
+            font-size: 1.25rem;
+            line-height: 1.6;
+            color: var(--gris-fonce);
+        }
+
+        .subtitle {
+            font-size: 1.6rem;
+            font-weight: 500;
+            color: var(--gris-fonce);
+        }
+
+        /* ========================================
+           SLIDES SPECIALES
+           ======================================== */
+        .slide-cover {
+            background: linear-gradient(135deg, var(--bleu-fonce) 0%, #0d1b3e 100%);
+            color: var(--blanc);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .slide-cover h1 {
+            color: var(--blanc);
+            font-size: 3.5rem;
+        }
+
+        .slide-cover .subtitle {
+            color: rgba(255, 255, 255, 0.85);
+        }
+
+        .slide-cover p {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .slide-cover .highlight {
+            color: var(--orange);
+        }
+
+        .slide-next {
+            background: linear-gradient(135deg, var(--orange) 0%, #e55a2b 100%);
+            color: var(--blanc);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .slide-next h1,
+        .slide-next h2 {
+            color: var(--blanc);
+        }
+
+        .slide-next p {
+            color: rgba(255, 255, 255, 0.85);
+        }
+
+        .slide-objectifs {
+            background: var(--bleu-clair);
+        }
+
+        .slide-exercice {
+            background: var(--orange-clair);
+        }
+
+        .slide-exercice h2 {
+            color: #a0401a;
+        }
+
+        .slide-recap {
+            background: var(--vert-clair);
+        }
+
+        .slide-recap h2 {
+            color: #064e3b;
+        }
+
+        /* ========================================
+           OBJECTIFS
+           ======================================== */
+        .objectif-item {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+            padding: 0.8rem 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+        }
+
+        .objectif-item:last-child {
+            border-bottom: none;
+        }
+
+        .objectif-num {
+            background: var(--bleu);
+            color: var(--blanc);
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .objectif-text {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--texte);
+        }
+
+        /* ========================================
+           CARDS
+           ======================================== */
+        .card-grid {
+            display: grid;
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .card-grid.cols-2 {
+            grid-template-columns: 1fr 1fr;
+        }
+        .card-grid.cols-3 {
+            grid-template-columns: repeat(3, 1fr);
+        }
+        .card-grid.cols-4 {
+            grid-template-columns: repeat(4, 1fr);
+        }
+
+        .card {
+            background: var(--gris);
+            border-radius: var(--radius);
+            padding: 1.8rem 1.5rem;
+            border: 1px solid var(--bordure);
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow);
+        }
+
+        .card i {
+            font-size: 2.6rem;
+            color: var(--bleu);
+            margin-bottom: 0.6rem;
+        }
+
+        .card h4 {
+            font-size: 1.15rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .card p {
+            font-size: 0.95rem;
+            color: var(--gris-fonce);
+        }
+
+        /* ========================================
+           BOXES
+           ======================================== */
+        .box {
+            border-radius: var(--radius);
+            padding: 1.2rem 1.8rem;
+            margin: 1.2rem 0;
+            font-size: 1.15rem;
+            font-weight: 500;
+            border-left: 6px solid;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.8rem;
+            transition: var(--transition);
+        }
+
+        .box i {
+            font-size: 1.4rem;
+            flex-shrink: 0;
+            margin-top: 0.15rem;
+        }
+
+        .box-tip {
+            background: var(--bleu-clair);
+            border-color: var(--bleu);
+            color: #0a2c5c;
+        }
+
+        .box-important {
+            background: var(--orange-clair);
+            border-color: var(--orange);
+            color: #6b3a1f;
+        }
+
+        .box-success {
+            background: var(--vert-clair);
+            border-color: var(--vert);
+            color: #064e3b;
+        }
+
+        .box-warning {
+            background: var(--rouge-clair);
+            border-color: var(--rouge);
+            color: #7f1d1d;
+        }
+
+        .box-info {
+            background: var(--violet-clair);
+            border-color: var(--violet);
+            color: #3b0764;
+        }
+
+        /* ========================================
+           TABLEAUX
+           ======================================== */
+        .table-wrapper {
+            overflow-x: auto;
+            margin: 1.2rem 0;
+            border-radius: var(--radius);
+            border: 1px solid var(--bordure);
+        }
+
+        .table-simple {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 1.05rem;
+            background: var(--blanc);
+        }
+
+        .table-simple th {
+            background: var(--bleu);
+            color: var(--blanc);
+            padding: 0.9rem 1.2rem;
+            text-align: left;
+            font-weight: 700;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .table-simple td {
+            padding: 0.7rem 1.2rem;
+            border-bottom: 1px solid var(--bordure);
+        }
+
+        .table-simple tr:last-child td {
+            border-bottom: none;
+        }
+
+        .table-simple tr:nth-child(even) td {
+            background: #fafbfc;
+        }
+
+        .table-simple tr:hover td {
+            background: var(--bleu-clair);
+        }
+
+        /* ========================================
+           CODE
+           ======================================== */
+        pre {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            font-family: 'JetBrains Mono', 'Courier New', monospace;
+            font-size: 0.95rem;
+            line-height: 1.7;
+            overflow-x: auto;
+            margin: 1rem 0;
+            border: 1px solid #334155;
+        }
+
+        pre .comment {
+            color: #94a3b8;
+        }
+
+        pre .tag {
+            color: #f472b6;
+        }
+
+        pre .attr {
+            color: #60a5fa;
+        }
+
+        pre .string {
+            color: #a3e635;
+        }
+
+        pre .selector {
+            color: #fbbf24;
+        }
+
+        pre .property {
+            color: #34d399;
+        }
+
+        code {
+            background: var(--gris);
+            padding: 0.15rem 0.45rem;
+            border-radius: 4px;
+            font-family: 'JetBrains Mono', 'Courier New', monospace;
+            font-size: 0.9em;
+            color: var(--bleu-fonce);
+        }
+
+        .exercice-box {
+            background: var(--blanc);
+            border-radius: var(--radius);
+            padding: 2rem;
+            border: 2px solid var(--bleu);
+            margin-top: 1.5rem;
+            box-shadow: var(--shadow);
+        }
+
+        .exercice-box h3 {
+            color: var(--bleu);
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .exercice-box ol {
+            padding-left: 1.5rem;
+        }
+
+        .exercice-box li {
+            font-size: 1.1rem;
+            margin-bottom: 0.6rem;
+            color: var(--texte);
+        }
+
+        /* ========================================
+           TAG CARDS
+           ======================================== */
+        .tag-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.2rem;
+            margin: 1.5rem 0;
+        }
+
+        .tag-card {
+            background: var(--blanc);
+            border-radius: var(--radius);
+            padding: 1.2rem 1.5rem;
+            border: 1px solid var(--bordure);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .tag-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+        }
+
+        .tag-card .tag-name {
+            display: inline-block;
+            background: var(--bleu);
+            color: var(--blanc);
+            padding: 0.2rem 0.8rem;
+            border-radius: 6px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            font-weight: 700;
+            margin-bottom: 0.4rem;
+        }
+
+        .tag-card .tag-usage {
+            font-size: 0.9rem;
+            color: var(--gris-fonce);
+            margin-top: 0.3rem;
+        }
+
+        .tag-card .tag-example {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            background: var(--gris);
+            padding: 0.3rem 0.6rem;
+            border-radius: 4px;
+            margin-top: 0.3rem;
+            color: var(--bleu-fonce);
+        }
+
+        .tag-card .tag-role {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--texte);
+        }
+
+        /* ========================================
+           RESPONSIVE
+           ======================================== */
+        @media (max-width: 1024px) {
+            .slide-content { padding: 2.5rem 3rem; }
+        }
+
+        @media (max-width: 768px) {
+            .slide-content { padding: 1.8rem 1.5rem; }
+            h1 { font-size: 1.8rem; }
+            h2 { font-size: 1.4rem; }
+            p { font-size: 1rem; }
+            .subtitle { font-size: 1.2rem; }
+            .card-grid.cols-2,
+            .card-grid.cols-3,
+            .card-grid.cols-4 {
+                grid-template-columns: 1fr;
+            }
+            .tag-grid {
+                grid-template-columns: 1fr;
+            }
+            .table-simple { font-size: 0.85rem; }
+            .table-simple th,
+            .table-simple td {
+                padding: 0.4rem 0.6rem;
+            }
+            .slide-cover h1 { font-size: 2rem; }
+            .slide-next h1 { font-size: 2rem; }
+            .nav-hint,
+            .slide-counter {
+                font-size: 0.6rem;
+                padding: 0.2rem 0.7rem;
+            }
+            pre { font-size: 0.75rem; padding: 1rem; }
+            .exercice-box { padding: 1.2rem; }
+            .exercice-box li { font-size: 0.95rem; }
+            .objectif-text { font-size: 1rem; }
+            .objectif-num {
+                width: 36px;
+                height: 36px;
+                font-size: 1rem;
+            }
+            .box { font-size: 1rem; padding: 1rem 1.2rem; }
+            .tag-card .tag-name { font-size: 0.8rem; }
+            .tag-card .tag-example { font-size: 0.75rem; }
+        }
+
+        @media (max-width: 480px) {
+            .slide-content { padding: 1.2rem 1rem; }
+            h1 { font-size: 1.5rem; }
+            h2 { font-size: 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ========================================
+    CONTENEUR PROJECTION
+    ======================================== -->
+    <div class="presentation-container">
+        <div class="slide-stage" id="slideStage"></div>
+        <div class="progress-bar" id="progressBar"></div>
+        <div class="slide-counter" id="slideCounter">1 / 24</div>
+        <div class="nav-hint">← → naviguer · Escape quitter</div>
+    </div>
+
+    <script>
+        // ============================================================
+        // 1. SLIDES DATA — JOUR 4
+        // ============================================================
+        const slidesData = [{
+            // Slide 1 : Couverture
+            content: `
+                    <h1 class="anim-item">Maîtrise des balises HTML et <span class="highlight">déploiement</span></h1>
+                    <p class="subtitle anim-item">Jour 4 — Comprendre chaque balise · Lier HTML et CSS · Publier sur GitHub Pages</p>
+                    <p class="anim-item" style="font-size:1.3rem; margin-top:0.5rem;">
+                        De la balise à la publication en ligne
+                    </p>
+                    <div style="margin-top:2rem;">
+                        <p class="anim-item" style="font-size:1.1rem; color:rgba(255,255,255,0.6);">
+                            <i class="fas fa-map-pin"></i> NTIC Solution — Banfora, Burkina Faso
+                        </p>
+                        <p class="anim-item" style="font-size:0.95rem; color:rgba(255,255,255,0.4); margin-top:0.5rem;">
+                            Duree : 2 heures · Niveau : Debutant
+                        </p>
+                    </div>
+                `,
+            className: 'slide-cover'
+        }, {
+            // Slide 2 : Objectifs
+            content: `
+                    <h2 class="anim-item">Objectifs du Jour 4</h2>
+                    <p class="anim-item" style="font-size:1.1rem; color:var(--gris-fonce); margin-bottom:1rem;">
+                        A la fin de cette seance, chaque participant saura :
+                    </p>
+                    <div>
+                        <div class="objectif-item anim-item">
+                            <div class="objectif-num">1</div>
+                            <div class="objectif-text">Identifier et expliquer chaque balise HTML (h1, div, a, p, section, footer...)</div>
+                        </div>
+                        <div class="objectif-item anim-item">
+                            <div class="objectif-num">2</div>
+                            <div class="objectif-text">Comprendre le role de chaque balise dans la structure d'une page</div>
+                        </div>
+                        <div class="objectif-item anim-item">
+                            <div class="objectif-num">3</div>
+                            <div class="objectif-text">Lier le HTML au CSS et identifier le style de chaque element</div>
+                        </div>
+                        <div class="objectif-item anim-item">
+                            <div class="objectif-num">4</div>
+                            <div class="objectif-text">Personnaliser un site en modifiant les balises et leurs styles</div>
+                        </div>
+                        <div class="objectif-item anim-item">
+                            <div class="objectif-num">5</div>
+                            <div class="objectif-text">Deployer son site sur GitHub Pages et le rendre public</div>
+                        </div>
+                    </div>
+                `,
+            className: 'slide-objectifs'
+        }, {
+            // Slide 3 : Les balises HTML — introduction
+            content: `
+                    <h2 class="anim-item">Les balises HTML — la structure du web</h2>
+                    <p class="anim-item" style="margin-top:0.5rem;">
+                        Une balise HTML est un <strong>element</strong> qui definit une partie du contenu d'une page web.
+                    </p>
+                    <div class="box box-tip anim-item">
+                        <i class="fas fa-lightbulb"></i>
+                        <div>
+                            <strong>Format d'une balise :</strong><br />
+                            <code>&lt;nom-de-la-balise&gt; contenu &lt;/nom-de-la-balise&gt;</code><br />
+                            Certaines balises sont <strong>auto-fermantes</strong> : <code>&lt;img src="photo.jpg" /&gt;</code>
+                        </div>
+                    </div>
+                    <p class="anim-item" style="font-size:1.1rem; color:var(--gris-fonce); margin-top:0.5rem;">
+                        <strong>Regle d'or :</strong> Chaque balise a un role precis. Bien les utiliser, c'est construire un site clair et accessible.
+                    </p>
+                `,
+            className: ''
+        }, {
+            // Slide 4 : Les balises de titre — h1 à h6
+            content: `
+                    <h2 class="anim-item">Les balises de titre — h1 a h6</h2>
+                    <div class="tag-grid anim-item">
+                        <div class="tag-card">
+                            <span class="tag-name">&lt;h1&gt;</span>
+                            <p class="tag-role">Titre principal de la page</p>
+                            <p class="tag-usage">Utilise une seule fois par page. C'est le titre le plus important.</p>
+                            <div class="tag-example">&lt;h1&gt;Bienvenue sur mon site&lt;/h1&gt;</div>
+                        </div>
+                        <div class="tag-card">
+                            <span class="tag-name">&lt;h2&gt;</span>
+                            <p class="tag-role">Sous-titre de section</p>
+                            <p class="tag-usage">Utilise pour structurer les grandes sections de la page.</p>
+                            <div class="tag-example">&lt;h2&gt;Nos services&lt;/h2&gt;</div>
+                        </div>
+                        <div class="tag-card">
+                            <span class="tag-name">&lt;h3&gt;</span>
+                            <p class="tag-role">Sous-section</p>
+                            <p class="tag-usage">Utilise pour diviser une section h2 en sous-parties.</p>
+                            <div class="tag-example">&lt;h3&gt;Developpement web&lt;/h3&gt;</div>
+                        </div>
+                        <div class="tag-card">
+                            <span class="tag-name">&lt;h4&gt; a &lt;h6&gt;</span>
+                            <p class="tag-role">Titres de niveaux inferieurs</p>
+                            <p class="tag-usage">Utilises pour des sous-sections plus precises.</p>
+                            <div class="tag-example">&lt;h4&gt;Duree de la formation&lt;/h4&gt;</div>
+                        </div>
+                    </div>
+                    <div class="box box-important anim-item">
+                        <i class="fas fa-star"></i>
+                        <div><strong>A retenir :</strong> L'ordre des titres est important pour la structure et le referencement (SEO).</div>
+                    </div>
+                `,
+            className: ''
+        }, {
+            // Slide 5 : Les balises de structure — div, section, header, footer
+            content: `
+                    <h2 class="anim-item">Les balises de structure</h2>
+                    <div class="tag-grid anim-item">
+                        <div class="tag-card">
+                            <span class="tag-name">&lt;div&gt;</span>
+                            <p class="tag-role">Conteneur generique</p>
+                            <p class="tag-usage">Utilise pour regrouper des elements et appliquer des styles CSS.</p>
+                            <div class="tag-example">&lt;div class="container"&gt;...&lt;/div&gt;</div>
+                        </div>
+                        <div class="tag-card">
+                            <span class="tag-name">&lt;section&gt;</span>
+                            <p class="tag-role">Section thematique</p>
+                            <p class="tag-usage">Represente une partie distincte d'une page (ex: services, contact).</p>
+                            <div class="tag-example">&lt;section id="contact"&gt;...&lt;/section&gt;</div>
+                        </div>
+                        <div class="tag-card">
+                            <span class="tag-name">&lt;header&gt;</span>
+                            <p class="tag-role">En-tete de la page</p>
+                            <p class="tag-usage">Contient le logo, le menu de navigation, le titre principal.</p>
+                            <div class="tag-example">&lt;header&gt;&lt;nav&gt;...&lt;/nav&gt;&lt;/header&gt;</div>
+                        </div>
+                        <div class="tag-card">
+                            <span class="tag-name">&lt;footer&gt;</span>
+                            <p class="tag-role">Pied de page</p>
+                            <p class="tag-usage">Contient les mentions legales, les contacts, les liens.</p>
+                            <div class="tag-example">&lt;footer&gt;&copy; 2026 NTIC Solution&lt;/footer&gt;</div>
+                        </div>
+                    </div>
+                    <div class="box box-tip anim-item">
+                        <i class="fas fa-lightbulb"></i>
+                        <div><strong>Astuce :</strong> Utilisez <code>&lt;section&gt;</code> pour du contenu thematique et <code>&lt;div&gt;</code> pour le design/layout.</div>
+                    </div>
+                `,
+            className: ''
+        }, {
+            // Slide 6 : Les balises de texte — p, span, strong, em
+            content: `
+                    <h2 class="anim-item">Les balises de texte</h2>
+                    <div class="tag-grid anim-item">
+                        <div class="tag-card">
+                            <span class="tag-name">&lt;p&gt;</span>
+                            <p class="tag-role">Paragraphe</p>
+                            <p class="tag-usage">Utilise pour ecrire des blocs de texte.</p>
+                            <div class="tag-example">&lt;p&gt;Bienvenue sur notre site web.&lt;/p&gt;</div>
+                        </div>
+                        <div class="tag-card">
+                            <span class="tag-name">&lt;span&gt;</span>
+                            <p class="tag-role">Conteneur inline</p>
+                            <p class="tag-usage">Utilise pour styliser une partie d'un texte sans couper le flux.</p>
+                            <div class="tag-example">&lt;p&gt;Texte &lt;span style="color:red;"&gt;rouge&lt;/span&gt;&lt;/p&gt;</div>
+                        </div>
+                        <div class="tag-card">
+                            <span class="tag-name">&lt;strong&gt;</span>
+                            <p class="tag-role">Texte important</p>
+                            <p class="tag-usage">Met en gras le texte pour indiquer son importance.</p>
+                            <div class="tag-example">&lt;strong&gt;Attention :&lt;/strong&gt; lisez ceci.</div>
+                        </div>
+                        <div class="tag-card">
+                            <span class="tag-name">&lt;em&gt;</span>
+                            <p class="tag-role">Texte accentue</p>
+                            <p class="tag-usage">Met en italique le texte pour souligner.</p>
+                            <div class="tag-example">&lt;em&gt;Important&lt;/em&gt; : verifiez vos informations.</div>
+                        </div>
+                    </div>
+                `,
+            className: ''
+        }, {
+            // Slide 7 : Les balises de lien et image — a, img
+            content: `
+                    <h2 class="anim-item">Les balises de lien et d'image</h2>
+                    <div class="tag-grid anim-item">
+                        <div class="tag-card">
+                            <span class="tag-name">&lt;a&gt;</span>
+                            <p class="tag-role">Lien hypertexte</p>
+                            <p class="tag-usage">Permet de naviguer vers une autre page, un site, ou une ancre interne.</p>
+                            <div class="tag-example">&lt;a href="https://nticsolution.org"&gt;NTIC Solution&lt;/a&gt;</div>
+                            <div class="tag-example" style="margin-top:0.2rem;">&lt;a href="#contact"&gt;Aller au contact&lt;/a&gt;</div>
+                        </div>
+                        <div class="tag-card">
+                            <span class="tag-name">&lt;img&gt;</span>
+                            <p class="tag-role">Image</p>
+                            <p class="tag-usage">Affiche une image. La balise est auto-fermante.</p>
+                            <div class="tag-example">&lt;img src="logo.png" alt="Logo NTIC" /&gt;</div>
+                            <p class="tag-usage" style="font-size:0.8rem; color:var(--gris-fonce); margin-top:0.2rem;">
+                                <strong>Attributs obligatoires :</strong> <code>src</code> (source) et <code>alt</code> (description)
+                            </p>
+                        </div>
+                    </div>
+                    <div class="box box-info anim-item">
+                        <i class="fas fa-info-circle"></i>
+                        <div>
+                            <strong>A retenir :</strong><br />
+                            - <code>href</code> definit la destination du lien<br />
+                            - <code>target="_blank"</code> ouvre le lien dans un nouvel onglet
+                        </div>
+                    </div>
+                `,
+            className: ''
+        }, {
+            // Slide 8 : Les balises de liste — ul, ol, li
+            content: `
+                    <h2 class="anim-item">Les balises de liste</h2>
+                    <div class="tag-grid anim-item">
+                        <div class="tag-card">
+                            <span class="tag-name">&lt;ul&gt;</span>
+                            <p class="tag-role">Liste non ordonnee</p>
+                            <p class="tag-usage">Liste a puces, sans ordre precis.</p>
+                            <div class="tag-example">
+                                &lt;ul&gt;<br />
+                                &nbsp;&nbsp;&lt;li&gt;Element 1&lt;/li&gt;<br />
+                                &nbsp;&nbsp;&lt;li&gt;Element 2&lt;/li&gt;<br />
+                                &lt;/ul&gt;
+                            </div>
+                        </div>
+                        <div class="tag-card">
+                            <span class="tag-name">&lt;ol&gt;</span>
+                            <p class="tag-role">Liste ordonnee</p>
+                            <p class="tag-usage">Liste numerotee, avec un ordre precis.</p>
+                            <div class="tag-example">
+                                &lt;ol&gt;<br />
+                                &nbsp;&nbsp;&lt;li&gt;Etape 1&lt;/li&gt;<br />
+                                &nbsp;&nbsp;&lt;li&gt;Etape 2&lt;/li&gt;<br />
+                                &lt;/ol&gt;
+                            </div>
+                        </div>
+                        <div class="tag-card">
+                            <span class="tag-name">&lt;li&gt;</span>
+                            <p class="tag-role">Element de liste</p>
+                            <p class="tag-usage">Chaque element d'une liste, qu'elle soit ul ou ol.</p>
+                            <div class="tag-example">&lt;li&gt;Mon element de liste&lt;/li&gt;</div>
+                        </div>
+                    </div>
+                `,
+            className: ''
+        }, {
+            // Slide 9 : Les balises de formulaire — form, input, button, textarea
+            content: `
+                    <h2 class="anim-item">Les balises de formulaire</h2>
+                    <div class="tag-grid anim-item">
+                        <div class="tag-card">
+                            <span class="tag-name">&lt;form&gt;</span>
+                            <p class="tag-role">Formulaire</p>
+                            <p class="tag-usage">Conteneur pour les champs de saisie.</p>
+                            <div class="tag-example">&lt;form action="/envoyer" method="POST"&gt;...&lt;/form&gt;</div>
+                        </div>
+                        <div class="tag-card">
+                            <span class="tag-name">&lt;input&gt;</span>
+                            <p class="tag-role">Champ de saisie</p>
+                            <p class="tag-usage">Permet de saisir du texte, un email, un mot de passe, etc.</p>
+                            <div class="tag-example">&lt;input type="text" placeholder="Votre nom" /&gt;</div>
+                            <div class="tag-example" style="margin-top:0.2rem;">&lt;input type="email" placeholder="Email" /&gt;</div>
+                        </div>
+                        <div class="tag-card">
+                            <span class="tag-name">&lt;button&gt;</span>
+                            <p class="tag-role">Bouton</p>
+                            <p class="tag-usage">Declenche une action : envoyer un formulaire, ouvrir un lien, etc.</p>
+                            <div class="tag-example">&lt;button type="submit"&gt;Envoyer&lt;/button&gt;</div>
+                        </div>
+                        <div class="tag-card">
+                            <span class="tag-name">&lt;textarea&gt;</span>
+                            <p class="tag-role">Zone de texte</p>
+                            <p class="tag-usage">Permet de saisir un texte long (message, commentaire).</p>
+                            <div class="tag-example">&lt;textarea rows="4" cols="50"&gt;Votre message...&lt;/textarea&gt;</div>
+                        </div>
+                    </div>
+                `,
+            className: ''
+        }, {
+            // Slide 10 : Les balises de navigation et multimedia — nav, video, audio
+            content: `
+                    <h2 class="anim-item">Les balises de navigation et multimedia</h2>
+                    <div class="tag-grid anim-item">
+                        <div class="tag-card">
+                            <span class="tag-name">&lt;nav&gt;</span>
+                            <p class="tag-role">Navigation</p>
+                            <p class="tag-usage">Contient le menu de navigation principal du site.</p>
+                            <div class="tag-example">&lt;nav&gt;&lt;a href="/"&gt;Accueil&lt;/a&gt; ... &lt;/nav&gt;</div>
+                        </div>
+                        <div class="tag-card">
+                            <span class="tag-name">&lt;video&gt;</span>
+                            <p class="tag-role">Video</p>
+                            <p class="tag-usage">Integre une video dans la page.</p>
+                            <div class="tag-example">&lt;video src="video.mp4" controls&gt;&lt;/video&gt;</div>
+                        </div>
+                        <div class="tag-card">
+                            <span class="tag-name">&lt;audio&gt;</span>
+                            <p class="tag-role">Audio</p>
+                            <p class="tag-usage">Integre un fichier audio.</p>
+                            <div class="tag-example">&lt;audio src="musique.mp3" controls&gt;&lt;/audio&gt;</div>
+                        </div>
+                        <div class="tag-card">
+                            <span class="tag-name">&lt;iframe&gt;</span>
+                            <p class="tag-role">Cadre integre</p>
+                            <p class="tag-usage">Affiche une page web dans la page (ex: Google Maps, video YouTube).</p>
+                            <div class="tag-example">&lt;iframe src="https://youtube.com/..."&gt;&lt;/iframe&gt;</div>
+                        </div>
+                    </div>
+                `,
+            className: ''
+        }, {
+            // Slide 11 : Synthese des balises — tableau recapitulatif
+            content: `
+                    <h2 class="anim-item">Synthese des balises HTML essentielles</h2>
+                    <div class="table-wrapper anim-item">
+                        <table class="table-simple">
+                            <thead>
+                                <tr>
+                                    <th>Balise</th>
+                                    <th>Role</th>
+                                    <th>Exemple</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td><code>&lt;h1&gt;</code> a <code>&lt;h6&gt;</code></td><td>Titres hierarchises</td><td><code>&lt;h1&gt;Titre principal&lt;/h1&gt;</code></td></tr>
+                                <tr><td><code>&lt;p&gt;</code></td><td>Paragraphe</td><td><code>&lt;p&gt;Texte...&lt;/p&gt;</code></td></tr>
+                                <tr><td><code>&lt;div&gt;</code></td><td>Conteneur generique</td><td><code>&lt;div class="container"&gt;...&lt;/div&gt;</code></td></tr>
+                                <tr><td><code>&lt;section&gt;</code></td><td>Section thematique</td><td><code>&lt;section id="services"&gt;...&lt;/section&gt;</code></td></tr>
+                                <tr><td><code>&lt;header&gt;</code></td><td>En-tete</td><td><code>&lt;header&gt;&lt;nav&gt;...&lt;/nav&gt;&lt;/header&gt;</code></td></tr>
+                                <tr><td><code>&lt;footer&gt;</code></td><td>Pied de page</td><td><code>&lt;footer&gt;&copy; 2026&lt;/footer&gt;</code></td></tr>
+                                <tr><td><code>&lt;a&gt;</code></td><td>Lien</td><td><code>&lt;a href="https://..."&gt;Lien&lt;/a&gt;</code></td></tr>
+                                <tr><td><code>&lt;img&gt;</code></td><td>Image</td><td><code>&lt;img src="photo.jpg" alt="Photo" /&gt;</code></td></tr>
+                                <tr><td><code>&lt;ul&gt;</code> / <code>&lt;ol&gt;</code></td><td>Listes</td><td><code>&lt;ul&gt;&lt;li&gt;Element&lt;/li&gt;&lt;/ul&gt;</code></td></tr>
+                                <tr><td><code>&lt;form&gt;</code></td><td>Formulaire</td><td><code>&lt;form&gt;&lt;input type="text" /&gt;&lt;/form&gt;</code></td></tr>
+                                <tr><td><code>&lt;button&gt;</code></td><td>Bouton</td><td><code>&lt;button&gt;Cliquez&lt;/button&gt;</code></td></tr>
+                                <tr><td><code>&lt;nav&gt;</code></td><td>Navigation</td><td><code>&lt;nav&gt;&lt;a href="#accueil"&gt;Accueil&lt;/a&gt;&lt;/nav&gt;</code></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                `,
+            className: ''
+        }, {
+            // Slide 12 : Lien HTML-CSS — Comment identifier le CSS d'un element
+            content: `
+                    <h2 class="anim-item">Lien HTML-CSS : identifier le style d'un element</h2>
+                    <p class="anim-item" style="margin-top:0.5rem;">
+                        Chaque element HTML peut etre stylise via le CSS. Pour identifier le CSS d'un element, on utilise :
+                    </p>
+                    <div class="card-grid cols-3 anim-item" style="margin-top:1.5rem;">
+                        <div class="card">
+                            <i class="fas fa-hashtag" style="color:var(--violet);"></i>
+                            <h4>L'identifiant <code>id</code></h4>
+                            <p>Unique sur la page. On le cible avec <code>#nom-id</code> en CSS.</p>
+                            <div class="tag-example" style="background:var(--gris); padding:0.3rem; border-radius:4px; font-size:0.85rem;">
+                                HTML : <code>&lt;section id="accueil"&gt;</code><br />
+                                CSS : <code>#accueil { background: blue; }</code>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <i class="fas fa-circle" style="color:var(--vert);"></i>
+                            <h4>La classe <code>class</code></h4>
+                            <p>Reutilisable sur plusieurs elements. On la cible avec <code>.nom-classe</code> en CSS.</p>
+                            <div class="tag-example" style="background:var(--gris); padding:0.3rem; border-radius:4px; font-size:0.85rem;">
+                                HTML : <code>&lt;div class="container"&gt;</code><br />
+                                CSS : <code>.container { max-width: 1200px; }</code>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <i class="fas fa-tag" style="color:var(--orange);"></i>
+                            <h4>La balise directement</h4>
+                            <p>On cible toutes les balises d'un certain type.</p>
+                            <div class="tag-example" style="background:var(--gris); padding:0.3rem; border-radius:4px; font-size:0.85rem;">
+                                HTML : <code>&lt;h1&gt;Titre&lt;/h1&gt;</code><br />
+                                CSS : <code>h1 { font-size: 2rem; }</code>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box box-important anim-item">
+                        <i class="fas fa-search"></i>
+                        <div><strong>Methode :</strong> Pour trouver le style d'un element, cherchez son <code>id</code>, sa <code>class</code>, ou la balise elle-meme dans le fichier CSS.</div>
+                    </div>
+                `,
+            className: ''
+        }, {
+            // Slide 13 : Exemple concret de liaison HTML-CSS
+            content: `
+                    <h2 class="anim-item">Exemple concret : liaison HTML-CSS</h2>
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:2rem; margin-top:1.5rem;">
+                        <div class="anim-item">
+                            <h4 style="color:var(--bleu);">HTML</h4>
+                            <pre style="font-size:0.85rem; background:#1e293b; color:#e2e8f0; padding:1rem; border-radius:var(--radius);">
+        <span class="tag">&lt;section</span> <span class="attr">id</span>=<span class="string">"services"</span> <span class="attr">class</span>=<span class="string">"section"</span><span class="tag">&gt;</span>
+            <span class="tag">&lt;h2</span> <span class="attr">class</span>=<span class="string">"section-title"</span><span class="tag">&gt;</span>Nos services<span class="tag">&lt;/h2&gt;</span>
+            <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="string">"services-grid"</span><span class="tag">&gt;</span>
+                <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="string">"service-card"</span><span class="tag">&gt;</span>
+                    <span class="tag">&lt;h3&gt;</span>Developpement web<span class="tag">&lt;/h3&gt;</span>
+                    <span class="tag">&lt;p&gt;</span>Creation de sites sur mesure.<span class="tag">&lt;/p&gt;</span>
+                <span class="tag">&lt;/div&gt;</span>
+            <span class="tag">&lt;/div&gt;</span>
+        <span class="tag">&lt;/section&gt;</span></pre>
+                        </div>
+                        <div class="anim-item">
+                            <h4 style="color:var(--orange);">CSS associe</h4>
+                            <pre style="font-size:0.85rem; background:#1e293b; color:#e2e8f0; padding:1rem; border-radius:var(--radius);">
+        <span class="comment">/* Section services */</span>
+        <span class="selector">#services</span> {
+            <span class="property">padding</span>: <span class="string">60px 0</span>;
+            <span class="property">background</span>: <span class="string">#f8fafc</span>;
+        }
+
+        <span class="selector">.section-title</span> {
+            <span class="property">font-size</span>: <span class="string">2.2rem</span>;
+            <span class="property">font-weight</span>: <span class="string">800</span>;
+            <span class="property">color</span>: <span class="string">#0B3FA5</span>;
+        }
+
+        <span class="selector">.services-grid</span> {
+            <span class="property">display</span>: <span class="string">grid</span>;
+            <span class="property">grid-template-columns</span>: <span class="string">repeat(3, 1fr)</span>;
+            <span class="property">gap</span>: <span class="string">2rem</span>;
+        }
+
+        <span class="selector">.service-card</span> {
+            <span class="property">background</span>: <span class="string">white</span>;
+            <span class="property">border-radius</span>: <span class="string">16px</span>;
+            <span class="property">padding</span>: <span class="string">2rem</span>;
+            <span class="property">box-shadow</span>: <span class="string">0 4px 24px rgba(0,0,0,0.08)</span>;
+        }</pre>
+                        </div>
+                    </div>
+                    <div class="box box-success anim-item">
+                        <i class="fas fa-check-circle"></i>
+                        <div>
+                            <strong>Observation :</strong> Chaque element HTML a un <code>id</code> ou une <code>class</code> qui correspond a un style CSS.
+                            Pour modifier l'apparence, on modifie le CSS correspondant.
+                        </div>
+                    </div>
+                `,
+            className: ''
+        }, {
+            // Slide 14 : Exercice — identifier les liaisons HTML-CSS
+            content: `
+                    <h2 class="anim-item">Exercice : identifier les liaisons HTML-CSS</h2>
+                    <div class="exercice-box anim-item">
+                        <h3><i class="fas fa-search"></i> Consignes</h3>
+                        <ol>
+                            <li>Ouvrez le fichier <code>index.html</code> du site CPP</li>
+                            <li>Pour chaque element ci-dessous, trouvez son <code>id</code> ou sa <code>class</code></li>
+                            <li>Retrouvez le style CSS correspondant</li>
+                            <li>Notez la propriete qui definit la couleur</li>
+                        </ol>
+                        <div style="margin-top:1rem; display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
+                            <div style="background:var(--gris); padding:1rem; border-radius:10px;">
+                                <p><strong>Element HTML</strong></p>
+                                <p style="font-size:0.95rem;"><code>&lt;section class="hero"&gt;</code></p>
+                            </div>
+                            <div style="background:var(--gris); padding:1rem; border-radius:10px;">
+                                <p><strong>CSS associe</strong></p>
+                                <p style="font-size:0.95rem; color:var(--gris-fonce);">A trouver...</p>
+                            </div>
+                            <div style="background:var(--gris); padding:1rem; border-radius:10px;">
+                                <p><strong>Element HTML</strong></p>
+                                <p style="font-size:0.95rem;"><code>&lt;button class="btn-primary"&gt;</code></p>
+                            </div>
+                            <div style="background:var(--gris); padding:1rem; border-radius:10px;">
+                                <p><strong>CSS associe</strong></p>
+                                <p style="font-size:0.95rem; color:var(--gris-fonce);">A trouver...</p>
+                            </div>
+                            <div style="background:var(--gris); padding:1rem; border-radius:10px;">
+                                <p><strong>Element HTML</strong></p>
+                                <p style="font-size:0.95rem;"><code>&lt;footer class="footer"&gt;</code></p>
+                            </div>
+                            <div style="background:var(--gris); padding:1rem; border-radius:10px;">
+                                <p><strong>CSS associe</strong></p>
+                                <p style="font-size:0.95rem; color:var(--gris-fonce);">A trouver...</p>
+                            </div>
+                        </div>
+                        <p style="margin-top:1rem; font-size:1.1rem; font-weight:600; color:var(--bleu);">
+                            <i class="fas fa-pen"></i> Notez vos resultats sur une feuille.
+                        </p>
+                    </div>
+                `,
+            className: 'slide-exercice'
+        }, {
+            // Slide 15 : Exercice — personnaliser le site
+            content: `
+                    <h2 class="anim-item">Exercice : personnaliser le site</h2>
+                    <div class="exercice-box anim-item">
+                        <h3><i class="fas fa-tasks"></i> Consignes</h3>
+                        <ol>
+                            <li>Ouvrez le fichier <code>index.html</code> du site CPP</li>
+                            <li>Modifiez les elements suivants :</li>
+                        </ol>
+                        <div style="margin-top:1rem; background:var(--gris); padding:1rem; border-radius:10px;">
+                            <p style="font-size:1rem;"><strong>1. Le titre principal</strong></p>
+                            <p style="font-size:0.95rem; color:var(--gris-fonce);">Changez <code>&lt;h1&gt;</code> pour votre propre message</p>
+                            <p style="font-size:1rem; margin-top:0.5rem;"><strong>2. Le paragraphe de presentation</strong></p>
+                            <p style="font-size:0.95rem; color:var(--gris-fonce);">Modifiez le texte du <code>&lt;p&gt;</code> dans la section hero</p>
+                            <p style="font-size:1rem; margin-top:0.5rem;"><strong>3. Les statistiques</strong></p>
+                            <p style="font-size:0.95rem; color:var(--gris-fonce);">Changez les chiffres dans les <code>&lt;span class="number"&gt;</code></p>
+                            <p style="font-size:1rem; margin-top:0.5rem;"><strong>4. Le footer</strong></p>
+                            <p style="font-size:0.95rem; color:var(--gris-fonce);">Modifiez le texte du <code>&lt;footer&gt;</code></p>
+                            <p style="font-size:1rem; margin-top:0.5rem;"><strong>5. La couleur principale</strong></p>
+                            <p style="font-size:0.95rem; color:var(--gris-fonce);">Changez <code>--vert-fonce</code> dans <code>:root</code></p>
+                        </div>
+                        <p style="margin-top:1rem; font-size:1.1rem; font-weight:600; color:var(--vert);">
+                            <i class="fas fa-save"></i> Ctrl+S → Vérifier dans le navigateur
+                        </p>
+                    </div>
+                `,
+            className: 'slide-exercice'
+        }, {
+            // Slide 16 : Introduction a GitHub
+            content: `
+                    <h2 class="anim-item">GitHub — la plateforme des developpeurs</h2>
+                    <p class="anim-item" style="margin-top:0.5rem;">
+                        GitHub est une plateforme de <strong>stockage de code</strong> et de <strong>collaboration</strong>.
+                    </p>
+                    <div class="card-grid cols-2 anim-item" style="margin-top:1.5rem;">
+                        <div class="card" style="border-color:var(--violet);">
+                            <i class="fab fa-github" style="color:var(--violet);"></i>
+                            <h4>Qu'est-ce que GitHub ?</h4>
+                            <p>Un service en ligne pour heberger et partager du code.</p>
+                            <p style="font-size:0.85rem; color:var(--gris-fonce);">Comme Google Drive, mais pour le code.</p>
+                        </div>
+                        <div class="card" style="border-color:var(--vert);">
+                            <i class="fas fa-globe" style="color:var(--vert);"></i>
+                            <h4>GitHub Pages</h4>
+                            <p>Un service gratuit qui publie votre site web en ligne.</p>
+                            <p style="font-size:0.85rem; color:var(--gris-fonce);">Votre site devient accessible a tout le monde.</p>
+                        </div>
+                    </div>
+                    <div class="box box-important anim-item">
+                        <i class="fas fa-star"></i>
+                        <div><strong>Avantage :</strong> GitHub Pages est <strong>gratuit</strong> et ne necessite pas de serveur payant.</div>
+                    </div>
+                `,
+            className: ''
+        }, {
+            // Slide 17 : Creation d'un compte GitHub
+            content: `
+                    <h2 class="anim-item">Etape 1 : Creer un compte GitHub</h2>
+                    <div class="table-wrapper anim-item">
+                        <table class="table-simple">
+                            <thead>
+                                <tr><th>Etape</th><th>Action</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>1</strong></td>
+                                    <td>Allez sur <code>github.com</code></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>2</strong></td>
+                                    <td>Cliquez sur <strong>« Sign up »</strong></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>3</strong></td>
+                                    <td>Entrez votre adresse email</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>4</strong></td>
+                                    <td>Creez un mot de passe (minimum 8 caracteres)</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>5</strong></td>
+                                    <td>Choisissez un nom d'utilisateur (ex: prenom-nom)</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>6</strong></td>
+                                    <td>Verifiez votre email (code recu par mail)</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>7</strong></td>
+                                    <td>Selectionnez « Free » (gratuit)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="box box-tip anim-item">
+                        <i class="fas fa-lightbulb"></i>
+                        <div><strong>Astuce :</strong> Choisissez un nom d'utilisateur simple et professionnel.</div>
+                    </div>
+                `,
+            className: ''
+        }, {
+            // Slide 18 : Creation du depot (repository)
+            content: `
+                    <h2 class="anim-item">Etape 2 : Creer un depot (repository)</h2>
+                    <div class="table-wrapper anim-item">
+                        <table class="table-simple">
+                            <thead>
+                                <tr><th>Etape</th><th>Action</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>1</strong></td>
+                                    <td>Connectez-vous a GitHub</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>2</strong></td>
+                                    <td>Cliquez sur le bouton <strong>« + »</strong> en haut a droite</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>3</strong></td>
+                                    <td>Selectionnez <strong>« New repository »</strong></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>4</strong></td>
+                                    <td>Donnez un nom au depot : <code>mon-premier-site</code></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>5</strong></td>
+                                    <td>Cochez <strong>« Add a README file »</strong></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>6</strong></td>
+                                    <td>Cliquez sur <strong>« Create repository »</strong></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="box box-info anim-item">
+                        <i class="fas fa-info-circle"></i>
+                        <div>Le depot est l'endroit ou vos fichiers seront stockes en ligne.</div>
+                    </div>
+                `,
+            className: ''
+        }, {
+            // Slide 19 : Upload du fichier HTML
+            content: `
+                    <h2 class="anim-item">Etape 3 : Uploader le fichier HTML</h2>
+                    <div class="table-wrapper anim-item">
+                        <table class="table-simple">
+                            <thead>
+                                <tr><th>Etape</th><th>Action</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>1</strong></td>
+                                    <td>Dans votre depot, cliquez sur <strong>« Add file »</strong></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>2</strong></td>
+                                    <td>Selectionnez <strong>« Upload files »</strong></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>3</strong></td>
+                                    <td>Glissez-deposez votre fichier <code>index.html</code></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>4</strong></td>
+                                    <td>Ajoutez un message de commit : « Ajout de la page web »</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>5</strong></td>
+                                    <td>Cliquez sur <strong>« Commit changes »</strong></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="box box-success anim-item">
+                        <i class="fas fa-check-circle"></i>
+                        <div><strong>Felicitation !</strong> Votre fichier est maintenant stocke en ligne sur GitHub.</div>
+                    </div>
+                `,
+            className: ''
+        }, {
+            // Slide 20 : Activation de GitHub Pages
+            content: `
+                    <h2 class="anim-item">Etape 4 : Activer GitHub Pages</h2>
+                    <div class="table-wrapper anim-item">
+                        <table class="table-simple">
+                            <thead>
+                                <tr><th>Etape</th><th>Action</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>1</strong></td>
+                                    <td>Dans votre depot, allez dans <strong>« Settings »</strong></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>2</strong></td>
+                                    <td>Dans le menu de gauche, cliquez sur <strong>« Pages »</strong></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>3</strong></td>
+                                    <td>Dans « Branch », selectionnez <strong>« main »</strong></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>4</strong></td>
+                                    <td>Cliquez sur <strong>« Save »</strong></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>5</strong></td>
+                                    <td>Attendez 2 a 3 minutes que le site soit publie</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="box box-important anim-item">
+                        <i class="fas fa-globe"></i>
+                        <div>
+                            <strong>URL de votre site :</strong><br />
+                            <code>https://nom-utilisateur.github.io/mon-premier-site/</code>
+                        </div>
+                    </div>
+                `,
+            className: ''
+        }, {
+            // Slide 21 : Verification et partage
+            content: `
+                    <h2 class="anim-item">Etape 5 : Verifier et partager</h2>
+                    <div class="card-grid cols-2 anim-item" style="margin-top:1.5rem;">
+                        <div class="card" style="border-color:var(--vert);">
+                            <i class="fas fa-check-circle" style="color:var(--vert);"></i>
+                            <h4>Verification</h4>
+                            <p>Ouvrez l'URL dans votre navigateur.</p>
+                            <p style="font-size:0.85rem; color:var(--gris-fonce);">Si le site s'affiche, c'est reussi !</p>
+                        </div>
+                        <div class="card" style="border-color:var(--orange);">
+                            <i class="fab fa-whatsapp" style="color:#25D366;"></i>
+                            <h4>Partage</h4>
+                            <p>Copiez l'URL et partagez-la sur WhatsApp.</p>
+                            <p style="font-size:0.85rem; color:var(--gris-fonce);">Montrez votre site a vos proches !</p>
+                        </div>
+                    </div>
+                    <div class="box box-success anim-item">
+                        <i class="fas fa-rocket"></i>
+                        <div><strong>Votre site est EN LIGNE !</strong> Accessible depuis n'importe quel appareil connecte a Internet.</div>
+                    </div>
+                `,
+            className: ''
+        }, {
+            // Slide 22 : Recapitulatif des etapes
+            content: `
+                    <h2 class="anim-item">Recapitulatif : les 5 etapes de deploiement</h2>
+                    <div style="margin-top:1.5rem;">
+                        <div class="objectif-item anim-item">
+                            <div class="objectif-num" style="background:var(--vert);">1</div>
+                            <div class="objectif-text">Creer un compte sur <strong>GitHub</strong></div>
+                        </div>
+                        <div class="objectif-item anim-item">
+                            <div class="objectif-num" style="background:var(--vert);">2</div>
+                            <div class="objectif-text">Creer un <strong>depot</strong> (repository)</div>
+                        </div>
+                        <div class="objectif-item anim-item">
+                            <div class="objectif-num" style="background:var(--vert);">3</div>
+                            <div class="objectif-text"><strong>Uploader</strong> le fichier index.html</div>
+                        </div>
+                        <div class="objectif-item anim-item">
+                            <div class="objectif-num" style="background:var(--vert);">4</div>
+                            <div class="objectif-text">Activer <strong>GitHub Pages</strong> dans les parametres</div>
+                        </div>
+                        <div class="objectif-item anim-item">
+                            <div class="objectif-num" style="background:var(--vert);">5</div>
+                            <div class="objectif-text">Obtenir l'<strong>URL publique</strong> et la partager</div>
+                        </div>
+                    </div>
+                    <div class="box box-tip anim-item" style="margin-top:1.5rem;">
+                        <i class="fas fa-lightbulb"></i>
+                        <div><strong>Rappel :</strong> Le fichier principal doit toujours s'appeler <code>index.html</code>.</div>
+                    </div>
+                `,
+            className: 'slide-recap'
+        }, {
+            // Slide 23 : Synthese des competences acquises
+            content: `
+                    <h2 class="anim-item">Ce que vous savez faire maintenant</h2>
+                    <div class="table-wrapper anim-item">
+                        <table class="table-simple">
+                            <thead>
+                                <tr><th>Competence</th><th>Statut</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>Identifier les balises HTML (h1, div, a, p, section, footer...)</td><td>✅</td></tr>
+                                <tr><td>Comprendre le role de chaque balise</td><td>✅</td></tr>
+                                <tr><td>Lier le HTML au CSS via id, class et balises</td><td>✅</td></tr>
+                                <tr><td>Identifier le CSS d'un element HTML</td><td>✅</td></tr>
+                                <tr><td>Personnaliser un site en modifiant le code</td><td>✅</td></tr>
+                                <tr><td>Creer un compte GitHub</td><td>✅</td></tr>
+                                <tr><td>Uploader un fichier sur GitHub</td><td>✅</td></tr>
+                                <tr><td>Activer GitHub Pages et obtenir une URL publique</td><td>✅</td></tr>
+                                <tr><td>Partager son site en ligne</td><td>✅</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                `,
+            className: 'slide-recap'
+        }, {
+            // Slide 24 : Conclusion
+            content: `
+                    <h1 class="anim-item" style="font-size:3rem;">Vous avez publie votre premier site web !</h1>
+                    <p class="anim-item" style="font-size:1.8rem; font-weight:600; color:var(--blanc);">NTIC Solution</p>
+                    <p class="anim-item" style="font-size:1.2rem; color:rgba(255,255,255,0.8);">
+                        L'univers du digital, a votre portee.
+                    </p>
+                    <div style="margin-top:1.5rem;">
+                        <p class="anim-item" style="color:rgba(255,255,255,0.9); font-size:1.1rem; padding:0.3rem 0;">
+                            <i class="fab fa-whatsapp" style="color:#25D366;"></i> WhatsApp : +226 69 69 69 24
+                        </p>
+                        <p class="anim-item" style="color:rgba(255,255,255,0.9); font-size:1.1rem; padding:0.3rem 0;">
+                            <i class="fas fa-phone" style="color:#C5E1A5;"></i> Telephone : +226 05 58 58 68
+                        </p>
+                        <p class="anim-item" style="color:rgba(255,255,255,0.9); font-size:1.1rem; padding:0.3rem 0;">
+                            <i class="fas fa-globe" style="color:#C5E1A5;"></i> www.nticsolution.org
+                        </p>
+                    </div>
+                    <p class="anim-item" style="margin-top:1.5rem; font-size:1rem; color:rgba(255,255,255,0.5);">
+                        Prochaine etape : Jour 5 — CSS avance et responsive design
+                    </p>
+                `,
+            className: 'slide-next'
+        }];
+
+        // ============================================================
+        // 2. ETAT
+        // ============================================================
+        let currentSlide = 0;
+        const totalSlides = slidesData.length;
+
+        // ============================================================
+        // 3. FONCTIONS D'AFFICHAGE
+        // ============================================================
+        function renderSlide(index) {
+            const stage = document.getElementById('slideStage');
+            const slide = slidesData[index];
+            stage.innerHTML = `<div class="slide-content ${slide.className}">${slide.content}</div>`;
+            updateProgress(index);
+            updateCounter(index);
+        }
+
+        function updateProgress(index) {
+            const progress = ((index + 1) / totalSlides) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+        }
+
+        function updateCounter(index) {
+            document.getElementById('slideCounter').textContent = (index + 1) + ' / ' + totalSlides;
+        }
+
+        function goNext() {
+            if (currentSlide < totalSlides - 1) {
+                currentSlide++;
+                renderSlide(currentSlide);
+            }
+        }
+
+        function goPrev() {
+            if (currentSlide > 0) {
+                currentSlide--;
+                renderSlide(currentSlide);
+            }
+        }
+
+        // ============================================================
+        // 4. INITIALISATION
+        // ============================================================
+        renderSlide(currentSlide);
+
+        // ============================================================
+        // 5. NAVIGATION CLAVIER / TACTILE
+        // ============================================================
+        document.addEventListener('keydown', function(e) {
+            const container = document.querySelector('.presentation-container');
+            if (!container) return;
+
+            switch (e.key) {
+                case 'ArrowRight':
+                case ' ':
+                case 'PageDown':
+                case 'ArrowDown':
+                    e.preventDefault();
+                    goNext();
+                    break;
+                case 'ArrowLeft':
+                case 'PageUp':
+                case 'ArrowUp':
+                    e.preventDefault();
+                    goPrev();
+                    break;
+                case 'Escape':
+                    if (confirm('Quitter la projection ?')) {
+                        document.querySelector('.presentation-container').style.display = 'none';
+                    }
+                    break;
+                case 'Home':
+                    e.preventDefault();
+                    currentSlide = 0;
+                    renderSlide(currentSlide);
+                    break;
+                case 'End':
+                    e.preventDefault();
+                    currentSlide = totalSlides - 1;
+                    renderSlide(currentSlide);
+                    break;
+            }
+        });
+
+        // Navigation tactile
+        let touchStartX = 0;
+        let touchStartY = 0;
+
+        document.addEventListener('touchstart', function(e) {
+            touchStartX = e.changedTouches[0].screenX;
+            touchStartY = e.changedTouches[0].screenY;
+        });
+
+        document.addEventListener('touchend', function(e) {
+            const deltaX = e.changedTouches[0].screenX - touchStartX;
+            const deltaY = e.changedTouches[0].screenY - touchStartY;
+
+            if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 50) {
+                if (deltaX < 0) goNext();
+                else goPrev();
+            }
+        });
+
+        // Scroll sur les slides
+        let scrollTimeout = false;
+
+        document.addEventListener('wheel', function(e) {
+            if (scrollTimeout) return;
+            const container = document.querySelector('.presentation-container');
+            if (!container || container.style.display === 'none') return;
+
+            if (Math.abs(e.deltaY) > 40) {
+                scrollTimeout = true;
+                if (e.deltaY > 0) {
+                    goNext();
+                } else {
+                    goPrev();
+                }
+                setTimeout(() => { scrollTimeout = false; }, 600);
+            }
+        }, { passive: true });
+    </script>
+
+</body>
+</html>
