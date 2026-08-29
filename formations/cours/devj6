@@ -1,0 +1,1219 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NTIC SOLUTION · Jour 6 — Création d'application mobile avec AppCreator24</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <style>
+        :root {
+            --bleu: #0B3FA5;
+            --bleu-clair: #e8f0fe;
+            --bleu-fonce: #072a6e;
+            --orange: #FF6B35;
+            --orange-clair: #fff4e5;
+            --vert: #059669;
+            --vert-clair: #ecfdf5;
+            --violet: #7c3aed;
+            --violet-clair: #f3e8ff;
+            --rouge: #dc2626;
+            --rouge-clair: #fef2f2;
+            --jaune: #f59e0b;
+            --jaune-clair: #fffbeb;
+            --gris: #f1f5f9;
+            --gris-fonce: #475569;
+            --texte: #1e293b;
+            --blanc: #ffffff;
+            --bordure: #e2e8f0;
+            --shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+            --radius: 16px;
+            --transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: #0d1117;
+            color: var(--texte);
+            overflow: hidden;
+            height: 100vh;
+            width: 100vw;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .presentation-container {
+            position: fixed;
+            inset: 0;
+            background: #0d1117;
+            z-index: 100;
+        }
+
+        .slide-stage {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .slide-content {
+            background: var(--blanc);
+            width: 100%;
+            height: 100%;
+            overflow-y: auto;
+            padding: 3rem 4.5rem;
+            position: relative;
+            animation: slideIn 0.5s ease;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: scale(0.96) translateY(12px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        .progress-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            z-index: 200;
+            height: 4px;
+            background: var(--orange);
+            transition: width 0.4s ease;
+            border-radius: 0 2px 2px 0;
+        }
+
+        .slide-counter {
+            position: fixed;
+            bottom: 1.2rem;
+            left: 1.5rem;
+            z-index: 200;
+            color: rgba(255,255,255,0.4);
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            background: rgba(0,0,0,0.4);
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            backdrop-filter: blur(8px);
+        }
+
+        .nav-hint {
+            position: fixed;
+            bottom: 1.2rem;
+            right: 1.5rem;
+            z-index: 200;
+            color: rgba(255,255,255,0.3);
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            background: rgba(0,0,0,0.3);
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            backdrop-filter: blur(8px);
+        }
+
+        .anim-item {
+            opacity: 0;
+            transform: translateY(24px);
+            animation: fadeUp 0.7s ease forwards;
+        }
+        .anim-item:nth-child(1) { animation-delay: 0.05s; }
+        .anim-item:nth-child(2) { animation-delay: 0.15s; }
+        .anim-item:nth-child(3) { animation-delay: 0.25s; }
+        .anim-item:nth-child(4) { animation-delay: 0.35s; }
+        .anim-item:nth-child(5) { animation-delay: 0.45s; }
+        .anim-item:nth-child(6) { animation-delay: 0.55s; }
+        .anim-item:nth-child(7) { animation-delay: 0.65s; }
+        .anim-item:nth-child(8) { animation-delay: 0.75s; }
+        .anim-item:nth-child(9) { animation-delay: 0.85s; }
+        .anim-item:nth-child(10) { animation-delay: 0.95s; }
+
+        @keyframes fadeUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 { font-size: 3.2rem; font-weight: 800; letter-spacing: -1.5px; color: var(--bleu); line-height: 1.1; }
+        h2 { font-size: 2.4rem; font-weight: 700; color: var(--bleu); line-height: 1.2; margin-bottom: 0.5rem; }
+        h3 { font-size: 1.5rem; font-weight: 700; }
+        h4 { font-size: 1.2rem; font-weight: 700; }
+        p { font-size: 1.25rem; line-height: 1.6; color: var(--gris-fonce); }
+        .subtitle { font-size: 1.6rem; font-weight: 500; color: var(--gris-fonce); }
+
+        .slide-cover {
+            background: linear-gradient(135deg, var(--bleu-fonce) 0%, #0d1b3e 100%);
+            color: var(--blanc);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        .slide-cover h1 { color: var(--blanc); font-size: 3.5rem; }
+        .slide-cover .subtitle { color: rgba(255,255,255,0.85); }
+        .slide-cover p { color: rgba(255,255,255,0.7); }
+        .slide-cover .highlight { color: var(--orange); }
+
+        .slide-next {
+            background: linear-gradient(135deg, var(--orange) 0%, #e55a2b 100%);
+            color: var(--blanc);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        .slide-next h1, .slide-next h2 { color: var(--blanc); }
+        .slide-next p { color: rgba(255,255,255,0.85); }
+
+        .slide-objectifs { background: var(--bleu-clair); }
+        .slide-exercice { background: var(--orange-clair); }
+        .slide-exercice h2 { color: #a0401a; }
+        .slide-recap { background: var(--vert-clair); }
+        .slide-recap h2 { color: #064e3b; }
+
+        .objectif-item {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+            padding: 0.8rem 0;
+            border-bottom: 1px solid rgba(0,0,0,0.06);
+        }
+        .objectif-item:last-child { border-bottom: none; }
+        .objectif-num {
+            background: var(--bleu);
+            color: var(--blanc);
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+        .objectif-text { font-size: 1.25rem; font-weight: 600; color: var(--texte); }
+
+        .card-grid {
+            display: grid;
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        .card-grid.cols-2 { grid-template-columns: 1fr 1fr; }
+        .card-grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
+        .card-grid.cols-4 { grid-template-columns: repeat(4, 1fr); }
+
+        .card {
+            background: var(--gris);
+            border-radius: var(--radius);
+            padding: 1.8rem 1.5rem;
+            border: 1px solid var(--bordure);
+            text-align: center;
+            transition: var(--transition);
+        }
+        .card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+        .card i { font-size: 2.6rem; color: var(--bleu); margin-bottom: 0.6rem; }
+        .card h4 { font-size: 1.15rem; margin-bottom: 0.3rem; }
+        .card p { font-size: 0.95rem; color: var(--gris-fonce); }
+
+        .box {
+            border-radius: var(--radius);
+            padding: 1.2rem 1.8rem;
+            margin: 1.2rem 0;
+            font-size: 1.15rem;
+            font-weight: 500;
+            border-left: 6px solid;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.8rem;
+            transition: var(--transition);
+        }
+        .box i { font-size: 1.4rem; flex-shrink: 0; margin-top: 0.15rem; }
+        .box-tip { background: var(--bleu-clair); border-color: var(--bleu); color: #0a2c5c; }
+        .box-important { background: var(--orange-clair); border-color: var(--orange); color: #6b3a1f; }
+        .box-success { background: var(--vert-clair); border-color: var(--vert); color: #064e3b; }
+        .box-warning { background: var(--rouge-clair); border-color: var(--rouge); color: #7f1d1d; }
+        .box-info { background: var(--violet-clair); border-color: var(--violet); color: #3b0764; }
+
+        .table-wrapper {
+            overflow-x: auto;
+            margin: 1.2rem 0;
+            border-radius: var(--radius);
+            border: 1px solid var(--bordure);
+        }
+        .table-simple {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 1.05rem;
+            background: var(--blanc);
+        }
+        .table-simple th {
+            background: var(--bleu);
+            color: var(--blanc);
+            padding: 0.9rem 1.2rem;
+            text-align: left;
+            font-weight: 700;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .table-simple td {
+            padding: 0.7rem 1.2rem;
+            border-bottom: 1px solid var(--bordure);
+        }
+        .table-simple tr:last-child td { border-bottom: none; }
+        .table-simple tr:nth-child(even) td { background: #fafbfc; }
+        .table-simple tr:hover td { background: var(--bleu-clair); }
+
+        .tag-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.2rem;
+            margin: 1.5rem 0;
+        }
+        .tag-card {
+            background: var(--blanc);
+            border-radius: var(--radius);
+            padding: 1.2rem 1.5rem;
+            border: 1px solid var(--bordure);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+        .tag-card:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(0,0,0,0.12); }
+        .tag-card .tag-name {
+            display: inline-block;
+            background: var(--bleu);
+            color: var(--blanc);
+            padding: 0.2rem 0.8rem;
+            border-radius: 6px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            font-weight: 700;
+            margin-bottom: 0.4rem;
+        }
+        .tag-card .tag-usage { font-size: 0.9rem; color: var(--gris-fonce); margin-top: 0.3rem; }
+        .tag-card .tag-example {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            background: var(--gris);
+            padding: 0.3rem 0.6rem;
+            border-radius: 4px;
+            margin-top: 0.3rem;
+            color: var(--bleu-fonce);
+        }
+        .tag-card .tag-role { font-size: 0.95rem; font-weight: 600; color: var(--texte); }
+
+        .exercice-box {
+            background: var(--blanc);
+            border-radius: var(--radius);
+            padding: 2rem;
+            border: 2px solid var(--bleu);
+            margin-top: 1.5rem;
+            box-shadow: var(--shadow);
+        }
+        .exercice-box h3 { color: var(--bleu); font-size: 1.3rem; margin-bottom: 0.5rem; }
+        .exercice-box ol { padding-left: 1.5rem; }
+        .exercice-box li { font-size: 1.1rem; margin-bottom: 0.6rem; color: var(--texte); }
+
+        .step-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        .step-card {
+            background: var(--blanc);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            border: 1px solid var(--bordure);
+            box-shadow: var(--shadow);
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+        .step-card .step-num {
+            background: var(--bleu);
+            color: var(--blanc);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+        .step-card .step-content h4 { font-size: 1.1rem; color: var(--bleu); }
+        .step-card .step-content p { font-size: 0.95rem; color: var(--gris-fonce); }
+
+        .compare-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 1.5rem 0;
+        }
+        .compare-col {
+            border-radius: var(--radius);
+            padding: 1.8rem 1.5rem;
+            text-align: center;
+            transition: var(--transition);
+        }
+        .compare-col.negative { background: var(--rouge-clair); border: 2px solid var(--rouge); }
+        .compare-col.positive { background: var(--vert-clair); border: 2px solid var(--vert); }
+        .compare-col .icon-big { font-size: 3.2rem; display: block; margin-bottom: 0.5rem; }
+        .compare-col h3 { margin-bottom: 0.8rem; }
+        .compare-col ul { list-style: none; padding: 0; text-align: left; }
+        .compare-col ul li { padding: 0.5rem 0; border-bottom: 1px solid rgba(0,0,0,0.05); font-size: 1.05rem; }
+        .compare-col ul li:last-child { border-bottom: none; }
+        .compare-col.negative ul li::before { content: "✗ "; color: var(--rouge); font-weight: 700; }
+        .compare-col.positive ul li::before { content: "✓ "; color: var(--vert); font-weight: 700; }
+
+        pre {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            font-family: 'JetBrains Mono', 'Courier New', monospace;
+            font-size: 0.95rem;
+            line-height: 1.7;
+            overflow-x: auto;
+            margin: 1rem 0;
+            border: 1px solid #334155;
+        }
+        code {
+            background: var(--gris);
+            padding: 0.15rem 0.45rem;
+            border-radius: 4px;
+            font-family: 'JetBrains Mono', 'Courier New', monospace;
+            font-size: 0.9em;
+            color: var(--bleu-fonce);
+        }
+
+        @media (max-width: 1024px) {
+            .slide-content { padding: 2.5rem 3rem; }
+        }
+        @media (max-width: 768px) {
+            .slide-content { padding: 1.8rem 1.5rem; }
+            h1 { font-size: 1.8rem; }
+            h2 { font-size: 1.4rem; }
+            p { font-size: 1rem; }
+            .subtitle { font-size: 1.2rem; }
+            .card-grid.cols-2, .card-grid.cols-3, .card-grid.cols-4 { grid-template-columns: 1fr; }
+            .tag-grid { grid-template-columns: 1fr; }
+            .step-grid { grid-template-columns: 1fr; }
+            .compare-grid { grid-template-columns: 1fr; gap: 1rem; }
+            .table-simple { font-size: 0.85rem; }
+            .table-simple th, .table-simple td { padding: 0.4rem 0.6rem; }
+            .slide-cover h1 { font-size: 2rem; }
+            .slide-next h1 { font-size: 2rem; }
+            .nav-hint, .slide-counter { font-size: 0.6rem; padding: 0.2rem 0.7rem; }
+            .objectif-text { font-size: 1rem; }
+            .objectif-num { width: 36px; height: 36px; font-size: 1rem; }
+            .box { font-size: 1rem; padding: 1rem 1.2rem; }
+            .exercice-box { padding: 1.2rem; }
+            .exercice-box li { font-size: 0.95rem; }
+        }
+        @media (max-width: 480px) {
+            .slide-content { padding: 1.2rem 1rem; }
+            h1 { font-size: 1.5rem; }
+            h2 { font-size: 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="presentation-container">
+        <div class="slide-stage" id="slideStage"></div>
+        <div class="progress-bar" id="progressBar"></div>
+        <div class="slide-counter" id="slideCounter">1 / 22</div>
+        <div class="nav-hint">← → naviguer · Escape quitter</div>
+    </div>
+
+    <script>
+        const slidesData = [{
+            content: `
+                    <h1 class="anim-item">Creation d'application mobile <span class="highlight">sans code</span></h1>
+                    <p class="subtitle anim-item">Jour 6 — AppCreator24 : de l'idee a l'application publique</p>
+                    <p class="anim-item" style="font-size:1.3rem; margin-top:0.5rem;">
+                        Application · Site web · No-Code · Deploiement
+                    </p>
+                    <div style="margin-top:2rem;">
+                        <p class="anim-item" style="font-size:1.1rem; color:rgba(255,255,255,0.6);">
+                            <i class="fas fa-map-pin"></i> NTIC Solution — Banfora, Burkina Faso
+                        </p>
+                        <p class="anim-item" style="font-size:0.95rem; color:rgba(255,255,255,0.4); margin-top:0.5rem;">
+                            Duree : 2 heures · Niveau : Debutant
+                        </p>
+                    </div>
+                `,
+            className: 'slide-cover'
+        }, {
+            content: `
+                    <h2 class="anim-item">Objectifs du Jour 6</h2>
+                    <p class="anim-item" style="font-size:1.1rem; color:var(--gris-fonce); margin-bottom:1rem;">
+                        A la fin de cette seance, chaque participant saura :
+                    </p>
+                    <div>
+                        <div class="objectif-item anim-item">
+                            <div class="objectif-num">1</div>
+                            <div class="objectif-text">Definir ce qu'est une application mobile et la differencier d'un site web</div>
+                        </div>
+                        <div class="objectif-item anim-item">
+                            <div class="objectif-num">2</div>
+                            <div class="objectif-text">Identifier les avantages d'une application pour une entreprise ou une activite</div>
+                        </div>
+                        <div class="objectif-item anim-item">
+                            <div class="objectif-num">3</div>
+                            <div class="objectif-text">Creer une application complete sur AppCreator24</div>
+                        </div>
+                        <div class="objectif-item anim-item">
+                            <div class="objectif-num">4</div>
+                            <div class="objectif-text">Personnaliser l'application (couleurs, icones, sections, menus)</div>
+                        </div>
+                        <div class="objectif-item anim-item">
+                            <div class="objectif-num">5</div>
+                            <div class="objectif-text">Publier et partager l'application</div>
+                        </div>
+                    </div>
+                `,
+            className: 'slide-objectifs'
+        }, {
+            content: `
+                    <h2 class="anim-item">Qu'est-ce qu'une application mobile ?</h2>
+                    <p class="anim-item" style="margin-top:0.5rem;">
+                        Une <strong>application mobile</strong> est un logiciel concu pour fonctionner sur un appareil mobile (smartphone, tablette).
+                    </p>
+                    <div class="card-grid cols-2 anim-item" style="margin-top:1.5rem;">
+                        <div class="card" style="border-color:var(--vert);">
+                            <i class="fas fa-mobile-alt" style="color:var(--vert);"></i>
+                            <h4>Application native</h4>
+                            <p>Installee directement sur l'appareil. Disponible via les stores (Google Play, App Store).</p>
+                            <p style="font-size:0.85rem; color:var(--gris-fonce);">Exemple : WhatsApp, Facebook, TikTok</p>
+                        </div>
+                        <div class="card" style="border-color:var(--bleu);">
+                            <i class="fas fa-globe" style="color:var(--bleu);"></i>
+                            <h4>Application web (PWA)</h4>
+                            <p>Accessible via navigateur. Peut etre ajoutee a l'ecran d'accueil.</p>
+                            <p style="font-size:0.85rem; color:var(--gris-fonce);">Exemple : Twitter Lite, Starbucks</p>
+                        </div>
+                    </div>
+                    <div class="box box-important anim-item">
+                        <i class="fas fa-info-circle"></i>
+                        <div><strong>Aujourd'hui :</strong> Nous creons une application <strong>no-code</strong> avec AppCreator24, accessible sur Android.</div>
+                    </div>
+                `,
+            className: ''
+        }, {
+            content: `
+                    <h2 class="anim-item">Application vs Site web : quelles differences ?</h2>
+                    <div class="compare-grid anim-item">
+                        <div class="compare-col positive">
+                            <span class="icon-big">📱</span>
+                            <h3 style="color:var(--vert);">Application</h3>
+                            <ul>
+                                <li>Acces hors ligne (partiel ou total)</li>
+                                <li>Notifications push (alertes en temps reel)</li>
+                                <li>Acces aux fonctionnalites du telephone (GPS, camera, contacts)</li>
+                                <li>Meilleure experience utilisateur (UI/UX)</li>
+                                <li>Fidelisation via l'icone sur l'ecran d'accueil</li>
+                                <li>Monetisation possible (publicite, in-app purchases)</li>
+                            </ul>
+                        </div>
+                        <div class="compare-col negative">
+                            <span class="icon-big">🌐</span>
+                            <h3 style="color:var(--rouge);">Site web</h3>
+                            <ul>
+                                <li>Requis une connexion internet permanente</li>
+                                <li>Pas de notifications automatiques</li>
+                                <li>Acces limite aux fonctionnalites de l'appareil</li>
+                                <li>Experience variable selon le navigateur</li>
+                                <li>Accessible via moteur de recherche (SEO)</li>
+                                <li>Mise a jour instantanee (pas de reinstallation)</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="box box-tip anim-item">
+                        <i class="fas fa-lightbulb"></i>
+                        <div><strong>Le choix :</strong> L'application est ideale pour la <strong>fidelisation</strong> et l'<strong>engagement</strong>. Le site web est meilleur pour la <strong>visibilite</strong> et l'<strong>acquisition</strong>.</div>
+                    </div>
+                `,
+            className: ''
+        }, {
+            content: `
+                    <h2 class="anim-item">Pourquoi une application pour votre activite ?</h2>
+                    <div class="card-grid cols-3 anim-item" style="margin-top:1.5rem;">
+                        <div class="card" style="border-color:var(--vert);">
+                            <i class="fas fa-user-friends" style="color:var(--vert);"></i>
+                            <h4>Proximite avec les clients</h4>
+                            <p>L'application est toujours dans la poche de vos clients. Ils peuvent vous contacter en un clic.</p>
+                        </div>
+                        <div class="card" style="border-color:var(--bleu);">
+                            <i class="fas fa-bullhorn" style="color:var(--bleu);"></i>
+                            <h4>Communication directe</h4>
+                            <p>Envoyez des notifications push pour informer de nouvelles offres, evenements, ou promotions.</p>
+                        </div>
+                        <div class="card" style="border-color:var(--orange);">
+                            <i class="fas fa-chart-line" style="color:var(--orange);"></i>
+                            <h4>Fidelisation et notoriete</h4>
+                            <p>Une application renforce la presence de marque et augmente la confiance des clients.</p>
+                        </div>
+                        <div class="card" style="border-color:var(--violet);">
+                            <i class="fas fa-store" style="color:var(--violet);"></i>
+                            <h4>Vente en ligne</h4>
+                            <p>Integrez un catalogue de produits et permettez les commandes directement dans l'application.</p>
+                        </div>
+                        <div class="card" style="border-color:var(--jaune);">
+                            <i class="fas fa-hand-holding-usd" style="color:var(--jaune);"></i>
+                            <h4>Monetisation</h4>
+                            <p>Ajoutez des publicites, des abonnements ou des achats integres pour generer des revenus.</p>
+                        </div>
+                        <div class="card" style="border-color:var(--rouge);">
+                            <i class="fas fa-shield-alt" style="color:var(--rouge);"></i>
+                            <h4>Controle total</h4>
+                            <p>Vous possedez votre application et vous controlez son contenu, sans dependre d'une plateforme tierce.</p>
+                        </div>
+                    </div>
+                `,
+            className: ''
+        }, {
+            content: `
+                    <h2 class="anim-item">AppCreator24 : la plateforme no-code</h2>
+                    <div class="card-grid cols-2 anim-item" style="margin-top:1.5rem;">
+                        <div class="card" style="border-color:var(--violet);">
+                            <i class="fas fa-users" style="color:var(--violet);"></i>
+                            <h4>Chiffres cles</h4>
+                            <p><strong>4.162.343</strong> applications creees</p>
+                            <p><strong>1 million+</strong> clients</p>
+                            <p><strong>5 millions+</strong> utilisateurs quotidiens</p>
+                            <p><strong>10 ans</strong> d'existence</p>
+                        </div>
+                        <div class="card" style="border-color:var(--vert);">
+                            <i class="fas fa-check-circle" style="color:var(--vert);"></i>
+                            <h4>Pourquoi AppCreator24 ?</h4>
+                            <p>✓ Gratuit (option de monetisation par publicite)</p>
+                            <p>✓ Aucune connaissance en code requise</p>
+                            <p>✓ Interface simple et intuitive</p>
+                            <p>✓ Publication immediate sur Android</p>
+                            <p>✓ Support multilingue</p>
+                        </div>
+                    </div>
+                    <div class="box box-info anim-item">
+                        <i class="fas fa-link"></i>
+                        <div><strong>Lien :</strong> <code>https://www.appcreator24.com</code></div>
+                    </div>
+                `,
+            className: ''
+        }, {
+            content: `
+                    <h2 class="anim-item">Les types d'applications possibles</h2>
+                    <p class="anim-item" style="margin-top:0.5rem;">
+                        AppCreator24 permet de creer plusieurs types d'applications :
+                    </p>
+                    <div class="card-grid cols-4 anim-item" style="margin-top:1.5rem;">
+                        <div class="card" style="border-color:var(--violet);">
+                            <i class="fas fa-video" style="color:var(--violet);"></i>
+                            <h4>Video / Musique / Radio</h4>
+                            <p>Diffusez du contenu multimedia, des podcasts, des chaines radio.</p>
+                        </div>
+                        <div class="card" style="border-color:var(--vert);">
+                            <i class="fas fa-comments" style="color:var(--vert);"></i>
+                            <h4>Chat / Forums</h4>
+                            <p>Creez une communaute avec des discussions, des groupes, des messageries.</p>
+                        </div>
+                        <div class="card" style="border-color:var(--orange);">
+                            <i class="fas fa-gamepad" style="color:var(--orange);"></i>
+                            <h4>Jeux / Quiz</h4>
+                            <p>Developpez des jeux simples, des questionnaires, des defis interactifs.</p>
+                        </div>
+                        <div class="card" style="border-color:var(--bleu);">
+                            <i class="fas fa-bullseye" style="color:var(--bleu);"></i>
+                            <h4>Et bien plus</h4>
+                            <p>Catalogues, vitrines, informations, services, formulaires...</p>
+                        </div>
+                    </div>
+                    <div class="box box-tip anim-item">
+                        <i class="fas fa-lightbulb"></i>
+                        <div><strong>Question :</strong> Quel type d'application correspond a votre activite ?</div>
+                    </div>
+                `,
+            className: ''
+        }, {
+            content: `
+                    <h2 class="anim-item">Etape 1 : Inscription sur AppCreator24</h2>
+                    <div class="table-wrapper anim-item">
+                        <table class="table-simple">
+                            <thead><tr><th>Etape</th><th>Action</th></tr></thead>
+                            <tbody>
+                                <tr><td><strong>1</strong></td><td>Allez sur <code>https://www.appcreator24.com</code></td></tr>
+                                <tr><td><strong>2</strong></td><td>Cliquez sur <strong>« Sign up »</strong> (Inscription)</td></tr>
+                                <tr><td><strong>3</strong></td><td>Entrez votre <strong>nom</strong> (qui n'apparaitra pas dans l'application)</td></tr>
+                                <tr><td><strong>4</strong></td><td>Selectionnez votre <strong>pays</strong> (Burkina Faso)</td></tr>
+                                <tr><td><strong>5</strong></td><td>Entrez votre <strong>adresse email</strong></td></tr>
+                                <tr><td><strong>6</strong></td><td>Creez un <strong>mot de passe</strong> (minimum 6 caracteres)</td></tr>
+                                <tr><td><strong>7</strong></td><td>Acceptez les <strong>conditions d'utilisation</strong></td></tr>
+                                <tr><td><strong>8</strong></td><td>Cliquez sur <strong>« Send »</strong> (Envoyer)</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="box box-success anim-item">
+                        <i class="fas fa-check-circle"></i>
+                        <div><strong>Conseil :</strong> Utilisez votre email professionnel pour recevoir les communications importantes.</div>
+                    </div>
+                `,
+            className: ''
+        }, {
+            content: `
+                    <h2 class="anim-item">Etape 2 : Interface de creation</h2>
+                    <p class="anim-item" style="margin-top:0.5rem;">
+                        Apres l'inscription, vous accedez au <strong>panneau de controle</strong> (Dashboard).
+                    </p>
+                    <div class="card-grid cols-2 anim-item" style="margin-top:1.5rem;">
+                        <div class="card" style="border-color:var(--bleu);">
+                            <i class="fas fa-plus-circle" style="color:var(--bleu);"></i>
+                            <h4>Creer une nouvelle application</h4>
+                            <p>Cliquez sur <strong>« Create App »</strong> pour demarrer un nouveau projet.</p>
+                        </div>
+                        <div class="card" style="border-color:var(--orange);">
+                            <i class="fas fa-paint-brush" style="color:var(--orange);"></i>
+                            <h4>Interface de conception</h4>
+                            <p>L'interface se compose de :</p>
+                            <p style="font-size:0.85rem; color:var(--gris-fonce);">
+                                - Menu de navigation (gauche)<br />
+                                - Apercu de l'application (centre)<br />
+                                - Panneau de configuration (droite)
+                            </p>
+                        </div>
+                    </div>
+                    <div class="box box-tip anim-item">
+                        <i class="fas fa-lightbulb"></i>
+                        <div><strong>Astuce :</strong> L'apercu en temps reel vous permet de voir les modifications instantanement.</div>
+                    </div>
+                `,
+            className: ''
+        }, {
+            content: `
+                    <h2 class="anim-item">Etape 3 : Choisir le theme et les couleurs</h2>
+                    <p class="anim-item" style="margin-top:0.5rem;">
+                        Le theme definit l'ambiance visuelle de votre application.
+                    </p>
+                    <div class="step-grid anim-item">
+                        <div class="step-card">
+                            <div class="step-num">1</div>
+                            <div class="step-content">
+                                <h4>Couleur principale</h4>
+                                <p>La couleur dominante de l'application (en-tete, boutons, titres).</p>
+                                <p style="font-size:0.85rem; color:var(--gris-fonce);">Exemple : #0B3FA5 (bleu NTIC)</p>
+                            </div>
+                        </div>
+                        <div class="step-card">
+                            <div class="step-num">2</div>
+                            <div class="step-content">
+                                <h4>Couleur secondaire</h4>
+                                <p>La couleur des accents, des notifications, des elements interactifs.</p>
+                                <p style="font-size:0.85rem; color:var(--gris-fonce);">Exemple : #FF6B35 (orange NTIC)</p>
+                            </div>
+                        </div>
+                        <div class="step-card">
+                            <div class="step-num">3</div>
+                            <div class="step-content">
+                                <h4>Police de caractere</h4>
+                                <p>Choisissez une police lisible et professionnelle.</p>
+                                <p style="font-size:0.85rem; color:var(--gris-fonce);">Exemple : Inter, Roboto, Open Sans</p>
+                            </div>
+                        </div>
+                        <div class="step-card">
+                            <div class="step-num">4</div>
+                            <div class="step-content">
+                                <h4>Fond</h4>
+                                <p>Couleur de fond des pages (blanc, gris clair, degrade).</p>
+                                <p style="font-size:0.85rem; color:var(--gris-fonce);">Exemple : #FFFFFF (blanc) ou #F4F6FA</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box box-important anim-item">
+                        <i class="fas fa-palette"></i>
+                        <div><strong>Regle d'or :</strong> 2 couleurs maximum pour une application professionnelle et elegante.</div>
+                    </div>
+                `,
+            className: ''
+        }, {
+            content: `
+                    <h2 class="anim-item">Etape 4 : Ajouter l'icone et le nom de l'application</h2>
+                    <div class="tag-grid anim-item">
+                        <div class="tag-card">
+                            <span class="tag-name" style="background:var(--orange);">Nom de l'application</span>
+                            <p class="tag-role">L'identite de votre application</p>
+                            <p class="tag-usage">Le nom qui apparaitra sous l'icone sur l'ecran d'accueil.</p>
+                            <div class="tag-example">Exemple : « NTIC Solution », « Ma Boutique », « Mon Ecole »</div>
+                        </div>
+                        <div class="tag-card">
+                            <span class="tag-name" style="background:var(--vert);">Icone</span>
+                            <p class="tag-role">L'image de reconnaissance</p>
+                            <p class="tag-usage">L'icone doit etre carree, simple et reconnaissable.</p>
+                            <div class="tag-example">Format : PNG ou JPG, taille recommandee : 512x512 pixels</div>
+                        </div>
+                    </div>
+                    <div class="box box-success anim-item">
+                        <i class="fas fa-check-circle"></i>
+                        <div>
+                            <strong>Conseils pour l'icone :</strong><br />
+                            - Utilisez un logo simple et clair<br />
+                            - Evitez les textes trop petits<br />
+                            - Testez l'icone sur un fond sombre et un fond clair
+                        </div>
+                    </div>
+                `,
+            className: ''
+        }, {
+            content: `
+                    <h2 class="anim-item">Etape 5 : Creer les sections de l'application</h2>
+                    <p class="anim-item" style="margin-top:0.5rem;">
+                        Les sections sont les <strong>pages</strong> de votre application. Chaque section correspond a un menu.
+                    </p>
+                    <div class="card-grid cols-3 anim-item" style="margin-top:1.5rem;">
+                        <div class="card" style="border-color:var(--bleu);">
+                            <i class="fas fa-home" style="color:var(--bleu);"></i>
+                            <h4>Accueil</h4>
+                            <p>La page d'arrivee. Presentez votre activite et les informations principales.</p>
+                        </div>
+                        <div class="card" style="border-color:var(--vert);">
+                            <i class="fas fa-info-circle" style="color:var(--vert);"></i>
+                            <h4>A propos</h4>
+                            <p>Presentez votre entreprise, votre histoire, vos valeurs.</p>
+                        </div>
+                        <div class="card" style="border-color:var(--orange);">
+                            <i class="fas fa-cogs" style="color:var(--orange);"></i>
+                            <h4>Services / Produits</h4>
+                            <p>Catalogue de vos offres, avec descriptions et images.</p>
+                        </div>
+                        <div class="card" style="border-color:var(--violet);">
+                            <i class="fas fa-envelope" style="color:var(--violet);"></i>
+                            <h4>Contact</h4>
+                            <p>Telephone, WhatsApp, email, formulaire de contact.</p>
+                        </div>
+                        <div class="card" style="border-color:var(--jaune);">
+                            <i class="fas fa-images" style="color:var(--jaune);"></i>
+                            <h4>Galerie</h4>
+                            <p>Photos de vos realisations, de votre equipe, de vos locaux.</p>
+                        </div>
+                        <div class="card" style="border-color:var(--rouge);">
+                            <i class="fas fa-newspaper" style="color:var(--rouge);"></i>
+                            <h4>Actualites</h4>
+                            <p>Publiez des nouvelles, des evenements, des promotions.</p>
+                        </div>
+                    </div>
+                `,
+            className: ''
+        }, {
+            content: `
+                    <h2 class="anim-item">Etape 6 : Personnaliser la page d'ouverture (Splash Screen)</h2>
+                    <p class="anim-item" style="margin-top:0.5rem;">
+                        La page d'ouverture (ou <strong>Splash Screen</strong>) est la premiere image qui apparait au lancement de l'application.
+                    </p>
+                    <div class="tag-grid anim-item">
+                        <div class="tag-card">
+                            <span class="tag-name" style="background:var(--bleu);">Image d'ouverture</span>
+                            <p class="tag-role">Le visuel de bienvenue</p>
+                            <p class="tag-usage">Choisissez une image qui represente votre marque.</p>
+                            <div class="tag-example">Logo, photo de couverture, illustration</div>
+                        </div>
+                        <div class="tag-card">
+                            <span class="tag-name" style="background:var(--orange);">Titre d'ouverture</span>
+                            <p class="tag-role">Message de bienvenue</p>
+                            <p class="tag-usage">Texte court qui apparait sur la page d'ouverture.</p>
+                            <div class="tag-example">« Bienvenue », « NTIC Solution », « Votre partenaire digital »</div>
+                        </div>
+                    </div>
+                    <div class="box box-tip anim-item">
+                        <i class="fas fa-lightbulb"></i>
+                        <div><strong>Astuce :</strong> La page d'ouverture doit rester simple et rapide (moins de 3 secondes d'affichage).</div>
+                    </div>
+                `,
+            className: ''
+        }, {
+            content: `
+                    <h2 class="anim-item">Etape 7 : Configurer le menu de navigation</h2>
+                    <p class="anim-item" style="margin-top:0.5rem;">
+                        Le menu permet a l'utilisateur de naviguer entre les differentes sections de l'application.
+                    </p>
+                    <div class="card-grid cols-2 anim-item" style="margin-top:1.5rem;">
+                        <div class="card" style="border-color:var(--bleu);">
+                            <i class="fas fa-bars" style="color:var(--bleu);"></i>
+                            <h4>Menu principal</h4>
+                            <p>Liste des sections accessibles depuis l'ecran d'accueil.</p>
+                            <p style="font-size:0.85rem; color:var(--gris-fonce);">Exemple : Accueil, Services, Contact, Galerie</p>
+                        </div>
+                        <div class="card" style="border-color:var(--orange);">
+                            <i class="fas fa-ellipsis-v" style="color:var(--orange);"></i>
+                            <h4>Menu lateral</h4>
+                            <p>Menu supplementaire accessible par un glissement depuis la gauche.</p>
+                            <p style="font-size:0.85rem; color:var(--gris-fonce);">Exemple : Parametres, A propos, Partager</p>
+                        </div>
+                    </div>
+                    <div class="box box-info anim-item">
+                        <i class="fas fa-info-circle"></i>
+                        <div><strong>Regle de navigation :</strong> L'utilisateur doit toujours savoir ou il se trouve et comment revenir en arriere.</div>
+                    </div>
+                `,
+            className: ''
+        }, {
+            content: `
+                    <h2 class="anim-item">Etape 8 : Ajouter du contenu</h2>
+                    <p class="anim-item" style="margin-top:0.5rem;">
+                        Le contenu est le <strong>coeur</strong> de votre application. Il doit etre pertinent et bien structure.
+                    </p>
+                    <div class="table-wrapper anim-item">
+                        <table class="table-simple">
+                            <thead><tr><th>Type de contenu</th><th>Description</th></tr></thead>
+                            <tbody>
+                                <tr><td><strong>Textes</strong></td><td>Descriptions, articles, informations, offres</td></tr>
+                                <tr><td><strong>Images</strong></td><td>Photos, logos, illustrations, bannieres</td></tr>
+                                <tr><td><strong>Videos</strong></td><td>Presentations, tutoriels, temoignages</td></tr>
+                                <tr><td><strong>Liens</strong></td><td>Vers des sites web, des pages externes, des documents</td></tr>
+                                <tr><td><strong>Formulaires</strong></td><td>Contact, inscription, commande, sondage</td></tr>
+                                <tr><td><strong>Boutons d'action</strong></td><td>Appeler, envoyer un message, commander, reserver</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="box box-important anim-item">
+                        <i class="fas fa-star"></i>
+                        <div><strong>Regle d'or :</strong> Un contenu clair et concis = une application efficace.</div>
+                    </div>
+                `,
+            className: ''
+        }, {
+            content: `
+                    <h2 class="anim-item">Etape 9 : Ajouter les fonctionnalites avancees</h2>
+                    <div class="card-grid cols-2 anim-item" style="margin-top:1.5rem;">
+                        <div class="card" style="border-color:var(--vert);">
+                            <i class="fas fa-bell" style="color:var(--vert);"></i>
+                            <h4>Notifications push</h4>
+                            <p>Envoyez des alertes en temps reel a vos utilisateurs.</p>
+                            <p style="font-size:0.85rem; color:var(--gris-fonce);">Ideales pour les promotions, les rappels, les actualites.</p>
+                        </div>
+                        <div class="card" style="border-color:var(--bleu);">
+                            <i class="fas fa-map-marker-alt" style="color:var(--bleu);"></i>
+                            <h4>Geolocalisation</h4>
+                            <p>Affichez votre position ou trouvez des points d'interet.</p>
+                            <p style="font-size:0.85rem; color:var(--gris-fonce);">Utile pour les boutiques, les restaurants, les services.</p>
+                        </div>
+                        <div class="card" style="border-color:var(--orange);">
+                            <i class="fas fa-camera" style="color:var(--orange);"></i>
+                            <h4>Camera</h4>
+                            <p>Permettez aux utilisateurs de prendre des photos depuis l'application.</p>
+                            <p style="font-size:0.85rem; color:var(--gris-fonce);">Pour les formulaires, les temoignages, les avis.</p>
+                        </div>
+                        <div class="card" style="border-color:var(--violet);">
+                            <i class="fas fa-comments" style="color:var(--violet);"></i>
+                            <h4>Chat integre</h4>
+                            <p>Discutez directement avec vos clients via l'application.</p>
+                            <p style="font-size:0.85rem; color:var(--gris-fonce);">Renforce la relation client et la reponse rapide.</p>
+                        </div>
+                    </div>
+                `,
+            className: ''
+        }, {
+            content: `
+                    <h2 class="anim-item">Etape 10 : Generer et telecharger l'application</h2>
+                    <div class="table-wrapper anim-item">
+                        <table class="table-simple">
+                            <thead><tr><th>Etape</th><th>Action</th></tr></thead>
+                            <tbody>
+                                <tr><td><strong>1</strong></td><td>Une fois l'application finalisee, cliquez sur <strong>« Generate App »</strong></td></tr>
+                                <tr><td><strong>2</strong></td><td>Selectionnez la plateforme : <strong>Android</strong> (APK)</td></tr>
+                                <tr><td><strong>3</strong></td><td>Patientez pendant la generation (quelques secondes a minutes)</td></tr>
+                                <tr><td><strong>4</strong></td><td>Telechargez le fichier <strong>APK</strong></td></tr>
+                                <tr><td><strong>5</strong></td><td>Installez l'application sur votre telephone Android</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="box box-success anim-item">
+                        <i class="fas fa-check-circle"></i>
+                        <div>
+                            <strong>Felicitation !</strong> Votre application est prete a etre utilisee.<br />
+                            Vous pouvez la partager en envoyant le fichier APK a vos clients.
+                        </div>
+                    </div>
+                `,
+            className: 'slide-exercice'
+        }, {
+            content: `
+                    <h2 class="anim-item">Comment installer l'application sur Android</h2>
+                    <div class="step-grid anim-item">
+                        <div class="step-card">
+                            <div class="step-num">1</div>
+                            <div class="step-content">
+                                <h4>Transferer le fichier APK</h4>
+                                <p>Envoyez le fichier APK sur votre telephone (email, WhatsApp, cable USB).</p>
+                            </div>
+                        </div>
+                        <div class="step-card">
+                            <div class="step-num">2</div>
+                            <div class="step-content">
+                                <h4>Activer les sources inconnues</h4>
+                                <p>Dans les parametres Android : Securite → Sources inconnues → Activer.</p>
+                            </div>
+                        </div>
+                        <div class="step-card">
+                            <div class="step-num">3</div>
+                            <div class="step-content">
+                                <h4>Ouvrir le fichier APK</h4>
+                                <p>Depuis le gestionnaire de fichiers, ouvrez le fichier APK telecharge.</p>
+                            </div>
+                        </div>
+                        <div class="step-card">
+                            <div class="step-num">4</div>
+                            <div class="step-content">
+                                <h4>Installer et lancer</h4>
+                                <p>Cliquez sur « Installer » puis « Ouvrir ». L'application est pretel</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box box-warning anim-item">
+                        <i class="fas fa-shield-alt"></i>
+                        <div><strong>Securite :</strong> Assurez-vous que le fichier APK provient d'une source fiable.</div>
+                    </div>
+                `,
+            className: ''
+        }, {
+            content: `
+                    <h2 class="anim-item">Les avantages du No-Code</h2>
+                    <div class="card-grid cols-3 anim-item" style="margin-top:1.5rem;">
+                        <div class="card" style="border-color:var(--vert);">
+                            <i class="fas fa-clock" style="color:var(--vert);"></i>
+                            <h4>Rapidite</h4>
+                            <p>Creez une application en quelques heures, contre plusieurs mois en developpement traditionnel.</p>
+                        </div>
+                        <div class="card" style="border-color:var(--bleu);">
+                            <i class="fas fa-wallet" style="color:var(--bleu);"></i>
+                            <h4>Economique</h4>
+                            <p>Pas besoin d'embaucher un developpeur. Des solutions gratuites ou abordables existent.</p>
+                        </div>
+                        <div class="card" style="border-color:var(--orange);">
+                            <i class="fas fa-user-edit" style="color:var(--orange);"></i>
+                            <h4>Autonomie</h4>
+                            <p>Vous pouvez modifier votre application a tout moment, sans dependre d'un tiers.</p>
+                        </div>
+                        <div class="card" style="border-color:var(--violet);">
+                            <i class="fas fa-sync" style="color:var(--violet);"></i>
+                            <h4>Iteration rapide</h4>
+                            <p>Testez, modifiez, ameliorez votre application en continu, en quelques clics.</p>
+                        </div>
+                        <div class="card" style="border-color:var(--jaune);">
+                            <i class="fas fa-graduation-cap" style="color:var(--jaune);"></i>
+                            <h4>Accessible a tous</h4>
+                            <p>Pas besoin de competences techniques. Tout le monde peut creer une application.</p>
+                        </div>
+                        <div class="card" style="border-color:var(--rouge);">
+                            <i class="fas fa-cloud-upload-alt" style="color:var(--rouge);"></i>
+                            <h4>Deploiement simplifie</h4>
+                            <p>Publiez directement sur les stores ou partagez le fichier APK.</p>
+                        </div>
+                    </div>
+                `,
+            className: ''
+        }, {
+            content: `
+                    <h2 class="anim-item">Exercice pratique : Creez votre application</h2>
+                    <div class="exercice-box anim-item">
+                        <h3><i class="fas fa-tasks"></i> Consignes</h3>
+                        <ol>
+                            <li>Allez sur <code>https://www.appcreator24.com</code> et creez un compte</li>
+                            <li>Creez une nouvelle application</li>
+                            <li>Choisissez un theme et des couleurs (inspirez-vous de votre activite)</li>
+                            <li>Ajoutez un nom et une icone a votre application</li>
+                            <li>Creez au moins 4 sections (Accueil, A propos, Services, Contact)</li>
+                            <li>Ajoutez du contenu dans chaque section (texte, images, liens)</li>
+                            <li>Personnalisez la page d'ouverture (Splash Screen)</li>
+                            <li>Configurez le menu de navigation</li>
+                            <li>Generer l'application (APK) et la telecharger</li>
+                            <li>Installez-la sur votre telephone et testez-la</li>
+                        </ol>
+                        <p style="margin-top:1rem; font-size:1.1rem; font-weight:600; color:var(--bleu);">
+                            <i class="fas fa-rocket"></i> Objectif : Avoir une application fonctionnelle avant la fin de la seance.
+                        </p>
+                    </div>
+                `,
+            className: 'slide-exercice'
+        }, {
+            content: `
+                    <h2 class="anim-item">Recapitulatif : les 10 etapes de creation</h2>
+                    <div style="margin-top:1.5rem;">
+                        <div class="objectif-item anim-item">
+                            <div class="objectif-num" style="background:var(--vert);">1</div>
+                            <div class="objectif-text">Creer un compte sur AppCreator24</div>
+                        </div>
+                        <div class="objectif-item anim-item">
+                            <div class="objectif-num" style="background:var(--vert);">2</div>
+                            <div class="objectif-text">Choisir le theme et les couleurs</div>
+                        </div>
+                        <div class="objectif-item anim-item">
+                            <div class="objectif-num" style="background:var(--vert);">3</div>
+                            <div class="objectif-text">Ajouter le nom et l'icone de l'application</div>
+                        </div>
+                        <div class="objectif-item anim-item">
+                            <div class="objectif-num" style="background:var(--vert);">4</div>
+                            <div class="objectif-text">Creer les sections (pages) de l'application</div>
+                        </div>
+                        <div class="objectif-item anim-item">
+                            <div class="objectif-num" style="background:var(--vert);">5</div>
+                            <div class="objectif-text">Personnaliser la page d'ouverture (Splash Screen)</div>
+                        </div>
+                        <div class="objectif-item anim-item">
+                            <div class="objectif-num" style="background:var(--vert);">6</div>
+                            <div class="objectif-text">Configurer le menu de navigation</div>
+                        </div>
+                        <div class="objectif-item anim-item">
+                            <div class="objectif-num" style="background:var(--vert);">7</div>
+                            <div class="objectif-text">Ajouter le contenu (textes, images, videos)</div>
+                        </div>
+                        <div class="objectif-item anim-item">
+                            <div class="objectif-num" style="background:var(--vert);">8</div>
+                            <div class="objectif-text">Ajouter les fonctionnalites avancees (notifications, GPS, chat)</div>
+                        </div>
+                        <div class="objectif-item anim-item">
+                            <div class="objectif-num" style="background:var(--vert);">9</div>
+                            <div class="objectif-text">Generer et telecharger l'APK</div>
+                        </div>
+                        <div class="objectif-item anim-item">
+                            <div class="objectif-num" style="background:var(--vert);">10</div>
+                            <div class="objectif-text">Installer et tester l'application</div>
+                        </div>
+                    </div>
+                `,
+            className: 'slide-recap'
+        }, {
+            content: `
+                    <h2 class="anim-item">Ce que vous savez faire maintenant</h2>
+                    <div class="table-wrapper anim-item">
+                        <table class="table-simple">
+                            <thead><tr><th>Competence</th><th>Statut</th></tr></thead>
+                            <tbody>
+                                <tr><td>Definir ce qu'est une application mobile</td><td>✅</td></tr>
+                                <tr><td>Differencier une application d'un site web</td><td>✅</td></tr>
+                                <tr><td>Identifier les avantages d'une application pour une activite</td><td>✅</td></tr>
+                                <tr><td>Creer un compte sur AppCreator24</td><td>✅</td></tr>
+                                <tr><td>Choisir un theme et des couleurs</td><td>✅</td></tr>
+                                <tr><td>Ajouter des sections et du contenu</td><td>✅</td></tr>
+                                <tr><td>Personnaliser la page d'ouverture et le menu</td><td>✅</td></tr>
+                                <tr><td>Generer et installer une application APK</td><td>✅</td></tr>
+                                <tr><td>Comprendre les avantages du No-Code</td><td>✅</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="box box-success anim-item">
+                        <i class="fas fa-rocket"></i>
+                        <div><strong>Felicitation !</strong> Vous avez cree votre premiere application mobile sans ecrire une seule ligne de code.</div>
+                    </div>
+                `,
+            className: 'slide-recap'
+        }, {
+            content: `
+                    <h1 class="anim-item" style="font-size:3rem;">Vous avez cree votre premiere application mobile !</h1>
+                    <p class="anim-item" style="font-size:1.8rem; font-weight:600; color:var(--blanc);">NTIC Solution</p>
+                    <p class="anim-item" style="font-size:1.2rem; color:rgba(255,255,255,0.8);">
+                        L'univers du digital, a votre portee.
+                    </p>
+                    <div style="margin-top:1.5rem;">
+                        <p class="anim-item" style="color:rgba(255,255,255,0.9); font-size:1.1rem; padding:0.3rem 0;">
+                            <i class="fab fa-whatsapp" style="color:#25D366;"></i> WhatsApp : +226 69 69 69 24
+                        </p>
+                        <p class="anim-item" style="color:rgba(255,255,255,0.9); font-size:1.1rem; padding:0.3rem 0;">
+                            <i class="fas fa-phone" style="color:#C5E1A5;"></i> Telephone : +226 05 58 58 68
+                        </p>
+                        <p class="anim-item" style="color:rgba(255,255,255,0.9); font-size:1.1rem; padding:0.3rem 0;">
+                            <i class="fas fa-globe" style="color:#C5E1A5;"></i> www.nticsolution.org
+                        </p>
+                    </div>
+                    <p class="anim-item" style="margin-top:1.5rem; font-size:1rem; color:rgba(255,255,255,0.5);">
+                        Prochaine etape : Jour 7 — Monétisation et publication sur les stores
+                    </p>
+                `,
+            className: 'slide-next'
+        }];
+
+        let currentSlide = 0;
+        const totalSlides = slidesData.length;
+
+        function renderSlide(index) {
+            const stage = document.getElementById('slideStage');
+            const slide = slidesData[index];
+            stage.innerHTML = `<div class="slide-content ${slide.className}">${slide.content}</div>`;
+            updateProgress(index);
+            updateCounter(index);
+        }
+
+        function updateProgress(index) {
+            const progress = ((index + 1) / totalSlides) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+        }
+
+        function updateCounter(index) {
+            document.getElementById('slideCounter').textContent = (index + 1) + ' / ' + totalSlides;
+        }
+
+        function goNext() {
+            if (currentSlide < totalSlides - 1) {
+                currentSlide++;
+                renderSlide(currentSlide);
+            }
+        }
+
+        function goPrev() {
+            if (currentSlide > 0) {
+                currentSlide--;
+                renderSlide(currentSlide);
+            }
+        }
+
+        renderSlide(currentSlide);
+
+        document.addEventListener('keydown', function(e) {
+            switch (e.key) {
+                case 'ArrowRight': case ' ': case 'PageDown': case 'ArrowDown':
+                    e.preventDefault(); goNext(); break;
+                case 'ArrowLeft': case 'PageUp': case 'ArrowUp':
+                    e.preventDefault(); goPrev(); break;
+                case 'Escape':
+                    if (confirm('Quitter la projection ?')) {
+                        document.querySelector('.presentation-container').style.display = 'none';
+                    }
+                    break;
+                case 'Home':
+                    e.preventDefault(); currentSlide = 0; renderSlide(currentSlide); break;
+                case 'End':
+                    e.preventDefault(); currentSlide = totalSlides - 1; renderSlide(currentSlide); break;
+            }
+        });
+
+        let touchStartX = 0;
+        document.addEventListener('touchstart', function(e) {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+        document.addEventListener('touchend', function(e) {
+            const deltaX = e.changedTouches[0].screenX - touchStartX;
+            if (Math.abs(deltaX) > 50) {
+                if (deltaX < 0) goNext();
+                else goPrev();
+            }
+        });
+
+        let scrollTimeout = false;
+        document.addEventListener('wheel', function(e) {
+            if (scrollTimeout) return;
+            if (Math.abs(e.deltaY) > 40) {
+                scrollTimeout = true;
+                if (e.deltaY > 0) goNext();
+                else goPrev();
+                setTimeout(() => { scrollTimeout = false; }, 600);
+            }
+        }, { passive: true });
+    </script>
+
+</body>
+</html>
